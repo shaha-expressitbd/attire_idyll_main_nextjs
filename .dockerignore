@@ -1,0 +1,10 @@
+- !package.json
+  !package-lock.json
+  !next.config.ts
+  !tailwind.config.ts
+  !tsconfig.json
+  !postcss.config.mjs
+  !attireIdyll.config.js
+  !next-env.d.ts
+  !src/
+  !public/
