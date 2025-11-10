@@ -236,11 +236,11 @@ export const Navbar = ({ className, business }: NavbarProps) => {
                       return (
                         <Link
                           key={cat._id}
-                          href={`/${slug}`}
+                          href={`/maincategory/${slug}`}
                           onClick={() => setIsCategoryOpen(false)}
-                          className="block px-4 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-300 
-                            hover:bg-pink-50 dark:hover:bg-gray-800 
-                            hover:text-primary dark:hover:text-pink-400 
+                          className="block px-4 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-300
+                            hover:bg-pink-50 dark:hover:bg-gray-800
+                            hover:text-primary dark:hover:text-pink-400
                             transition text-left"
                         >
                           {cat.name}
@@ -368,7 +368,7 @@ export const Navbar = ({ className, business }: NavbarProps) => {
           </div>
 
           {/* Center: Logo */}
-          <div className="flex-1 flex justify-center max-w-[100px] sm:max-w-[140px]">
+          <div className="flex-1 flex justify-center max-w-44 ">
             <Link href="/">
               <Image
                 src={business?.alterImage?.secure_url || DEFAULT_IMAGE}

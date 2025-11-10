@@ -1,6 +1,8 @@
 // app/page.js
 import React, { Suspense } from 'react'
 import { getProductsServer } from '@/lib/api/serverApi'
+import HeroSection from '@/components/HeroSection'
+import BrandText from '@/components/BrandText'
 
 
 export async function generateMetadata() {
@@ -23,6 +25,8 @@ export default async function LandingPage() {
 
   return (
     <div>
+      <HeroSection />
+      <BrandText />
     </div>
   )
 }

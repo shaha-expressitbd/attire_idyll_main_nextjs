@@ -8,6 +8,7 @@ import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import { useBusiness } from '@/hooks/useBusiness';
 import { useRouter } from 'next/navigation';
 import Image from './ui/atoms/image';
+import Link from 'next/link';
 
 export default function HeroSection() {
   const { businessData } = useBusiness();
@@ -34,12 +35,19 @@ export default function HeroSection() {
     }
   };
 
-  const handleCategoryClick = (categoryId: string, categoryName: string) => {
-    router.push(`/products?category=${categoryId}&name=${encodeURIComponent(categoryName.toLowerCase())}`);
+  const handleCategoryClick = (categoryName: string) => {
+    const slug = categoryName
+      .toLowerCase()
+      .replace(/\s+/g, '-')
+      .replace(/[^\w\-]+/g, '')
+      .replace(/\-\-+/g, '-')
+      .replace(/^-+/, '')
+      .replace(/-+$/, '');
+    router.push(`/maincategory/${slug}`);
   };
 
   return (
-    <div className="pb-12 md:pb-0">
+    <div className="pb-12 md:pb-0 lg:container md:container mx-auto">
       <div className="relative w-full overflow-hidden h-[260px] md:h-[800px] lg:h-[800px] md:pb-10">
         <section className="w-full h-full">
           <Swiper
@@ -53,10 +61,10 @@ export default function HeroSection() {
             className="mySwiper w-full h-full"
           >
             {[
-              { src: '/assets/banner/Bride-1.webp', alt: 'Hero Necklace' },
-              { src: '/assets/banner/bride-12.webp', alt: 'Bracelet' },
-              { src: '/assets/banner/bride-13.webp', alt: 'Earrings' },
-              { src: '/assets/banner/bride-14.webp', alt: 'Earrings' },
+              { src: '/upload/images/bride-14-160707.webp', alt: 'Hero Necklace' },
+              { src: '/upload/images/bride-13-795681.webp', alt: 'Bracelet' },
+              { src: '/upload/images/bride-12-313748.webp', alt: 'Earrings' },
+              { src: '/upload/images/Bride-1-994403.webp', alt: 'Earrings' },
             ].map((slide, index) => (
               <SwiperSlide key={index}>
                 <div className="relative w-full h-full flex flex-col md:flex-row items-center">
@@ -67,7 +75,8 @@ export default function HeroSection() {
                       fill
                       sizes="100vw"
                       className="object-cover"
-                      priority={index === 0} // Priority for the first slide only
+                      variant='original'
+                      // Priority for the first slide only
 
                       loading={index === 0 ? 'eager' : 'lazy'} // Lazy load non-critical slides
                     />
@@ -78,119 +87,44 @@ export default function HeroSection() {
           </Swiper>
         </section>
 
-        {/* Desktop Category Chips */}
-        <div className="hidden md:block absolute bottom-2 left-0 w-full z-20">
-          <div className="flex justify-center px-4">
-            <div className="inline-flex overflow-x-auto max-w-full py-1 sm:py-2 px-2 sm:px-4 rounded-full bg-primary/70 backdrop-blur-sm">
-              <div className="flex gap-1 sm:gap-2">
-                {CATEGORIES.map((cat) => (
-                  <button
-                    key={cat._id}
-                    onClick={() => handleCategoryClick(cat._id, cat.name)}
-                    className="flex items-center gap-2 px-3 py-1.5 bg-primary backdrop-blur-sm text-white border border-white rounded-full hover:shadow transition-all min-w-[120px] text-sm"
-                  >
-                    <div className="w-8 h-8 rounded-full overflow-hidden flex-shrink-0">
-                      <Image
-                        src={getCategoryImage(cat)}
-                        alt={`${cat.name} category`}
-                        width={32}
-                        height={32}
-                        className="object-cover"
 
-                        loading="lazy" // Lazy load category images
-                      />
-                    </div>
-                    <span className="truncate">{cat.name}</span>
-                  </button>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
-      <div>
-        {/* Mobile Category Chips */}
-        <div className="md:hidden absolute left-0 w-full z-20 px-2 mt-2">
-          <div className="bg-primary/70 backdrop-blur-sm rounded-full p-2">
-            <div className="flex px-2 justify-between mb-2">
-              {CATEGORIES.slice(0, 3).map((cat) => (
-                <button
-                  key={cat._id}
-                  onClick={() => handleCategoryClick(cat._id, cat.name)}
-                  className="flex-1 flex justify-center items-center gap-1 px-2 py-1.5 bg-primary backdrop-blur-sm text-white border border-white rounded-full hover:shadow transition-all text-xs max-w-[100px]"
-                  title={cat.name}
-                >
-                  <div className="w-6 h-6 rounded-full overflow-hidden flex-shrink-0">
-                    <Image
-                      src={getCategoryImage(cat)}
-                      alt={`${cat.name} category`}
-                      width={24}
-                      height={24}
-                      className="object-cover"
 
-                      loading="lazy"
-                    />
-                  </div>
-                  <span className="truncate">
-                    {cat.name.length > 10 ? `${cat.name.substring(0, 8)}...` : cat.name}
-                  </span>
-                </button>
+      <div className="w-full mx-auto space-y-4">
+        {CATEGORIES.length > 0 && (
+          <>
+            <div className="grid grid-cols-3 gap-3">
+              {CATEGORIES.slice(0, 3).map((category) => (
+                <Link
+                  key={category._id}
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleCategoryClick(category.name);
+                  }}
+                  className="h-12 rounded-lg border border-gray-300 bg-white text-sm font-medium text-gray-700 flex items-center justify-center hover:bg-gray-100 hover:border-gray-400 transition"
+                >
+                  {category.name.toUpperCase()}
+                </Link>
               ))}
             </div>
+
             {CATEGORIES.length > 3 && (
-              <button
-                key={CATEGORIES[3]._id}
-                onClick={() => handleCategoryClick(CATEGORIES[3]._id, CATEGORIES[3].name)}
-                className="w-full flex items-center justify-center gap-2 px-2 py-1.5 bg-primary backdrop-blur-sm text-white border border-white rounded-full hover:shadow transition-all text-xs"
-                title={CATEGORIES[3].name}
-              >
-                <div className="w-6 h-6 rounded-full overflow-hidden flex-shrink-0">
-                  <Image
-                    src={getCategoryImage(CATEGORIES[3])}
-                    alt={`${CATEGORIES[3].name} category`}
-                    width={24}
-                    height={24}
-                    className="object-cover"
-
-                    loading="lazy"
-                  />
-                </div>
-                <span className="truncate">
-                  {CATEGORIES[3].name.length > 20 ? `${CATEGORIES[3].name.substring(0, 18)}...` : CATEGORIES[3].name}
-                </span>
-              </button>
+              <div className="w-full">
+                <Link
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleCategoryClick(CATEGORIES[3].name);
+                  }}
+                  className="block w-full h-16 rounded-lg border border-gray-300 bg-white text-base font-medium text-gray-700 flex items-center justify-center hover:bg-gray-100 hover:border-gray-400 transition"
+                >
+                  {CATEGORIES[3].name.toUpperCase()}
+                </Link>
+              </div>
             )}
-          </div>
-        </div>
-      </div>
-      <div class="w-full max-w-2xl mx-auto space-y-4">
-
-        <!-- 3 Categories in Same Line -->
-        <div class="grid grid-cols-3 gap-3">
-          <a href="/woman"
-            class="h-12 rounded-lg border border-gray-300 bg-white text-sm font-medium text-gray-700 flex items-center justify-center hover:bg-gray-100 hover:border-gray-400 transition">
-            WOMAN
-          </a>
-
-          <a href="/man"
-            class="h-12 rounded-lg border border-gray-300 bg-white text-sm font-medium text-gray-700 flex items-center justify-center hover:bg-gray-100 hover:border-gray-400 transition">
-            MAN
-          </a>
-
-          <a href="/kids-family"
-            class="h-12 rounded-lg border border-gray-300 bg-white text-sm font-medium text-gray-700 flex items-center justify-center hover:bg-gray-100 hover:border-gray-400 transition">
-            KIDS & FAMILY
-          </a>
-        </div>
-
-        <!-- BRIDAL Full Width -->
-        <div class="w-full">
-          <a href="/bridal"
-            class="block w-full h-16 rounded-lg border border-gray-300 bg-white text-base font-medium text-gray-700 flex items-center justify-center hover:bg-gray-100 hover:border-gray-400 transition">
-            BRIDAL
-          </a>
-        </div>
-
+          </>
+        )}
       </div>
     </div>
   );

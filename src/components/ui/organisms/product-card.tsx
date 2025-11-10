@@ -323,7 +323,7 @@ export default function ProductCard({
           </div>
 
           {/* Product Info */}
-          <div className="p-3 sm:p-4 bg-pink-50/40 dark:bg-black">
+          {/* <div className="p-3 sm:p-4 bg-pink-50/40 dark:bg-black">
             <h3 className="text-[15px] font-semibold text-gray-900 dark:text-white line-clamp-1">
               {product.name}
             </h3>
@@ -337,56 +337,16 @@ export default function ProductCard({
                 </span>
               )}
             </div>
-          </div>
+          </div> */}
 
           {/* Action Buttons */}
-          <div className="flex items-center justify-between md:flex-col lg:flex-row gap-2 px-1 py-1 w-full">
-            <button
-              onClick={handleAddToCart}
-              disabled={isOutOfStock}
-              className={`inline-block text-white font-bold rounded-lg text-xs md:text-sm lg:text-lg p-1 md:p-1.5 hover:shadow-md disabled:opacity-60 text-nowrap w-full ${isPreOrder
-                ? "bg-gradient-to-r from-orange-500 to-red-500"
-                : "bg-primary dark:bg-primary"
-                }`}
-            >
-              {isPreOrder ? "প্রি-অর্ডার করুন" : "অর্ডার করুন"}
-            </button>
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                setIsQuickViewOpen(true);
-              }}
-              className="inline-block text-primary border border-primary text-xs md:text-sm lg:text-lg p-1 md:p-1.5 font-bold rounded-lg hover:bg-primary hover:text-white transition-colors text-nowrap w-full"
-            >
-              Quick View
-            </button>
-          </div>
+
         </div>
       </Link>
 
-      {/* Variant Modal */}
-      {product.variantsId && (
-        <VariantSelectModal
-          isOpen={isModalOpen}
-          variants={product.variantsId}
-          onSelect={handleVariantSelect}
-          onClose={() => {
-            setIsModalOpen(false);
-            setModalAction(null);
-          }}
-          product={product}
-          isWishlistModal={modalAction === "wishlist"}
-          variantsGroup={product.variantsGroup}
-        />
-      )}
 
-      {/* Quick View Modal */}
-      <QuickViewModal
-        product={product}
-        isOpen={isQuickViewOpen}
-        onClose={() => setIsQuickViewOpen(false)}
-      />
+
+
     </div>
   );
 }
