@@ -186,10 +186,10 @@ export default function MobileFilterModal({
                     {/* Header */}
                     <div className="flex items-center justify-between p-5 border-b border-gray-200 dark:border-gray-700 bg-secondary dark:bg-secondary">
                         <div className="flex items-center gap-3">
-                            <BiFilterAlt className="text-pink-600 dark:text-pink-400" size={24} />
+                            <BiFilterAlt className="text-primary dark:text-white" size={24} />
                             <h2 className="text-xl font-bold text-gray-900 dark:text-white">Filters</h2>
                             {activeFiltersCount > 0 && (
-                                <span className="px-3 py-1 text-sm font-bold bg-pink-600 text-white rounded-full shadow-sm">
+                                <span className="px-3 py-1 text-sm font-bold bg-primary text-white rounded-full shadow-sm">
                                     {activeFiltersCount}
                                 </span>
                             )}
