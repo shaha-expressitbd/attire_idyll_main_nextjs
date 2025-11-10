@@ -162,7 +162,7 @@ export default function RefundPolicyPage() {
       id: 5,
       title: "Non-Refundable Situations",
       icon: <BiXCircle className="w-6 h-6" />,
-      color: "from-red-600 to-pink-600",
+      color: "from-red-600 to-primary",
       bgColor: "from-red-50 to-pink-50 dark:from-red-900/20 dark:to-pink-900/20",
       borderColor: "red-600",
       content: (
@@ -215,7 +215,7 @@ export default function RefundPolicyPage() {
           <div className="inline-flex items-center justify-center md:w-16 md:h-16 w-8 h-8 bg-primary rounded-full md:mb-6 mb-2 shadow-lg">
             <FiRotateCcw className="md:w-8 md:h-8 w-4 h-4 text-white" />
           </div>
-          <h1 className="md:text-5xl text-xl font-bold bg-gradient-to-r from-red-600 via-pink-600 to-orange-600 bg-clip-text text-transparent mb-4">
+          <h1 className="md:text-5xl text-xl font-bold bg-gradient-to-r from-red-600 via-primary to-orange-600 bg-clip-text text-transparent mb-4">
             Refund & Return Policy
           </h1>
           <p className="text-sm md:text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">

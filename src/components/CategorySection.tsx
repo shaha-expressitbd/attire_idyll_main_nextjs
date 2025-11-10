@@ -154,7 +154,7 @@ export default function CategorySection() {
                                             overflow-hidden text-ellipsis line-clamp-2 uppercase
                                             ${isDark
                                                 ? "text-gray-200 group-hover:text-pink-300"
-                                                : "text-gray-700 group-hover:text-pink-600"
+                                                : "text-gray-700 group-hover:text-primary"
                                             }
                                         `}
                                         style={{ maxHeight: "2.8rem" }}

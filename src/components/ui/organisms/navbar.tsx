@@ -2,19 +2,17 @@
 
 import React, { useState, useEffect, useRef, useMemo, lazy, Suspense } from "react";
 import Link from "next/link";
-import { AiOutlineSearch } from "react-icons/ai";
-import { useSidebar } from "@/hooks/useSidebar";
-import { navbarRef } from "@/lib/refs";
-import { SidebarToggler } from "../molecules/sidebarToggler";
-import ThemeToggler from "../molecules/themeToggler";
-import { CartSheet } from "../organisms/cart-sheet";
-import { WishlistSheet } from "./WishlistSheet";
-import { MenuSidebar } from "../molecules/menusidebar";
+import { AiOutlineSearch, AiTwotoneShopping } from "react-icons/ai";
+import { HiOutlineMenu } from "react-icons/hi";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { useProducts } from "@/hooks/useProducts";
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { Business } from "@/types/business";
 import Image from "../atoms/image";
+import { CartSheet } from "../organisms/cart-sheet";
+import { WishlistSheet } from "./WishlistSheet";
+import ThemeToggler from "../molecules/themeToggler";
+import { PiShoppingBagThin } from "react-icons/pi";
 
 const SearchDropdown = lazy(() => import("./SearchDropdown"));
 
@@ -31,40 +29,32 @@ interface SearchResultItem {
   image?: string;
 }
 
-const DEFAULT_IMAGE = "/assets/falback.jpg";
+const DEFAULT_IMAGE = "/assets/fallback.jpg";
 
 export const Navbar = ({ className, business }: NavbarProps) => {
-  const { toggle, isDesktop } = useSidebar();
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const { products, fetchProducts, loading: productsLoading, hasFetched } = useProducts();
+
   const [isScrolled, setIsScrolled] = useState(false);
   const [showSearchBar, setShowSearchBar] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState("");
   const [isFetchingForSearch, setIsFetchingForSearch] = useState(false);
-  const searchRef = useRef<HTMLDivElement>(null);
+  const [isCategoryOpen, setIsCategoryOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
-  const isProductsPage = pathname?.startsWith("/products");
-  const isProductDetailPage = pathname?.startsWith("/product");
-  const isCheckoutPage = pathname?.startsWith("/checkout");
+  const searchRef = useRef<HTMLDivElement>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+
   const categories = business?.categories || [];
 
   // Slug generator
   const generateSlug = (name: string): string => {
-    const BANGLA_TO_LATIN: Record<string, string> = {
-      "অ": "o", "আ": "a", "ই": "i", "ঈ": "i", "উ": "u", "ঊ": "u", "ঋ": "ri",
-      "এ": "e", "ঐ": "oi", "ও": "o", "ঔ": "ou", "ক": "k", "খ": "kh", "গ": "g",
-      "ঘ": "gh", "ঙ": "ng", "চ": "ch", "ছ": "chh", "জ": "j", "ঝ": "jh", "ঞ": "ny",
-      "ট": "t", "ঠ": "th", "ড": "d", "ঢ": "dh", "ণ": "n", "ত": "t", "থ": "th",
-      "দ": "d", "ধ": "dh", "ন": "n", "প": "p", "ফ": "ph", "ব": "b", "ভ": "bh",
-      "ম": "m", "য": "j", "র": "r", "ল": "l", "শ": "sh", "ষ": "sh", "স": "s",
-      "হ": "h", "ড়": "r", "ঢ়": "rh", "য়": "y", "ৎ": "t", "ং": "ng", "ঃ": "h", "ঁ": "",
-    };
     return name
       .toLowerCase()
-      .replace(/[অ-হ]/g, (char) => BANGLA_TO_LATIN[char] || char)
       .replace(/\s+/g, "-")
       .replace(/[^\w\-]+/g, "")
       .replace(/\-\-+/g, "-")
@@ -72,32 +62,79 @@ export const Navbar = ({ className, business }: NavbarProps) => {
       .replace(/-+$/, "");
   };
 
-  // Scroll shadow effect
+  // Detect mobile
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 640);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  // Scroll effect
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 10);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close search on outside click
+  // === লক/আনলক বডি স্ক্রল (শুধু মোবাইলে সার্চ ওপেনে) ===
   useEffect(() => {
-    if (!showSearchBar) return;
-    const handleOutsideClick = (e: MouseEvent) => {
+    if (showSearchBar && isMobile) {
+      // পেজ স্ক্রল লক
+      document.body.style.overflow = "hidden";
+      document.body.style.position = "fixed";
+      document.body.style.width = "100%";
+      document.body.style.top = `-${window.scrollY}px`; // স্ক্রল পজিশন মেইনটেইন
+    } else if (!showSearchBar && isMobile) {
+      // আনলক + পুরানো স্ক্রল পজিশন রিস্টোর
+      const scrollY = document.body.style.top;
+      document.body.style.overflow = "";
+      document.body.style.position = "";
+      document.body.style.width = "";
+      document.body.style.top = "";
+      window.scrollTo(0, parseInt(scrollY || "0") * -1);
+    }
+
+    return () => {
+      // ক্লিনআপ
+      document.body.style.overflow = "";
+      document.body.style.position = "";
+      document.body.style.width = "";
+      document.body.style.top = "";
+    };
+  }, [showSearchBar, isMobile]);
+
+  // Close search on outside click (desktop only)
+  useEffect(() => {
+    if (!showSearchBar || isMobile) return;
+    const handleClick = (e: MouseEvent) => {
       if (searchRef.current && !searchRef.current.contains(e.target as Node)) {
         setShowSearchBar(false);
         setSearchTerm("");
       }
     };
-    document.addEventListener("mousedown", handleOutsideClick);
-    return () => document.removeEventListener("mousedown", handleOutsideClick);
-  }, [showSearchBar]);
+    document.addEventListener("mousedown", handleClick);
+    return () => document.removeEventListener("mousedown", handleClick);
+  }, [showSearchBar, isMobile]);
 
-  // Clear isFetchingForSearch when products are loaded
+  // Close category dropdown on outside click
+  useEffect(() => {
+    if (!isCategoryOpen) return;
+    const handleClick = (e: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setIsCategoryOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClick);
+    return () => document.removeEventListener("mousedown", handleClick);
+  }, [isCategoryOpen]);
+
+  // Clear fetching
   useEffect(() => {
     if (hasFetched) setIsFetchingForSearch(false);
   }, [hasFetched]);
 
-  // Debounce search term
+  // Debounce
   useEffect(() => {
     const timer = setTimeout(() => setDebouncedSearchTerm(searchTerm), 300);
     return () => clearTimeout(timer);
@@ -113,8 +150,8 @@ export const Navbar = ({ className, business }: NavbarProps) => {
       .map((cat: any) => ({
         type: "category" as const,
         id: cat._id,
-        name: cat.name || "Unnamed Category",
-        url: `/products?category=${cat._id}&name=${encodeURIComponent(cat.name?.toLowerCase() || "")}`,
+        name: cat.name || "Unnamed",
+        url: `/category=${cat._id}&name=${encodeURIComponent(cat.name)}`,
         image: cat.image?.optimizeUrl || DEFAULT_IMAGE,
       }));
 
@@ -126,8 +163,8 @@ export const Navbar = ({ className, business }: NavbarProps) => {
       .map((product: any) => ({
         type: "product" as const,
         id: product._id,
-        name: product.name || "Unnamed Product",
-        url: `/product/${generateSlug(product.name || "")}?id=${product._id}`,
+        name: product.name || "Unnamed",
+        url: `/product/${generateSlug(product.name)}?id=${product._id}`,
         image: product.images?.[0]?.image?.secure_url
           ? product.images[0].alterImage?.secure_url || product.images[0].image.secure_url
           : DEFAULT_IMAGE,
@@ -136,7 +173,7 @@ export const Navbar = ({ className, business }: NavbarProps) => {
     return [...categoryMatches, ...productMatches].slice(0, 8);
   }, [debouncedSearchTerm, categories, products, hasFetched]);
 
-  // Handle search submission
+  // Handle search
   const handleSearchKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key !== "Enter" || !searchTerm.trim()) return;
     const newSearchParams = new URLSearchParams(searchParams);
@@ -146,7 +183,6 @@ export const Navbar = ({ className, business }: NavbarProps) => {
     setSearchTerm("");
   };
 
-  // Handle search button click
   const handleSearchClick = () => {
     setShowSearchBar(true);
     if (!hasFetched && !productsLoading) {
@@ -155,116 +191,162 @@ export const Navbar = ({ className, business }: NavbarProps) => {
     }
   };
 
-  // Placeholder text for search input
   const placeholderText = isFetchingForSearch
-    ? "Loading products..."
+    ? "Loading..."
     : !hasFetched
-      ? "Click to load and search products..."
+      ? "Click to load..."
       : "Search products...";
 
   return (
     <>
-      {/* Main Navbar */}
+      {/* Sticky Navbar */}
       <div
-        ref={navbarRef}
         className={`w-full z-[100] sticky top-0 transition-all duration-300
           ${isScrolled
-            ? "bg-white border-xl border-gray-200 shadow-sm dark:bg-black dark:border-gray-800 dark:shadow-none dark:text-white"
-            : "bg-white text-black dark:bg-black dark:text-white"
+            ? "bg-white/95 backdrop-blur-sm border-b border-gray-200 shadow-sm dark:bg-black/95 dark:border-gray-800"
+            : "bg-white dark:bg-black"
           } ${className || ""}`}
       >
-        {/* Mobile Bottom Navigation Bar */}
-        {!isProductsPage && !isCheckoutPage && !isProductDetailPage && (
-          <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white dark:bg-black border-t flex justify-around items-center h-16 shadow-lg">
-            <div className="flex flex-col items-center text-xs ml-4">
-              <SidebarToggler />
-              <span>Menu</span>
-            </div>
-            <button
-              type="button"
-              onClick={() => router.push("/products")}
-              className="flex flex-col items-center text-xs text-black dark:text-white"
-            >
-              <svg
-                stroke="currentColor"
-                fill="currentColor"
-                strokeWidth="0"
-                viewBox="0 0 16 16"
-                className="text-lg"
-                height="1.5em"
-                width="1.5em"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4z"></path>
-              </svg>
-              <span className="text-xs transition-all duration-500 ease-in-out text-black dark:text-white">
-                Shop
-              </span>
-            </button>
-            <Link
-              href="/"
-              className="left-1/2 absolute flex justify-center items-center border-2 border-gray-200 bg-gray-100 hover:bg-gray-200 shadow-lg hover:shadow-xl rounded-full w-16 h-16 transform transition -translate-x-1/2 -translate-y-1/2 duration-300 ease-in-out"
-              aria-current="page"
-            >
-              <svg
-                stroke="currentColor"
-                fill="currentColor"
-                strokeWidth="0"
-                viewBox="0 0 576 512"
-                className="w-7 h-7 text-pink-400 transition duration-200 ease-in-out"
-                height="1em"
-                width="1em"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path d="M280.37 148.26L96 300.11V464a16 16 0 0 0 16 16l112.06-.29a16 16 0 0 0 15.92-16V368a16 16 0 0 1 16-16h64a16 16 0 0 1 16 16v95.64a16 16 0 0 0 16 16.05L464 480a16 16 0 0 0 16-16V300L295.67 148.26a12.19 12.19 0 0 0-15.3 0zM571.6 251.47L488 182.56V44.05a12 12 0 0 0-12-12h-56a12 12 0 0 0-12 12v72.61L318.47 43a48 48 0 0 0-61 0L4.34 251.47a12 12 0 0 0-1.6 16.9l25.5 31A12 12 0 0 0 45.15 301l235.22-193.74a12.19 12.19 0 0 1 15.3 0L530.9 301a12 12 0 0 0 16.9-1.6l25.5-31a12 12 0 0 0-1.7-16.93z"></path>
-              </svg>
-            </Link>
-            <Link href="/about" className="flex flex-col items-center ml-10 group">
-              <svg
-                stroke="currentColor"
-                fill="currentColor"
-                strokeWidth="0"
-                viewBox="0 0 24 24"
-                className="w-7 h-7 text-black dark:text-white transition duration-200 ease-in-out"
-                height="1em"
-                width="1em"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path d="M12 11C14.7614 11 17 13.2386 17 16V22H15V16C15 14.4023 13.7511 13.0963 12.1763 13.0051L12 13C10.4023 13 9.09634 14.2489 9.00509 15.8237L9 16V22H7V16C7 13.2386 9.23858 11 12 11ZM5.5 14C5.77885 14 6.05009 14.0326 6.3101 14.0942C6.14202 14.594 6.03873 15.122 6.00896 15.6693L6 16L6.0007 16.0856C5.88757 16.0456 5.76821 16.0187 5.64446 16.0069L5.5 16C4.7203 16 4.07955 16.5949 4.00687 17.3555L4 17.5V22H2V17.5C2 15.567 3.567 14 5.5 14ZM18.5 14C20.433 14 22 15.567 22 17.5V22H20V17.5C20 16.7203 19.4051 16.0796 18.6445 16.0069L18.5 16C18.3248 16 18.1566 16.03 18.0003 16.0852L18 16C18 15.3343 17.8916 14.694 17.6915 14.0956C17.9499 14.0326 18.2211 14 18.5 14ZM5.5 8C6.88071 8 8 9.11929 8 10.5C8 11.8807 6.88071 13 5.5 13C4.11929 13 3 11.8807 3 10.5C3 9.11929 4.11929 8 5.5 8ZM18.5 8C19.8807 8 21 9.11929 21 10.5C21 11.8807 19.8807 13 18.5 13C17.1193 13 16 11.8807 16 10.5C16 9.11929 17.1193 8 18.5 8ZM5.5 10C5.22386 10 5 10.2239 5 10.5C5 10.7761 5.22386 11 5.5 11C5.77614 11 6 10.7761 6 10.5C6 10.2239 6 10 5.5 10ZM18.5 10C18.2239 10 18 10.2239 18 10.5C18 10.7761 18.2239 11 18.5 11C18.7761 11 19 10.7761 19 10.5C19 10.2239 19 10 18.5 10ZM12 2C14.2091 2 16 3.79086 16 6C16 8.20914 14.2091 10 12 10C9.79086 10 8 8.20914 8 6C8 3.79086 9.79086 2 12 2ZM12 4C10.8954 4 10 4.89543 10 6C10 7.10457 10.8954 8 12 8C13.1046 8 14 7.10457 14 6C14 4.89543 13.1046 4 12 4Z"></path>
-              </svg>
-              <span className="text-xs transition-all duration-500 ease-in-out text-black dark:text-white">
-                About US
-              </span>
-            </Link>
-            <ThemeToggler />
-          </div>
-        )}
-
-        {/* Desktop Full Header */}
-        <div
-          className={`hidden md:flex items-center justify-between px-6 py-2
-            ${isScrolled ? "text-gray-900" : "text-black dark:text-white"}`}
-        >
+        {/* Top Row */}
+        <div className="flex items-center justify-between px-3 py-2.5 sm:px-4 sm:py-3 gap-2 sm:gap-3 lg:container md:container mx-auto">
           {/* Left: Menu + Search */}
-          <div className="flex items-center gap-6 text-sm font-semibold ml-16">
-            <div className="flex items-center gap-1 cursor-pointer text-black dark:text-white">
-              <SidebarToggler />
-              <span className="cursor-pointer px-3 py-2" onClick={toggle}>
-                Menu
-              </span>
-            </div>
+          <div className="flex items-center gap-2 sm:gap-3 relative" ref={dropdownRef}>
+            {/* Menu Icon */}
+            <button
+              ref={menuButtonRef}
+              onClick={() => setIsCategoryOpen(!isCategoryOpen)}
+              className="p-1.5 sm:p-2 text-gray-700 dark:text-gray-300 hover:text-primary transition"
+            >
+              <HiOutlineMenu className="text-xl sm:text-2xl" />
+            </button>
+
+            {/* Category Dropdown */}
+            <AnimatePresence>
+              {isCategoryOpen && categories.length > 0 && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  className="absolute top-full left-0 mt-1 w-screen sm:w-48 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-md shadow-lg py-1 z-50"
+                  style={{ maxWidth: "100vw" }}
+                >
+                  <nav className="max-h-60 overflow-y-auto">
+                    {categories.map((cat: any) => {
+                      const slug = generateSlug(cat.name);
+                      return (
+                        <Link
+                          key={cat._id}
+                          href={`/${slug}`}
+                          onClick={() => setIsCategoryOpen(false)}
+                          className="block px-4 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-300 
+                            hover:bg-pink-50 dark:hover:bg-gray-800 
+                            hover:text-primary dark:hover:text-pink-400 
+                            transition text-left"
+                        >
+                          {cat.name}
+                        </Link>
+                      );
+                    })}
+                  </nav>
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+            {/* Search Button */}
             <div className="relative" ref={searchRef}>
               <button
-                type="button"
                 onClick={handleSearchClick}
-                className="flex items-center gap-1 cursor-pointer text-black dark:text-white hover:text-pink-500 dark:hover:text-pink-400 transition-colors"
+                className="flex items-center gap-1.5 sm:gap-2 text-gray-700 dark:text-gray-300 hover:text-primary transition"
               >
-                <AiOutlineSearch className="text-lg" />
-                <span>Search</span>
+                <AiOutlineSearch className="text-lg sm:text-xl" />
+                <span className="text-xs sm:text-sm hidden xs:block">Search</span>
               </button>
+
+              {/* Mobile Full Screen Search */}
               <AnimatePresence>
-                {showSearchBar && (
-                  <Suspense fallback={<div className="text-center p-2">Loading search...</div>}>
+                {showSearchBar && isMobile && (
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="fixed inset-0 bg-white dark:bg-black z-[200] flex flex-col"
+                  >
+                    {/* Search Header */}
+                    <div className="flex items-center gap-3 p-4 border-b dark:border-gray-800">
+                      <button
+                        onClick={() => {
+                          setShowSearchBar(false);
+                          setSearchTerm("");
+                        }}
+                        className="text-gray-600 dark:text-gray-400"
+                      >
+                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                        </svg>
+                      </button>
+                      <input
+                        type="text"
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        onKeyDown={handleSearchKeyDown}
+                        placeholder={placeholderText}
+                        className="flex-1 text-base outline-none dark:bg-transparent dark:text-white"
+                        autoFocus
+                      />
+                      {isFetchingForSearch && (
+                        <div className="animate-spin">
+                          <svg className="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24">
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
+                          </svg>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Scrollable Results */}
+                    <div className="flex-1 overflow-y-auto px-4 py-2">
+                      <Suspense fallback={<div className="p-4 text-center">Loading...</div>}>
+                        {suggestions.length > 0 ? (
+                          <div className="space-y-1">
+                            {suggestions.map((item) => (
+                              <Link
+                                key={`${item.type}-${item.id}`}
+                                href={item.url}
+                                onClick={() => {
+                                  setShowSearchBar(false);
+                                  setSearchTerm("");
+                                }}
+                                className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition"
+                              >
+                                {item.image && (
+                                  <Image
+                                    src={item.image}
+                                    alt={item.name}
+                                    className="w-10 h-10 object-cover rounded"
+                                    variant="small"
+                                  />
+                                )}
+                                <div>
+                                  <p className="text-sm font-medium text-gray-900 dark:text-gray-100">{item.name}</p>
+                                  <p className="text-xs text-gray-500 dark:text-gray-400 capitalize">{item.type}</p>
+                                </div>
+                              </Link>
+                            ))}
+                          </div>
+                        ) : debouncedSearchTerm && hasFetched ? (
+                          <p className="text-center text-gray-500 py-8">No results found</p>
+                        ) : null}
+                      </Suspense>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
+              {/* Desktop Search Dropdown */}
+              <AnimatePresence>
+                {showSearchBar && !isMobile && (
+                  <Suspense fallback={<div className="p-2">Loading...</div>}>
                     <SearchDropdown
                       searchTerm={searchTerm}
                       setSearchTerm={setSearchTerm}
@@ -286,45 +368,31 @@ export const Navbar = ({ className, business }: NavbarProps) => {
           </div>
 
           {/* Center: Logo */}
-          <div>
+          <div className="flex-1 flex justify-center max-w-[100px] sm:max-w-[140px]">
             <Link href="/">
               <Image
                 src={business?.alterImage?.secure_url || DEFAULT_IMAGE}
-                alt="Business Logo"
-                sizes="160px"
-                className="h-10 md:h-12 object-contain"
+                alt="Logo"
+                sizes="100px"
+                className="h-7 sm:h-9 object-contain"
                 variant="small"
               />
             </Link>
           </div>
 
-          {/* Right: Shop + Cart + Wishlist + Theme */}
-          <div className="flex items-center gap-6 text-sm font-semibold">
+          {/* Right: Icons */}
+          <div className="flex items-center gap-2 sm:gap-3">
             <button
-              type="button"
               onClick={() => router.push("/products")}
-              className="flex flex-col items-center text-xs text-black dark:text-white"
+              className="text-gray-700 dark:text-gray-300 hover:text-primary"
             >
-              <svg
-                stroke="currentColor"
-                fill="currentColor"
-                strokeWidth="0"
-                viewBox="0 0 16 16"
-                className="text-lg text-black dark:text-white"
-                height="1em"
-                width="1em"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4z"></path>
-              </svg>
+              <PiShoppingBagThin className="w-6 h-6 " />
             </button>
             <CartSheet />
             <WishlistSheet />
             <ThemeToggler />
           </div>
         </div>
-
-        <MenuSidebar />
       </div>
     </>
   );

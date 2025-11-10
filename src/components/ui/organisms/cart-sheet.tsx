@@ -19,10 +19,11 @@ import { useEffect, useState, useRef, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { AnimatePresence } from "framer-motion";
 import { TCartItem } from "@/lib/features/cart/cartSlice";
-import { FaCartArrowDown } from "react-icons/fa";
+
 import { BiMinus, BiPlus } from "react-icons/bi";
 import Link from "next/link";
 import Image from "../atoms/image";
+import { PiShoppingCartLight } from "react-icons/pi";
 
 function CartItemComponent({
   item,
@@ -263,7 +264,7 @@ export function CartSheet() {
 
     >
       <div className="relative">
-        <FaCartArrowDown className="w-5 h-5 text-gray-700 dark:text-gray-200" />
+        <PiShoppingCartLight className="w-6 h-6 text-gray-700 dark:text-gray-200" />
         {mounted && itemCount > 0 && (
           <>
             <span

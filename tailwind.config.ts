@@ -12,14 +12,9 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Urbanist", "sans-serif"],
-        pollinator: "Pollinator",
-        autography: "Autography",
-        airstrip: "airstrip",
+        sans: ["Jura", "sans-serif"], // এটাই ডিফল্ট হবে
+        hebrew: ['"IBM Plex Sans Hebrew"', "sans-serif"],
         noto: ["Noto Sans Bengali"],
-        jakarta: ["Plus Jakarta Sans", "sans-serif"],
-        poppins: ["Poppins", "sans-serif"],
-        urbanist: ["Urbanist", "sans-serif"],
       },
       colors: {
         primary: {

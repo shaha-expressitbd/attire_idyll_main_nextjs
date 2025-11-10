@@ -110,7 +110,7 @@ export default function NewProductsSlide({
           </div>
           <Link
             href="/products/new"
-            className="px-4 py-2 md:px-6 md:py-3 border-2 md:mt-0 mt-6 border-pink-500 text-pink-600 dark:text-pink-400 font-medium rounded-full hover:bg-pink-50 dark:hover:bg-pink-900/30 transition"
+            className="px-4 py-2 md:px-6 md:py-3 border-2 md:mt-0 mt-6 border-pink-500 text-primary dark:text-pink-400 font-medium rounded-full hover:bg-pink-50 dark:hover:bg-pink-900/30 transition"
           >
             See More
           </Link>

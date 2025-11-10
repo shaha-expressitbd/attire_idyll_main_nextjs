@@ -1,4 +1,4 @@
-import { notosans } from "@/lib/fonts";
+import { jura } from "@/lib/fonts";
 import { AppProviders } from "@/lib/Provider/AppProvider";
 import { GoogleTagManager } from "@next/third-parties/google";
 import type { Metadata } from "next";
@@ -68,7 +68,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
           crossOrigin='anonymous'
         />
       </head>
-      <body className={`${notosans.className} w-full max-w-screen h-screen`}>
+      <body className={`${jura.className} w-full max-w-screen h-screen`}>
         <AppProviders>
           <main className="bg-white dark:bg-gray-800 cursor-default">
             <Toaster richColors position="top-center" closeButton />

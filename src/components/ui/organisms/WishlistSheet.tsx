@@ -217,7 +217,7 @@ export function WishlistSheet() {
 
             >
                 <div className="relative">
-                    <FiHeart className="w-5 h-5 text-pink-600 dark:text-pink-400  " />
+                    <FiHeart className="w-5 h-5 text-primary dark:text-pink-400  " />
 
                     {mounted && itemCount > 0 && (
                         <>
@@ -252,7 +252,7 @@ export function WishlistSheet() {
                             <div className="flex items-center justify-between">
                                 <div className="flex items-center gap-3">
                                     <div className="p-2 rounded-xl bg-gradient-to-br from-pink-100 to-red-100 dark:from-pink-900/30 dark:to-red-900/30">
-                                        <FiHeart className="w-5 h-5 text-pink-600 dark:text-pink-400" />
+                                        <FiHeart className="w-5 h-5 text-primary dark:text-pink-400" />
                                     </div>
                                     <div>
                                         <h2 className="text-lg font-bold text-gray-900 dark:text-white">

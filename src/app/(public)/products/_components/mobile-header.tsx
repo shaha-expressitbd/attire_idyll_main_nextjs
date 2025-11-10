@@ -37,7 +37,7 @@
 //                         <span>FILTERS</span>
 //                         {isMobileFiltersOpen ? <FiChevronUp /> : <FiChevronDown />}
 //                         {(selectedCats.length > 0 || selectedSizes.length > 0 || searchQuery) && (
-//                             <span className="ml-2 px-2 py-1 bg-pink-600 text-white text-xs rounded-full">
+//                             <span className="ml-2 px-2 py-1 bg-primary text-white text-xs rounded-full">
 //                                 {selectedCats.length + selectedSizes.length + (searchQuery ? 1 : 0)}
 //                             </span>
 //                         )}

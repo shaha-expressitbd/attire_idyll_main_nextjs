@@ -50,7 +50,7 @@ export const FlashDealTimeCounter = React.memo(({ endDate, variant = "default" }
     if (timeLeft.completed) {
         return (
             <div className="relative overflow-hidden">
-                <div className="bg-gradient-to-r from-red-500 to-pink-600 px-3 py-2 rounded-xl text-center shadow-lg">
+                <div className="bg-gradient-to-r from-red-500 to-primary px-3 py-2 rounded-xl text-center shadow-lg">
                     <div className="absolute inset-0 bg-black/20 backdrop-blur-sm"></div>
                     <span className="relative text-sm font-semibold text-white">Deal Expired</span>
                 </div>
@@ -63,7 +63,7 @@ export const FlashDealTimeCounter = React.memo(({ endDate, variant = "default" }
         return (
             <div className="relative group">
                 {/* Glowing Background Effect */}
-                <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-pulse"></div>
+                <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 via-primary to-blue-600 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-pulse"></div>
 
                 <div className="relative bg-gradient-to-r from-gray-900 via-purple-900 to-gray-900 rounded-xl p-4 shadow-2xl border border-purple-500/30">
                     {/* Animated particles background */}

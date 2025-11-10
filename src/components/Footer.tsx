@@ -1,9 +1,9 @@
 import React from 'react'
 import Link from 'next/link'
-import { FaFacebookF, FaInstagram, FaWhatsapp } from 'react-icons/fa'
-import { RiMessengerLine } from 'react-icons/ri'
+import { FaFacebookF, FaInstagram, FaPhone, FaWhatsapp } from 'react-icons/fa'
 import { Business } from '@/types/business'
 import Image from './ui/atoms/image'
+import { CiMail } from 'react-icons/ci'
 
 interface FooterProps {
   business: Business
@@ -12,182 +12,138 @@ interface FooterProps {
 const Footer = function Footer({ business }: FooterProps) {
 
   return (
-    <footer className='w-full bg-white dark:bg-black'>
+    <footer className="w-full bg-white dark:bg-black font-hebrew">
       {/* Thin pink top border */}
-      <div className='bg-rose-100'></div>
+      <div className="h-1 bg-rose-100"></div>
 
-      <div className=' px-4 sm:px-6 py-10'>
-        <div className='grid grid-cols-1 md:grid-cols-12 gap-8'>
-          {/* Left: Logo + Text */}
-          <div className='md:col-span-4 flex flex-col items-center md:items-start'>
-            <Link href='/'>
-              <Image
-                src={business?.alterImage?.secure_url || '/assets/logo.png'}
-                alt="AttireIdyll Logo"
+      <div className="px-4 sm:px-6 py-10">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
 
-                sizes='(max-width: 768px) 240px, 240px'
-                className='w-60'
-                loading='lazy'
-                variant="small"
-              />
-            </Link>
-            <p className='mt-6 text-sm leading-7 text-gray-800 dark:text-gray-200 text-center md:text-left'>
-              আমাদের কালেকশন আপনাকে দেবে ফ্যাশনের আধুনিকতা এবং এলিগেন্সের একটি
-              নিখুঁত সমন্বয়।
-            </p>
-          </div>
-          {/* Explore More */}
-          <div className='md:col-span-3'>
-            <h4 className='font-semibold text-lg text-gray-800 dark:text-gray-200'>
-              Explore More
-            </h4>
-            <ul className='mt-4 space-y-3 text-gray-800 dark:text-gray-200'>
-              <li>
-                <Link
-                  href='/products/new'
-                  className='hover:text-pink-600 transition-colors'
-                >
-                  New Arrivals
-                </Link>
-              </li>
-
-              <li>
-                <Link
-                  href='/about'
-                  className='hover:text-pink-600 transition-colors'
-                >
-                  About Us
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href='/faq'
-                  className='hover:text-pink-600 transition-colors'
-                >
-                  FAQ
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href='/support'
-                  className='hover:text-pink-600 transition-colors'
-                >
-                  Support
-                </Link>
-              </li>
-            </ul>
-          </div>
-          {/* Policies */}
-          <div className='md:col-span-3'>
-            <h4 className='font-semibold text-lg text-gray-800 dark:text-gray-200'>
-              Policies
-            </h4>
-            <ul className='mt-4 space-y-3 text-gray-800 dark:text-gray-200'>
-              <li>
-                <Link
-                  href='/refund-policy'
-                  className='hover:text-pink-600 transition-colors'
-                >
-                  Return and Refund Policy
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href='/privacy-policy'
-                  className='hover:text-pink-600 transition-colors'
-                >
-                  Privacy Policy
-                </Link>
-              </li>
-
-              <li>
-                <Link
-                  href='/terms-of-service'
-                  className='hover:text-pink-600 transition-colors'
-                >
-                  Terms of Service
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href='/shipping-info'
-                  className='hover:text-pink-600 transition-colors'
-                >
-                  Shipping Info
-                </Link>
-              </li>
-            </ul>
-          </div>
-          <div className='md:col-span-2'>
-            <h4 className='font-semibold text-lg text-gray-800 dark:text-gray-200'>
-              Get in Touch
+          {/* === Contact Us === */}
+          <div>
+            <h4 className="font-semibold text-lg text-gray-800 dark:text-gray-200 mb-4">
+              Contact Us
             </h4>
 
-            {/* Contact Info */}
-            <div className='mt-4 space-y-2 text-gray-800 dark:text-gray-200'>
-              <p>
-                মোবাইল নং:{' '}
+            <div className="space-y-2 text-gray-800 dark:text-gray-200 text-sm md:text-base">
+              <Link href='/'>
+                <Image
+                  src={business?.alterImage?.secure_url || '/assets/logo.png'}
+                  alt="attireidyll Logo"
+
+                  sizes='(max-width: 768px) 240px, 240px'
+                  className='w-60'
+                  loading='lazy'
+                  variant="small"
+                />
+              </Link>
+              <p className="break-all leading-relaxed">
+                {business?.location}<br />
+
+              </p>
+
+              <p className="flex items-center gap-1">
+                <span> <FaPhone /> </span>
                 <Link
                   href={`tel:${business?.phone}`}
-                  className='hover:text-pink-600 transition-colors'
+                  className="hover:text-primary transition-colors"
                   prefetch={false}
                 >
-                  (+88) {business?.phone || ''}
+                  (+88) {business?.phone || '1122334455'}
                 </Link>
               </p>
-              <p className="text-base md:text-lg">
-                ইমেইল:{' '}
+
+              <p className="flex items-center gap-1 break-all">
+                <span> <CiMail /> </span>
                 <Link
                   href={`mailto:${business?.email || ''}`}
-                  className="hover:text-pink-600 transition-colors md:break-words break-all"
+                  className="hover:text-primary transition-colors"
                   prefetch={false}
                 >
-                  {business?.email || ''}
+                  {business?.email || 'help@gmail.com'}
                 </Link>
               </p>
             </div>
+          </div>
 
-            {/* Social Links */}
-            <div className='mt-5 flex items-center gap-4 text-gray-800 dark:text-gray-200'>
+          {/* === Information === */}
+          <div>
+            <h4 className="font-semibold text-lg text-gray-800 dark:text-gray-200 mb-4">
+              Information
+            </h4>
+            <ul className="space-y-3 text-gray-800 dark:text-gray-200">
+              <li><Link href="/refund-policy" className="hover:text-primary transition-colors">Returns and Exchange</Link></li>
+              <li><Link href="/privacy-policy" className="hover:text-primary transition-colors">Privacy Policy</Link></li>
+              <li><Link href="/terms-of-service" className="hover:text-primary transition-colors">Terms and Conditions</Link></li>
+              <li><Link href="/faq" className="hover:text-primary transition-colors">FAQs</Link></li>
+
+            </ul>
+          </div>
+
+          {/* === Customer Care === */}
+          <div>
+            <h4 className="font-semibold text-lg text-gray-800 dark:text-gray-200 mb-4">
+              Customer Care
+            </h4>
+            <ul className="space-y-3 text-gray-800 dark:text-gray-200">
+              <li><Link href="/about" className="hover:text-primary transition-colors">About Us</Link></li>
+              <li><Link href="/contact" className="hover:text-primary transition-colors">Contact Us</Link></li>
+              <li><Link href="/store" className="hover:text-primary transition-colors">Store Location</Link></li>
+              <li><Link href="/shipping-info" className="hover:text-primary transition-colors">Shipping Info</Link></li>
+
+            </ul>
+          </div>
+
+          {/* === Newsletter + Social === */}
+          <div>
+            <h4 className="font-semibold text-lg text-gray-800 dark:text-gray-200 mb-4">
+              Signup For Our Newsletter
+            </h4>
+
+            {/* Newsletter Form */}
+            <form className="flex mb-6">
+              <input
+                type="email"
+                placeholder="Enter your email"
+                className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-l-md focus:outline-none focus:ring-2 focus:ring-pink-500 text-gray-800 dark:text-gray-200 bg-white dark:bg-gray-900 text-sm"
+              />
+              <button
+                type="submit"
+                className="px-4 py-2 bg-teal-500 text-white rounded-r-md hover:bg-teal-600 transition-colors flex items-center"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd" />
+                </svg>
+              </button>
+            </form>
+
+            {/* Social Icons */}
+            <div className="flex gap-4 text-gray-800 dark:text-gray-200">
               <Link
-                href="https://www.facebook.com/AttireIdyll/"
-                target='_blank'
-                rel='noopener noreferrer'
-                className='hover:text-pink-600 transition-colors'
-                aria-label='Facebook'
+                href={business?.social?.facebook || "https://facebook.com"}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-primary transition-colors"
                 prefetch={false}
               >
                 <FaFacebookF size={20} />
               </Link>
 
               <Link
-                href='https://www.facebook.com/messages/t/414489611749530'
-                target='_blank'
-                rel='noopener noreferrer'
-                className='hover:text-pink-600 transition-colors'
-                aria-label='Messenger'
-                prefetch={false}
-              >
-                <RiMessengerLine size={20} />
-              </Link>
-
-              <Link
-                href='https://wa.me/+8801907349009'
-                target='_blank'
-                rel='noopener noreferrer'
-                className='hover:text-pink-600 transition-colors'
-                aria-label='WhatsApp'
+                href={business?.social?.whatsapp ? `https://wa.me/${business.social.whatsapp}` : "https://wa.me/8801907349009"}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-primary transition-colors"
                 prefetch={false}
               >
                 <FaWhatsapp size={20} />
               </Link>
 
               <Link
-                href='https://instagram.com'
-                target='_blank'
-                rel='noopener noreferrer'
-                className='hover:text-pink-600 transition-colors'
-                aria-label='Instagram'
+                href={business?.social?.instagram || "https://instagram.com"}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-primary transition-colors"
                 prefetch={false}
               >
                 <FaInstagram size={20} />
@@ -202,31 +158,28 @@ const Footer = function Footer({ business }: FooterProps) {
             <div className='flex flex-row items-center gap-1 text-sm text-gray-800 dark:text-gray-200'>
               <p>© 2025 Powered by</p>
               <a href='https://calquick.app' aria-label='Calquick'>
-                <Image
+                <img
                   src='https://calquick.app/images/logo/logo.png'
                   alt='CalQuick logo'
-                  width={70}
-                  height={20}
+
                   sizes='70px'
-                  className='w-[70px] dark:hidden'
+                  className='w-[80px] dark:hidden'
                   loading='lazy'
                 />
               </a>
               <a href='https://calquick.app' aria-label='Calquick'>
-                <Image
+                <img
                   src='https://calquick.app/images/logo/logo-white.png'
                   alt='CalQuick logo'
-                  width={70}
-                  height={20}
                   sizes='70px'
-                  className='w-[70px] hidden dark:block'
+                  className='w-[80px] hidden dark:block'
                   loading='lazy'
                 />
               </a>
             </div>
             <div className='flex gap-2 text-sm text-gray-800 dark:text-gray-200'>
               <span className='font-semibold'>Trade License Number:</span>
-              <span>TRAD/DNCC/050278/2022</span>
+              <span></span>
             </div>
           </div>
 
@@ -252,7 +205,7 @@ const Footer = function Footer({ business }: FooterProps) {
           </div>
         </div>
       </div>
-    </footer>
+    </footer >
   )
 }
 

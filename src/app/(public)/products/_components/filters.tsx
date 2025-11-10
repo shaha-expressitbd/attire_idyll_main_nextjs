@@ -510,7 +510,7 @@ export default function FilterContent({
                           key={tag}
                           onClick={() => toggle(selectedTags, setSelectedTags, tag)}
                           className={`px-3 py-1.5 text-xs font-medium rounded-full transition-all duration-200 ${selectedTags.includes(tag)
-                            ? "bg-pink-600 text-white shadow-md"
+                            ? "bg-primary text-white shadow-md"
                             : "bg-gray-100 dark:bg-gray-700 text-black dark:text-white hover:bg-gray-200 dark:hover:bg-gray-600 border border-gray-300 dark:border-gray-600"
                             }`}
                         >

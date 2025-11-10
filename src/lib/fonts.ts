@@ -1,27 +1,16 @@
-import {
-  Noto_Sans_Bengali,
-  Plus_Jakarta_Sans,
-  Poppins,
-  Urbanist,
-} from "next/font/google";
+// src/lib/fonts.ts  (অথবা যেকোনো lib ফোল্ডারে)
 
-export const notosans = Noto_Sans_Bengali({
-  subsets: ["bengali"],
-  variable: "--font-noto",
+import { Jura, IBM_Plex_Sans_Hebrew } from "next/font/google";
+
+// === Google Fonts ===
+export const jura = Jura({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-sans", // এটাই গ্লোবাল ডিফল্ট হবে
 });
 
-export const jakarta = Plus_Jakarta_Sans({
-  subsets: ["latin"],
-  variable: "--font-jakarta",
-});
-
-export const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-  variable: "--font-poppins",
-});
-
-export const urbanist = Urbanist({
-  subsets: ["latin"],
-  variable: "--font-urbanist",
+export const hebrew = IBM_Plex_Sans_Hebrew({
+  subsets: ["hebrew", "latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700"],
+  variable: "--font-hebrew",
 });

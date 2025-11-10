@@ -88,7 +88,7 @@ export default function ProductCard({
   const addVariantToCart = (selectedVariant: any, quantity: number = 1, finalPrice?: number) => {
     if (isPreOrder) {
       if (cartItems.length > 0) {
-        toast.error("আপাচার রেগুলার কার্টে প্রোডাক্ট আছে। প্রি-অর্ডার করতে হলে রেগুলার কার্ট ক্লিয়ার করুন।", {
+        toast.error("আপানার রেগুলার কার্টে প্রোডাক্ট আছে। প্রি-অর্ডার করতে হলে রেগুলার কার্ট ক্লিয়ার করুন।", {
           description: "চেকআউট পেজে গিয়ে রেগুলার কার্ট ক্লিয়ার করুন।",
           duration: 5000,
         });

@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@100..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Hebrew:wght@100;200;300;400;500;600;700&family=Jura:wght@300..700&display=swap");
 @import "nprogress/nprogress.css";
 @tailwind base;
 @tailwind components;
@@ -41,8 +41,8 @@
 @layer base {
   :root {
     --color-primary: #318c89;
-    --color-secondary: #76b0ae;
-    --color-tertiary: #b8d9d5;
+    --color-secondary: #f0f5f4;
+    --color-tertiary: #f0f7f6;
     --color-foreground: #d4a91c;
     --color-base: #1a2a27;
     --color-accent: #ede9d1;
@@ -58,6 +58,9 @@
     --color-base: #1a2a27;
     --color-accent: #e65a50;
     --color-muted: #6c757d;
+  }
+  html {
+    font-family: theme("fontFamily.sans");
   }
 }
 @layer components {
@@ -353,7 +356,7 @@
 
 .custom-scrollbar {
   scrollbar-width: thin;
-  scrollbar-color: #c43882 transparent;
+  scrollbar-color: #318c89 transparent;
 }
 
 .custom-scrollbar::-webkit-scrollbar {
@@ -365,17 +368,17 @@
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background-color: #c43882;
+  background-color: #318c89;
   border-radius: 9999px;
   border: 2px solid transparent;
   background-clip: content-box;
 }
 
 .dark .custom-scrollbar::-webkit-scrollbar-thumb {
-  background-color: #c43882;
+  background-color: #318c89;
 }
 .dark .custom-scrollbar {
-  scrollbar-color: #c43882 transparent;
+  scrollbar-color: #318c89 transparent;
 }
 
 /* cart-sheet */
@@ -425,7 +428,7 @@
 
 /* Active selected range */
 .rc-slider-track {
-  background-color: #c43882 !important;
+  background-color: #318c89 !important;
   height: 6px !important;
 }
 
@@ -436,7 +439,7 @@
 
 /* Handle knob */
 .rc-slider-handle {
-  border-color: #c43882 !important;
+  border-color: #318c89 !important;
   background-color: #fff !important;
   width: 18px !important;
   height: 18px !important;
@@ -501,7 +504,7 @@ input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
   background-color: #ffff; /* blue */
-  border: 4px solid #c43882; /* border also blue */
+  border: 4px solid #318c89; /* border also blue */
   height: 16px;
   width: 16px;
   border-radius: 50%;
@@ -512,7 +515,7 @@ input[type="range"]::-webkit-slider-thumb {
 
 input[type="range"]::-moz-range-thumb {
   background-color: #99b0d6; /* blue */
-  border: 4px solid #c43882;
+  border: 4px solid #318c89;
   height: 16px;
   width: 16px;
   border-radius: 50%;
@@ -523,12 +526,12 @@ input[type="range"]::-moz-range-thumb {
 /* Dark mode */
 .dark input[type="range"]::-webkit-slider-thumb {
   background-color: #99b0d6;
-  border-color: #c43882;
+  border-color: #318c89;
 }
 
 .dark input[type="range"]::-moz-range-thumb {
   background-color: #99b0d6;
-  border-color: #c43882;
+  border-color: #318c89;
 }
 
 .custom-search-range {
@@ -593,7 +596,7 @@ input[type="range"]::-moz-range-thumb {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #c43882;
+  background: #318c89;
   border-radius: 6px;
 }
 
@@ -606,7 +609,7 @@ input[type="range"]::-moz-range-thumb {
   background: #000000;
 }
 .dark ::-webkit-scrollbar-thumb {
-  background: #c43882;
+  background: #318c89;
 }
 .dark ::-webkit-scrollbar-thumb:hover {
   background: #a9256a;
@@ -615,11 +618,11 @@ input[type="range"]::-moz-range-thumb {
 /* Firefox scrollbar */
 * {
   scrollbar-width: thin;
-  scrollbar-color: #c43882 #ffffff;
+  scrollbar-color: #318c89 #ffffff;
 }
 
 .dark * {
-  scrollbar-color: #c43882 #000000;
+  scrollbar-color: #318c89 #000000;
 }
 
 /* RecentlyViewedProducts Component Global Transitions */
