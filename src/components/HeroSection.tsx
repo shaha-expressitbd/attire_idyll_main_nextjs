@@ -47,7 +47,7 @@ export default function HeroSection() {
   };
 
   return (
-    <div className="pb-12 md:pb-0 lg:container md:container mx-auto">
+    <div className="pb-12 md:pb-0 lg:container md:container mx-auto lg:mt-12 md:mt-12 mt-8">
       <div className="relative w-full overflow-hidden h-[260px] md:h-[800px] lg:h-[800px] md:pb-10">
         <section className="w-full h-full">
           <Swiper

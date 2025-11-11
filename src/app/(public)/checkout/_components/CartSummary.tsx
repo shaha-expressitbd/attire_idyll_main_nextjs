@@ -21,6 +21,7 @@ export interface CartSummaryProps {
     isLoading: boolean;
     handleSubmit: (e?: React.FormEvent) => void;
     additional_discount_amount?: number;
+    isPreOrder?: boolean;
 }
 
 export const CartSummary: React.FC<CartSummaryProps> = ({
@@ -33,6 +34,7 @@ export const CartSummary: React.FC<CartSummaryProps> = ({
     isLoading,
     handleSubmit,
     additional_discount_amount = 0,
+    isPreOrder = false,
 }) => {
     const [itemCount, setItemCount] = useState(items.length);
 
@@ -85,12 +87,14 @@ export const CartSummary: React.FC<CartSummaryProps> = ({
 
                 {/* Totals (Desktop) */}
                 <div className="mt-6 pt-6 border-t border-gray-200 hidden lg:block">
-                    <div className="flex justify-between text-gray-600 dark:text-white">
-                        <span>সাবটোটাল</span>
-                        <span className="font-medium">
-                            {formatCurrency(subtotal, currency)}
-                        </span>
-                    </div>
+                    {!isPreOrder && (
+                        <div className="flex justify-between text-gray-600 dark:text-white">
+                            <span>সাবটোটাল</span>
+                            <span className="font-medium">
+                                {formatCurrency(subtotal, currency)}
+                            </span>
+                        </div>
+                    )}
                     <div className="flex justify-between text-gray-600 dark:text-white">
                         <span>ডেলিভারি চার্জ</span>
                         <span className="font-medium">
@@ -109,7 +113,7 @@ export const CartSummary: React.FC<CartSummaryProps> = ({
                         <div className="flex justify-between text-xl font-bold text-gray-800 dark:text-white">
                             <span>মোট</span>
                             <span className="text-primary">
-                                {formatCurrency(total, currency)}
+                                {formatCurrency(isPreOrder ? deliveryCharge : total, currency)}
                             </span>
                         </div>
                     </div>

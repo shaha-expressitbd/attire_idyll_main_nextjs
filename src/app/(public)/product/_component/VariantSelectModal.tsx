@@ -5,6 +5,7 @@ import { createPortal } from "react-dom";
 import { BiX, BiMinus, BiPlus } from "react-icons/bi";
 import type { Variant, VariantGroup, Product } from "@/types/product";
 import Image from "@/components/ui/atoms/image";
+import { isProductPreOrder } from "@/utils/productUtils";
 
 interface Props {
   isOpen: boolean;
@@ -145,8 +146,9 @@ export default function VariantSelectModal({
               ? Math.round(((Number(v.selling_price) - Number(v.finalPrice)) / Number(v.selling_price)) * 100)
               : 0;
 
+            const isPreOrder = product ? isProductPreOrder(v, product) : v.isPreOrder;
             const showQtyControls = !isWishlistModal && !isDisabled;
-            console.log(`VariantSelectModal: Variant ${v._id} showQtyControls = ${showQtyControls} (isWishlistModal=${isWishlistModal}, isDisabled=${isDisabled}, isPreOrder=${v.isPreOrder})`);
+            console.log(`VariantSelectModal: Variant ${v._id} showQtyControls = ${showQtyControls} (isWishlistModal=${isWishlistModal}, isDisabled=${isDisabled}, isPreOrder=${isPreOrder})`);
 
             return (
               <div
@@ -196,21 +198,23 @@ export default function VariantSelectModal({
                 </div>
                 <div className="ml-2 flex-shrink-0 text-right">
                   <div className="flex flex-col items-end gap-2">
-                    <div>
-                      <span className="text-lg font-bold text-red-600 dark:text-red-400">
-                        {"৳"}{displayPrice}
-                      </span>
-                      {discountPercent > 0 && (
-                        <>
-                          <span className="text-sm line-through text-gray-400 dark:text-gray-500 block">
-                            {"৳"}{Number(v.selling_price).toFixed(2)}
-                          </span>
-                          <span className="text-xs text-green-600 dark:text-green-400">
-                            {discountPercent}% OFF
-                          </span>
-                        </>
-                      )}
-                    </div>
+                    {!isPreOrder && (
+                      <div>
+                        <span className="text-lg font-bold text-red-600 dark:text-red-400">
+                          {"৳"}{displayPrice}
+                        </span>
+                        {discountPercent > 0 && (
+                          <>
+                            <span className="text-sm line-through text-gray-400 dark:text-gray-500 block">
+                              {"৳"}{Number(v.selling_price).toFixed(2)}
+                            </span>
+                            <span className="text-xs text-green-600 dark:text-green-400">
+                              {discountPercent}% OFF
+                            </span>
+                          </>
+                        )}
+                      </div>
+                    )}
                     {showQtyControls && (
                       <div className="flex items-center border rounded-md bg-white dark:bg-gray-600 border-gray-300 dark:border-gray-600 mt-1">
                         <button

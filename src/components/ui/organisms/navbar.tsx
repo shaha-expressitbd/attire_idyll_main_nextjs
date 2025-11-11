@@ -208,7 +208,7 @@ export const Navbar = ({ className, business }: NavbarProps) => {
           } ${className || ""}`}
       >
         {/* Top Row */}
-        <div className="flex items-center justify-between px-3 py-2.5 sm:px-4 sm:py-3 gap-2 sm:gap-3 lg:container md:container mx-auto">
+        <div className="flex items-center justify-between px-3 md:px-0 py-2.5  gap-2 sm:gap-3 lg:container md:container mx-auto">
           {/* Left: Menu + Search */}
           <div className="flex items-center gap-2 sm:gap-3 relative" ref={dropdownRef}>
             {/* Menu Icon */}

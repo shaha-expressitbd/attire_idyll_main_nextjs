@@ -64,9 +64,11 @@ export function CartItem({
         )}
       </div>
 
-      <div className="absolute -top-1 -right-1 bg-gradient-to-r from-pink-500 to-rose-500 text-white text-[9px] xs:text-[10px] sm:text-xs px-1 xs:px-1.5 sm:px-2 py-0.5 xs:py-1 rounded-full shadow-md transform rotate-12 group-hover:rotate-0 transition-transform duration-300">
-        ৳{unitPrice}
-      </div>
+      {!item.isPreOrder && (
+        <div className="absolute -top-1 -right-1 bg-gradient-to-r from-pink-500 to-rose-500 text-white text-[9px] xs:text-[10px] sm:text-xs px-1 xs:px-1.5 sm:px-2 py-0.5 xs:py-1 rounded-full shadow-md transform rotate-12 group-hover:rotate-0 transition-transform duration-300">
+          ৳{unitPrice}
+        </div>
+      )}
     </div>
   );
 
@@ -117,22 +119,24 @@ export function CartItem({
       )}
 
       <div className={`${layout === 'mobile' ? 'flex flex-col gap-1 mt-1' : layout === 'tablet' ? 'flex flex-wrap items-center gap-2 xs:gap-4 mt-2' : 'flex flex-col lg:flex-row lg:items-center gap-1 xs:gap-2 lg:gap-4 xl:gap-6 2xl:gap-8 mt-2'}`}>
-        <div className="flex items-center gap-1 xs:gap-2">
-          {item.isDiscountActive && item.sellingPrice && item.sellingPrice > unitPrice ? (
-            <div className="flex items-center gap-2">
+        {!item.isPreOrder && (
+          <div className="flex items-center gap-1 xs:gap-2">
+            {item.isDiscountActive && item.sellingPrice && item.sellingPrice > unitPrice ? (
+              <div className="flex items-center gap-2">
+                <span className={`font-semibold text-primary dark:text-pink-400 ${layout === 'mobile' ? 'text-sm' : layout === 'tablet' ? 'text-sm xs:text-base' : 'text-base lg:text-lg xl:text-xl'}`}>
+                  {formatCurrency(unitPrice, currency)}
+                </span>
+                <span className={`line-through text-gray-500 dark:text-gray-400 ${layout === 'mobile' ? 'text-sm' : 'text-sm'}`}>
+                  {formatCurrency(item.sellingPrice, currency)}
+                </span>
+              </div>
+            ) : (
               <span className={`font-semibold text-primary dark:text-pink-400 ${layout === 'mobile' ? 'text-sm' : layout === 'tablet' ? 'text-sm xs:text-base' : 'text-base lg:text-lg xl:text-xl'}`}>
                 {formatCurrency(unitPrice, currency)}
               </span>
-              <span className={`line-through text-gray-500 dark:text-gray-400 ${layout === 'mobile' ? 'text-sm' : 'text-sm'}`}>
-                {formatCurrency(item.sellingPrice, currency)}
-              </span>
-            </div>
-          ) : (
-            <span className={`font-semibold text-primary dark:text-pink-400 ${layout === 'mobile' ? 'text-sm' : layout === 'tablet' ? 'text-sm xs:text-base' : 'text-base lg:text-lg xl:text-xl'}`}>
-              {formatCurrency(unitPrice, currency)}
-            </span>
-          )}
-        </div>
+            )}
+          </div>
+        )}
 
         {layout === 'desktop' && (
           <div className="hidden lg:flex items-center">
@@ -228,11 +232,13 @@ export function CartItem({
           <div className="flex flex-row items-center justify-between gap-2 mt-2">
             <QuantityControls size="mobile" />
 
-            <div className="bg-gradient-to-r from-primary/10 to-pink-500/10 dark:from-pink-400/10 dark:to-pink-500/10 px-2.5 py-1.5 rounded-lg border border-primary/20 dark:border-pink-400/20">
-              <span className="font-bold text-primary dark:text-pink-400 text-sm xs:text-base">
-                {formatCurrency(totalPrice, currency)}
-              </span>
-            </div>
+            {!item.isPreOrder && (
+              <div className="bg-gradient-to-r from-primary/10 to-pink-500/10 dark:from-pink-400/10 dark:to-pink-500/10 px-2.5 py-1.5 rounded-lg border border-primary/20 dark:border-pink-400/20">
+                <span className="font-bold text-primary dark:text-pink-400 text-sm xs:text-base">
+                  {formatCurrency(totalPrice, currency)}
+                </span>
+              </div>
+            )}
           </div>
         </div>
 
@@ -273,9 +279,11 @@ export function CartItem({
                 )}
               </div>
 
-              <div className="absolute -top-2 -right-2 bg-gradient-to-r from-pink-500 to-rose-500 text-white text-xs px-2 py-1 rounded-full shadow-lg transform rotate-12 group-hover:rotate-0 transition-transform duration-300 text-nowrap">
-                {formatCurrency(unitPrice, currency)}
-              </div>
+              {!item.isPreOrder && (
+                <div className="absolute -top-2 -right-2 bg-gradient-to-r from-pink-500 to-rose-500 text-white text-xs px-2 py-1 rounded-full shadow-lg transform rotate-12 group-hover:rotate-0 transition-transform duration-300 text-nowrap">
+                  {formatCurrency(unitPrice, currency)}
+                </div>
+              )}
             </div>
           </div>
 
@@ -314,47 +322,49 @@ export function CartItem({
               <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-pink-500 group-hover:w-full transition-all duration-500"></div>
             </div>
 
-            <div className="flex flex-col lg:flex-row lg:items-center gap-2 lg:gap-4">
-              <div className="flex items-center gap-2">
-                {item.isDiscountActive && item.sellingPrice && item.sellingPrice > unitPrice ? (
-                  <div className="flex items-center gap-2">
+            {!item.isPreOrder && (
+              <div className="flex flex-col lg:flex-row lg:items-center gap-2 lg:gap-4">
+                <div className="flex items-center gap-2">
+                  {item.isDiscountActive && item.sellingPrice && item.sellingPrice > unitPrice ? (
+                    <div className="flex items-center gap-2">
+                      <span className="font-semibold text-primary dark:text-pink-400 text-lg text-nowrap">
+                        {formatCurrency(unitPrice, currency)}
+                      </span>
+                      <span className="line-through text-gray-500 dark:text-gray-400 text-sm">
+                        {formatCurrency(item.sellingPrice, currency)}
+                      </span>
+                    </div>
+                  ) : (
                     <span className="font-semibold text-primary dark:text-pink-400 text-lg text-nowrap">
                       {formatCurrency(unitPrice, currency)}
                     </span>
-                    <span className="line-through text-gray-500 dark:text-gray-400 text-sm">
-                      {formatCurrency(item.sellingPrice, currency)}
-                    </span>
-                  </div>
-                ) : (
-                  <span className="font-semibold text-primary dark:text-pink-400 text-lg text-nowrap">
-                    {formatCurrency(unitPrice, currency)}
-                  </span>
-                )}
-              </div>
-
-              <div className="hidden lg:flex items-center">
-                <div className="w-6 h-6 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center">
-                  <span className="dark:text-gray-200 text-gray-600 text-xs">×</span>
+                  )}
                 </div>
-              </div>
 
-              <div className="bg-gradient-to-r from-primary/10 to-pink-500/10 dark:from-pink-400/10 dark:to-pink-500/10 px-3 py-1 rounded-full border border-primary/20 dark:border-pink-400/20 text-nowrap">
-                {item.isDiscountActive && item.sellingPrice && item.sellingPrice > unitPrice ? (
-                  <div className="flex items-center gap-2">
+                <div className="hidden lg:flex items-center">
+                  <div className="w-6 h-6 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center">
+                    <span className="dark:text-gray-200 text-gray-600 text-xs">×</span>
+                  </div>
+                </div>
+
+                <div className="bg-gradient-to-r from-primary/10 to-pink-500/10 dark:from-pink-400/10 dark:to-pink-500/10 px-3 py-1 rounded-full border border-primary/20 dark:border-pink-400/20 text-nowrap">
+                  {item.isDiscountActive && item.sellingPrice && item.sellingPrice > unitPrice ? (
+                    <div className="flex items-center gap-2">
+                      <span className="font-bold text-primary dark:text-pink-400 text-sm">
+                        {formatCurrency(totalPrice, currency)}
+                      </span>
+                      <span className="line-through text-gray-500 dark:text-gray-400 text-xs">
+                        {formatCurrency(item.sellingPrice * item.quantity, currency)}
+                      </span>
+                    </div>
+                  ) : (
                     <span className="font-bold text-primary dark:text-pink-400 text-sm">
                       {formatCurrency(totalPrice, currency)}
                     </span>
-                    <span className="line-through text-gray-500 dark:text-gray-400 text-xs">
-                      {formatCurrency(item.sellingPrice * item.quantity, currency)}
-                    </span>
-                  </div>
-                ) : (
-                  <span className="font-bold text-primary dark:text-pink-400 text-sm">
-                    {formatCurrency(totalPrice, currency)}
-                  </span>
-                )}
+                  )}
+                </div>
               </div>
-            </div>
+            )}
           </div>
 
           {/* Controls Section */}

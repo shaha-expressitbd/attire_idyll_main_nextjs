@@ -60,6 +60,7 @@ export function ProductContent({
                 isDiscountActive={isDiscountActive}
                 discountStartDate={discountStartDate?.toISOString()}
                 discountEndDate={discountEndDate?.toISOString()}
+                isPreorder={isPreOrder}
             />
 
             <div className="md:pb-2">

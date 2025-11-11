@@ -13,8 +13,6 @@ import { formatCurrency } from "@/utils/formatCurrency";
 import { trackBeginCheckout, trackPurchase } from "@/utils/gtm";
 import DeliveryInfoForm from "./_components/DeliveryInfoForm";
 import { CartSummary } from "./_components/CartSummary";
-import { BkashCashbackModal } from "@/components/bkashCashbackModal";
-import PromotionBikashText from "./_components/PromotionBikashText";
 import { normalizePhone } from "@/utils/normalizePhone";
 
 interface OnlineOrderResponse {
@@ -103,6 +101,7 @@ export default function CheckoutPage() {
   // Delivery charge calculation (পুরানো লজিক)
   const deliveryCharge = useMemo(() => {
     if (!businessData) return 0;
+    if (businessData?.defaultCourier === null || businessData?.defaultCourier === "office-delivery") return 0;
     switch (formData.delivery_area) {
       case "inside_dhaka":
         return businessData.insideDhaka;
@@ -414,9 +413,9 @@ export default function CheckoutPage() {
                 <DeliveryInfoForm
                   formData={formData}
                   formErrors={formErrors}
-                  insideFee={businessData?.insideDhaka || 0}
-                  subDhakaFee={businessData?.subDhaka || 0}
-                  outsideFee={businessData?.outsideDhaka || 0}
+                  insideFee={businessData?.defaultCourier === null || businessData?.defaultCourier === "office-delivery" ? 0 : businessData?.insideDhaka || 0}
+                  subDhakaFee={businessData?.defaultCourier === null || businessData?.defaultCourier === "office-delivery" ? 0 : businessData?.subDhaka || 0}
+                  outsideFee={businessData?.defaultCourier === null || businessData?.defaultCourier === "office-delivery" ? 0 : businessData?.outsideDhaka || 0}
                   isLoading={isOrderLoading}
                   handleChange={handleChange}
                   handlePaymentMethodChange={handlePaymentMethodChange}
@@ -444,6 +443,7 @@ export default function CheckoutPage() {
                   updateItemQuantity={currentUpdateItemQuantity}
                   isLoading={isOrderLoading}
                   handleSubmit={handleSubmit}
+                  isPreOrder={isPreorderCheckout}
                 />
               </div>
             </div>
@@ -459,23 +459,27 @@ export default function CheckoutPage() {
             <h2 className="text-lg font-semibold text-black dark:text-white">Cart Total</h2>
             <div className="w-full">
               <div className="flex flex-col gap-1 sm:gap-2 sm:mt-2 text-sm">
-                <div className="flex justify-between text-black dark:text-white">
-                  <p>সাব-টোটাল</p>
-                  <p>{formatCurrency(currentSubtotal, currency)}</p>
-                </div>
-                <hr />
+                {!isPreorderCheckout && (
+                  <>
+                    <div className="flex justify-between text-black dark:text-white">
+                      <p>সাব-টোটাল</p>
+                      <p>{formatCurrency(currentSubtotal, currency)}</p>
+                    </div>
+                    <hr />
+                  </>
+                )}
                 <div className="flex justify-between text-black dark:text-white">
                   <p>ডেলিভারি চার্জ</p>
                   <p>{formatCurrency(deliveryCharge, currency)}</p>
                 </div>
                 <hr />
-                {additional_discount_amount > 0 && (
+                {additional_discount_amount > 0 && !isPreorderCheckout && (
                   <div className="flex justify-between text-black dark:text-white">
                     <p>বিকাশ ডিসকাউন্ট</p>
                     <p>[&minus;] {formatCurrency(additional_discount_amount, currency)}</p>
                   </div>
                 )}
-                {additional_discount_amount > 0 && <hr />}
+                {additional_discount_amount > 0 && !isPreorderCheckout && <hr />}
                 <div className="flex justify-between text-black dark:text-white">
                   <p><strong>টোটাল বিল</strong></p>
                   <p className="font-bold">{formatCurrency(total, currency)}</p>

@@ -146,6 +146,7 @@ export default function ProductCard({
         sellingPrice: selectedVariant.selling_price ? Number(selectedVariant.selling_price) : pricingData.sellingPrice,
         currency: product.currency || "BDT",
         isDiscountActive: selectedVariant.isDiscountActive ?? pricingData.isDiscountActive ?? false,
+        isPreOrder: selectedVariant.isPreOrder,
         ...(selectedVariant.variants_values?.length > 0 && {
           variantLabel: selectedVariant.variants_values.join(" / "),
         }),
@@ -322,21 +323,23 @@ export default function ProductCard({
             </button>
           </div>
 
-          {/* Product Info */}
+          {/* Product Info - Hide prices for preorder items */}
           {/* <div className="p-3 sm:p-4 bg-pink-50/40 dark:bg-black">
             <h3 className="text-[15px] font-semibold text-gray-900 dark:text-white line-clamp-1">
               {product.name}
             </h3>
-            <div className="flex justify-between items-baseline">
-              <span className="md:text-xl text-[14px] font-semibold text-primary">
-                ৳{displayPrice}
-              </span>
-              {discountPercent > 0 && (
-                <span className="line-through text-gray-400 md:text-xl">
-                  ৳{pricingData.sellingPrice}
+            {!isPreOrder && (
+              <div className="flex justify-between items-baseline">
+                <span className="md:text-xl text-[14px] font-semibold text-primary">
+                  ৳{displayPrice}
                 </span>
-              )}
-            </div>
+                {discountPercent > 0 && (
+                  <span className="line-through text-gray-400 md:text-xl">
+                    ৳{pricingData.sellingPrice}
+                  </span>
+                )}
+              </div>
+            )}
           </div> */}
 
           {/* Action Buttons */}

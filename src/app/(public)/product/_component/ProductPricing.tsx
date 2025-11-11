@@ -12,6 +12,7 @@ interface ProductPricingProps {
     isDiscountActive: boolean;
     discountStartDate?: string;
     discountEndDate?: string;
+    isPreorder?: boolean;
 }
 
 export default function ProductPricing({
@@ -22,6 +23,7 @@ export default function ProductPricing({
     isDiscountActive,
     discountStartDate,
     discountEndDate,
+    isPreorder = false,
 }: ProductPricingProps) {
     const displayPrice = finalPrice;
 
@@ -49,21 +51,23 @@ export default function ProductPricing({
                 </span>
             </div>
 
-            {/* Pricing Section */}
-            <div className="flex items-center justify-between mb-2 md:mb-4">
-                <div className="flex items-center gap-2 md:gap-4">
-                    <span className="text-2xl md:text-4xl font-bold text-primary dark:text-white">
-                        ৳{displayPrice.toFixed(2)}
-                    </span>
-                    {isDiscountActive && discountPercent > 0 && (
-                        <span className="line-through text-gray-400 text-base md:text-xl">
-                            ৳{sellingPrice.toFixed(2)}
+            {/* Pricing Section - Hide for preorder items */}
+            {!isPreorder && (
+                <div className="flex items-center justify-between mb-2 md:mb-4">
+                    <div className="flex items-center gap-2 md:gap-4">
+                        <span className="text-2xl md:text-4xl font-bold text-primary dark:text-white">
+                            ৳{displayPrice.toFixed(2)}
                         </span>
-                    )}
+                        {isDiscountActive && discountPercent > 0 && (
+                            <span className="line-through text-gray-400 text-base md:text-xl">
+                                ৳{sellingPrice.toFixed(2)}
+                            </span>
+                        )}
+                    </div>
                 </div>
-            </div>
+            )}
 
-            {isDiscountActive && discountPercent > 0 && (
+            {!isPreorder && isDiscountActive && discountPercent > 0 && (
                 <div className="mt-1 md:mt-2 flex items-center gap-1 md:gap-2">
                     <span className="bg-primary dark:bg-primary text-white text-xs font-bold px-2 py-1 md:px-3 md:py-1.5 rounded-full">
                         {discountPercent}% OFF

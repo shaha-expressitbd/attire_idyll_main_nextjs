@@ -12,12 +12,14 @@ interface QuickViewModalProps {
     product: Product;
     isOpen: boolean;
     onClose: () => void;
+    isPreorder?: boolean;
 }
 
 export default function QuickViewModal({
     product,
     isOpen,
     onClose,
+    isPreorder = false,
 }: QuickViewModalProps) {
     const router = useRouter();
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -187,16 +189,18 @@ export default function QuickViewModal({
                         <h2 className="text-lg font-bold text-gray-900 dark:text-white line-clamp-2">
                             {product.name}
                         </h2>
-                        <div className="flex items-baseline gap-2 mt-2">
-                            <span className="text-xl font-bold text-primary">
-                                {"৳"}{displayPrice.toFixed(2)}
-                            </span>
-                            {isOffer && originalPrice && (
-                                <span className="text-sm text-gray-500 line-through">
-                                    {"৳"}{originalPrice.toFixed(2)}
+                        {!isPreorder && (
+                            <div className="flex items-baseline gap-2 mt-2">
+                                <span className="text-xl font-bold text-primary">
+                                    {"৳"}{displayPrice.toFixed(2)}
                                 </span>
-                            )}
-                        </div>
+                                {isOffer && originalPrice && (
+                                    <span className="text-sm text-gray-500 line-through">
+                                        {"৳"}{originalPrice.toFixed(2)}
+                                    </span>
+                                )}
+                            </div>
+                        )}
                     </div>
 
                     {/* Mobile image section */}
@@ -364,21 +368,23 @@ export default function QuickViewModal({
                                 {product.name}
                             </h1>
 
-                            <div className="flex items-baseline gap-3 mb-4">
-                                <span className="text-3xl font-bold text-primary">
-                                    {product.currency || "৳"}{displayPrice.toFixed(2)}
-                                </span>
-                                {isOffer && originalPrice && (
-                                    <span className="text-xl text-gray-500 line-through">
-                                        {product.currency || "৳"}{originalPrice.toFixed(2)}
+                            {!isPreorder && (
+                                <div className="flex items-baseline gap-3 mb-4">
+                                    <span className="text-3xl font-bold text-primary">
+                                        {product.currency || "৳"}{displayPrice.toFixed(2)}
                                     </span>
-                                )}
-                                {isOffer && (
-                                    <span className="bg-red-500 text-white px-3 py-1 rounded-full text-sm font-medium">
-                                        SAVE {originalPrice ? Math.round(((originalPrice - displayPrice) / originalPrice) * 100) : 0}%
-                                    </span>
-                                )}
-                            </div>
+                                    {isOffer && originalPrice && (
+                                        <span className="text-xl text-gray-500 line-through">
+                                            {product.currency || "৳"}{originalPrice.toFixed(2)}
+                                        </span>
+                                    )}
+                                    {isOffer && (
+                                        <span className="bg-red-500 text-white px-3 py-1 rounded-full text-sm font-medium">
+                                            SAVE {originalPrice ? Math.round(((originalPrice - displayPrice) / originalPrice) * 100) : 0}%
+                                        </span>
+                                    )}
+                                </div>
+                            )}
 
                             <div className="flex items-center gap-2 mb-4">
                                 <span className={`inline-flex items-center px-4 py-2 text-sm font-medium rounded-full ${product.total_stock > 10
