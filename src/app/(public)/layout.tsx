@@ -80,8 +80,8 @@ export default async function PublicLayout({
       {/* Footer - hidden on specific pages */}
       <DynamicFooter business={business} />
       {/* Floating Icons - only on home and products pages */}
-      <DynamicFloatingIcons />
-      <StickySocialButton phoneNumber='+8801907349009' />
+
+      <StickySocialButton />
     </div>
   )
 }

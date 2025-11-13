@@ -122,7 +122,19 @@ export const publicApi = createApi({
     /* 2. PRODUCTS */
     getProducts: builder.query<
       Product[],
-      Partial<{ search?: string; page?: number; limit?: number; _id?: string }>
+      Partial<{
+        search?: string;
+        page?: number;
+        limit?: number;
+        _id?: string;
+        categories?: string;
+        sizes?: string;
+        conditions?: string;
+        tags?: string;
+        variants?: string;
+        priceMin?: number;
+        priceMax?: number;
+      }>
     >({
       query: (params = {}) => {
         const payload: Record<string, number | string | undefined> = {

@@ -41,7 +41,7 @@ export default function ShopDesktopHeader({
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Search…"
-          className="w-full h-10 pl-5 pr-12 rounded-full bg-white dark:bg-gray-600 text-black dark:text-white border border-pink-200 focus:outline-none focus:ring-2 focus:ring-primary"
+          className="w-full h-10 pl-5 pr-12 rounded-full bg-white dark:bg-gray-600 text-black dark:text-white border border-primary/40 focus:outline-none focus:ring-2 focus:ring-primary"
         />
         <AiOutlineSearch
           className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 dark:text-white pointer-events-none"
@@ -68,7 +68,7 @@ export default function ShopDesktopHeader({
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search…"
-              className="w-full h-10 pl-5 pr-12 rounded-full bg-white dark:bg-gray-600 text-black dark:text-white border border-pink-200 focus:outline-none focus:ring-2 focus:ring-primary"
+              className="w-full h-10 pl-5 pr-12 rounded-full bg-white dark:bg-gray-600 text-black dark:text-white border border-primary/40 focus:outline-none focus:ring-2 focus:ring-primary"
             />
             <AiOutlineSearch
               className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 dark:text-white pointer-events-none"

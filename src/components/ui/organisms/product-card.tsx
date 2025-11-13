@@ -11,8 +11,7 @@ import { useCart } from "@/hooks/useCart";
 import { useWishlist } from "@/hooks/useWishlist";
 import { usePreorderCart } from "@/hooks/usePreorderCart";
 import type { TPreorderCartItem } from "@/lib/features/preOrderCartSlice/preOrderCartSlice";
-import VariantSelectModal from "@/app/(public)/product/_component/VariantSelectModal";
-import QuickViewModal from "../molecules/QuickViewModal";
+
 
 // Import all 4 utility functions (ager moto)
 import {
@@ -279,7 +278,7 @@ export default function ProductCard({
         aria-label={`View ${product.name} details`}
         prefetch={false}
       >
-        <div className="relative rounded-2xl overflow-hidden bg-white dark:bg-black shadow-sm transition-transform duration-200 hover:-translate-y-0.5">
+        <div className="relative rounded-2xl overflow-hidden bg-white dark:bg-black shadow-lg transition-transform duration-200 hover:-translate-y-0.5">
           {/* Discount Badge */}
           {discountPercent > 0 && (
             <span className="absolute top-3 left-3 z-20 bg-red-600 text-white text-xs font-bold px-3 py-1.5 rounded-full">

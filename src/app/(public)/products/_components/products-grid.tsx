@@ -6,9 +6,10 @@ import ProductCard from "@/components/ui/organisms/product-card";
 import ProductGridSkeleton from "@/components/ui/skeleton/ProductGridSkeleton";
 
 interface ShopProductsGridProps {
-    productsContainerRef: React.RefObject<HTMLDivElement>;
+    productsContainerRef: React.RefObject<HTMLDivElement | null>;
     filteredAndSorted: Product[];
     clearAllFilters: () => void;
+    containerWidth?: number;
     isLoadingMore?: boolean;
 }
 
