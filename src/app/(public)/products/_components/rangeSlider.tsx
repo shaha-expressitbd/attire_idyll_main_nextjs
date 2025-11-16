@@ -51,7 +51,7 @@ const RangePriceFilter: React.FC<RangePriceFilterProps> = ({
                 <div className="relative w-full h-[6px] bg-gray-300 rounded">
                     {/* Active range between min and max */}
                     <div
-                        className="absolute h-[6px] bg-pink-500 rounded z-[1]"
+                        className="absolute h-[6px] bg-primary rounded z-[1]"
                         style={{
                             left: `${((minSliderValue - MIN_PRICE) / (MAX_PRICE - MIN_PRICE)) * 100}%`,
                             right: `${100 - ((maxSliderValue - MIN_PRICE) / (MAX_PRICE - MIN_PRICE)) * 100}%`

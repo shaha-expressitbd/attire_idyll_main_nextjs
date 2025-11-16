@@ -146,7 +146,7 @@ export default function MobileFilterModal({
                     </div>
                     <button
                         onClick={() => setIsOpen(false)}
-                        className="p-1 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full"
+                        className="p-1 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors"
                     >
                         <FiX size={20} />
                     </button>
@@ -157,7 +157,7 @@ export default function MobileFilterModal({
                     {/* Categories */}
                     <section>
                         <h3 className="font-semibold mb-2">Categories</h3>
-                        <label className="flex items-center gap-2 p-2 rounded hover:bg-gray-50">
+                        <label className="flex items-center gap-2 p-2 rounded hover:bg-gray-50 dark:hover:bg-gray-800 cursor-pointer">
                             <input
                                 type="checkbox"
                                 className="accent-primary"
@@ -201,8 +201,12 @@ export default function MobileFilterModal({
                                 {allSizes.map((s) => (
                                     <button
                                         key={s}
-                                        onClick={() => toggle(selectedSizes, setSelectedSizes, s)}
-                                        className={`py-2 text-xs font-medium rounded border ${selectedSizes.includes(s)
+                                        type="button"
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            toggle(selectedSizes, setSelectedSizes, s);
+                                        }}
+                                        className={`py-2 text-xs font-medium rounded border transition-colors ${selectedSizes.includes(s)
                                             ? "bg-primary text-white border-primary"
                                             : "border-gray-300 dark:border-gray-600 hover:border-primary"
                                             }`}
@@ -215,20 +219,30 @@ export default function MobileFilterModal({
                     )}
 
                     {/* Conditions */}
-                    {conditions.map((c) => (
-                        <section key={c}>
+                    {conditions.length > 0 && (
+                        <section>
                             <h3 className="font-semibold mb-2">Condition</h3>
-                            <label className="flex items-center gap-2 p-2 rounded hover:bg-gray-50">
-                                <input
-                                    type="checkbox"
-                                    className="accent-orange-600"
-                                    checked={selectedConditions.includes(c)}
-                                    onChange={() => toggle(selectedConditions, setSelectedConditions, c)}
-                                />
-                                <span>{c}</span>
-                            </label>
+                            <div className="space-y-1">
+                                {conditions.map((c) => (
+                                    <label
+                                        key={c}
+                                        className="flex items-center gap-2 p-2 rounded hover:bg-gray-50 dark:hover:bg-gray-800 cursor-pointer"
+                                    >
+                                        <input
+                                            type="checkbox"
+                                            className="accent-orange-600"
+                                            checked={selectedConditions.includes(c)}
+                                            onChange={(e) => {
+                                                e.stopPropagation();
+                                                toggle(selectedConditions, setSelectedConditions, c);
+                                            }}
+                                        />
+                                        <span>{c}</span>
+                                    </label>
+                                ))}
+                            </div>
                         </section>
-                    ))}
+                    )}
 
                     {/* Variants */}
                     {variantsValues.filter(v => !v.name.toLowerCase().includes('size')).length > 0 && (
@@ -244,7 +258,9 @@ export default function MobileFilterModal({
                                                 {variant.values.map(value => (
                                                     <button
                                                         key={value}
-                                                        onClick={() => {
+                                                        type="button"
+                                                        onClick={(e) => {
+                                                            e.stopPropagation();
                                                             setSelectedVariants(prev => {
                                                                 const current = prev[variant.name] || [];
                                                                 const updated = current.includes(value)
@@ -253,9 +269,9 @@ export default function MobileFilterModal({
                                                                 return { ...prev, [variant.name]: updated };
                                                             });
                                                         }}
-                                                        className={`px-3 py-1 text-xs rounded-full ${selectedVariants[variant.name]?.includes(value)
+                                                        className={`px-3 py-1 text-xs rounded-full transition-colors ${selectedVariants[variant.name]?.includes(value)
                                                             ? "bg-primary text-white"
-                                                            : "bg-gray-100 dark:bg-gray-700 hover:bg-gray-200"
+                                                            : "bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600"
                                                             }`}
                                                     >
                                                         {value}
@@ -276,10 +292,14 @@ export default function MobileFilterModal({
                                 {tags.map((t) => (
                                     <button
                                         key={t}
-                                        onClick={() => toggle(selectedTags, setSelectedTags, t)}
-                                        className={`px-3 py-1 text-xs rounded-full ${selectedTags.includes(t)
+                                        type="button"
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            toggle(selectedTags, setSelectedTags, t);
+                                        }}
+                                        className={`px-3 py-1 text-xs rounded-full transition-colors ${selectedTags.includes(t)
                                             ? "bg-rose-600 text-white"
-                                            : "bg-gray-100 dark:bg-gray-700 hover:bg-gray-200"
+                                            : "bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600"
                                             }`}
                                     >
                                         #{t}
@@ -297,13 +317,13 @@ export default function MobileFilterModal({
                             clearAllFilters();
                             setIsOpen(false);
                         }}
-                        className="flex-1 py-2.5 text-sm font-medium bg-gray-100 dark:bg-gray-800 rounded-lg"
+                        className="flex-1 py-2.5 text-sm font-medium bg-gray-100 dark:bg-gray-800 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
                     >
                         Clear All
                     </button>
                     <button
                         onClick={() => setIsOpen(false)}
-                        className="flex-1 py-2.5 text-sm font-medium bg-primary text-white rounded-lg"
+                        className="flex-1 py-2.5 text-sm font-medium bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors"
                     >
                         Apply
                     </button>

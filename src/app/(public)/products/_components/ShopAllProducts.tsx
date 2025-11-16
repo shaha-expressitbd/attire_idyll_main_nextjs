@@ -8,14 +8,10 @@ import ShopDesktopHeader from "./desktop-header";
 import ShopProductsGrid from "./products-grid";
 import { useGetProductsQuery, useGetFilterOptionsQuery } from "@/lib/api/publicApi";
 
-// Import করো শুধু এই কম্পোনেন্টগুলো
-// Desktop only
-import MobileFilterButton from "./MobileFilterButton"; // Mobile button
+import MobileFilterButton from "./MobileFilterButton";
 import Filters from "./filters";
 import MobileFilterModal from "./mobile-filter-modal";
 
-
-// Filter Options Type
 interface FilterOptions {
   tags: string[];
   conditions: string[];
@@ -48,7 +44,6 @@ export default function ShopAllProducts({
   const { businessData } = useBusiness();
   const categories: Category[] = businessData?.categories || [];
 
-  // Fetch filter options
   const { data: filterOptions } = useGetFilterOptionsQuery(
     {
       isCategories: true,
@@ -64,7 +59,6 @@ export default function ShopAllProducts({
 
   // Refs
   const sidebarRef = useRef<HTMLDivElement>(null);
-  const productsContainerRef = useRef<HTMLDivElement>(null);
   const sentinelRef = useRef<HTMLDivElement>(null);
   const [sidebarWidth, setSidebarWidth] = useState(320);
 
@@ -77,13 +71,10 @@ export default function ShopAllProducts({
     return () => window.removeEventListener("resize", check);
   }, []);
 
-  // Mobile Filter Modal State
   const [isMobileFiltersOpen, setIsMobileFiltersOpen] = useState(false);
 
-  // Sort
+  // Sort & Filters
   const [sortBy, setSortBy] = useState<"name" | "price-low" | "price-high" | "newest">("newest");
-
-  // Filter States
   const [selectedCats, setSelectedCats] = useState<string[]>([]);
   const [selectedSizes, setSelectedSizes] = useState<string[]>([]);
   const [selectedConditions, setSelectedConditions] = useState<string[]>([]);
@@ -91,15 +82,19 @@ export default function ShopAllProducts({
   const [selectedVariants, setSelectedVariants] = useState<{ [key: string]: string[] }>({});
   const [priceRange, setPriceRange] = useState<[number, number]>([0, 10000]);
 
-  // Pagination
+  // Pagination State
   const [currentPage, setCurrentPage] = useState(1);
   const [allProducts, setAllProducts] = useState<Product[]>(initialProducts);
   const [hasMorePages, setHasMorePages] = useState(true);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
+  const [seenProductIds, setSeenProductIds] = useState<Set<string>>(
+    new Set(initialProducts.map((p) => p._id))
+  );
 
-  // Intersection Observer for infinite scroll
+  // Intersection Observer
   const observerRef = useRef<IntersectionObserver | null>(null);
 
+  // Fetch Products
   const { data: paginatedProducts, isFetching: isFetchingProducts } = useGetProductsQuery(
     { page: currentPage, limit: 20 },
     { skip: currentPage === 1 && initialProducts.length > 0 }
@@ -113,65 +108,49 @@ export default function ShopAllProducts({
     }
   }, [isLoadingMore, hasMorePages, isFetchingProducts]);
 
+  // Handle New Products (Critical Fix)
   useEffect(() => {
     if (paginatedProducts && currentPage > 1) {
-      setAllProducts((prev) => [...prev, ...paginatedProducts]);
-      setHasMorePages(paginatedProducts.length === 20);
+      const newProducts = paginatedProducts.filter((p) => !seenProductIds.has(p._id));
+
+      if (newProducts.length > 0) {
+        setAllProducts((prev) => [...prev, ...newProducts]);
+        setSeenProductIds((prev) => new Set([...prev, ...newProducts.map((p) => p._id)]));
+      }
+
+      // Stop loading if:
+      // 1. Less than 20 products returned OR
+      // 2. No new products found (duplicate page)
+      const receivedFullPage = paginatedProducts.length === 20;
+      const hasNewProducts = newProducts.length > 0;
+
+      if (!receivedFullPage || !hasNewProducts) {
+        setHasMorePages(false); // Stop forever
+      }
+
       setIsLoadingMore(false);
     }
-  }, [paginatedProducts, currentPage]);
+  }, [paginatedProducts, currentPage, seenProductIds]);
 
-  // Intersection Observer effect for infinite scroll
-  useEffect(() => {
-    const sentinel = sentinelRef.current;
-    if (!sentinel || !hasMorePages || isLoadingMore) {
-      if (observerRef.current) {
-        observerRef.current.disconnect();
-      }
-      return;
-    }
-
-    observerRef.current = new IntersectionObserver(
-      (entries) => {
-        const [entry] = entries;
-        if (entry.isIntersecting && hasMorePages && !isLoadingMore) {
-          loadMoreProducts();
-        }
-      },
-      {
-        root: null,
-        rootMargin: '200px', // Trigger when sentinel is 200px from viewport
-        threshold: 0.1,
-      }
-    );
-
-    observerRef.current.observe(sentinel);
-
-    return () => {
-      if (observerRef.current) {
-        observerRef.current.disconnect();
-      }
-    };
-  }, [hasMorePages, isLoadingMore, loadMoreProducts]);
-
-  // Reset on initial data change
+  // Reset on initial data
   useEffect(() => {
     setAllProducts(initialProducts);
+    setSeenProductIds(new Set(initialProducts.map((p) => p._id)));
     setCurrentPage(1);
-    setHasMorePages(true);
-  }, [initialProducts, initialFilterOptions]);
+    setHasMorePages(initialProducts.length >= 20);
+  }, [initialProducts]);
 
-  // Sidebar width
+  // Sidebar Width
   useEffect(() => {
-    const updateWidth = () => {
+    const update = () => {
       if (sidebarRef.current) setSidebarWidth(sidebarRef.current.offsetWidth);
     };
-    updateWidth();
-    window.addEventListener("resize", updateWidth);
-    return () => window.removeEventListener("resize", updateWidth);
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
   }, []);
 
-  // Price Range Calculation
+  // Price Range
   const { minPrice: calcMin, maxPrice: calcMax } = useMemo(() => {
     if (finalFilterOptions?.priceRange) {
       return {
@@ -189,7 +168,10 @@ export default function ShopAllProducts({
         const sell = Number(v.selling_price || 0);
         const offer = Number(v.offer_price || sell);
         const now = Date.now();
-        const isOffer = offer < sell && now >= new Date(v.discount_start_date || 0).getTime() && now <= new Date(v.discount_end_date || 0).getTime();
+        const isOffer =
+          offer < sell &&
+          now >= new Date(v.discount_start_date || 0).getTime() &&
+          now <= new Date(v.discount_end_date || 0).getTime();
         return isOffer ? offer : sell;
       })
       .filter((n) => !isNaN(n));
@@ -203,7 +185,7 @@ export default function ShopAllProducts({
     setPriceRange([calcMin, calcMax]);
   }, [calcMin, calcMax]);
 
-  // Filter & Sort Logic
+  // Filter & Sort
   const filteredAndSorted = useMemo(() => {
     return allProducts
       .filter((product) => {
@@ -214,7 +196,10 @@ export default function ShopAllProducts({
           const sell = Number(v.selling_price || 0);
           const offer = Number(v.offer_price || sell);
           const now = Date.now();
-          const isOffer = offer < sell && now >= new Date(v.discount_start_date || 0).getTime() && now <= new Date(v.discount_end_date || 0).getTime();
+          const isOffer =
+            offer < sell &&
+            now >= new Date(v.discount_start_date || 0).getTime() &&
+            now <= new Date(v.discount_end_date || 0).getTime();
           return isOffer ? offer : sell;
         })();
         if (price < priceRange[0] || price > priceRange[1]) return false;
@@ -226,38 +211,41 @@ export default function ShopAllProducts({
             product.name?.toLowerCase().trim() || "",
             ...(product.sub_category?.map((c) => c.name?.toLowerCase().trim()) || []),
             ...(product.variantsId?.map((v) => v.condition?.toLowerCase().trim()) || []),
-          ].join(" ").trim();
+          ].join(" ");
           if (!searchIn.includes(query)) return false;
         }
 
-        // Categories - check if product belongs to selected categories or their descendants
+        // Categories
         if (selectedCats.length > 0) {
           const productCategoryIds = product.category_group?.map((cg) => cg._id) || [];
-          const hasMatchingCategory = selectedCats.some(selectedCatId =>
-            productCategoryIds.includes(selectedCatId) ||
-            product.category_group?.some(cg => cg.children?.some(child => child._id === selectedCatId))
+          const hasMatch = selectedCats.some(
+            (id) =>
+              productCategoryIds.includes(id) ||
+              product.category_group?.some((cg) =>
+                cg.children?.some((child) => child._id === id)
+              )
           );
-          if (!hasMatchingCategory) return false;
+          if (!hasMatch) return false;
         }
 
         // Sizes
         if (selectedSizes.length > 0) {
-          const prodSizes = product.variantsId?.flatMap((v) => v.variants_values || []).map(sz => sz.trim().toLowerCase()) ?? [];
-          const selected = selectedSizes.map(sz => sz.trim().toLowerCase());
-          if (!prodSizes.some((sz) => selected.includes(sz))) return false;
+          const prodSizes = product.variantsId?.flatMap((v) => v.variants_values || []).map((s) => s.trim().toLowerCase()) ?? [];
+          const selected = selectedSizes.map((s) => s.trim().toLowerCase());
+          if (!prodSizes.some((s) => selected.includes(s))) return false;
         }
 
         // Conditions
         if (selectedConditions.length > 0) {
           const prodConditions = product.variantsId?.map((v) => v.condition?.trim().toLowerCase()).filter(Boolean) || [];
-          const selected = selectedConditions.map(c => c.trim().toLowerCase());
+          const selected = selectedConditions.map((c) => c.trim().toLowerCase());
           if (!prodConditions.some((c) => selected.includes(c))) return false;
         }
 
         // Tags
         if (selectedTags.length > 0) {
-          const prodTags = product.tags?.map(t => t.trim().toLowerCase()) || [];
-          const selected = selectedTags.map(t => t.trim().toLowerCase());
+          const prodTags = product.tags?.map((t) => t.trim().toLowerCase()) || [];
+          const selected = selectedTags.map((t) => t.trim().toLowerCase());
           if (!prodTags.some((t) => selected.includes(t))) return false;
         }
 
@@ -265,8 +253,8 @@ export default function ShopAllProducts({
         if (Object.keys(selectedVariants).length > 0) {
           for (const [name, values] of Object.entries(selectedVariants)) {
             if (values.length > 0) {
-              const prodValues = product.variantsId?.flatMap((v) => v.variants_values || []).map(v => v.trim().toLowerCase()) ?? [];
-              const selected = values.map(v => v.trim().toLowerCase());
+              const prodValues = product.variantsId?.flatMap((v) => v.variants_values || []).map((v) => v.trim().toLowerCase()) ?? [];
+              const selected = values.map((v) => v.trim().toLowerCase());
               if (!prodValues.some((v) => selected.includes(v))) return false;
             }
           }
@@ -281,7 +269,10 @@ export default function ShopAllProducts({
           const sell = Number(v.selling_price || 0);
           const offer = Number(v.offer_price || sell);
           const now = Date.now();
-          const isOffer = offer < sell && now >= new Date(v.discount_start_date || 0).getTime() && now <= new Date(v.discount_end_date || 0).getTime();
+          const isOffer =
+            offer < sell &&
+            now >= new Date(v.discount_start_date || 0).getTime() &&
+            now <= new Date(v.discount_end_date || 0).getTime();
           return isOffer ? offer : sell;
         };
 
@@ -309,7 +300,7 @@ export default function ShopAllProducts({
     sortBy,
   ]);
 
-  // Clear All Filters
+  // Clear Filters
   const clearAllFilters = useCallback(() => {
     setSelectedCats([]);
     setSelectedSizes([]);
@@ -320,12 +311,34 @@ export default function ShopAllProducts({
     setSearch("");
   }, [calcMin, calcMax, setSearch]);
 
+  // Intersection Observer
+  useEffect(() => {
+    const sentinel = sentinelRef.current;
+    if (!sentinel || !hasMorePages || isLoadingMore) {
+      observerRef.current?.disconnect();
+      return;
+    }
+
+    observerRef.current = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          loadMoreProducts();
+        }
+      },
+      { root: null, rootMargin: "300px", threshold: 0.1 }
+    );
+
+    observerRef.current.observe(sentinel);
+
+    return () => observerRef.current?.disconnect();
+  }, [hasMorePages, isLoadingMore, loadMoreProducts]);
+
   return (
     <div className="min-h-screen bg-white dark:bg-slate-900">
-      <div className="mx-auto max-w-[1800px] px-2 md:px-4 lg:px-6 py-2 md:py-6 h-full">
-        <div className="h-full grid grid-cols-1 md:grid-cols-[320px_1fr] gap-x-3">
-          {/* Desktop Sidebar */}
-          <div className="h-full md:pb-8 pb-0" ref={sidebarRef}>
+      <div className="mx-auto max-w-[1800px] px-2 md:px-4 lg:px-6 py-2 md:py-6">
+        <div className="grid grid-cols-1 md:grid-cols-[320px_1fr] gap-x-3">
+          {/* Sidebar */}
+          <div className="h-full md:pb-8" ref={sidebarRef}>
             <div className="sticky top-20">
               <Filters
                 categories={finalFilterOptions?.categories || categories}
@@ -352,8 +365,8 @@ export default function ShopAllProducts({
             </div>
           </div>
 
-          {/* Main Content */}
-          <main className="h-full flex-1">
+          {/* Main */}
+          <main className="flex-1">
             <div className="overflow-y-auto scrollbar-hide h-full">
               <ShopDesktopHeader
                 filteredAndSorted={filteredAndSorted}
@@ -369,25 +382,39 @@ export default function ShopAllProducts({
 
               <ShopProductsGrid
                 filteredAndSorted={filteredAndSorted}
-                productsContainerRef={productsContainerRef}
                 clearAllFilters={clearAllFilters}
                 containerWidth={typeof window !== "undefined" ? window.innerWidth - sidebarWidth : undefined}
                 isLoadingMore={isLoadingMore}
               />
 
-              {/* Sentinel element for infinite scroll */}
-              {hasMorePages && filteredAndSorted.length > 0 && (
-                <div ref={sentinelRef} className="h-10" />
+              {/* Loading More */}
+              {hasMorePages && !isLoadingMore && (
+                <div ref={sentinelRef} className="py-6 flex justify-center">
+                  <div className="text-sm text-gray-500 animate-pulse">Loading more products...</div>
+                </div>
+              )}
+
+              {/* End of Results */}
+              {!hasMorePages && filteredAndSorted.length > 0 && (
+                <div className="py-8 text-center text-sm text-gray-500">
+                  You've reached the end!
+                </div>
+              )}
+
+              {/* No Products */}
+              {filteredAndSorted.length === 0 && (
+                <div className="py-16 text-center text-gray-500">
+                  No products found.
+                </div>
               )}
             </div>
           </main>
         </div>
       </div>
 
-      {/* Mobile Filter Button */}
+      {/* Mobile */}
       {isMobile && <MobileFilterButton onClick={() => setIsMobileFiltersOpen(true)} />}
 
-      {/* Mobile Filter Modal */}
       <MobileFilterModal
         categories={categories}
         selectedCats={selectedCats}

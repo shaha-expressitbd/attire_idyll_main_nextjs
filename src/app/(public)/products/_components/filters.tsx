@@ -3,7 +3,7 @@
 import React, { useCallback, useMemo, useState, useEffect, useRef } from "react";
 import { Category } from "@/types/business";
 import { Product } from "@/types/product";
-import { FiChevronDown, FiChevronUp, FiX } from "react-icons/fi";
+import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 import { BiFilterAlt } from "react-icons/bi";
 import CategoryTree from "./category-tree";
 import RangePriceFilter from "./rangeSlider";
@@ -57,10 +57,6 @@ interface FiltersProps {
 
   clearAllFilters?: () => void;
 }
-
-const sectionStyles = {
-  default: { accentColor: 'text-gray-600 dark:text-gray-400' },
-};
 
 export default function Filters({
   categories,
@@ -165,35 +161,26 @@ export default function Filters({
   // Filter Section Component
   const FilterSection = ({ title, children, id, count }: { title: string; children: React.ReactNode; id: string; count?: number }) => {
     const isOpen = activeAccordion.includes(id);
-    const style = sectionStyles[id as keyof typeof sectionStyles] || sectionStyles.default;
 
     return (
-      <div className={`mb-4 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-900 hover:shadow-lg transition-all duration-300 ${isOpen ? 'shadow-lg' : 'shadow-sm'}`}>
+      <div className="border-b border-gray-200 dark:border-gray-700">
         <button
           onClick={() => toggleAccordion(id)}
-          className={`w-full flex items-center justify-between px-2 py-2 text-left bg-secondary dark:bg-secondary hover:brightness-95 dark:hover:brightness-110 transition-all duration-200`}
+          className="w-full flex items-center justify-between py-3 px-4 text-left hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
         >
-          <div className="flex items-center gap-3">
-            <div className="flex flex-col items-start">
-              <span className={`text-sm font-bold ${style.accentColor}`}>{title}</span>
-              {count !== undefined && count > 0 && (
-                <span className="text-xs text-gray-600 dark:text-gray-300 mt-1">{count} selected</span>
-              )}
-            </div>
-          </div>
           <div className="flex items-center gap-2">
+            <span className="text-sm font-semibold text-gray-900 dark:text-gray-100">{title}</span>
             {count !== undefined && count > 0 && (
-              <span className={`px-2 py-1 text-xs font-bold bg-white dark:bg-gray-800 ${style.accentColor} rounded-full shadow-sm`}>
-                {count}
-              </span>
+              <span className="text-xs text-gray-500 dark:text-gray-400">({count})</span>
             )}
-            <div className="p-1 rounded-full bg-white/80 dark:bg-gray-700/80">
-              {isOpen ? <FiChevronUp className="text-black dark:text-white" size={16} /> : <FiChevronDown className="text-black dark:text-white" size={16} />}
-            </div>
           </div>
+          {isOpen ?
+            <FiChevronUp className="text-gray-500 dark:text-gray-400" size={18} /> :
+            <FiChevronDown className="text-gray-500 dark:text-gray-400" size={18} />
+          }
         </button>
         {isOpen && (
-          <div className="px-2 py-2 bg-secondary dark:bg-secondary animate-in slide-in-from-top-2 duration-300 max-h-[280px] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-600 scrollbar-track-gray-100 dark:scrollbar-track-gray-800">
+          <div className="px-4 pb-4">
             {children}
           </div>
         )}
@@ -202,49 +189,47 @@ export default function Filters({
   };
 
   return (
-    <aside className="mt-14 hidden md:block w-50">
+    <aside className="mt-14 hidden md:block w-64">
       <div className="sticky top-24">
-        <div className="rounded-2xl bg-secondary dark:bg-secondary border border-gray-200 dark:border-gray-700 shadow-xl">
+        <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg">
           {/* Header */}
-          <div className="p-3 border-b border-gray-200 dark:border-gray-700">
-            <div className="flex items-center justify-between">
-              <h2 className="text-xl font-bold text-black dark:text-white flex items-center gap-3">
-                <BiFilterAlt className="text-primary dark:text-primary" size={24} />
+          <div className="p-4 border-b border-gray-200 dark:border-gray-700">
+            <div className="flex items-center justify-between mb-2">
+              <h2 className="text-lg font-bold text-gray-900 dark:text-gray-100 flex items-center gap-2">
+                <BiFilterAlt size={20} />
                 Filters
               </h2>
-              {activeFiltersCount > 0 && (
-                <div className="flex items-center gap-2">
-                  <span className="text-sm text-gray-600 dark:text-gray-400">
-                    {activeFiltersCount} active
-                  </span>
-                  {clearAllFilters && (
-                    <button
-                      onClick={clearAllFilters}
-                      className="text-sm font-semibold text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300 transition-all"
-                    >
-                      Clear
-                    </button>
-                  )}
-                </div>
+              {activeFiltersCount > 0 && clearAllFilters && (
+                <button
+                  onClick={clearAllFilters}
+                  className="text-sm text-blue-600 dark:text-blue-400 hover:underline"
+                >
+                  Clear all
+                </button>
               )}
             </div>
+            {activeFiltersCount > 0 && (
+              <p className="text-xs text-gray-600 dark:text-gray-400">
+                {activeFiltersCount} filter{activeFiltersCount !== 1 ? 's' : ''} applied
+              </p>
+            )}
           </div>
 
           {/* Filter Sections */}
-          <div ref={scrollRef} className="p-6 space-y-4 max-h-[350px] md:max-h-[450px] lg:max-h-[600px] xl:max-h-[800px] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-600 scrollbar-track-gray-100 dark:scrollbar-track-gray-800">
+          <div ref={scrollRef} className="max-h-[calc(100vh-200px)] overflow-y-auto">
             {/* Categories */}
             <FilterSection title="Categories" id="categories" count={selectedCats.length}>
-              <div className="space-y-3 max-h-[350px] overflow-y-auto">
-                <label className="flex items-center gap-3 p-2 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg cursor-pointer transition-all">
+              <div className="space-y-2">
+                <label className="flex items-center gap-2 cursor-pointer">
                   <input
                     type="checkbox"
-                    className="w-4 h-4 accent-primary rounded"
+                    className="w-4 h-4 rounded border-gray-300"
                     checked={selectedCats.length === 0}
                     onChange={() => setSelectedCats([])}
                   />
-                  <span className="text-sm font-medium text-black dark:text-white flex-1">All Categories</span>
-                  <span className="text-xs text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-600 px-2 py-1 rounded">
-                    {apiCategories.reduce((total, cat) => total + (cat.products || 0), 0) || initialProducts.length}
+                  <span className="text-sm text-gray-700 dark:text-gray-300">All Categories</span>
+                  <span className="ml-auto text-xs text-gray-500 dark:text-gray-400">
+                    ({apiCategories.reduce((total, cat) => total + (cat.products || 0), 0) || initialProducts.length})
                   </span>
                 </label>
                 <CategoryTree
@@ -263,7 +248,7 @@ export default function Filters({
               id="price"
               count={(priceRange[0] !== (apiMinPrice ?? minPrice) || priceRange[1] !== (apiMaxPrice ?? maxPrice)) ? 1 : 0}
             >
-              <div className="p-2">
+              <div className="pt-2">
                 <RangePriceFilter
                   minPrice={apiMinPrice ?? minPrice}
                   maxPrice={apiMaxPrice ?? maxPrice}
@@ -275,15 +260,15 @@ export default function Filters({
 
             {/* Sizes */}
             {allSizes.length > 0 && (
-              <FilterSection title="Sizes" id="size" count={selectedSizes.length}>
-                <div className="grid grid-cols-4 gap-2 max-h-[120px] overflow-y-auto">
+              <FilterSection title="Size" id="size" count={selectedSizes.length}>
+                <div className="grid grid-cols-4 gap-2">
                   {allSizes.map(size => (
                     <button
                       key={size}
                       onClick={() => toggle(selectedSizes, setSelectedSizes, size)}
-                      className={`relative py-2 text-xs font-semibold rounded-lg border transition-all duration-200 ${selectedSizes.includes(size)
-                        ? "bg-primary text-white shadow-md"
-                        : "border-gray-300 dark:border-gray-600 text-black dark:text-white hover:border-primary dark:hover:border-primary bg-white dark:bg-gray-700"
+                      className={`py-2 text-sm font-medium rounded border transition-colors ${selectedSizes.includes(size)
+                        ? "bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 border-gray-900 dark:border-gray-100"
+                        : "bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500"
                         }`}
                     >
                       {size}
@@ -295,16 +280,16 @@ export default function Filters({
 
             {/* Variants (non-size) */}
             {variantsValues.filter(v => !v.name.toLowerCase().includes('size')).length > 0 && (
-              <FilterSection title="Variants" id="variants" count={Object.values(selectedVariants).flat().length}>
-                <div className="space-y-4 max-h-[200px] overflow-y-auto">
+              <FilterSection title="Options" id="variants" count={Object.values(selectedVariants).flat().length}>
+                <div className="space-y-4">
                   {variantsValues
                     .filter(v => !v.name.toLowerCase().includes('size'))
                     .map(variant => (
                       <div key={variant.name} className="space-y-2">
-                        <h4 className="text-xs font-bold text-black dark:text-white uppercase tracking-wide">
+                        <h4 className="text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase">
                           {variant.name}
                         </h4>
-                        <div className="flex flex-wrap gap-1">
+                        <div className="flex flex-wrap gap-2">
                           {variant.values.map(value => (
                             <button
                               key={value}
@@ -317,9 +302,9 @@ export default function Filters({
                                   return { ...prev, [variant.name]: updated };
                                 });
                               }}
-                              className={`px-2 py-1 text-xs font-medium rounded-md transition-all duration-200 ${selectedVariants[variant.name]?.includes(value)
-                                ? "bg-primary text-white shadow-md"
-                                : "bg-gray-100 dark:bg-gray-700 text-black dark:text-white hover:bg-gray-200 dark:hover:bg-gray-600 border border-gray-300 dark:border-gray-600"
+                              className={`px-3 py-1.5 text-xs font-medium rounded border transition-colors ${selectedVariants[variant.name]?.includes(value)
+                                ? "bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 border-gray-900 dark:border-gray-100"
+                                : "bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500"
                                 }`}
                             >
                               {value}
@@ -335,19 +320,19 @@ export default function Filters({
             {/* Conditions */}
             {conditions.length > 0 && (
               <FilterSection title="Condition" id="condition" count={selectedConditions.length}>
-                <div className="space-y-2 max-h-[120px] overflow-y-auto">
+                <div className="space-y-2">
                   {conditions.map(condition => (
                     <label
                       key={condition}
-                      className="flex items-center gap-2 p-2 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg cursor-pointer transition-all"
+                      className="flex items-center gap-2 cursor-pointer"
                     >
                       <input
                         type="checkbox"
-                        className="w-4 h-4 accent-orange-600 rounded"
+                        className="w-4 h-4 rounded border-gray-300"
                         checked={selectedConditions.includes(condition)}
                         onChange={() => toggle(selectedConditions, setSelectedConditions, condition)}
                       />
-                      <span className="text-sm font-medium text-black dark:text-white">{condition}</span>
+                      <span className="text-sm text-gray-700 dark:text-gray-300">{condition}</span>
                     </label>
                   ))}
                 </div>
@@ -357,17 +342,17 @@ export default function Filters({
             {/* Tags */}
             {tags.length > 0 && (
               <FilterSection title="Tags" id="tags" count={selectedTags.length}>
-                <div className="flex flex-wrap gap-2 max-h-[120px] overflow-y-auto">
+                <div className="flex flex-wrap gap-2">
                   {tags.map(tag => (
                     <button
                       key={tag}
                       onClick={() => toggle(selectedTags, setSelectedTags, tag)}
-                      className={`px-3 py-1.5 text-xs font-medium rounded-full transition-all duration-200 ${selectedTags.includes(tag)
-                        ? "bg-primary text-white shadow-md"
-                        : "bg-gray-100 dark:bg-gray-700 text-black dark:text-white hover:bg-gray-200 dark:hover:bg-gray-600 border border-gray-300 dark:border-gray-600"
+                      className={`px-3 py-1.5 text-xs font-medium rounded-full border transition-colors ${selectedTags.includes(tag)
+                        ? "bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 border-gray-900 dark:border-gray-100"
+                        : "bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500"
                         }`}
                     >
-                      #{tag}
+                      {tag}
                     </button>
                   ))}
                 </div>

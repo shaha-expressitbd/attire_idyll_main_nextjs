@@ -1,6 +1,6 @@
-// components/shop-all-products/category-tree.tsx
 "use client";
-import React, { useState, useCallback, useEffect } from "react";
+
+import React, { useState, useCallback, useEffect, useRef } from "react";
 import { Category } from "@/types/business";
 import { Product } from "@/types/product";
 import { FiChevronDown, FiChevronRight } from "react-icons/fi";
@@ -21,7 +21,6 @@ interface CategoryTreeProps {
   apiCategories?: FilterCategory[];
 }
 
-
 /* ───────────────────────── helpers ───────────────────────── */
 function getAllDescendantIds(cat: Category): string[] {
   let ids: string[] = [cat._id];
@@ -33,7 +32,7 @@ function getAllDescendantIds(cat: Category): string[] {
   return ids;
 }
 
-// Recursive function to find category by _id in hierarchical structure
+// Recursive function to find category by _id
 function findCategoryById(categories: FilterCategory[], id: string): FilterCategory | undefined {
   for (const cat of categories) {
     if (cat._id === id) return cat;
@@ -45,25 +44,21 @@ function findCategoryById(categories: FilterCategory[], id: string): FilterCateg
   return undefined;
 }
 
-// Calculate total products for a category including all its descendants
+// Calculate total products for a category including descendants
 function getTotalProductsForCategory(cat: Category, apiCategories: FilterCategory[]): number {
   const apiCat = findCategoryById(apiCategories, cat._id);
-  if (apiCat) {
-    return apiCat.products || 0;
-  }
+  if (apiCat) return apiCat.products || 0;
 
-  // Fallback: sum products from all descendant categories
   let total = 0;
   const descendants = getAllDescendantIds(cat);
   for (const descId of descendants) {
     const descCat = findCategoryById(apiCategories, descId);
-    if (descCat && descCat.products) {
-      total += descCat.products;
-    }
+    if (descCat?.products) total += descCat.products;
   }
   return total;
 }
 
+// Determine if category is none, partial, or fully selected
 function getCategorySelectionState(
   cat: Category,
   selectedCats: string[]
@@ -75,6 +70,7 @@ function getCategorySelectionState(
   return "partial";
 }
 
+// Build initial expanded state
 function buildInitiallyExpandedMap(cats: Category[]): Record<string, boolean> {
   const map: Record<string, boolean> = {};
   const walk = (list: Category[]) => {
@@ -93,16 +89,18 @@ export default function CategoryTree({
   selectedCats,
   setSelectedCats,
   initialProducts,
-  apiCategories,
+  apiCategories = [],
 }: CategoryTreeProps) {
-  const [expandedCategories, setExpandedCategories] = useState<
-    Record<string, boolean>
-  >(() => buildInitiallyExpandedMap(categories));
+  const [expandedCategories, setExpandedCategories] = useState<Record<string, boolean>>(
+    () => buildInitiallyExpandedMap(categories)
+  );
 
+  // Rebuild expanded map when categories change
   useEffect(() => {
     setExpandedCategories(buildInitiallyExpandedMap(categories));
   }, [categories]);
 
+  // Toggle category + all descendants
   const toggleCategoryWithChildren = useCallback(
     (cat: Category) => {
       const allIds = getAllDescendantIds(cat);
@@ -116,10 +114,12 @@ export default function CategoryTree({
     [setSelectedCats]
   );
 
+  // Toggle expand/collapse
   const toggleCategoryExpand = useCallback((catId: string) => {
     setExpandedCategories((prev) => ({ ...prev, [catId]: !prev[catId] }));
   }, []);
 
+  // Render tree recursively
   const renderCategoryTree = useCallback(
     (cats: Category[], depth = 0) =>
       cats.map((cat) => {
@@ -127,19 +127,31 @@ export default function CategoryTree({
         const isExpanded = expandedCategories[cat._id];
         const selectionState = getCategorySelectionState(cat, selectedCats);
 
+        const checkboxRef = useRef<HTMLInputElement>(null);
+
+        // Sync indeterminate state
+        useEffect(() => {
+          if (checkboxRef.current) {
+            checkboxRef.current.indeterminate = selectionState === "partial";
+          }
+        }, [selectionState]);
+
         return (
           <div
             key={cat._id}
-            className="mb-1 "
+            className="mb-1"
             style={{ marginLeft: `${depth * 16}px` }}
           >
             <div className="flex items-center group">
+              {/* Expand/Collapse Button */}
               {hasChildren && (
                 <button
-                  onClick={() => toggleCategoryExpand(cat._id)}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    toggleCategoryExpand(cat._id);
+                  }}
                   className="mr-2 p-1 text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 transition-colors rounded hover:bg-gray-100 dark:hover:bg-gray-700"
-                  aria-label={`${isExpanded ? "Collapse" : "Expand"} ${cat.name
-                    }`}
+                  aria-label={`${isExpanded ? "Collapse" : "Expand"} ${cat.name}`}
                 >
                   {isExpanded ? (
                     <FiChevronDown className="w-3 h-3" />
@@ -148,19 +160,18 @@ export default function CategoryTree({
                   )}
                 </button>
               )}
-              <label className="flex items-center flex-grow px-2 hover:bg-gray-50 dark:hover:bg-gray-700 rounded cursor-pointer transition-colors">
+
+              {/* Checkbox + Label */}
+              <label
+                className="flex items-center flex-grow px-2 py-1 hover:bg-gray-50 dark:hover:bg-gray-700 rounded cursor-pointer transition-colors select-none"
+                onClick={(e) => e.stopPropagation()}
+              >
                 <input
+                  ref={checkboxRef}
                   type="checkbox"
                   className="accent-pink-600 w-3 h-3 rounded"
                   checked={selectionState === "all"}
-                  ref={(input) => {
-                    if (input)
-                      input.indeterminate = selectionState === "partial";
-                  }}
-                  onChange={(e) => {
-                    e.preventDefault();
-                    toggleCategoryWithChildren(cat);
-                  }}
+                  onChange={() => toggleCategoryWithChildren(cat)}
                   aria-label={`Filter by ${cat.name}`}
                 />
                 <span className="ml-3 text-gray-700 dark:text-white text-sm font-medium group-hover:text-gray-900 dark:group-hover:text-gray-100 transition-colors">
@@ -168,22 +179,22 @@ export default function CategoryTree({
                 </span>
                 <span className="ml-auto text-xs text-gray-500 dark:text-gray-400">
                   (
-                  {
-                    apiCategories ?
-                      getTotalProductsForCategory(cat, apiCategories as FilterCategory[]) :
-                      initialProducts.filter((p) =>
-                        p.sub_category?.some((sc) =>
-                          getAllDescendantIds(cat).includes(sc._id)
-                        )
-                      ).length
-                  }
+                  {apiCategories.length > 0
+                    ? getTotalProductsForCategory(cat, apiCategories)
+                    : initialProducts.filter((p) =>
+                      p.sub_category?.some((sc) =>
+                        getAllDescendantIds(cat).includes(sc._id)
+                      )
+                    ).length}
                   )
                 </span>
               </label>
             </div>
+
+            {/* Children */}
             {hasChildren && isExpanded && (
               <div className="mt-1">
-                {renderCategoryTree(cat.children || [], depth + 1)}
+                {renderCategoryTree(cat.children!, depth + 1)}
               </div>
             )}
           </div>
@@ -194,6 +205,7 @@ export default function CategoryTree({
       selectedCats,
       toggleCategoryExpand,
       toggleCategoryWithChildren,
+      apiCategories,
       initialProducts,
     ]
   );

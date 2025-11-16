@@ -31,7 +31,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<Sea
   const res = await store.dispatch(
     publicApi.endpoints.getProducts.initiate({
       page: 1,
-      limit: 20, // Reduced from 500, only load first page initially
+      limit: 500,
       ...(search && { search }),
       ...(sort && { sort }),
       ...(brand && { brand }),

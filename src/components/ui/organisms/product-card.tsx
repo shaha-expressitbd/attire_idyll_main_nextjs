@@ -340,15 +340,20 @@ export default function ProductCard({
               </div>
             )}
           </div> */}
+          <div className="p-3 sm:p-4 bg-pink-50/40 dark:bg-black">
+            <h3 className="text-[15px] font-semibold text-gray-900 dark:text-white line-clamp-1">
+              {product.name}
+            </h3>
+          </div>
 
           {/* Action Buttons */}
 
         </div>
-      </Link>
+      </Link >
 
 
 
 
-    </div>
+    </div >
   );
 }

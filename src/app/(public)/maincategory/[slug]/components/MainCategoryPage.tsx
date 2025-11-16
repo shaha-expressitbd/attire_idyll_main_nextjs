@@ -3,12 +3,12 @@
 import { useMemo, useState, useCallback, useEffect, memo } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { Product } from '@/types/product';
-import { FiGrid, FiPackage, FiSearch, FiFilter, FiX, FiChevronLeft, FiChevronRight } from 'react-icons/fi';
+import { FiGrid, FiPackage, FiSearch, FiFilter, FiX, FiChevronDown } from 'react-icons/fi';
 import ProductCard from '@/components/ui/organisms/product-card';
 import { Pagination } from '@/components/ui/molecules/pagination';
 import { LoadingSpinner } from '@/components/ui/atoms/loading-spinner';
 import { debounce } from 'lodash';
-import { useGetFilterOptionsQuery } from '@/lib/api/publicApi';
+import RangePriceFilter from '@/app/(public)/products/_components/rangeSlider';
 
 interface BusinessCategory {
     _id: string;
@@ -30,13 +30,23 @@ interface Props {
 }
 
 /* ------------------------------------------------------------------ */
-/*  Helper – price of a product (first variant)                        */
+/*  Helper – price of a product (first variant with offer logic)     */
 /* ------------------------------------------------------------------ */
-const getPrice = (p: Product) =>
-    Number(p.variantsId?.[0]?.selling_price) || 0;
+const getPrice = (p: Product) => {
+    const v = p.variantsId?.find((x) => Number(x.variants_stock) > 0) ?? p.variantsId?.[0];
+    if (!v) return 0;
+    const sell = Number(v.selling_price || 0);
+    const offer = Number(v.offer_price || sell);
+    const now = Date.now();
+    const isOffer =
+        offer < sell &&
+        now >= new Date(v.discount_start_date || 0).getTime() &&
+        now <= new Date(v.discount_end_date || 0).getTime();
+    return isOffer ? offer : sell;
+};
 
 /* ------------------------------------------------------------------ */
-/*  Slug helper (copied from server)                                   */
+/*  Slug helper (copied from server)                                  */
 /* ------------------------------------------------------------------ */
 const createSlug = (name: string): string =>
     name
@@ -64,61 +74,71 @@ export default function MainCategoryPage({
     const [sortBy, setSortBy] = useState('featured');
     const [searchTerm, setSearchTerm] = useState('');
     const [currentPage, setCurrentPage] = useState(page);
-
-    // Use the useGetFilterOptionsQuery hook to fetch filter options including price range
-    const { data: filterOptions, isLoading: isLoadingPrice, error: priceError } = useGetFilterOptionsQuery({
-        isPriceRange: true,
-    });
-
-    // Calculate price range with API data priority, fallback to product calculation
-    const calculatedPriceRange = useMemo(() => {
-        if (filterOptions?.priceRange) {
-            const apiMin = Number(filterOptions.priceRange.min);
-            const apiMax = Number(filterOptions.priceRange.max);
-            return [apiMin, apiMax] as [number, number];
-        }
-        // Fallback to product calculation
-        const prices = initialProducts.map(getPrice).filter(p => p > 0);
-        const min = prices.length ? Math.min(...prices) : 0;
-        const max = prices.length ? Math.max(...prices) : 1000;
-        return [min, max] as [number, number];
-    }, [filterOptions?.priceRange, initialProducts]);
-
-    const [priceRange, setPriceRange] = useState<[number, number]>(calculatedPriceRange);
-    const [priceMin, setPriceMin] = useState(calculatedPriceRange[0]);
-    const [priceMax, setPriceMax] = useState(calculatedPriceRange[1]);
-
-    // Update priceRange state when calculatedPriceRange changes
-    useEffect(() => {
-        setPriceRange(calculatedPriceRange);
-        setPriceMin(calculatedPriceRange[0]);
-        setPriceMax(calculatedPriceRange[1]);
-    }, [calculatedPriceRange]);
-
-    /* ---------- Sub-category filter state ---------- */
+    const [isMobileFiltersOpen, setIsMobileFiltersOpen] = useState(false);
     const [selectedSubs, setSelectedSubs] = useState<string | null>(null);
 
-    /* ---------- Mobile filters modal state ---------- */
-    const [isMobileFiltersOpen, setIsMobileFiltersOpen] = useState(false);
-
-    /* ---------- Sub-category IDs (once) ---------- */
+    // Sub-category IDs
     const subCategoryIds = useMemo(() => {
         if (!mainCategory) return [];
         return mainCategory.children.map(c => c._id.toLowerCase());
     }, [mainCategory]);
 
-    /* ---------- Sync URL with subcategory from searchParams ---------- */
+    // Filter products by current category (including subcategories)
+    const categoryFilteredProducts = useMemo(() => {
+        if (!mainCategory || !initialProducts.length) return [];
+        return initialProducts.filter(p =>
+            p.sub_category?.some(sc => subCategoryIds.includes(sc._id.toLowerCase()))
+        );
+    }, [initialProducts, subCategoryIds, mainCategory]);
+
+    // Calculate price range from category-specific products with offer price logic
+    const calculatedPriceRange = useMemo(() => {
+        if (categoryFilteredProducts.length === 0) return [0, 10000] as [number, number];
+
+        const prices = categoryFilteredProducts.map((p) => {
+            const v = p.variantsId?.find((x) => Number(x.variants_stock) > 0) ?? p.variantsId?.[0];
+            if (!v) return 0;
+            const sell = Number(v.selling_price || 0);
+            const offer = Number(v.offer_price || sell);
+            const now = Date.now();
+            const isOffer =
+                offer < sell &&
+                now >= new Date(v.discount_start_date || 0).getTime() &&
+                now <= new Date(v.discount_end_date || 0).getTime();
+            return isOffer ? offer : sell;
+        }).filter((n) => !isNaN(n) && n > 0);
+
+        const min = prices.length ? Math.min(...prices) : 0;
+        const max = prices.length ? Math.max(...prices) : 10000;
+        return [min, max] as [number, number];
+    }, [categoryFilteredProducts]);
+
+    const [priceRange, setPriceRange] = useState<[number, number]>(calculatedPriceRange);
+    const [priceMin, setPriceMin] = useState(calculatedPriceRange[0]);
+    const [priceMax, setPriceMax] = useState(calculatedPriceRange[1]);
+
+    // Update price range when calculated range changes (avoid infinite loops)
+    useEffect(() => {
+        // Only update if the calculated range has actually changed and user hasn't custom set values
+        const hasUserInteracted = priceMin !== priceRange[0] || priceMax !== priceRange[1];
+        if (!hasUserInteracted || priceRange[0] === 0 && priceRange[1] === 10000) {
+            setPriceRange(calculatedPriceRange);
+            setPriceMin(calculatedPriceRange[0]);
+            setPriceMax(calculatedPriceRange[1]);
+        } else {
+            // Just update boundaries without changing user selection
+            setPriceRange(calculatedPriceRange);
+        }
+    }, [calculatedPriceRange]);
+
+    // Sync URL with subcategory from searchParams
     useEffect(() => {
         const subSlug = searchParams.get('subcategory');
         if (subSlug && mainCategory) {
             const sub = mainCategory.children.find(
                 c => createSlug(c.name) === subSlug
             );
-            if (sub) {
-                setSelectedSubs(sub._id.toLowerCase());
-            } else {
-                setSelectedSubs(null);
-            }
+            setSelectedSubs(sub ? sub._id.toLowerCase() : null);
         } else {
             setSelectedSubs(null);
         }
@@ -132,9 +152,15 @@ export default function MainCategoryPage({
         [router]
     );
 
-    const syncUrl = (newPage: number) => {
+    const syncUrl = (newPage: number, additionalParams?: Record<string, string>) => {
         const p = new URLSearchParams(searchParams.toString());
         p.set('page', newPage.toString());
+        if (additionalParams) {
+            Object.entries(additionalParams).forEach(([key, value]) => {
+                if (value) p.set(key, value);
+                else p.delete(key);
+            });
+        }
         updateUrl(p);
     };
 
@@ -154,20 +180,22 @@ export default function MainCategoryPage({
     const handlePage = (p: number) => {
         setCurrentPage(p);
         syncUrl(p);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
-    const handlePriceChange = (min: number, max: number) => {
+    const handlePriceChange = useCallback((min: number, max: number) => {
         setPriceMin(min);
         setPriceMax(max);
         setCurrentPage(1);
         syncUrl(1);
-    };
+    }, [syncUrl]);
 
     const toggleSub = (id: string, name: string) => {
         const slug = createSlug(name);
         const isCurrentlySelected = selectedSubs === id;
+        const newSelection = isCurrentlySelected ? null : id;
 
-        setSelectedSubs(isCurrentlySelected ? null : id);
+        setSelectedSubs(newSelection);
         setCurrentPage(1);
 
         const p = new URLSearchParams(searchParams.toString());
@@ -186,11 +214,12 @@ export default function MainCategoryPage({
         setPriceMin(priceRange[0]);
         setPriceMax(priceRange[1]);
         setCurrentPage(1);
-        const p = new URLSearchParams(searchParams.toString());
-        p.delete('subcategory');
-        p.delete('page');
+        const p = new URLSearchParams();
+        p.set('page', '1');
         updateUrl(p);
     };
+
+    const hasActiveFilters = selectedSubs || searchTerm || priceMin !== priceRange[0] || priceMax !== priceRange[1];
 
     /* ------------------------------------------------------------------ */
     /*  Filtering + sorting + pagination                                   */
@@ -198,21 +227,18 @@ export default function MainCategoryPage({
     const { filteredProducts, paginatedProducts, totalPages } = useMemo(() => {
         let list = [...initialProducts];
 
-        /* ---- 1. Sub-category filter ---- */
+        // 1. Sub-category filter
         if (selectedSubs) {
             list = list.filter(p =>
-                p.sub_category?.some(sc =>
-                    selectedSubs === sc._id.toLowerCase()
-                )
+                p.sub_category?.some(sc => selectedSubs === sc._id.toLowerCase())
             );
         } else {
-            // keep only products that belong to the main category
             list = list.filter(p =>
                 p.sub_category?.some(sc => subCategoryIds.includes(sc._id.toLowerCase()))
             );
         }
 
-        /* ---- 2. Search filter ---- */
+        // 2. Search filter
         if (searchTerm.trim()) {
             const term = searchTerm.trim().toLowerCase();
             list = list.filter(p => {
@@ -223,20 +249,61 @@ export default function MainCategoryPage({
             });
         }
 
-        /* ---- 3. Price filter ---- */
+        // 3. Price filter
         list = list.filter(p => {
-            const price = getPrice(p);
+            const v = p.variantsId?.find((x) => Number(x.variants_stock) > 0) ?? p.variantsId?.[0];
+            if (!v) return true; // Include products without variants
+            const sell = Number(v.selling_price || 0);
+            const offer = Number(v.offer_price || sell);
+            const now = Date.now();
+            const isOffer =
+                offer < sell &&
+                now >= new Date(v.discount_start_date || 0).getTime() &&
+                now <= new Date(v.discount_end_date || 0).getTime();
+            const price = isOffer ? offer : sell;
             return price >= priceMin && price <= priceMax;
         });
 
-        /* ---- 4. Sorting ---- */
+        // 4. Sorting
         if (sortBy === 'price-low') {
-            list.sort((a, b) => getPrice(a) - getPrice(b));
+            list.sort((a, b) => {
+                const getPriceForSort = (p: Product) => {
+                    const v = p.variantsId?.find((x) => Number(x.variants_stock) > 0) ?? p.variantsId?.[0];
+                    if (!v) return 0;
+                    const sell = Number(v.selling_price || 0);
+                    const offer = Number(v.offer_price || sell);
+                    const now = Date.now();
+                    const isOffer =
+                        offer < sell &&
+                        now >= new Date(v.discount_start_date || 0).getTime() &&
+                        now <= new Date(v.discount_end_date || 0).getTime();
+                    return isOffer ? offer : sell;
+                };
+                return getPriceForSort(a) - getPriceForSort(b);
+            });
         } else if (sortBy === 'price-high') {
-            list.sort((a, b) => getPrice(b) - getPrice(a));
+            list.sort((a, b) => {
+                const getPriceForSort = (p: Product) => {
+                    const v = p.variantsId?.find((x) => Number(x.variants_stock) > 0) ?? p.variantsId?.[0];
+                    if (!v) return 0;
+                    const sell = Number(v.selling_price || 0);
+                    const offer = Number(v.offer_price || sell);
+                    const now = Date.now();
+                    const isOffer =
+                        offer < sell &&
+                        now >= new Date(v.discount_start_date || 0).getTime() &&
+                        now <= new Date(v.discount_end_date || 0).getTime();
+                    return isOffer ? offer : sell;
+                };
+                return getPriceForSort(b) - getPriceForSort(a);
+            });
+        } else if (sortBy === 'name-asc') {
+            list.sort((a, b) => (a.name || '').localeCompare(b.name || ''));
+        } else if (sortBy === 'name-desc') {
+            list.sort((a, b) => (b.name || '').localeCompare(a.name || ''));
         }
 
-        /* ---- 5. Pagination ---- */
+        // 5. Pagination
         const total = Math.ceil(list.length / limit);
         const start = (currentPage - 1) * limit;
         const end = start + limit;
@@ -259,28 +326,17 @@ export default function MainCategoryPage({
         limit,
     ]);
 
-    /* ---------- Loading state for price range ---------- */
-    if (isLoadingPrice) {
-        return (
-            <div className="min-h-screen flex items-center justify-center">
-                <LoadingSpinner />
-            </div>
-        );
-    }
-
-    /* ---------- Error state for price range ---------- */
-    if (priceError && !mainCategory) {
-        return (
-            <div className="min-h-screen flex items-center justify-center">
-                <p className="text-red-600">Failed to load price range information.</p>
-            </div>
-        );
-    }
+    /* ---------- Loading state ---------- */
+    // No longer using isLoadingPrice since we removed the API call
 
     if (!mainCategory) {
         return (
-            <div className="min-h-screen flex items-center justify-center">
-                <p className="text-gray-600">Category not found.</p>
+            <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
+                <div className="text-center">
+                    <FiPackage className="w-16 h-16 mx-auto text-gray-400 mb-4" />
+                    <h2 className="text-xl font-semibold text-gray-700 dark:text-gray-300 mb-2">Category Not Found</h2>
+                    <p className="text-gray-500 dark:text-gray-400">The requested category does not exist.</p>
+                </div>
             </div>
         );
     }
@@ -289,30 +345,35 @@ export default function MainCategoryPage({
     /*  Filter Sidebar Component (Memoized)                                */
     /* ------------------------------------------------------------------ */
     const FilterSidebar = memo(({ isMobile = false }: { isMobile?: boolean }) => (
-        <div className={`space-y-6 ${isMobile ? '' : 'sticky top-6'}`}>
+        <div className="space-y-4">
             {/* Sub-categories */}
-            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-4">
-                <h3 className="font-semibold text-lg mb-3 flex items-center justify-between">
-                    Sub-categories
-                    {selectedSubs && (
-                        <button
-                            onClick={() => {
-                                const sub = mainCategory.children.find(s => s._id.toLowerCase() === selectedSubs);
-                                if (sub) toggleSub(selectedSubs, sub.name);
-                            }}
-                            className="text-xs text-primary hover:underline"
-                        >
-                            Clear
-                        </button>
-                    )}
-                </h3>
-                <div className="space-y-2 max-h-96 overflow-y-auto">
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
+                <div className="p-4 bg-gray-50 dark:bg-gray-750 border-b border-gray-200 dark:border-gray-700">
+                    <div className="flex items-center justify-between">
+                        <h3 className="font-semibold text-gray-900 dark:text-white">Sub-categories</h3>
+                        {selectedSubs && (
+                            <button
+                                onClick={() => {
+                                    const sub = mainCategory.children.find(s => s._id.toLowerCase() === selectedSubs);
+                                    if (sub) toggleSub(selectedSubs, sub.name);
+                                }}
+                                className="text-xs text-primary hover:text-primary-dark transition"
+                            >
+                                Clear
+                            </button>
+                        )}
+                    </div>
+                </div>
+                <div className="p-3 space-y-1 max-h-80 overflow-y-auto">
                     {mainCategory.children.map(child => {
                         const checked = selectedSubs === child._id.toLowerCase();
                         return (
                             <label
                                 key={child._id}
-                                className="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer transition"
+                                className={`flex items-center gap-3 p-3 rounded-lg cursor-pointer transition ${checked
+                                    ? 'bg-primary/10 border border-primary'
+                                    : 'hover:bg-gray-50 dark:hover:bg-gray-700/50 border border-transparent'
+                                    }`}
                             >
                                 <input
                                     type="radio"
@@ -325,99 +386,50 @@ export default function MainCategoryPage({
                                     <img
                                         src={child.image.secure_url}
                                         alt={child.name}
-                                        className="w-10 h-10 object-cover rounded"
+                                        className="w-10 h-10 object-cover rounded-md"
                                     />
                                 ) : (
-                                    <div className="w-10 h-10 bg-gray-200 dark:bg-gray-600 rounded flex items-center justify-center">
+                                    <div className="w-10 h-10 bg-gray-100 dark:bg-gray-700 rounded-md flex items-center justify-center">
                                         <FiPackage className="w-5 h-5 text-gray-400" />
                                     </div>
                                 )}
-                                <span className="text-sm flex-1">{child.name}</span>
+                                <span className="text-sm font-medium text-gray-700 dark:text-gray-300 flex-1">
+                                    {child.name}
+                                </span>
                             </label>
                         );
                     })}
                 </div>
             </div>
 
-            {/* Price range */}
-            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-4">
-                <h3 className="font-semibold text-lg mb-3 flex items-center justify-between">
-                    Price Range
-                    {isLoadingPrice ? (
-                        <LoadingSpinner />
-                    ) : (
+            {/* Price Range */}
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
+                <div className="p-4 bg-gray-50 dark:bg-gray-750 border-b border-gray-200 dark:border-gray-700">
+                    <div className="flex items-center justify-between">
+                        <h3 className="font-semibold text-gray-900 dark:text-white">Price Range</h3>
                         <button
-                            onClick={() => {
-                                setPriceMin(priceRange[0]);
-                                setPriceMax(priceRange[1]);
-                                setCurrentPage(1);
-                                syncUrl(1);
-                            }}
-                            className="text-xs text-primary hover:underline"
-                            disabled={isLoadingPrice}
+                            onClick={() => handlePriceChange(priceRange[0], priceRange[1])}
+                            className="text-xs text-primary hover:text-primary-dark transition"
                         >
                             Reset
                         </button>
-                    )}
-                </h3>
-
-                {priceError ? (
-                    <p className="text-red-500 text-sm">Unable to load price filter options.</p>
-                ) : (
-                    <div className="space-y-4">
-                        {/* Slider */}
-                        <input
-                            type="range"
-                            min={priceRange[0]}
-                            max={priceRange[1]}
-                            value={priceMax}
-                            onChange={e => handlePriceChange(priceMin, Number(e.target.value))}
-                            className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
-                            style={{
-                                background: `linear-gradient(to right, #10b981 0%, #10b981 ${((priceMax - priceRange[0]) / (priceRange[1] - priceRange[0])) * 100
-                                    }%, #e5e7eb ${((priceMax - priceRange[0]) / (priceRange[1] - priceRange[0])) * 100
-                                    }%, #e5e7eb 100%)`,
-                            }}
-                            disabled={isLoadingPrice}
-                        />
-
-                        {/* Min-Max inputs */}
-                        <div className="flex items-center gap-2">
-                            <input
-                                type="number"
-                                value={priceMin}
-                                onChange={e => {
-                                    const v = Number(e.target.value);
-                                    if (v >= priceRange[0] && v <= priceMax) handlePriceChange(v, priceMax);
-                                }}
-                                className="w-full px-2 py-1 text-center border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
-                                disabled={isLoadingPrice}
-                            />
-                            <span className="text-gray-500">–</span>
-                            <input
-                                type="number"
-                                value={priceMax}
-                                onChange={e => {
-                                    const v = Number(e.target.value);
-                                    if (v <= priceRange[1] && v >= priceMin) handlePriceChange(priceMin, v);
-                                }}
-                                className="w-full px-2 py-1 text-center border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
-                                disabled={isLoadingPrice}
-                            />
-                        </div>
-
-                        <p className="text-xs text-gray-500 text-center">
-                            ৳{priceMin} – ৳{priceMax}
-                        </p>
                     </div>
-                )}
+                </div>
+                <div className="p-4 space-y-4">
+                    <RangePriceFilter
+                        minPrice={priceRange[0]}
+                        maxPrice={priceRange[1]}
+                        priceRange={[priceMin, priceMax]}
+                        setPriceRange={(newRange) => handlePriceChange(newRange[0], newRange[1])}
+                    />
+                </div>
             </div>
 
-            {/* Clear All */}
-            {(selectedSubs || searchTerm || priceMin !== priceRange[0] || priceMax !== priceRange[1]) && (
+            {/* Clear All Filters */}
+            {hasActiveFilters && (
                 <button
                     onClick={clearFilters}
-                    className="w-full py-2 bg-red-100 text-red-600 rounded-lg hover:bg-red-200 transition flex items-center justify-center gap-1"
+                    className="w-full py-3 bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 rounded-lg hover:bg-red-100 dark:hover:bg-red-900/30 transition flex items-center justify-center gap-2 font-medium"
                 >
                     <FiX className="w-4 h-4" />
                     Clear All Filters
@@ -429,76 +441,105 @@ export default function MainCategoryPage({
     FilterSidebar.displayName = 'FilterSidebar';
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
-            {/* ------------------- CONTENT ------------------- */}
-            <div className="container mx-auto md:px-4 px-1 py-6">
-                {/* ---- Two-column layout ---- */}
+        <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+            <div className="container mx-auto px-4 py-6">
+                {/* Header Section */}
+                <div className="mb-6">
+
+
+                    {/* Search and Sort Bar */}
+                    <div className="flex flex-col sm:flex-row gap-3 md:mt-20">
+                        {/* Search */}
+                        <div className="flex-1 relative">
+                            <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
+                            <input
+                                type="text"
+                                placeholder="Search products..."
+                                value={searchTerm}
+                                onChange={e => handleSearch(e.target.value)}
+                                className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-gray-800 dark:text-white"
+                            />
+                        </div>
+
+                        {/* Sort Dropdown */}
+                        <div className="relative sm:w-48">
+                            <select
+                                value={sortBy}
+                                onChange={e => handleSort(e.target.value)}
+                                className="w-full px-4 py-3 pr-10 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary appearance-none dark:bg-gray-800 dark:text-white cursor-pointer"
+                            >
+                                <option value="featured">Featured</option>
+                                <option value="price-low">Price: Low to High</option>
+                                <option value="price-high">Price: High to Low</option>
+                                <option value="name-asc">Name: A to Z</option>
+                                <option value="name-desc">Name: Z to A</option>
+                            </select>
+                            <FiChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
+                        </div>
+
+                        {/* Mobile Filter Button */}
+                        <button
+                            onClick={() => setIsMobileFiltersOpen(true)}
+                            className="lg:hidden px-4 py-3 bg-primary text-white rounded-lg hover:bg-primary-dark transition flex items-center justify-center gap-2 font-medium"
+                        >
+                            <FiFilter className="w-5 h-5" />
+                            Filters
+                            {hasActiveFilters && (
+                                <span className="bg-white text-primary px-2 py-0.5 rounded-full text-xs font-bold">
+                                    Active
+                                </span>
+                            )}
+                        </button>
+                    </div>
+                </div>
+
+                {/* Main Content Grid */}
                 <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-                    {/* ---------- LEFT SIDEBAR (DESKTOP - STICKY) ---------- */}
+                    {/* Desktop Sidebar */}
                     <aside className="hidden lg:block lg:col-span-1">
-                        <FilterSidebar />
+                        <div className="sticky top-20">
+                            <FilterSidebar />
+                        </div>
                     </aside>
 
-                    {/* ---------- RIGHT GRID ---------- */}
+                    {/* Products Grid */}
                     <div className="lg:col-span-3">
                         {filteredProducts.length === 0 ? (
-                            <div className="text-center py-20">
-                                <div className="mx-auto w-32 h-32 mb-6 relative">
-                                    <div className="absolute inset-0 bg-gradient-to-br from-primary to-secondary rounded-full opacity-10" />
-                                    <div className="absolute inset-4 bg-white dark:bg-gray-800 rounded-full shadow-inner flex items-center justify-center">
-                                        <FiPackage className="w-12 h-12 text-gray-400" />
-                                    </div>
+                            <div className="text-center py-16 bg-white dark:bg-gray-800 rounded-lg shadow-sm">
+                                <div className="mx-auto w-24 h-24 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center mb-6">
+                                    <FiPackage className="w-12 h-12 text-gray-400" />
                                 </div>
-                                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+                                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
                                     {searchTerm ? 'No Results Found' : 'No Products Available'}
                                 </h3>
-                                <p className="text-gray-600 dark:text-gray-400 max-w-md mx-auto">
+                                <p className="text-gray-600 dark:text-gray-400 max-w-md mx-auto mb-6">
                                     {searchTerm
-                                        ? `No products match "${searchTerm}". Try different keywords.`
-                                        : `No products in ${mainCategory.name} category.`}
+                                        ? `No products match "${searchTerm}". Try different keywords or filters.`
+                                        : `No products available in ${mainCategory.name} category.`}
                                 </p>
-                                {searchTerm && (
+                                {hasActiveFilters && (
                                     <button
-                                        onClick={() => handleSearch('')}
-                                        className="mt-4 px-6 py-2 bg-primary text-white rounded-lg hover:bg-secondary transition"
+                                        onClick={clearFilters}
+                                        className="px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary-dark transition font-medium"
                                     >
-                                        Clear Search
+                                        Clear All Filters
                                     </button>
                                 )}
                             </div>
                         ) : (
                             <>
-                                {/* Header */}
-                                <div className="flex items-center justify-between mb-4">
-                                    <div className="flex items-center gap-2">
-                                        <FiPackage className="w-6 h-6 text-primary" />
-                                        <h2 className="text-xl md:text-2xl font-bold capitalize">
-                                            All Products in {mainCategory.name}
-                                        </h2>
-                                    </div>
-                                    <span className="text-sm text-gray-500">
-                                        ({filteredProducts.length} product{filteredProducts.length !== 1 ? 's' : ''})
-                                    </span>
-                                </div>
-
-                                {/* Grid */}
-                                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 gap-3 md:gap-4">
-                                    {paginatedProducts.map((product, i) => (
-                                        <div
-                                            key={product._id}
-                                            className="animate-fade-in-up"
-                                            style={{ animationDelay: `${i * 0.05}s` }}
-                                        >
-                                            <div className="group transition-transform duration-300 hover:scale-[1.02] hover:-translate-y-1">
-                                                <ProductCard product={product} />
-                                            </div>
+                                {/* Products Grid */}
+                                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                                    {paginatedProducts.map(product => (
+                                        <div key={product._id} className="group">
+                                            <ProductCard product={product} />
                                         </div>
                                     ))}
                                 </div>
 
                                 {/* Pagination */}
                                 {totalPages > 1 && (
-                                    <div className="mt-8 flex justify-center">
+                                    <div className="mt-8">
                                         <Pagination
                                             currentPage={currentPage}
                                             totalPages={totalPages}
@@ -513,59 +554,46 @@ export default function MainCategoryPage({
                     </div>
                 </div>
 
-                {/* ---------- MOBILE FILTER TOGGLE BUTTON (RIGHT SIDE STICKY) ---------- */}
-                <button
-                    onClick={() => setIsMobileFiltersOpen(true)}
-                    className="fixed right-0 top-1/2 -translate-y-1/2 lg:hidden z-40 bg-primary text-white px-2 py-6 rounded-l-lg shadow-lg hover:bg-secondary transition-all duration-300 hover:px-3"
-                    aria-label="Open filters"
-                >
-                    <div className="flex flex-col items-center gap-1">
-                        <FiChevronLeft className="w-5 h-5" />
-                        <span className="text-xs font-semibold writing-mode-vertical">FILTER</span>
-                    </div>
-                </button>
-
-                {/* ---------- MOBILE FILTER SLIDE PANEL ---------- */}
-                <div
-                    className={`fixed inset-y-0 right-0 z-50 w-80 bg-white dark:bg-gray-800 shadow-2xl transform transition-transform duration-300 ease-in-out lg:hidden ${isMobileFiltersOpen ? 'translate-x-0' : 'translate-x-full'
-                        }`}
-                >
-                    {/* Header */}
-                    <div className="flex items-center justify-between p-4 border-b dark:border-gray-700 bg-gradient-to-r from-primary to-secondary">
-                        <h2 className="text-lg font-semibold text-white flex items-center gap-2">
-                            <FiFilter className="w-5 h-5" />
-                            Filters
-                        </h2>
-                        <button
-                            onClick={() => setIsMobileFiltersOpen(false)}
-                            className="text-white hover:bg-white/20 p-2 rounded-lg transition"
-                            aria-label="Close filters"
-                        >
-                            <FiX className="w-6 h-6" />
-                        </button>
-                    </div>
-
-                    {/* Scrollable content */}
-                    <div className="overflow-y-auto h-[calc(100vh-64px)] p-4">
-                        <FilterSidebar isMobile />
-                    </div>
-                </div>
-
-                {/* Backdrop */}
+                {/* Mobile Filter Panel */}
                 {isMobileFiltersOpen && (
-                    <div
-                        className="fixed inset-0 bg-black/50 z-40 lg:hidden transition-opacity duration-300"
-                        onClick={() => setIsMobileFiltersOpen(false)}
-                    />
+                    <>
+                        <div
+                            className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+                            onClick={() => setIsMobileFiltersOpen(false)}
+                        />
+                        <div className="fixed inset-y-0 right-0 z-50 w-full max-w-sm bg-white dark:bg-gray-800 shadow-2xl lg:hidden overflow-y-auto">
+                            {/* Header */}
+                            <div className="sticky top-0 z-10 bg-primary text-white p-4 flex items-center justify-between">
+                                <h2 className="text-lg font-semibold flex items-center gap-2">
+                                    <FiFilter className="w-5 h-5" />
+                                    Filters
+                                </h2>
+                                <button
+                                    onClick={() => setIsMobileFiltersOpen(false)}
+                                    className="p-2 hover:bg-white/20 rounded-lg transition"
+                                >
+                                    <FiX className="w-6 h-6" />
+                                </button>
+                            </div>
+
+                            {/* Content */}
+                            <div className="p-4">
+                                <FilterSidebar isMobile />
+                            </div>
+
+                            {/* Apply Button */}
+                            <div className="sticky bottom-0 p-4 bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
+                                <button
+                                    onClick={() => setIsMobileFiltersOpen(false)}
+                                    className="w-full py-3 bg-primary text-white rounded-lg hover:bg-primary-dark transition font-medium"
+                                >
+                                    Apply Filters
+                                </button>
+                            </div>
+                        </div>
+                    </>
                 )}
             </div>
-
-            <style jsx>{`
-                .writing-mode-vertical {
-                    writing-mode: vertical-rl;
-                    text-orientation: mixed;
-                }
-            `}</style>
         </div>
     );
 }
