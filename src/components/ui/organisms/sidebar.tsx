@@ -123,7 +123,7 @@
 //   /* ---------- wrapper ---------- */
 //   const sidebarClasses =
 //     "h-full w-64 fixed top-0 left-0 z-50 flex flex-col text-gray-200 " +
-//     "bg-gradient-to-b from-gray-800 via-gray-900 to-gray-900 dark:bg-gray-800";
+//     "bg-gradient-to-b from-gray-800 via-gray-900 to-gray-900 dark:bg-secondary";
 
 //   const SidebarOverlay = () => (
 //     <motion.div

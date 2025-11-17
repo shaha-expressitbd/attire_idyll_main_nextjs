@@ -35,7 +35,7 @@ function CartItemComponent({
   onQuantityChange: (q: number) => void;
 }) {
   return (
-    <div className="flex gap-4 p-2 rounded-lg bg-white dark:bg-gray-800 shadow-sm hover:shadow-md transition-shadow">
+    <div className="flex gap-4 p-2 rounded-lg bg-white dark:bg-secondary shadow-sm hover:shadow-md transition-shadow">
       <div className="relative flex-shrink-0 h-24 w-24 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700">
         <Image
           src={item.image}
@@ -55,7 +55,7 @@ function CartItemComponent({
           <button
             onMouseDown={(e) => e.stopPropagation()}
             onClick={onRemove}
-            className="text-pink-500 hover:text-red-600 transition-colors"
+            className="text-green-500 hover:text-red-600 transition-colors"
             aria-label="Remove"
           >
             <FiTrash2 className="w-5 h-5" />
@@ -101,7 +101,7 @@ function CartItemComponent({
             >
               <BiMinus className="w-3 h-3 text-black dark:text-white" />
             </button>
-            <span className="w-8 text-center text-sm font-medium border-x bg-white dark:bg-gray-900 border-gray-300 dark:border-gray-600 focus:outline-none text-black dark:text-white ">
+            <span className="w-8 text-center text-sm font-medium border-x bg-white dark:bg-secondary border-gray-300 dark:border-gray-600 focus:outline-none text-black dark:text-white ">
               {item.quantity}
             </span>
             <button
@@ -288,10 +288,10 @@ export function CartSheet() {
         <SheetContent className="p-0">
           <div
             ref={wrapperRef}
-            className="flex flex-col h-screen w-full sm:w-[320px] md:w-[380px] lg:w-[420px] xl:w-[450px] bg-white dark:bg-gray-900 overflow-hidden"
+            className="flex flex-col h-screen w-full sm:w-[320px] md:w-[380px] lg:w-[420px] xl:w-[450px] bg-white dark:bg-secondary overflow-hidden"
 
           >
-            <div className="relative px-4 sm:px-6 py-4 sm:py-6 bg-gradient-to-r from-gray-50 to-white dark:from-gray-800 dark:to-gray-900 border-b border-gray-200/50 dark:border-gray-700/50">
+            <div className="relative px-4 sm:px-6 py-4 sm:py-6 bg-white dark:bg-secondary border-b border-gray-200/50 dark:border-gray-700/50">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <div className="p-2 rounded-xl bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20">
@@ -325,11 +325,11 @@ export function CartSheet() {
                   className="flex flex-col items-center justify-center h-full gap-6 p-6 sm:p-8"
                 >
                   <div className="relative">
-                    <div className="p-6 rounded-xl bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900">
+                    <div className="p-6 rounded-xl bg-white dark:bg-secondary">
                       <FiShoppingCart className="w-16 h-16 text-gray-400" />
                     </div>
-                    <div className="absolute -top-2 -right-2 p-2 rounded-full bg-gradient-to-br from-blue-100 to-indigo-100 dark:from-blue-900/30 dark:to-indigo-900/30">
-                      <FiHeart className="w-4 h-4 text-blue-500" />
+                    <div className="absolute -top-2 -right-2 p-2 rounded-full bg-white dark:bg-secondary">
+                      <FiHeart className="w-4 h-4 text-red-500" />
                     </div>
                   </div>
 
@@ -379,7 +379,7 @@ export function CartSheet() {
             </div>
 
 
-            <div className="border-t border-gray-200/50 dark:border-gray-700/50 bg-gradient-to-t from-white to-gray-50/50 dark:from-gray-900 dark:to-gray-800/50">
+            <div className="border-t border-gray-200/50 dark:border-gray-700/50 bg-white dark:bg-secondary">
               <SheetFooter className="p-2 sm:p-2 space-y-2">
                 <div className="flex justify-between text-lg font-semibold text-gray-600 dark:text-gray-400">
                   <span>Subtotal</span>

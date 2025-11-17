@@ -1,7 +1,8 @@
 import React from "react";
 import Link from "next/link";
 import { AiOutlineSearch } from "react-icons/ai";
-import Image from "next/image";
+import Image from "../atoms/image";
+
 
 interface SearchResultItem {
     type: "product" | "category";
@@ -11,7 +12,7 @@ interface SearchResultItem {
     image?: string;
 }
 
-const DEFAULT_IMAGE = "/assets/placeholder.webp";
+const DEFAULT_IMAGE = "/assets/falback.jpg";
 
 interface SearchDropdownProps {
     searchTerm: string;
@@ -37,7 +38,7 @@ const SearchDropdown: React.FC<SearchDropdownProps> = ({
     onKeyDown,
 }) => {
     return (
-        <div className="absolute top-12 left-0 z-50 w-[90vw] md:w-[300px] lg:w-[400px] bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg p-3">
+        <div className="absolute top-12 left-0 z-50 w-[90vw] md:w-[300px] lg:w-[400px] bg-white dark:bg-secondary border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg p-3">
             <div className="relative">
                 <AiOutlineSearch className="absolute top-1/2 left-3 -translate-y-1/2 text-gray-500 pointer-events-none" />
                 <input
@@ -46,7 +47,7 @@ const SearchDropdown: React.FC<SearchDropdownProps> = ({
                     onChange={(e) => setSearchTerm(e.target.value)}
                     onKeyDown={onKeyDown}
                     placeholder={placeholderText}
-                    className="w-full pl-10 pr-8 py-2 rounded-md bg-gray-50 dark:bg-gray-900 text-black dark:text-white border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-primary text-sm"
+                    className="w-full pl-10 pr-8 py-2 rounded-md bg-gray-50 dark:bg-secondary text-black dark:text-white border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-primary text-sm"
                     autoFocus
                 />
                 {searchTerm && (
@@ -69,7 +70,7 @@ const SearchDropdown: React.FC<SearchDropdownProps> = ({
                 </div>
             )}
             {!isFetchingForSearch && hasFetched && suggestions.length > 0 && (
-                <div className="mt-2 max-h-60 overflow-y-auto bg-white dark:bg-gray-800 rounded-md border border-gray-200 dark:border-gray-700">
+                <div className="mt-2 max-h-60 overflow-y-auto bg-white dark:bg-secondary rounded-md border border-gray-200 dark:border-gray-700">
                     <ul>
                         {suggestions.map((item) => (
                             <li key={`${item.type}-${item.id}`}>
@@ -95,7 +96,7 @@ const SearchDropdown: React.FC<SearchDropdownProps> = ({
                                     ) : (
                                         <>
                                             <svg
-                                                className="w-5 h-5 text-pink-400"
+                                                className="w-5 h-5 text-red-400"
                                                 fill="currentColor"
                                                 viewBox="0 0 20 20"
                                                 xmlns="http://www.w3.org/2000/svg"

@@ -174,7 +174,7 @@ export default function ProductDetail({ product,
         isWishlisted={isWishlisted}
         onWishlistToggle={handleWishlistToggle}
         onAddToCart={handleAddToCart}
-        buttonText={pricingData.isPreOrder ? "প্রি-অর্ডার করুন" : "ক্যাশ অন ডেলিভারিতে অর্ডার করুন"}
+        buttonText={pricingData.isPreOrder ? "PRE-ORDER NOW" : "ORDER NOW"}
         buttonTitle={pricingData.isPreOrder ? "Pre-order product" : "Add to Cart"}
       />
 

@@ -37,7 +37,7 @@ export const CalendarTrigger = React.forwardRef<HTMLDivElement, CalendarTriggerP
         ref={ref}
         onClick={onToggleCalendar}
         className={twMerge(
-          "w-full flex items-center px-3 py-2 h-10 rounded border bg-white dark:bg-gray-800 text-gray-900 dark:text-white",
+          "w-full flex items-center px-3 py-2 h-10 rounded border bg-white dark:bg-secondary text-gray-900 dark:text-white",
           "cursor-pointer select-none text-xs md:text-sm",
           "border-gray-300 dark:border-gray-600 hover:border-orange-400 dark:hover:border-orange-400 focus:outline-none",
           isCalendarOpen && "ring-2 ring-orange-300 dark:ring-primary",

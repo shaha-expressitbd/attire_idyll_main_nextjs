@@ -2,7 +2,6 @@
 
 import { useBusiness } from "@/hooks/useBusiness";
 import { formatCurrency } from "@/utils/formatCurrency";
-import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import {
@@ -21,6 +20,7 @@ import { Button } from "../atoms/button";
 import { Sheet, SheetContent, SheetFooter } from "../molecules/sheet";
 import { useCart } from "@/hooks/useCart";
 import { useWishlist } from "@/hooks/useWishlist";
+import Image from "../atoms/image";
 
 /* -------------------------------------------------------------------------- */
 /*  Types                                                                     */
@@ -71,12 +71,12 @@ function WishlistItemRow({
 
             {/* details */}
             <div className="flex-1">
-                <h3 className="font-semibold text-pink-500 dark:text-white line-clamp-2 break-all">
+                <h3 className="font-semibold text-green-500 dark:text-white line-clamp-2 break-all">
                     {item.name}
                 </h3>
                 <div>
                     {item.variantValues?.length > 0 && (
-                        <div className="mt-1 text-sm text-pink-500 dark:text-gray-400 flex flex-col gap-1">
+                        <div className="mt-1 text-sm text-green-500 dark:text-gray-400 flex flex-col gap-1">
                             {item.variantGroups?.length
                                 ? item.variantValues.map((val, idx) => {
                                     const groupName = item.variantGroups?.[idx]?.variantName || "";
@@ -117,7 +117,7 @@ function WishlistItemRow({
                     onMouseDown={stop}
                     onTouchStart={stop}
                     onClick={onRemove}
-                    className="p-2 rounded-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
+                    className="p-2 rounded-full bg-white dark:bg-secondary border border-gray-200 dark:border-gray-700 text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
                     aria-label="Remove"
                 >
                     <FiTrash2 className="w-4 h-4" />
@@ -129,7 +129,7 @@ function WishlistItemRow({
                     onMouseDown={stop}
                     onTouchStart={stop}
                     onClick={onMoveToCart}
-                    className="p-2 rounded-full bg-pink-800 text-white shadow-sm hover:shadow-md transition-all"
+                    className="p-2 rounded-full bg-green-800 text-white shadow-sm hover:shadow-md transition-all"
                     aria-label="Move to cart"
                 >
                     <FiShoppingCart className="w-4 h-4" />
@@ -217,7 +217,7 @@ export function WishlistSheet() {
 
             >
                 <div className="relative">
-                    <FiHeart className="w-5 h-5 text-primary dark:text-pink-400  " />
+                    <FiHeart className="w-5 h-5 text-primary dark:text-green-400  " />
 
                     {mounted && itemCount > 0 && (
                         <>
@@ -245,14 +245,14 @@ export function WishlistSheet() {
 
             {/* sheet */}
             <Sheet isOpen={isOpen}>
-                <SheetContent className="flex flex-col h-screen w-full sm:max-w-sm md:max-w-md lg:max-w-lg bg-white dark:bg-gray-900 overflow-hidden">
+                <SheetContent className="flex flex-col h-screen w-full sm:max-w-sm md:max-w-md lg:max-w-lg bg-white dark:bg-secondary overflow-hidden">
                     <div ref={contentRef} className="flex flex-col flex-1 min-h-0">
                         {/* header */}
-                        <div className="relative px-5 py-5 bg-gradient-to-r from-red-50 to-pink-50 dark:from-red-900/20 dark:to-pink-900/20 border-b border-gray-200/50 dark:border-gray-700/50">
+                        <div className="relative px-5 py-5 bg-gradient-to-r from-red-50 to-green-50 dark:from-red-900/20 dark:to-green-900/20 border-b border-gray-200/50 dark:border-gray-700/50">
                             <div className="flex items-center justify-between">
                                 <div className="flex items-center gap-3">
-                                    <div className="p-2 rounded-xl bg-gradient-to-br from-pink-100 to-red-100 dark:from-pink-900/30 dark:to-red-900/30">
-                                        <FiHeart className="w-5 h-5 text-primary dark:text-pink-400" />
+                                    <div className="p-2 rounded-xl bg-gradient-to-br from-green-100 to-red-100 dark:from-green-900/30 dark:to-red-900/30">
+                                        <FiHeart className="w-5 h-5 text-primary dark:text-green-400" />
                                     </div>
                                     <div>
                                         <h2 className="text-lg font-bold text-gray-900 dark:text-white">
@@ -283,8 +283,8 @@ export function WishlistSheet() {
                                     animate={{ opacity: 1, y: 0 }}
                                     className="flex flex-col items-center justify-center h-full gap-6 p-6 sm:p-8"
                                 >
-                                    <div className="p-6 rounded-3xl bg-gradient-to-br from-red-50 to-pink-50 dark:from-red-900/30 dark:to-pink-900/30">
-                                        <FiHeart className="w-16 h-16 text-pink-400" />
+                                    <div className="p-6 rounded-3xl bg-gradient-to-br from-red-50 to-green-50 dark:from-red-900/30 dark:to-green-900/30">
+                                        <FiHeart className="w-16 h-16 text-green-400" />
                                     </div>
 
                                     <div className="text-center space-y-2">
@@ -324,7 +324,7 @@ export function WishlistSheet() {
                                                 transition: { duration: 0.3 },
                                             }}
                                             transition={{ duration: 0.25 }}
-                                            className="bg-gradient-to-br from-white to-gray-50/50 dark:from-gray-800 dark:to-gray-900/40 border border-gray-200/50 dark:border-gray-700/50 rounded-2xl p-3 shadow-sm"
+                                            className="bg-white dark:bg-secondary border rounded-2xl p-3 shadow-sm"
                                         >
                                             <WishlistItemRow
                                                 item={itm}

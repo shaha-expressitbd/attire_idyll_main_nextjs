@@ -64,7 +64,7 @@ export const CalendarDropdown = forwardRef<HTMLDivElement, CalendarDropdownProps
           <div
             ref={ref}
             className={twMerge(
-              "z-[9999] bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 shadow-lg rounded-md",
+              "z-[9999] bg-white dark:bg-secondary border border-gray-300 dark:border-gray-600 shadow-lg rounded-md",
               "fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[calc(100%-32px)] max-h-[80vh] overflow-y-auto"
             )}
           >
@@ -123,7 +123,7 @@ export const CalendarDropdown = forwardRef<HTMLDivElement, CalendarDropdownProps
       <div
         ref={ref}
         className={twMerge(
-          "z-[9999] bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 shadow-lg rounded-md",
+          "z-[9999] bg-white dark:bg-secondary border border-gray-300 dark:border-gray-600 shadow-lg rounded-md",
           dualMonth ? "min-w-[580px] absolute" : "min-w-[280px] absolute"
         )}
         style={{

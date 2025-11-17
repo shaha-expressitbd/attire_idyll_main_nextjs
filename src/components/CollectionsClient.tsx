@@ -169,7 +169,7 @@ export default function CollectionsClient({
 
   // ---------- UI ----------
   return (
-    <div className="bg-[#FFEBF0] dark:bg-gray-800">
+    <div className="bg-[#FFEBF0] dark:bg-secondary">
       <Header setShowSearch={setShowSearch} />
 
       <div className="mx-auto max-w-[1800px] px-3 md:px-4 lg:px-6 py-6 md:-ml-2 ">
@@ -184,7 +184,7 @@ export default function CollectionsClient({
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                   placeholder="Search…"
-                  className="w-full h-10 pl-5 pr-12 rounded-full bg-white dark:bg-gray-600 text-black dark:text-white  border border-pink-200 focus:outline-none focus:ring-2 focus:ring-pink-400/50"
+                  className="w-full h-10 pl-5 pr-12 rounded-full bg-white dark:bg-gray-600 text-black dark:text-white  border border-green-200 focus:outline-none focus:ring-2 focus:ring-green-400/50"
                 />
 
                 <AiOutlineSearch
@@ -212,7 +212,7 @@ export default function CollectionsClient({
 
 
         {/* ===== MOBILE TOP RIBBON (instead of searchbar) ===== */}
-        <div className="md:hidden -mx-3 px-4 py-3 bg-[#fee9f0] dark:bg-gray-700">
+        <div className="md:hidden -mx-3 px-4 py-3 bg-[#fee9f0] dark:bg-secondary">
           <div className="flex items-center justify-between -mt-3">
             {/* Filters button (opens the collapsible filter section) */}
             <button
@@ -278,7 +278,7 @@ export default function CollectionsClient({
 
         {/* Collapsible mobile filters */}
         {showMobileFilters && (
-          <div className="md:hidden rounded-2xl border border-gray-200 bg-[#FFEBF0]  dark:bg-gray-700 p-4 mb-6">
+          <div className="md:hidden rounded-2xl border border-gray-200 bg-[#FFEBF0]  dark:bg-secondary p-4 mb-6">
             <h3 className="text-sm font-semibold text-gray-800 mb-3 dark:text-white">
               Filter by Sub-Category
             </h3>
@@ -297,7 +297,7 @@ export default function CollectionsClient({
                       type="checkbox"
                       checked={checked}
                       onChange={() => toggleSub(label)}
-                      className="accent-pink-600 w-4 h-4 rounded"
+                      className="accent-green-600 w-4 h-4 rounded"
                     />
                     <span className="text-gray-700 dark:text-white">{label}</span>
                   </label>
@@ -339,7 +339,7 @@ export default function CollectionsClient({
         <div className="grid grid-cols-1 md:[grid-template-columns:240px_minmax(0,1fr)] gap-x-40">
           {/* Sidebar: desktop only (unchanged) */}
           <aside className="mt-3 translate-x-32 hidden md:block">
-            <div className="rounded-sm bg-[#FFEBF0] dark:bg-gray-700 border border-gray-300 p-3 sticky top-4">
+            <div className="rounded-sm bg-[#FFEBF0] dark:bg-secondary border border-gray-300 p-3 sticky top-4">
               <h3 className="text-sm font-semibold text-gray-800  dark:text-white mb-3">
                 Filter by Sub-Category
               </h3>
@@ -358,7 +358,7 @@ export default function CollectionsClient({
                         type="checkbox"
                         checked={checked}
                         onChange={() => toggleSub(label)}
-                        className="accent-pink-600 w-4 h-4 rounded"
+                        className="accent-green-600 w-4 h-4 rounded"
                       />
                       <span className="text-gray-700 dark:text-white ">{label}</span>
                     </label>
@@ -399,7 +399,7 @@ export default function CollectionsClient({
                     setSearch("");
                     setRange([minPrice, maxPrice]);
                   }}
-                  className="mt-5 w-full h-10 rounded-lg bg-pink-600 text-white text-sm font-semibold hover:opacity-95"
+                  className="mt-5 w-full h-10 rounded-lg bg-green-600 text-white text-sm font-semibold hover:opacity-95"
                 >
                   Clear Filters
                 </button>

@@ -12,7 +12,7 @@ const PageTitle = ({ title, className, leftElement, rightElement }: PageTitlePro
   return (
     <div
       className={twMerge(
-        "w-full  flex items-center justify-between px-4 py-3 rounded bg-white dark:bg-gray-700 border border-gray-300  dark:border-gray-600",
+        "w-full  flex items-center justify-between px-4 py-3 rounded bg-white dark:bg-secondary border border-gray-300  dark:border-gray-600",
         className
       )}
     >

@@ -48,7 +48,7 @@ export function ProductLayout({
     setActiveTab,
 }: ProductLayoutProps) {
     return (
-        <div className="container max-w-7xl mx-auto md:mt-16 md:pb-0 pb-16">
+        <div className="container max-w-7xl mx-auto mt-12 md:pb-0 pb-16">
             <div className="flex flex-row">
                 <article className="relative grid grid-cols-1 lg:grid-cols-12 md:gap-10 items-start w-full">
                     <div className={`lg:col-span-7 ${allMedia.length >= 4 ? "" : "lg:sticky md:top-24 md:self-start md:h-fit"}`}>

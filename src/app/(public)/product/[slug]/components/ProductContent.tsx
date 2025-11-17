@@ -76,7 +76,7 @@ export function ProductContent({
                     onAddToCart={onAddToCart}
                     onVariantMissing={onVariantMissing}
                     onWishlistVariantMissing={onWishlistVariantMissing}
-                    buttonText={isPreOrder ? "প্রি-অর্ডার করুন" : "ক্যাশ অন ডেলিভারিতে অর্ডার করুন"}
+                    buttonText={isPreOrder ? "PRE-ORDER NOW" : "ORDER NOW"}
                     buttonTitle={isPreOrder ? "Pre-order product" : "Add to Cart"}
                 />
             </div>

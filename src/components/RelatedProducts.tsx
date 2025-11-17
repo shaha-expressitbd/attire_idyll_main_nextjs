@@ -92,7 +92,7 @@ export default function RelatedProducts({
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-10 opacity-30">
           {Array.from({ length: 4 }).map((_, idx) => (
-            <div key={idx} className="bg-gray-100 dark:bg-gray-800 rounded-lg h-64 animate-pulse" />
+            <div key={idx} className="bg-gray-100 dark:bg-secondary rounded-lg h-64 animate-pulse" />
           ))}
         </div>
       </section>

@@ -28,9 +28,8 @@ const ThemeColorPicker: React.FC = () => {
             key={themeColor.name}
             variant='ghost'
             onClick={() => changeColor(themeColor.name)}
-            className={`p-2 rounded-full bg-gray-100 dark:bg-gray-900 hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors duration-200 ${
-              color === themeColor.name ? "border-2 border-black dark:border-white" : "border border-transparent"
-            }`}
+            className={`p-2 rounded-full bg-gray-100 dark:bg-secondary hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors duration-200 ${color === themeColor.name ? "border-2 border-black dark:border-white" : "border border-transparent"
+              }`}
           >
             {themeColor.icon}
           </Button>

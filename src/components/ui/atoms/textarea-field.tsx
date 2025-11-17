@@ -61,7 +61,7 @@ export const TextareaField = ({
           className={twMerge(
             "w-full min-h-[80px] px-3 py-2 rounded border text-sm",
             "focus:outline-none focus:ring-2 focus:border-transparent",
-            "bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100",
+            "bg-white dark:bg-secondary text-gray-900 dark:text-gray-100",
             "placeholder-gray-400 dark:placeholder-gray-400",
             "disabled:bg-gray-50 dark:disabled:bg-gray-800/50 disabled:opacity-75",
             error

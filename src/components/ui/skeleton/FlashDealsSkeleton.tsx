@@ -12,13 +12,13 @@ export default function FlashDealsSkeleton() {
                             Flash Deals
                             {/* Custom Swiper Nav Buttons */}
                             <div className="flex gap-2 ml-4">
-                                <div className="p-2 rounded-full bg-secondary dark:bg-primary shadow dark:hover:bg-pink-100 hover:bg-pink-50 transition opacity-50">
+                                <div className="p-2 rounded-full bg-secondary dark:bg-primary shadow dark:hover:bg-green-100 hover:bg-green-50 transition opacity-50">
                                     <div className="w-5 h-5 bg-gray-300 rounded animate-pulse"></div>
                                 </div>
-                                <div className="p-2 rounded-full bg-secondary dark:bg-primary shadow hover:bg-pink-50 dark:hover:bg-pink-100 transition opacity-50">
+                                <div className="p-2 rounded-full bg-secondary dark:bg-primary shadow hover:bg-green-50 dark:hover:bg-green-100 transition opacity-50">
                                     <div className="w-5 h-5 bg-gray-300 rounded animate-pulse"></div>
                                 </div>
-                                <div className="px-2 py-2 text-sm bg-secondary dark:bg-primary text-gray-700 rounded shadow hover:bg-pink-50 dark:hover:bg-pink-100 transition opacity-50">
+                                <div className="px-2 py-2 text-sm bg-secondary dark:bg-primary text-gray-700 rounded shadow hover:bg-green-50 dark:hover:bg-green-100 transition opacity-50">
                                     <div className="w-16 h-4 bg-gray-300 rounded animate-pulse"></div>
                                 </div>
                             </div>
@@ -36,7 +36,7 @@ export default function FlashDealsSkeleton() {
                                             <div className="relative">
                                                 {/* Flash deal timer skeleton */}
                                                 <div className="flex absolute bottom-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/3 items-center justify-center z-10">
-                                                    <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-lg px-3 py-2 shadow-lg">
+                                                    <div className="bg-white/90 dark:bg-secondary/90 backdrop-blur-sm rounded-lg px-3 py-2 shadow-lg">
                                                         <div className="flex gap-1">
                                                             <div className="w-6 h-4 bg-gray-300 rounded animate-pulse"></div>
                                                             <div className="w-6 h-4 bg-gray-300 rounded animate-pulse"></div>

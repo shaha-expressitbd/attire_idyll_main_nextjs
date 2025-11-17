@@ -78,7 +78,7 @@ export default function CategorySection() {
                 relative w-full pt-16 pb-4 md:pb-0 md:py-6 lg:py-8 overflow-hidden transition-all duration-700
                 ${isDark
                     ? "bg-gradient-to-r from-gray-900 via-slate-900 to-gray-900"
-                    : "bg-gradient-to-r from-pink-50 via-white to-purple-50"
+                    : "bg-gradient-to-r from-green-50 via-white to-purple-50"
                 }
             `}
         >
@@ -87,7 +87,7 @@ export default function CategorySection() {
                 <div
                     className={`
                         absolute top-1/2 left-0 w-full h-32 transform -translate-y-1/2 
-                        bg-gradient-to-r from-pink-500/8 via-purple-500/8 to-pink-500/8 blur-3xl
+                        bg-gradient-to-r from-green-500/8 via-purple-500/8 to-green-500/8 blur-3xl
                     `}
                 ></div>
             </div>
@@ -141,7 +141,7 @@ export default function CategorySection() {
                                     <div
                                         className={`
                                             absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500
-                                            bg-gradient-to-br from-pink-500/30 via-purple-600/20 to-transparent rounded-full
+                                            bg-gradient-to-br from-green-500/30 via-purple-600/20 to-transparent rounded-full
                                         `}
                                     ></div>
                                 </div>
@@ -153,7 +153,7 @@ export default function CategorySection() {
                                             text-xs sm:text-sm font-semibold tracking-wide text-center leading-tight
                                             overflow-hidden text-ellipsis line-clamp-2 uppercase
                                             ${isDark
-                                                ? "text-gray-200 group-hover:text-pink-300"
+                                                ? "text-gray-200 group-hover:text-green-300"
                                                 : "text-gray-700 group-hover:text-primary"
                                             }
                                         `}
@@ -175,8 +175,8 @@ export default function CategorySection() {
                             className={`
                                 w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full transition-all duration-1000
                                 ${i === 2
-                                    ? "bg-gradient-to-r from-pink-500 to-purple-500 scale-125"
-                                    : "bg-pink-300/60 scale-100"
+                                    ? "bg-gradient-to-r from-green-500 to-purple-500 scale-125"
+                                    : "bg-green-300/60 scale-100"
                                 }
                             `}
                             style={{

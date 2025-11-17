@@ -395,7 +395,7 @@ export default function CheckoutPage() {
   const overlayActive = isOrderLoading;
 
   return (
-    <div className="min-h-screen min-w-screen bg-rose-50 dark:bg-gray-800 relative">
+    <div className="min-h-screen min-w-screen bg-green-50 dark:bg-secondary relative">
       {overlayActive && (
         <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center">
           <div className="animate-spin h-14 w-14 border-4 border-white border-t-transparent rounded-full" />
@@ -405,10 +405,10 @@ export default function CheckoutPage() {
       {/* <div className="md:mt-20">
         <PromotionBikashText />
       </div> */}
-      <div className="px-1 pb-24 md:mt-20 lg:pb-16 bg-rose-50 dark:bg-gray-800 ">
+      <div className="px-1 pb-24 md:mt-20 lg:pb-16 bg-green-50 dark:bg-secondary ">
         <div className=" grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-6 ">
           <section className="lg:col-span-6 space-y-4 flex flex-col order-1 lg:order-2">
-            <div className="rounded-xl overflow-hidden shadow-sm border bg-white dark:bg-gray-900 border-rose-100 dark:border-gray-800 flex-1">
+            <div className="rounded-xl overflow-hidden shadow-sm border bg-white dark:bg-secondary border-green-100 dark:border-gray-800 flex-1">
               <div className="p-1 lg:p-5">
                 <DeliveryInfoForm
                   formData={formData}
@@ -428,7 +428,7 @@ export default function CheckoutPage() {
             </div>
           </section>
           <section className="lg:col-span-6 flex flex-col order-2">
-            <div className="rounded-xl overflow-hidden shadow-sm border border-rose-100 dark:border-gray-700 bg-white dark:bg-gray-900 flex-1">
+            <div className="rounded-xl overflow-hidden shadow-sm border border-green-100 dark:border-gray-700 bg-white dark:bg-secondary flex-1">
               <div className="bg-primary px-4 py-3">
                 <h2 className="text-[15px] font-semibold text-white">Shopping Items</h2>
               </div>
@@ -454,7 +454,7 @@ export default function CheckoutPage() {
       </div>
 
       <form onSubmit={handleSubmit}>
-        <div className="fixed bottom-0 left-0 right-0 lg:hidden bg-white dark:bg-gray-900 shadow-2xl border-t px-4 py-4 z-[60]">
+        <div className="fixed bottom-0 left-0 right-0 lg:hidden bg-white dark:bg-secondary shadow-2xl border-t px-4 py-4 z-[60]">
           <div className="pb-3">
             <h2 className="text-lg font-semibold text-black dark:text-white">Cart Total</h2>
             <div className="w-full">

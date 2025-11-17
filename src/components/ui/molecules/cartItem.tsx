@@ -65,7 +65,7 @@ export function CartItem({
       </div>
 
       {!item.isPreOrder && (
-        <div className="absolute -top-1 -right-1 bg-gradient-to-r from-pink-500 to-rose-500 text-white text-[9px] xs:text-[10px] sm:text-xs px-1 xs:px-1.5 sm:px-2 py-0.5 xs:py-1 rounded-full shadow-md transform rotate-12 group-hover:rotate-0 transition-transform duration-300">
+        <div className="absolute -top-1 -right-1 bg-gradient-to-r from-green-500 to-green-500 text-white text-[9px] xs:text-[10px] sm:text-xs px-1 xs:px-1.5 sm:px-2 py-0.5 xs:py-1 rounded-full shadow-md transform rotate-12 group-hover:rotate-0 transition-transform duration-300">
           ৳{unitPrice}
         </div>
       )}
@@ -105,7 +105,7 @@ export function CartItem({
   const ProductInfo = ({ layout, totalClasses = "" }: { layout: string; totalClasses?: string }) => (
     <div className="flex-1 min-w-0 space-y-1">
       <h3
-        className={`font-bold text-gray-800 dark:text-white leading-tight group-hover:text-primary dark:group-hover:text-pink-400 transition-colors duration-300 ${layout === 'mobile' ? 'text-sm ' : layout === 'tablet' ? 'text-base sm:text-lg' : 'text-lg xl:text-xl 2xl:text-2xl'} truncate pr-2`}
+        className={`font-bold text-gray-800 dark:text-white leading-tight group-hover:text-primary dark:group-hover:text-green-400 transition-colors duration-300 ${layout === 'mobile' ? 'text-sm ' : layout === 'tablet' ? 'text-base sm:text-lg' : 'text-lg xl:text-xl 2xl:text-2xl'} truncate pr-2`}
         title={item?.name}
       >
         {truncateName(item?.name)}
@@ -115,7 +115,7 @@ export function CartItem({
       <VariantInfo layout={layout} />
 
       {layout === 'desktop' && (
-        <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-pink-500 group-hover:w-full transition-all duration-500"></div>
+        <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-green-500 group-hover:w-full transition-all duration-500"></div>
       )}
 
       <div className={`${layout === 'mobile' ? 'flex flex-col gap-1 mt-1' : layout === 'tablet' ? 'flex flex-wrap items-center gap-2 xs:gap-4 mt-2' : 'flex flex-col lg:flex-row lg:items-center gap-1 xs:gap-2 lg:gap-4 xl:gap-6 2xl:gap-8 mt-2'}`}>
@@ -123,7 +123,7 @@ export function CartItem({
           <div className="flex items-center gap-1 xs:gap-2">
             {item.isDiscountActive && item.sellingPrice && item.sellingPrice > unitPrice ? (
               <div className="flex items-center gap-2">
-                <span className={`font-semibold text-primary dark:text-pink-400 ${layout === 'mobile' ? 'text-sm' : layout === 'tablet' ? 'text-sm xs:text-base' : 'text-base lg:text-lg xl:text-xl'}`}>
+                <span className={`font-semibold text-primary dark:text-green-400 ${layout === 'mobile' ? 'text-sm' : layout === 'tablet' ? 'text-sm xs:text-base' : 'text-base lg:text-lg xl:text-xl'}`}>
                   {formatCurrency(unitPrice, currency)}
                 </span>
                 <span className={`line-through text-gray-500 dark:text-gray-400 ${layout === 'mobile' ? 'text-sm' : 'text-sm'}`}>
@@ -131,7 +131,7 @@ export function CartItem({
                 </span>
               </div>
             ) : (
-              <span className={`font-semibold text-primary dark:text-pink-400 ${layout === 'mobile' ? 'text-sm' : layout === 'tablet' ? 'text-sm xs:text-base' : 'text-base lg:text-lg xl:text-xl'}`}>
+              <span className={`font-semibold text-primary dark:text-green-400 ${layout === 'mobile' ? 'text-sm' : layout === 'tablet' ? 'text-sm xs:text-base' : 'text-base lg:text-lg xl:text-xl'}`}>
                 {formatCurrency(unitPrice, currency)}
               </span>
             )}
@@ -140,7 +140,7 @@ export function CartItem({
 
         {layout === 'desktop' && (
           <div className="hidden lg:flex items-center">
-            <div className="w-5 h-5 xs:w-6 xs:h-6 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center">
+            <div className="w-5 h-5 xs:w-6 xs:h-6 bg-gray-100 dark:bg-secondary rounded-full flex items-center justify-center">
               <span className="text-gray-500 text-xs xs:text-sm">×</span>
             </div>
           </div>
@@ -148,8 +148,8 @@ export function CartItem({
 
         {/* <div className="flex items-center gap-1 xs:gap-2">
           <span className={`text-gray-500 dark:text-gray-400 ${layout === 'mobile' ? 'text-xs' : 'text-sm'}`}>Total:</span>
-          <div className={`bg-gradient-to-r from-primary/10 to-pink-500/10 dark:from-pink-400/10 dark:to-pink-500/10 px-2 xs:px-3 py-0.5 xs:py-1 rounded-full border border-primary/20 dark:border-pink-400/20 ${totalClasses}`}>
-            <span className={`font-bold text-primary dark:text-pink-400 ${layout === 'mobile' ? 'text-sm xs:text-base' : layout === 'tablet' ? 'text-sm xs:text-lg' : 'text-lg xl:text-xl 2xl:text-2xl'}`}>
+          <div className={`bg-gradient-to-r from-primary/10 to-green-500/10 dark:from-green-400/10 dark:to-green-500/10 px-2 xs:px-3 py-0.5 xs:py-1 rounded-full border border-primary/20 dark:border-green-400/20 ${totalClasses}`}>
+            <span className={`font-bold text-primary dark:text-green-400 ${layout === 'mobile' ? 'text-sm xs:text-base' : layout === 'tablet' ? 'text-sm xs:text-lg' : 'text-lg xl:text-xl 2xl:text-2xl'}`}>
               {formatCurrency(totalPrice, currency)}
             </span>
           </div>
@@ -159,16 +159,16 @@ export function CartItem({
   );
 
   const QuantityControls = ({ size }: { size: string }) => (
-    <div className={`flex items-center bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-600 group-hover:border-primary dark:group-hover:border-pink-400 transition-all duration-300 ${size === 'desktop' ? 'rounded-xl border-2' : ''}`}>
+    <div className={`flex items-center bg-gray-50 dark:bg-secondary rounded-lg border border-gray-200 dark:border-gray-600 group-hover:border-primary dark:group-hover:border-green-400 transition-all duration-300 ${size === 'desktop' ? 'rounded-xl border-2' : ''}`}>
       <button
         className={`hover:bg-gray-100 dark:hover:bg-gray-700 disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-200 group/dec ${size === 'mobile' ? 'p-2' : size === 'tablet' ? 'p-2.5' : 'p-1 rounded-l-xl'}`}
         onClick={() => onQuantityChange?.(Math.max(1, qty - 1))}
         disabled={!canDec}
       >
-        <FiMinus className={`text-gray-600 dark:text-gray-300 group-hover/dec:text-primary dark:group-hover/dec:text-pink-400 transition-all duration-200 ${size === 'mobile' ? 'w-3.5 h-3.5' : size === 'tablet' ? 'w-4 h-4' : 'w-4 h-4 group-hover/dec:scale-110'}`} />
+        <FiMinus className={`text-gray-600 dark:text-gray-300 group-hover/dec:text-primary dark:group-hover/dec:text-green-400 transition-all duration-200 ${size === 'mobile' ? 'w-3.5 h-3.5' : size === 'tablet' ? 'w-4 h-4' : 'w-4 h-4 group-hover/dec:scale-110'}`} />
       </button>
 
-      <div className={`text-center bg-white dark:bg-gray-900 border-x border-gray-200 dark:border-gray-600 min-w-[${size === 'mobile' ? '50px' : '50px'}] ${size === 'tablet' ? 'min-w-[50px]' : size === 'desktop' ? 'min-w-[60px]' : 'min-w-[50px]'} px-3 py-2 ${size === 'desktop' ? 'px-2 py-1' : ''}`}>
+      <div className={`text-center bg-white dark:bg-secondary border-x border-gray-200 dark:border-gray-600 min-w-[${size === 'mobile' ? '50px' : '50px'}] ${size === 'tablet' ? 'min-w-[50px]' : size === 'desktop' ? 'min-w-[60px]' : 'min-w-[50px]'} px-3 py-2 ${size === 'desktop' ? 'px-2 py-1' : ''}`}>
         <span className={`font-bold text-gray-800 dark:text-white ${size === 'mobile' ? 'text-sm' : size === 'tablet' ? 'text-base' : 'text-lg'}`}>
           {qty}
         </span>
@@ -179,7 +179,7 @@ export function CartItem({
         onClick={() => onQuantityChange?.(Math.max(1, qty + 1))}
         disabled={!canInc || (!ignoreStockCap && qty >= (item?.maxStock ?? 10))}
       >
-        <FiPlus className={`text-gray-600 dark:text-gray-300 group-hover/inc:text-primary dark:group-hover/inc:text-pink-400 transition-all duration-200 ${size === 'mobile' ? 'w-3.5 h-3.5' : size === 'tablet' ? 'w-4 h-4' : 'w-4 h-4 group-hover/inc:scale-110'}`} />
+        <FiPlus className={`text-gray-600 dark:text-gray-300 group-hover/inc:text-primary dark:group-hover/inc:text-green-400 transition-all duration-200 ${size === 'mobile' ? 'w-3.5 h-3.5' : size === 'tablet' ? 'w-4 h-4' : 'w-4 h-4 group-hover/inc:scale-110'}`} />
       </button>
 
       {size === 'desktop' && (
@@ -212,7 +212,7 @@ export function CartItem({
   );
 
   return (
-    <div className="group relative overflow-hidden bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm transition-shadow duration-300">
+    <div className="group relative overflow-hidden bg-white dark:bg-secondary border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm transition-shadow duration-300">
       {/* Background Gradient Animation */}
       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-indigo-50/0 to-transparent group-hover:via-indigo-50/50 dark:group-hover:via-indigo-900/20 transition-all duration-500"></div>
 
@@ -233,8 +233,8 @@ export function CartItem({
             <QuantityControls size="mobile" />
 
             {!item.isPreOrder && (
-              <div className="bg-gradient-to-r from-primary/10 to-pink-500/10 dark:from-pink-400/10 dark:to-pink-500/10 px-2.5 py-1.5 rounded-lg border border-primary/20 dark:border-pink-400/20">
-                <span className="font-bold text-primary dark:text-pink-400 text-sm xs:text-base">
+              <div className="bg-gradient-to-r from-primary/10 to-green-500/10 dark:from-green-400/10 dark:to-green-500/10 px-2.5 py-1.5 rounded-lg border border-primary/20 dark:border-green-400/20">
+                <span className="font-bold text-primary dark:text-green-400 text-sm xs:text-base">
                   {formatCurrency(totalPrice, currency)}
                 </span>
               </div>
@@ -280,7 +280,7 @@ export function CartItem({
               </div>
 
               {!item.isPreOrder && (
-                <div className="absolute -top-2 -right-2 bg-gradient-to-r from-pink-500 to-rose-500 text-white text-xs px-2 py-1 rounded-full shadow-lg transform rotate-12 group-hover:rotate-0 transition-transform duration-300 text-nowrap">
+                <div className="absolute -top-2 -right-2 bg-gradient-to-r from-green-500 to-green-500 text-white text-xs px-2 py-1 rounded-full shadow-lg transform rotate-12 group-hover:rotate-0 transition-transform duration-300 text-nowrap">
                   {formatCurrency(unitPrice, currency)}
                 </div>
               )}
@@ -290,7 +290,7 @@ export function CartItem({
           {/* Product Info Section */}
           <div className="col-span-2 space-y-3">
             <div className="relative">
-              <h3 className="font-bold text-lg xl:text-xl text-gray-800 dark:text-white leading-tight group-hover:text-primary dark:group-hover:text-pink-400 transition-colors duration-300">
+              <h3 className="font-bold text-lg xl:text-xl text-gray-800 dark:text-white leading-tight group-hover:text-primary dark:group-hover:text-green-400 transition-colors duration-300">
                 {truncateName(item?.name)}
               </h3>
 
@@ -319,7 +319,7 @@ export function CartItem({
                 </div>
               )}
 
-              <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-pink-500 group-hover:w-full transition-all duration-500"></div>
+              <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-green-500 group-hover:w-full transition-all duration-500"></div>
             </div>
 
             {!item.isPreOrder && (
@@ -327,7 +327,7 @@ export function CartItem({
                 <div className="flex items-center gap-2">
                   {item.isDiscountActive && item.sellingPrice && item.sellingPrice > unitPrice ? (
                     <div className="flex items-center gap-2">
-                      <span className="font-semibold text-primary dark:text-pink-400 text-lg text-nowrap">
+                      <span className="font-semibold text-primary dark:text-green-400 text-lg text-nowrap">
                         {formatCurrency(unitPrice, currency)}
                       </span>
                       <span className="line-through text-gray-500 dark:text-gray-400 text-sm">
@@ -335,22 +335,22 @@ export function CartItem({
                       </span>
                     </div>
                   ) : (
-                    <span className="font-semibold text-primary dark:text-pink-400 text-lg text-nowrap">
+                    <span className="font-semibold text-primary dark:text-green-400 text-lg text-nowrap">
                       {formatCurrency(unitPrice, currency)}
                     </span>
                   )}
                 </div>
 
                 <div className="hidden lg:flex items-center">
-                  <div className="w-6 h-6 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center">
+                  <div className="w-6 h-6 bg-gray-100 dark:bg-secondary rounded-full flex items-center justify-center">
                     <span className="dark:text-gray-200 text-gray-600 text-xs">×</span>
                   </div>
                 </div>
 
-                <div className="bg-gradient-to-r from-primary/10 to-pink-500/10 dark:from-pink-400/10 dark:to-pink-500/10 px-3 py-1 rounded-full border border-primary/20 dark:border-pink-400/20 text-nowrap">
+                <div className="bg-gradient-to-r from-primary/10 to-green-500/10 dark:from-green-400/10 dark:to-green-500/10 px-3 py-1 rounded-full border border-primary/20 dark:border-green-400/20 text-nowrap">
                   {item.isDiscountActive && item.sellingPrice && item.sellingPrice > unitPrice ? (
                     <div className="flex items-center gap-2">
-                      <span className="font-bold text-primary dark:text-pink-400 text-sm">
+                      <span className="font-bold text-primary dark:text-green-400 text-sm">
                         {formatCurrency(totalPrice, currency)}
                       </span>
                       <span className="line-through text-gray-500 dark:text-gray-400 text-xs">
@@ -358,7 +358,7 @@ export function CartItem({
                       </span>
                     </div>
                   ) : (
-                    <span className="font-bold text-primary dark:text-pink-400 text-sm">
+                    <span className="font-bold text-primary dark:text-green-400 text-sm">
                       {formatCurrency(totalPrice, currency)}
                     </span>
                   )}
@@ -370,16 +370,16 @@ export function CartItem({
           {/* Controls Section */}
           <div className="flex flex-col items-end justify-end gap-4">
             <div className="relative group/qty">
-              <div className="flex items-center bg-gray-50 dark:bg-gray-800 rounded-xl border-2 border-gray-200 dark:border-gray-600 group-hover/qty:border-primary dark:group-hover/qty:border-pink-400 transition-all duration-300 overflow-hidden">
+              <div className="flex items-center bg-gray-50 dark:bg-secondary rounded-xl border-2 border-gray-200 dark:border-gray-600 group-hover/qty:border-primary dark:group-hover/qty:border-green-400 transition-all duration-300 overflow-hidden">
                 <button
                   className="p-1 hover:bg-gray-100 dark:hover:bg-gray-700 disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-200 group/dec"
                   onClick={() => onQuantityChange?.(Math.max(1, qty - 1))}
                   disabled={!canDec}
                 >
-                  <FiMinus className="w-4 h-4 text-gray-600 dark:text-gray-300 group-hover/dec:text-primary dark:group-hover/dec:text-pink-400 group-hover/dec:scale-110 transition-all duration-200" />
+                  <FiMinus className="w-4 h-4 text-gray-600 dark:text-gray-300 group-hover/dec:text-primary dark:group-hover/dec:text-green-400 group-hover/dec:scale-110 transition-all duration-200" />
                 </button>
 
-                <div className="px-2 py-1 min-w-[60px] text-center bg-white dark:bg-gray-900 border-x border-gray-200 dark:border-gray-600">
+                <div className="px-2 py-1 min-w-[60px] text-center bg-white dark:bg-secondary border-x border-gray-200 dark:border-gray-600">
                   <span className="font-bold text-lg text-gray-800 dark:text-white">
                     {qty}
                   </span>
@@ -390,7 +390,7 @@ export function CartItem({
                   onClick={() => onQuantityChange?.(qty + 1)}
                   disabled={!canInc || (!ignoreStockCap && qty >= (item?.maxStock ?? 10))}
                 >
-                  <FiPlus className="w-4 h-4 text-gray-600 dark:text-gray-300 group-hover/inc:text-primary dark:group-hover/inc:text-pink-400 group-hover/inc:scale-110 transition-all duration-200" />
+                  <FiPlus className="w-4 h-4 text-gray-600 dark:text-gray-300 group-hover/inc:text-primary dark:group-hover/inc:text-green-400 group-hover/inc:scale-110 transition-all duration-200" />
                 </button>
               </div>
 
@@ -420,10 +420,10 @@ export function CartItem({
       </div>
 
       {/* Bottom Border Animation */}
-      <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-pink-500 to-purple-500 transition-all duration-700 ease-out"></div>
+      <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-green-500 to-purple-500 transition-all duration-700 ease-out"></div>
 
       {/* Side Glow Effect */}
-      <div className="absolute left-0 top-1/2 transform -translate-y-1/2 w-1 h-20 bg-gradient-to-b from-primary to-pink-500 transition-all duration-500 rounded-r-full shadow-lg shadow-primary/50"></div>
+      <div className="absolute left-0 top-1/2 transform -translate-y-1/2 w-1 h-20 bg-gradient-to-b from-primary to-green-500 transition-all duration-500 rounded-r-full shadow-lg shadow-primary/50"></div>
     </div>
   );
 }

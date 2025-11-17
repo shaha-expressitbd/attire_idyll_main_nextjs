@@ -334,12 +334,12 @@ export default function ShopAllProducts({
   }, [hasMorePages, isLoadingMore, loadMoreProducts]);
 
   return (
-    <div className="min-h-screen bg-white dark:bg-slate-900">
+    <div className="min-h-screen bg-white dark:bg-secondary">
       <div className="mx-auto max-w-[1800px] px-2 md:px-4 lg:px-6 py-2 md:py-6">
         <div className="grid grid-cols-1 md:grid-cols-[320px_1fr] gap-x-3">
           {/* Sidebar */}
           <div className="h-full md:pb-8" ref={sidebarRef}>
-            <div className="sticky top-20">
+            <div className="sticky top-20 md:block hidden">
               <Filters
                 categories={finalFilterOptions?.categories || categories}
                 selectedCats={selectedCats}

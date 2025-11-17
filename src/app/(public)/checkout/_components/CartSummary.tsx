@@ -36,7 +36,7 @@ export const CartSummary: React.FC<CartSummaryProps> = ({
     additional_discount_amount = 0,
     isPreOrder = false,
 }) => {
-    const [itemCount, setItemCount] = useState(items.length);
+    const [itemCount, setItemCount] = useState(0);
 
     useEffect(() => {
         setItemCount(items.length);
@@ -49,7 +49,7 @@ export const CartSummary: React.FC<CartSummaryProps> = ({
 
     return (
         <div className="w-full mb-20 md:mb-32 lg:mb-0">
-            <div className=" bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-2 border border-gray-100 lg:sticky lg:top-20">
+            <div className=" bg-white dark:bg-secondary rounded-2xl shadow-xl p-2 border border-gray-100 lg:sticky lg:top-20">
                 {/* Header */}
                 <div className="flex items-center justify-between mb-6">
                     <h2 className="text-xl font-bold text-gray-800 dark:text-white">
@@ -65,7 +65,7 @@ export const CartSummary: React.FC<CartSummaryProps> = ({
                     {items.map((item) => (
                         <div
                             key={`${item._id}-${item.variantId ?? "default"}`}
-                            className="bg-gray-50 dark:bg-gray-700 p-1 rounded-xl border border-gray-100 hover:shadow-md transition-shadow"
+                            className="bg-gray-50 dark:bg-secondary p-1 rounded-xl border border-gray-100 hover:shadow-md transition-shadow"
                         >
                             <CartItem
                                 item={item}

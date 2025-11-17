@@ -45,10 +45,7 @@ export default function ProductPricing({
                     <HiSparkles />
                     Premium Quality
                 </span>
-                <span className="flex items-center bg-white px-2 py-1.5 rounded-full text-primary dark:text-primary text-xs">
-                    <FiThumbsUp className="w-3 h-3 md:w-4 md:h-4 mr-1" />
-                    89% recommend
-                </span>
+
             </div>
 
             {/* Pricing Section - Hide for preorder items */}

@@ -5,7 +5,7 @@
 @tailwind utilities;
 
 #nprogress .bar {
-  background: #f50786;
+  background: #318c89;
   height: 3px;
   z-index: 9999;
   position: fixed;
@@ -52,7 +52,7 @@
 
   .dark {
     --color-primary: #318c89;
-    --color-secondary: #76b0ae;
+    --color-secondary: #1a2a27;
     --color-tertiary: #b8d9d5;
     --color-foreground: #f8f8f8;
     --color-base: #1a2a27;
@@ -265,11 +265,11 @@
 }
 
 .swiper-pagination-bullet-active {
-  background: rgb(239, 68, 68);
+  background: rgb(147, 248, 156);
   transform: scale(1.2);
 }
 
-/* heroSection */
+/* hegreenction */
 .mySwiper {
   width: 100% !important;
   max-width: 100% !important;
@@ -314,7 +314,7 @@
   display: none;
 }
 
-/* orderStatus,HeroSection,sheet & product-card */
+/* orderStatus,Hegreenction,sheet & product-card */
 .backdrop-blur-sm {
   backdrop-filter: blur(4px);
 }
@@ -447,7 +447,7 @@
 }
 .rc-slider-handle:hover,
 .rc-slider-handle:focus {
-  border-color: #a9256a !important;
+  border-color: #318c89 !important;
   box-shadow: 0 0 0 4px rgba(196, 56, 130, 0.2) !important;
 }
 
@@ -601,7 +601,7 @@ input[type="range"]::-moz-range-thumb {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #a9256a;
+  background: #318c89;
 }
 
 /* Dark mode global scrollbar */
@@ -612,7 +612,7 @@ input[type="range"]::-moz-range-thumb {
   background: #318c89;
 }
 .dark ::-webkit-scrollbar-thumb:hover {
-  background: #a9256a;
+  background: #318c89;
 }
 
 /* Firefox scrollbar */

@@ -13,8 +13,8 @@ const Footer = function Footer({ business }: FooterProps) {
 
   return (
     <footer className="w-full bg-white dark:bg-black font-hebrew">
-      {/* Thin pink top border */}
-      <div className="h-1 bg-rose-100"></div>
+      {/* Thin green top border */}
+
 
       <div className="px-4 sm:px-6 py-10">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
@@ -105,7 +105,7 @@ const Footer = function Footer({ business }: FooterProps) {
               <input
                 type="email"
                 placeholder="Enter your email"
-                className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-l-md focus:outline-none focus:ring-2 focus:ring-pink-500 text-gray-800 dark:text-gray-200 bg-white dark:bg-gray-900 text-sm"
+                className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-l-md focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-800 dark:text-gray-200 bg-white dark:bg-secondary text-sm"
               />
               <button
                 type="submit"

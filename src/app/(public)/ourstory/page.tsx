@@ -22,7 +22,7 @@ const OurStoryPage = () => {
         router.push("/products");
     };
     return (
-        <div className="min-h-screen bg-white dark:bg-gray-800 md:mt-0 -mt-4">
+        <div className="min-h-screen bg-white dark:bg-secondary md:mt-0 -mt-4">
             {/* Hero Section */}
             <section className="relative bg-gradient-to-r from-red-600 to-red-800 text-white md:py-16 py-8 ">
                 <div className="absolute inset-0 bg-black/10"></div>
@@ -119,7 +119,7 @@ const OurStoryPage = () => {
                                     {m.icon}
                                 </div>
                                 <div className="flex-1">
-                                    <div className="bg-white dark:bg-gray-900 p-6 rounded-xl shadow-lg border-l-4 border-red-500 dark:border-red-600 hover:shadow-xl transition-shadow duration-300">
+                                    <div className="bg-white dark:bg-secondary p-6 rounded-xl shadow-lg border-l-4 border-red-500 dark:border-red-600 hover:shadow-xl transition-shadow duration-300">
                                         <div className="flex flex-wrap items-center gap-4 mb-3">
                                             <span className="text-red-600 dark:text-red-400 font-bold text-lg sm:text-xl">
                                                 {m.year}
@@ -185,7 +185,7 @@ const OurStoryPage = () => {
                         ].map((v, i) => (
                             <div
                                 key={i}
-                                className="bg-white dark:bg-gray-900 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 border-t-4 border-red-500 dark:border-red-600"
+                                className="bg-white dark:bg-secondary p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 border-t-4 border-red-500 dark:border-red-600"
                             >
                                 <div className="text-red-600 dark:text-red-400 mb-4">
                                     {v.icon}
@@ -231,7 +231,7 @@ const OurStoryPage = () => {
                         constantly innovating, expanding our product range, and improving
                         our services to serve you better.
                     </p>
-                    <div className="bg-red-50 dark:bg-gray-900 p-8 rounded-xl border-l-4 border-red-500 dark:border-red-600">
+                    <div className="bg-red-50 dark:bg-secondary p-8 rounded-xl border-l-4 border-red-500 dark:border-red-600">
                         <p className="text-lg sm:text-xl font-semibold text-red-800 dark:text-red-400">
                             &quot;At AttireIdyll, we don&apos;t just sell products—we create
                             experiences, build relationships, and make online shopping a

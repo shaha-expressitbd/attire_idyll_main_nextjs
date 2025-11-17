@@ -30,7 +30,7 @@ const LoginPage = () => {
   };
 
   return (
-    <div className='w-full max-w-md p-6 bg-white rounded-lg shadow-md dark:bg-gray-800'>
+    <div className='w-full max-w-md p-6 bg-white rounded-lg shadow-md dark:bg-secondary'>
       <h1 className='text-2xl font-bold text-center mb-6'>Login</h1>
       {error && (
         <div className='bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4' role='alert'>

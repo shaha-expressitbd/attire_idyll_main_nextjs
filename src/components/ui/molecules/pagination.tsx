@@ -71,7 +71,7 @@ export const Pagination = ({
     <div
       className={twMerge(
         "flex flex-col md:flex-row items-center justify-between px-4 py-3",
-        "bg-white dark:bg-gray-800 rounded border border-gray-300 dark:border-gray-700",
+        "bg-white dark:bg-secondary rounded border border-gray-300 dark:border-gray-700",
         className
       )}
     >
@@ -86,7 +86,7 @@ export const Pagination = ({
             aria-label='Previous page'
             onClick={() => !isFirstPage && onPageChange(currentPage - 1)}
             disabled={isFirstPage}
-            className='px-3 py-1 text-sm font-medium text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 
+            className='px-3 py-1 text-sm font-medium text-gray-700 dark:text-gray-200 bg-white dark:bg-secondary 
                      border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700 
                      disabled:opacity-50 disabled:cursor-not-allowed'
           >
@@ -124,7 +124,7 @@ export const Pagination = ({
             aria-label='Next page'
             onClick={() => !isLastPage && onPageChange(currentPage + 1)}
             disabled={isLastPage}
-            className='px-3 py-1 text-sm font-medium text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 
+            className='px-3 py-1 text-sm font-medium text-gray-700 dark:text-gray-200 bg-white dark:bg-secondary 
                      border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700
                      disabled:opacity-50 disabled:cursor-not-allowed'
             variant='outline'

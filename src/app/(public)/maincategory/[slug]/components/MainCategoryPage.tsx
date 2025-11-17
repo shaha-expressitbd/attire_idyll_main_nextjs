@@ -331,7 +331,7 @@ export default function MainCategoryPage({
 
     if (!mainCategory) {
         return (
-            <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
+            <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-secondary">
                 <div className="text-center">
                     <FiPackage className="w-16 h-16 mx-auto text-gray-400 mb-4" />
                     <h2 className="text-xl font-semibold text-gray-700 dark:text-gray-300 mb-2">Category Not Found</h2>
@@ -347,7 +347,7 @@ export default function MainCategoryPage({
     const FilterSidebar = memo(({ isMobile = false }: { isMobile?: boolean }) => (
         <div className="space-y-4">
             {/* Sub-categories */}
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
+            <div className="bg-white dark:bg-secondary rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
                 <div className="p-4 bg-gray-50 dark:bg-gray-750 border-b border-gray-200 dark:border-gray-700">
                     <div className="flex items-center justify-between">
                         <h3 className="font-semibold text-gray-900 dark:text-white">Sub-categories</h3>
@@ -389,7 +389,7 @@ export default function MainCategoryPage({
                                         className="w-10 h-10 object-cover rounded-md"
                                     />
                                 ) : (
-                                    <div className="w-10 h-10 bg-gray-100 dark:bg-gray-700 rounded-md flex items-center justify-center">
+                                    <div className="w-10 h-10 bg-gray-100 dark:bg-secondary rounded-md flex items-center justify-center">
                                         <FiPackage className="w-5 h-5 text-gray-400" />
                                     </div>
                                 )}
@@ -403,7 +403,7 @@ export default function MainCategoryPage({
             </div>
 
             {/* Price Range */}
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
+            <div className="bg-white dark:bg-secondary rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
                 <div className="p-4 bg-gray-50 dark:bg-gray-750 border-b border-gray-200 dark:border-gray-700">
                     <div className="flex items-center justify-between">
                         <h3 className="font-semibold text-gray-900 dark:text-white">Price Range</h3>
@@ -441,7 +441,7 @@ export default function MainCategoryPage({
     FilterSidebar.displayName = 'FilterSidebar';
 
     return (
-        <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+        <div className="min-h-screen bg-gray-50 dark:bg-secondary">
             <div className="container mx-auto px-4 py-6">
                 {/* Header Section */}
                 <div className="mb-6">
@@ -457,7 +457,7 @@ export default function MainCategoryPage({
                                 placeholder="Search products..."
                                 value={searchTerm}
                                 onChange={e => handleSearch(e.target.value)}
-                                className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-gray-800 dark:text-white"
+                                className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-secondary dark:text-white"
                             />
                         </div>
 
@@ -466,7 +466,7 @@ export default function MainCategoryPage({
                             <select
                                 value={sortBy}
                                 onChange={e => handleSort(e.target.value)}
-                                className="w-full px-4 py-3 pr-10 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary appearance-none dark:bg-gray-800 dark:text-white cursor-pointer"
+                                className="w-full px-4 py-3 pr-10 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary appearance-none dark:bg-secondary dark:text-white cursor-pointer"
                             >
                                 <option value="featured">Featured</option>
                                 <option value="price-low">Price: Low to High</option>
@@ -505,8 +505,8 @@ export default function MainCategoryPage({
                     {/* Products Grid */}
                     <div className="lg:col-span-3">
                         {filteredProducts.length === 0 ? (
-                            <div className="text-center py-16 bg-white dark:bg-gray-800 rounded-lg shadow-sm">
-                                <div className="mx-auto w-24 h-24 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center mb-6">
+                            <div className="text-center py-16 bg-white dark:bg-secondary rounded-lg shadow-sm">
+                                <div className="mx-auto w-24 h-24 bg-gray-100 dark:bg-secondary rounded-full flex items-center justify-center mb-6">
                                     <FiPackage className="w-12 h-12 text-gray-400" />
                                 </div>
                                 <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
@@ -561,7 +561,7 @@ export default function MainCategoryPage({
                             className="fixed inset-0 bg-black/50 z-40 lg:hidden"
                             onClick={() => setIsMobileFiltersOpen(false)}
                         />
-                        <div className="fixed inset-y-0 right-0 z-50 w-full max-w-sm bg-white dark:bg-gray-800 shadow-2xl lg:hidden overflow-y-auto">
+                        <div className="fixed inset-y-0 right-0 z-50 w-full max-w-sm bg-white dark:bg-secondary shadow-2xl lg:hidden overflow-y-auto">
                             {/* Header */}
                             <div className="sticky top-0 z-10 bg-primary text-white p-4 flex items-center justify-between">
                                 <h2 className="text-lg font-semibold flex items-center gap-2">
@@ -582,7 +582,7 @@ export default function MainCategoryPage({
                             </div>
 
                             {/* Apply Button */}
-                            <div className="sticky bottom-0 p-4 bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
+                            <div className="sticky bottom-0 p-4 bg-white dark:bg-secondary border-t border-gray-200 dark:border-gray-700">
                                 <button
                                     onClick={() => setIsMobileFiltersOpen(false)}
                                     className="w-full py-3 bg-primary text-white rounded-lg hover:bg-primary-dark transition font-medium"

@@ -14,6 +14,7 @@ import { baseApi } from "./api/baseApi";
 import { publicApi } from "./api/publicApi";
 
 import authReducer from "./features/auth/authSlice";
+import businessReducer from "./features/business/businessSlice";
 import cartReducer from "./features/cart/cartSlice";
 import preorderCartReducer from "./features/preOrderCartSlice/preOrderCartSlice";
 import sidebarReducer from "./features/sidebar/sidebarSlice";
@@ -26,6 +27,7 @@ const combinedReducer = combineReducers({
   [baseApi.reducerPath]: baseApi.reducer,
   [publicApi.reducerPath]: publicApi.reducer,
   auth: authReducer,
+  business: businessReducer,
   cart: cartReducer,
   preorderCart: preorderCartReducer,
   sidebar: sidebarReducer,
@@ -59,6 +61,7 @@ if (isBrowser) {
     storage,
     whitelist: [
       "auth",
+      "business",
       "theme",
       "cart",
       "preorderCart",

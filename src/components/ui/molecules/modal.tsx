@@ -118,7 +118,7 @@ const Modal: React.FC<ModalProps> = ({
             aria-modal='true'
             aria-labelledby='modal-title'
             className={twMerge(
-              "relative bg-white dark:bg-gray-800 rounded-lg shadow-xl w-full max-h-[90vh] flex flex-col",
+              "relative bg-white dark:bg-secondary rounded-lg shadow-xl w-full max-h-[90vh] flex flex-col",
               sizeClasses[size],
               className
             )}
@@ -146,7 +146,7 @@ const Modal: React.FC<ModalProps> = ({
 
             {/* Footer */}
             {showFooter && (
-              <div className='flex justify-end gap-3 p-2 bg-gray-50 dark:bg-gray-700 rounded-b-lg'>
+              <div className='flex justify-end gap-3 p-2 bg-gray-50 dark:bg-secondary rounded-b-lg'>
                 <Button title='Cancel' variant='outline' size='md' onClick={onClose}>
                   Cancel
                 </Button>

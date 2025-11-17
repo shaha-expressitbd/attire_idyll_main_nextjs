@@ -1,8 +1,8 @@
 // app/page.js
 import React, { Suspense } from 'react'
 import { getProductsServer } from '@/lib/api/serverApi'
-import HeroSection from '@/components/HeroSection'
 import BrandText from '@/components/BrandText'
+import HeroSection from '@/components/HeroSection'
 
 
 export async function generateMetadata() {

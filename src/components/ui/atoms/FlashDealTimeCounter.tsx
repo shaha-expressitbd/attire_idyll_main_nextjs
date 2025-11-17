@@ -69,7 +69,7 @@ export const FlashDealTimeCounter = React.memo(({ endDate, variant = "default" }
                     {/* Animated particles background */}
                     <div className="absolute inset-0 overflow-hidden rounded-xl">
                         <div className="absolute -top-2 -left-2 w-4 h-4 bg-purple-400 rounded-full animate-bounce opacity-60"></div>
-                        <div className="absolute top-3 right-2 w-2 h-2 bg-pink-400 rounded-full animate-pulse opacity-40"></div>
+                        <div className="absolute top-3 right-2 w-2 h-2 bg-green-400 rounded-full animate-pulse opacity-40"></div>
                         <div className="absolute bottom-2 left-6 w-3 h-3 bg-blue-400 rounded-full animate-bounce opacity-50" style={{ animationDelay: '0.5s' }}></div>
                     </div>
 
@@ -124,14 +124,14 @@ export const FlashDealTimeCounter = React.memo(({ endDate, variant = "default" }
         <div className="relative group">
             {/* Floating Elements Background */}
             <div className="absolute inset-0 overflow-hidden rounded-2xl">
-                <div className="absolute -top-1 -right-1 w-6 h-6 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full opacity-30 animate-bounce"></div>
+                <div className="absolute -top-1 -right-1 w-6 h-6 bg-gradient-to-r from-green-400 to-purple-500 rounded-full opacity-30 animate-bounce"></div>
                 <div className="absolute top-1/2 -left-1 w-4 h-4 bg-gradient-to-r from-blue-400 to-cyan-500 rounded-full opacity-40 animate-pulse"></div>
             </div>
 
             {/* Main Timer Container */}
             <div className="relative backdrop-blur-md bg-white/20 dark:bg-black/20 border border-white/30 dark:border-gray-600/30 rounded-2xl md:p-3 p-1 shadow-2xl">
                 {/* Gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-pink-500/10 to-blue-500/10 rounded-2xl"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-green-500/10 to-blue-500/10 rounded-2xl"></div>
 
                 <div className="relative">
                     {/* Header */}
@@ -144,7 +144,7 @@ export const FlashDealTimeCounter = React.memo(({ endDate, variant = "default" }
                     {/* Timer Display - Always Row Layout */}
                     <div className="flex items-center justify-center space-x-1.5">
                         {[
-                            { value: timeLeft.days, label: 'D', gradient: 'from-red-400 to-pink-500 text-black dark:text-white' },
+                            { value: timeLeft.days, label: 'D', gradient: 'from-red-400 to-green-500 text-black dark:text-white' },
                             { value: timeLeft.hours, label: 'H', gradient: 'from-orange-400 to-red-500 text-black dark:text-white' },
                             { value: timeLeft.minutes, label: 'M', gradient: 'from-yellow-400 to-orange-500 text-black dark:text-white' },
                             { value: timeLeft.seconds, label: 'S', gradient: 'from-green-400 to-blue-500 text-black dark:text-white' }
@@ -156,7 +156,7 @@ export const FlashDealTimeCounter = React.memo(({ endDate, variant = "default" }
                                     <div className={`absolute -inset-0.5 bg-gradient-to-r ${item.gradient} rounded-lg opacity-20 group-hover/box:opacity-40 blur transition-all animate-pulse`}></div>
 
                                     {/* Main box */}
-                                    <div className="relative bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-lg border border-white/40 dark:border-gray-600/40 shadow-lg min-w-[28px] sm:min-w-[32px]">
+                                    <div className="relative bg-white/80 dark:bg-secondary/80 backdrop-blur-sm rounded-lg border border-white/40 dark:border-gray-600/40 shadow-lg min-w-[28px] sm:min-w-[32px]">
                                         <div className="px-1.5 py-1 text-center">
                                             {/* Number */}
                                             <div className={`text-sm sm:text-base font-bold bg-gradient-to-b ${item.gradient} text-transparent bg-clip-text`}>
@@ -182,7 +182,7 @@ export const FlashDealTimeCounter = React.memo(({ endDate, variant = "default" }
 
                     {/* Animated Border */}
                     <div className="absolute -inset-[1px] rounded-2xl opacity-50">
-                        <div className="h-full w-full bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 rounded-2xl blur-sm animate-pulse"></div>
+                        <div className="h-full w-full bg-gradient-to-r from-purple-500 via-green-500 to-blue-500 rounded-2xl blur-sm animate-pulse"></div>
                     </div>
                 </div>
             </div>

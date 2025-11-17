@@ -109,8 +109,8 @@ export default function VariantSelectModal({
         onClick={handleClose}
         aria-hidden="true"
       />
-      <div className="relative z-[100001] w-full max-w-lg mx-auto bg-white dark:bg-gray-900 rounded-2xl shadow-2xl max-h-[90vh] overflow-hidden">
-        <div className="sticky top-0 bg-white dark:bg-gray-900 rounded-t-2xl border-b border-gray-100 p-4 sm:p-6 flex items-center justify-between">
+      <div className="relative z-[100001] w-full max-w-lg mx-auto bg-white dark:bg-secondary rounded-2xl shadow-2xl max-h-[90vh] overflow-hidden">
+        <div className="sticky top-0 bg-white dark:bg-secondary rounded-t-2xl border-b border-gray-100 p-4 sm:p-6 flex items-center justify-between">
           <div>
             <h2 id="variant-modal-title" className="text-xl font-bold text-gray-900 dark:text-white">
               Select Your Preference
@@ -231,7 +231,7 @@ export default function VariantSelectModal({
                           type="number"
                           readOnly
                           value={quantity}
-                          className="w-8 text-center text-sm font-medium border-x bg-white dark:bg-gray-900 border-gray-300 dark:border-gray-600 focus:outline-none text-black dark:text-white "
+                          className="w-8 text-center text-sm font-medium border-x bg-white dark:bg-secondary border-gray-300 dark:border-gray-600 focus:outline-none text-black dark:text-white "
                         />
                         <button
                           onClick={(e) => {

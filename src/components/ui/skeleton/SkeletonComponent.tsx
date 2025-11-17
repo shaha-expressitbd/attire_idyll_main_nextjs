@@ -13,7 +13,7 @@ const SkeletonComponent: React.FC<SkeletonComponentProps> = ({
   height = 'h-64',
   className = '',
 }) => {
-  const baseClasses = 'relative overflow-hidden bg-pink-100 dark:bg-gray-700 rounded-lg';
+  const baseClasses = 'relative overflow-hidden bg-green-100 dark:bg-secondary rounded-lg';
 
   return (
     <div className={`${baseClasses} ${width} ${height} ${className}`}>

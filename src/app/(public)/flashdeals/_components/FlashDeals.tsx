@@ -149,7 +149,7 @@ export default function FlashDeals({ initialDeals }: FlashDealsProps) {
                     className="relative"
                 >
                     <h1 className="text-3xl md:text-6xl font-black tracking-tight relative">
-                        <span className="bg-clip-text text-transparent bg-gradient-to-r from-red-500 via-pink-500 to-red-600 animate-pulse">
+                        <span className="bg-clip-text text-transparent bg-gradient-to-r from-red-500 via-green-500 to-red-600 animate-pulse">
                             ⚡ Flash Deals
                         </span>
 
@@ -181,7 +181,7 @@ export default function FlashDeals({ initialDeals }: FlashDealsProps) {
                     <select
                         value={sortBy}
                         onChange={(e) => setSortBy(e.target.value as any)}
-                        className="md:px-3 md:py-2 px-2  text-black dark:text-white bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg text-sm focus:ring-2 focus:ring-red-500"
+                        className="md:px-3 md:py-2 px-2  text-black dark:text-white bg-white dark:bg-secondary border border-gray-200 dark:border-gray-700 rounded-lg text-sm focus:ring-2 focus:ring-red-500"
                     >
                         <option value="discount">🔥 Best Discount</option>
                         <option value="time">⏰ Ending Soon</option>
@@ -193,7 +193,7 @@ export default function FlashDeals({ initialDeals }: FlashDealsProps) {
                         <select
                             value={filterCategory}
                             onChange={(e) => setFilterCategory(e.target.value)}
-                            className="md:px-3 md:py-2 px-2  text-black dark:text-white bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg text-sm focus:ring-2 focus:ring-red-500"
+                            className="md:px-3 md:py-2 px-2  text-black dark:text-white bg-white dark:bg-secondary border border-gray-200 dark:border-gray-700 rounded-lg text-sm focus:ring-2 focus:ring-red-500"
                         >
                             <option value="all">📂 All Categories</option>
                             {categories.map((cat, i) => (

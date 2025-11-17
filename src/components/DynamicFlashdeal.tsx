@@ -128,7 +128,7 @@ function FlashDeals({ initialProducts }: FlashDealsProps) {
                   {showNav.prev && (
                     <div
                       ref={prevRef}
-                      className="p-2 rounded-full bg-secondary dark:bg-primary shadow dark:hover:bg-pink-100 hover:bg-pink-50 transition"
+                      className="p-2 rounded-full bg-secondary dark:bg-primary shadow dark:hover:bg-green-100 hover:bg-green-50 transition"
                     >
                       <HiOutlineChevronLeft className="h-5 w-5 text-gray-700" />
                     </div>
@@ -136,7 +136,7 @@ function FlashDeals({ initialProducts }: FlashDealsProps) {
                   {showNav.next && (
                     <div
                       ref={nextRef}
-                      className="p-2 rounded-full bg-secondary dark:bg-primary shadow hover:bg-pink-50 dark:hover:bg-pink-100 transition"
+                      className="p-2 rounded-full bg-secondary dark:bg-primary shadow hover:bg-green-50 dark:hover:bg-green-100 transition"
                     >
                       <HiOutlineChevronRight className="h-5 w-5 text-gray-700" />
                     </div>
@@ -144,7 +144,7 @@ function FlashDeals({ initialProducts }: FlashDealsProps) {
 
                   <button
                     onClick={() => router.push('/flashdeals')}
-                    className="px-2 py-2 text-sm bg-secondary dark:bg-primary text-gray-700 rounded shadow hover:bg-pink-50 dark:hover:bg-pink-100 transition"
+                    className="px-2 py-2 text-sm bg-secondary dark:bg-primary text-gray-700 rounded shadow hover:bg-green-50 dark:hover:bg-green-100 transition"
                   >
                     See More
                   </button>

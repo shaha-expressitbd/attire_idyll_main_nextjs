@@ -135,14 +135,14 @@ export function OrderStatus() {
                     className={`w-full md:max-w-6xl mx-auto transition-all duration-1000 ease-out transform ${isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
                         }`}
                 >
-                    <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/20 dark:border-slate-700/50 overflow-hidden mb-8">
+                    <div className="bg-white/80 dark:bg-secondary/80 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/20 dark:border-slate-700/50 overflow-hidden mb-8">
                         {/* Status Header */}
                         <div
                             className={`relative px-6 sm:px-8 lg:px-12 py-8 sm:py-12 text-center ${isSuccess
                                 ? "bg-green-50 dark:bg-emerald-900/20"
                                 : isIncomplete
                                     ? "bg-yellow-50 dark:bg-amber-900/20"
-                                    : "bg-red-50 dark:bg-rose-900/20"
+                                    : "bg-red-50 dark:bg-green-900/20"
                                 }`}
                         >
                             <div
@@ -167,7 +167,7 @@ export function OrderStatus() {
                                             {decodeURIComponent(searchParams.get("message") || "Thank you for your order!")}
                                         </p>
                                         {orderId && (
-                                            <div className="bg-white/50 dark:bg-slate-700/50 rounded-xl p-4 mt-4">
+                                            <div className="bg-white/50 dark:bg-secondary/50 rounded-xl p-4 mt-4">
                                                 <p className="text-sm text-slate-500 dark:text-slate-400">Order ID</p>
                                                 <p className="font-mono text-lg font-semibold text-black dark:text-white">{orderId}</p>
                                             </div>
@@ -200,7 +200,7 @@ export function OrderStatus() {
                             <div className="px-6 sm:px-8 lg:px-12 py-8 border-t border-slate-200 dark:border-slate-700">
                                 <h2 className="text-xl font-semibold mb-6 text-black dark:text-white text-center">Order Progress</h2>
                                 <div className="flex justify-between items-center relative">
-                                    <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-slate-200 dark:bg-slate-700 -translate-y-1/2"></div>
+                                    <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-slate-200 dark:bg-secondary -translate-y-1/2"></div>
                                     <div
                                         className="absolute top-1/2 left-0 h-0.5 bg-green-500 -translate-y-1/2 transition-all duration-1000 ease-out"
                                         style={{ width: `${(currentStep / 3) * 100}%` }}
@@ -212,7 +212,7 @@ export function OrderStatus() {
                                                 <div
                                                     className={`w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center ${step.active
                                                         ? "bg-green-500 text-white"
-                                                        : "bg-white dark:bg-slate-800 text-slate-400 border-2 border-slate-200 dark:border-slate-700"
+                                                        : "bg-white dark:bg-secondary text-slate-400 border-2 border-slate-200 dark:border-slate-700"
                                                         }`}
                                                 >
                                                     <Icon className="w-5 h-5 sm:w-6 sm:h-6" />
@@ -245,7 +245,7 @@ export function OrderStatus() {
                                 <div className="space-y-6 sm:space-y-8">
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                                         {/* Customer Info */}
-                                        <div className="bg-slate-50 dark:bg-slate-800/50 rounded-xl p-4 sm:p-6">
+                                        <div className="bg-slate-50 dark:bg-secondary/50 rounded-xl p-4 sm:p-6">
                                             <h3 className="flex items-center text-base sm:text-lg font-semibold mb-3 sm:mb-4 text-black dark:text-white">
                                                 <FiUser className="mr-2 w-5 h-5" /> Customer Information
                                             </h3>
@@ -272,7 +272,7 @@ export function OrderStatus() {
                                         </div>
 
                                         {/* Payment Info */}
-                                        <div className="bg-slate-50 dark:bg-slate-800/50 rounded-xl p-4 sm:p-6">
+                                        <div className="bg-slate-50 dark:bg-secondary/50 rounded-xl p-4 sm:p-6">
                                             <h3 className="flex items-center text-base sm:text-lg font-semibold mb-3 sm:mb-4 text-black dark:text-white">
                                                 <FiCreditCard className="mr-2 w-5 h-5" /> Payment Information
                                             </h3>
@@ -302,7 +302,7 @@ export function OrderStatus() {
                                     </div>
 
                                     {/* Order Summary */}
-                                    <div className="bg-slate-50 dark:bg-slate-800/50 rounded-xl p-4 sm:p-6 overflow-x-auto">
+                                    <div className="bg-slate-50 dark:bg-secondary/50 rounded-xl p-4 sm:p-6 overflow-x-auto">
                                         <h3 className="flex items-center text-base sm:text-lg font-semibold mb-3 sm:mb-4 text-black dark:text-white">
                                             <FiShoppingBag className="mr-2 w-5 h-5" /> Order Summary
                                         </h3>
@@ -377,7 +377,7 @@ export function OrderStatus() {
                         )}
 
                         {/* Footer Buttons */}
-                        <div className="px-6 sm:px-8 lg:px-12 py-8 bg-slate-50/50 dark:bg-slate-900/50">
+                        <div className="px-6 sm:px-8 lg:px-12 py-8 bg-slate-50/50 dark:bg-secondary/50">
                             <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
                                 <Button title="continue" variant="gradient">
                                     <Link href="/products" className="flex items-center justify-center gap-2 w-full">

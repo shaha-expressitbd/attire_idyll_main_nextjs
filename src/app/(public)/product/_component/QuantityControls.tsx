@@ -5,6 +5,8 @@ import { toast } from "sonner";
 import AddToCartBtn from "@/components/ui/molecules/addToCartBtn";
 import AddToWishlistBtn from "@/components/ui/molecules/AddToWishlistBtn";
 import type { Product, Variant } from "@/types/product";
+import { Button } from "@/components/ui/atoms/button";
+import { FaWhatsapp } from "react-icons/fa";
 
 interface QuantityControlsProps {
   quantity: number;
@@ -133,7 +135,7 @@ export default function QuantityControls({
       </div>
 
       {/* Separate Row: Add to Cart */}
-      <div className="pt-1 md:pt-0">
+      <div className="pt-1 md:pt-0 flex flex-row gap-2 items-center justify-between">
         <AddToCartBtn
           item={product as Product}
           variant={
@@ -150,7 +152,33 @@ export default function QuantityControls({
           buttonText={buttonText}
           buttonTitle={buttonTitle}
         />
+
+        <Button
+          title="WhatsApp"
+          onClick={() => {
+            const slug = product.name.trim().replace(/\s+/g, "-");
+            const productUrl = `${window.location.origin}/product/${slug}?id=${product._id}`;
+
+            // Professional & friendly English message (proven to work great in BD)
+            const message = `Hi! 👋\nI'm interested in "${product.name}"\nIs it still available? What's the best price right now?\n\n🔗 ${productUrl}`;
+
+            const waUrl = `https://wa.me/8801709503503?text=${encodeURIComponent(message)}`;
+
+            // Better mobile experience
+            if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+              window.location.href = waUrl;
+            } else {
+              window.open(waUrl, "_blank");
+            }
+          }}
+          variant="edge"
+          className="flex items-center gap-2"
+        >
+          <FaWhatsapp className="w-5 h-5" />
+          WhatsApp
+        </Button>
       </div>
+
 
       <div className="mt-5 text-gray-500 dark:text-white text-sm space-y-3">
         <div className="flex gap-2">

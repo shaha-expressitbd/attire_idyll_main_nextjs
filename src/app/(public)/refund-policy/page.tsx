@@ -19,8 +19,8 @@ export default function RefundPolicyPage() {
       id: 1,
       title: "Eligibility for Returns",
       icon: <BiCheckCircle className="w-6 h-6" />,
-      color: "from-red-500 to-pink-500",
-      bgColor: "from-red-50 to-pink-50 dark:from-red-900/20 dark:to-pink-900/20",
+      color: "from-red-500 to-green-500",
+      bgColor: "from-red-50 to-green-50 dark:from-red-900/20 dark:to-green-900/20",
       borderColor: "red-500",
       items: [
         {
@@ -41,12 +41,12 @@ export default function RefundPolicyPage() {
       id: 2,
       title: "Return Process",
       icon: <FiRotateCcw className="w-6 h-6" />,
-      color: "from-pink-500 to-red-500",
-      bgColor: "from-pink-50 to-red-50 dark:from-pink-900/20 dark:to-red-900/20",
-      borderColor: "pink-500",
+      color: "from-green-500 to-red-500",
+      bgColor: "from-green-50 to-red-50 dark:from-green-900/20 dark:to-red-900/20",
+      borderColor: "green-500",
       content: (
         <div className="space-y-4">
-          <div className="bg-gradient-to-r from-red-50 to-pink-50 dark:from-red-900/20 dark:to-pink-900/20 p-6 rounded-xl border border-red-200 dark:border-red-800">
+          <div className="bg-gradient-to-r from-red-50 to-green-50 dark:from-red-900/20 dark:to-green-900/20 p-6 rounded-xl border border-red-200 dark:border-red-800">
             <div className="flex items-center space-x-3 mb-4">
               <RiMvAiLine className="w-8 h-8 text-primary" />
               <div>
@@ -66,21 +66,21 @@ export default function RefundPolicyPage() {
             </a>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
-            <div className="text-center p-4 bg-white dark:bg-slate-800 rounded-xl shadow-md">
+            <div className="text-center p-4 bg-white dark:bg-secondary rounded-xl shadow-md">
               <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center mx-auto mb-3">
                 <BiMessageSquare className="w-6 h-6 text-white" />
               </div>
               <h5 className="font-semibold text-gray-800 dark:text-gray-200 mb-1">Step 1</h5>
               <p className="text-sm text-gray-600 dark:text-gray-400">Contact Support</p>
             </div>
-            <div className="text-center p-4 bg-white dark:bg-slate-800 rounded-xl shadow-md">
+            <div className="text-center p-4 bg-white dark:bg-secondary rounded-xl shadow-md">
               <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center mx-auto mb-3">
                 <BiPackage className="w-6 h-6 text-white" />
               </div>
               <h5 className="font-semibold text-gray-800 dark:text-gray-200 mb-1">Step 2</h5>
               <p className="text-sm text-gray-600 dark:text-gray-400">Package Item</p>
             </div>
-            <div className="text-center p-4 bg-white dark:bg-slate-800 rounded-xl shadow-md">
+            <div className="text-center p-4 bg-white dark:bg-secondary rounded-xl shadow-md">
               <div className="w-12 h-12 bg-gradient-to-r from-red-500 to-orange-500 rounded-full flex items-center justify-center mx-auto mb-3">
                 <FiRotateCcw className="w-6 h-6 text-white" />
               </div>
@@ -111,7 +111,7 @@ export default function RefundPolicyPage() {
             <p className="text-gray-700 dark:text-gray-300 mb-4">
               Once we receive and inspect your return, we will notify you of the approval or rejection of your refund. Approved refunds are credited back to your original payment method within <span className="font-bold text-red-600 dark:text-red-400">7–10 working days</span>.
             </p>
-            <div className="bg-white dark:bg-slate-800 p-4 rounded-lg">
+            <div className="bg-white dark:bg-secondary p-4 rounded-lg">
               <div className="flex items-center space-x-2 mb-2">
                 <BiCreditCard className="w-5 h-5 text-primary" />
                 <span className="font-medium text-gray-800 dark:text-gray-200">Payment Method</span>
@@ -163,11 +163,11 @@ export default function RefundPolicyPage() {
       title: "Non-Refundable Situations",
       icon: <BiXCircle className="w-6 h-6" />,
       color: "from-red-600 to-primary",
-      bgColor: "from-red-50 to-pink-50 dark:from-red-900/20 dark:to-pink-900/20",
+      bgColor: "from-red-50 to-green-50 dark:from-red-900/20 dark:to-green-900/20",
       borderColor: "red-600",
       content: (
         <div className="space-y-4">
-          <div className="bg-gradient-to-r from-red-50 to-pink-50 dark:from-red-900/20 dark:to-pink-900/20 p-6 rounded-xl border border-red-200 dark:border-red-800">
+          <div className="bg-gradient-to-r from-red-50 to-green-50 dark:from-red-900/20 dark:to-green-900/20 p-6 rounded-xl border border-red-200 dark:border-red-800">
             <div className="flex items-center space-x-3 mb-4">
               <BiXCircle className="w-8 h-8 text-primary" />
               <div>
@@ -179,17 +179,17 @@ export default function RefundPolicyPage() {
               We do not offer refunds for items that show signs of misuse, intentional damage, or are returned after the 7-day window.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-              <div className="bg-white dark:bg-slate-800 p-4 rounded-lg text-center">
+              <div className="bg-white dark:bg-secondary p-4 rounded-lg text-center">
                 <FiAlertTriangle className="w-6 h-6 text-primary mx-auto mb-2" />
                 <p className="text-sm font-medium text-gray-800 dark:text-gray-200">Misuse</p>
                 <p className="text-xs text-gray-600 dark:text-gray-400">Signs of improper use</p>
               </div>
-              <div className="bg-white dark:bg-slate-800 p-4 rounded-lg text-center">
+              <div className="bg-white dark:bg-secondary p-4 rounded-lg text-center">
                 <BiXCircle className="w-6 h-6 text-primary mx-auto mb-2" />
                 <p className="text-sm font-medium text-gray-800 dark:text-gray-200">Damage</p>
                 <p className="text-xs text-gray-600 dark:text-gray-400">Intentional damage</p>
               </div>
-              <div className="bg-white dark:bg-slate-800 p-4 rounded-lg text-center">
+              <div className="bg-white dark:bg-secondary p-4 rounded-lg text-center">
                 <CgLock className="w-6 h-6 text-primary mx-auto mb-2" />
                 <p className="text-sm font-medium text-gray-800 dark:text-gray-200">Late Return</p>
                 <p className="text-xs text-gray-600 dark:text-gray-400">After 7-day window</p>
@@ -202,10 +202,10 @@ export default function RefundPolicyPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-red-50 via-orange-50 to-pink-50 dark:from-slate-900 dark:via-red-900/20 dark:to-pink-900/20 md:mt-16 mt-0 ">
+    <div className="min-h-screen bg-gradient-to-br from-red-50 via-orange-50 to-green-50 dark:from-slate-900 dark:via-red-900/20 dark:to-green-900/20 md:mt-16 mt-0 ">
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-red-400/20 to-pink-400/20 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-red-400/20 to-green-400/20 rounded-full blur-3xl animate-pulse"></div>
         <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-br from-orange-400/20 to-red-400/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
       </div>
 
@@ -225,28 +225,28 @@ export default function RefundPolicyPage() {
 
         {/* Quick Stats */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6 md:mb-12 mb-5">
-          <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-2xl md:p-6 p-2 text-center shadow-xl border border-white/20 dark:border-slate-700/20">
+          <div className="bg-white/80 dark:bg-secondary/80 backdrop-blur-sm rounded-2xl md:p-6 p-2 text-center shadow-xl border border-white/20 dark:border-slate-700/20">
             <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center mx-auto mb-3">
               <BiCalendar className="w-6 h-6 text-white" />
             </div>
             <h3 className="text-2xl font-bold text-gray-800 dark:text-gray-200">7 Days</h3>
             <p className="text-sm text-gray-600 dark:text-gray-400">Return Window</p>
           </div>
-          <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-2xl md:p-6 p-2 text-center shadow-xl border border-white/20 dark:border-slate-700/20">
+          <div className="bg-white/80 dark:bg-secondary/80 backdrop-blur-sm rounded-2xl md:p-6 p-2 text-center shadow-xl border border-white/20 dark:border-slate-700/20">
             <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center mx-auto mb-3">
               <CgLock className="w-6 h-6 text-white" />
             </div>
             <h3 className="text-2xl font-bold text-gray-800 dark:text-gray-200">7-10 Days</h3>
             <p className="text-sm text-gray-600 dark:text-gray-400">Refund Processing</p>
           </div>
-          <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-2xl md:p-6 p-2 text-center shadow-xl border border-white/20 dark:border-slate-700/20">
+          <div className="bg-white/80 dark:bg-secondary/80 backdrop-blur-sm rounded-2xl md:p-6 p-2 text-center shadow-xl border border-white/20 dark:border-slate-700/20">
             <div className="w-12 h-12 bg-gradient-to-r from-orange-500 to-red-500 rounded-full flex items-center justify-center mx-auto mb-3">
               <BiCheckCircle className="w-6 h-6 text-white" />
             </div>
             <h3 className="text-2xl font-bold text-gray-800 dark:text-gray-200">Free</h3>
             <p className="text-sm text-gray-600 dark:text-gray-400">Cancellation</p>
           </div>
-          <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-2xl md:p-6 p-2 text-center shadow-xl border border-white/20 dark:border-slate-700/20">
+          <div className="bg-white/80 dark:bg-secondary/80 backdrop-blur-sm rounded-2xl md:p-6 p-2 text-center shadow-xl border border-white/20 dark:border-slate-700/20">
             <div className="w-12 h-12 bg-gradient-to-r from-red-500 to-orange-500 rounded-full flex items-center justify-center mx-auto mb-3">
               <BiPackage className="w-6 h-6 text-white" />
             </div>
@@ -266,9 +266,9 @@ export default function RefundPolicyPage() {
                 opacity: isVisible ? 1 : 0
               }}
             >
-              <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-2xl shadow-xl border border-white/20 dark:border-slate-700/20 overflow-hidden hover:shadow-2xl transition-all duration-300">
+              <div className="bg-white/80 dark:bg-secondary/80 backdrop-blur-sm rounded-2xl shadow-xl border border-white/20 dark:border-slate-700/20 overflow-hidden hover:shadow-2xl transition-all duration-300">
                 <div
-                  className="flex items-center justify-between p-6 cursor-pointer hover:bg-gradient-to-r hover:from-red-50 hover:to-pink-50 dark:hover:from-red-900/20 dark:hover:to-pink-900/20 transition-all duration-300"
+                  className="flex items-center justify-between p-6 cursor-pointer hover:bg-gradient-to-r hover:from-red-50 hover:to-green-50 dark:hover:from-red-900/20 dark:hover:to-green-900/20 transition-all duration-300"
                   onClick={() => setActiveSection(activeSection === section.id ? null : section.id)}
                 >
                   <div className="flex items-center space-x-2">
@@ -294,7 +294,7 @@ export default function RefundPolicyPage() {
                     {section.content || (
                       <div className="space-y-4 mb-2">
                         {section.items.map((item, itemIndex) => (
-                          <div key={itemIndex} className="flex items-start space-x-3 p-4 rounded-lg bg-gradient-to-r from-red-50 to-pink-50 dark:from-red-900/20 dark:to-pink-900/20 border border-red-200 dark:border-red-800">
+                          <div key={itemIndex} className="flex items-start space-x-3 p-4 rounded-lg bg-gradient-to-r from-red-50 to-green-50 dark:from-red-900/20 dark:to-green-900/20 border border-red-200 dark:border-red-800">
                             {item.icon}
                             <span className="text-gray-700 dark:text-gray-300">{item.text}</span>
                           </div>
@@ -311,7 +311,7 @@ export default function RefundPolicyPage() {
         {/* Support Section */}
         <div className="mt-16 text-center">
           <div className="bg-primary p-0.5 rounded-2xl">
-            <div className="bg-white dark:bg-slate-800 rounded-2xl p-8">
+            <div className="bg-white dark:bg-secondary rounded-2xl p-8">
               <h3 className="text-xl md:text-2xl font-bold text-gray-800 dark:text-gray-200 mb-4">
                 Need Help with Returns?
               </h3>
@@ -323,7 +323,7 @@ export default function RefundPolicyPage() {
                   <RiMvAiLine className="w-5 h-5 mr-2" />
                   Contact Support
                 </button>
-                <button className="inline-flex items-center text-sm md:text-xl md:px-8 px-3 py-3 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-300 transform hover:scale-105 shadow-lg">
+                <button className="inline-flex items-center text-sm md:text-xl md:px-8 px-3 py-3 bg-gray-100 dark:bg-secondary text-gray-800 dark:text-gray-200 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-300 transform hover:scale-105 shadow-lg">
                   <BiMessageSquare className="w-5 h-5 mr-2" />
                   Live Chat
                 </button>

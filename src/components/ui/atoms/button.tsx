@@ -17,13 +17,13 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     const variantStyles: Record<string, string> = {
       default: "rounded bg-primary text-white",
       flat: "rounded-none bg-primary text-text",
-      edge: "rounded-full border border-primary",
+      edge: "rounded-none border border-primary py-3 px-4",
       outline: "border border-primary rounded",
       "outline-flat": "border border-primary rounded-none",
       "outline-edge": "border border-primary rounded-full",
       ghost: "shadow-none border-none rounded-none bg-transparent",
       link: "text-primary hover:underline p-0",
-      gradient: "w-full bg-gradient-to-r from-primary to-red-800 text-white font-semibold py-3 px-4 rounded-xl hover:from-primary/90 hover:to-primary transition-all duration-300 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transform hover:scale-[1.02]",
+      gradient: "w-full bg-gradient-to-r from-primary to-green-800 text-white font-semibold py-3 px-4 rounded-xl hover:from-primary/90 hover:to-primary transition-all duration-300 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transform hover:scale-[1.02]",
       custom: "w-full bg-primary shadow-lg py-2 rounded-full font-medium text-white",
     };
 

@@ -97,17 +97,17 @@ const TabsTrigger = ({ value, children, className, isActive = false, disabled = 
       whileHover={
         !disabled
           ? {
-              scale: 1.05,
-              transition: { duration: 0.15, ease: "easeOut" },
-            }
+            scale: 1.05,
+            transition: { duration: 0.15, ease: "easeOut" },
+          }
           : {}
       }
       whileTap={
         !disabled
           ? {
-              scale: 0.98,
-              transition: { duration: 0.1, ease: "easeIn" },
-            }
+            scale: 0.98,
+            transition: { duration: 0.1, ease: "easeIn" },
+          }
           : {}
       }
     >
@@ -148,7 +148,7 @@ const TabsContent = ({ value, children, className }: TabsContentProps) => {
           id={`tab-content-${value}`}
           aria-labelledby={`tab-trigger-${value}`}
           className={twMerge(
-            "p-4 rounded bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-sm",
+            "p-4 rounded bg-white dark:bg-secondary border border-gray-200 dark:border-gray-700 shadow-sm",
             "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50",
             className
           )}

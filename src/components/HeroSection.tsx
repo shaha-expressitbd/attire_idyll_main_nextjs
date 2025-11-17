@@ -102,7 +102,7 @@ export default function HeroSection() {
                     e.preventDefault();
                     handleCategoryClick(category.name);
                   }}
-                  className="h-12 rounded-lg border border-gray-300 bg-white text-sm font-medium text-gray-700 flex items-center justify-center hover:bg-gray-100 hover:border-gray-400 transition"
+                  className="h-12 rounded-lg border border-gray-300 bg-white dark:bg-secondary dark:text-white text-sm font-medium text-gray-700 flex items-center justify-center hover:bg-gray-100 hover:border-gray-400 transition"
                 >
                   {category.name.toUpperCase()}
                 </Link>
@@ -117,7 +117,7 @@ export default function HeroSection() {
                     e.preventDefault();
                     handleCategoryClick(CATEGORIES[3].name);
                   }}
-                  className="block w-full h-16 rounded-lg border border-gray-300 bg-white text-base font-medium text-gray-700 flex items-center justify-center hover:bg-gray-100 hover:border-gray-400 transition"
+                  className=" w-full h-16 rounded-lg border border-gray-300 bg-white dark:bg-secondary dark:text-white  text-base font-medium text-gray-700 flex items-center justify-center hover:bg-gray-100 hover:border-gray-400 transition"
                 >
                   {CATEGORIES[3].name.toUpperCase()}
                 </Link>

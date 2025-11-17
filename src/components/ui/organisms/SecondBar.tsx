@@ -125,8 +125,8 @@ export default function SecondBar() {
   return (
     <div
       className={`w-full z-50 transition-all duration-300 hidden md:block ${isScrolled
-        ? "bg-white/95 dark:bg-gray-800/95 shadow-md py-1"
-        : "bg-white dark:bg-gray-700 py-1"
+        ? "bg-white/95 dark:bg-secondary/95 shadow-md py-1"
+        : "bg-white dark:bg-secondary py-1"
         }`}
     >
       <div className="container mx-auto flex items-end px-4 relative">
@@ -154,7 +154,7 @@ export default function SecondBar() {
               id="categories-dropdown"
               data-show={showCategories}
               className="absolute top-full left-0 mt-2 min-w-[260px] max-h-[75vh]
-                         overflow-y-auto bg-white dark:bg-gray-800 border
+                         overflow-y-auto bg-white dark:bg-secondary border
                          dark:border-gray-700 rounded-lg shadow-xl z-50 p-2
                          ring-1 ring-red-100 dark:ring-gray-700
                          opacity-0 -translate-y-2.5

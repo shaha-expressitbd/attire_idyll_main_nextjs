@@ -402,7 +402,7 @@ const Select: React.FC<SelectProps> = ({
           id={id}
           onClick={handleToggle}
           className={twMerge(
-            "w-full flex items-center p-2 h-10 rounded border bg-white dark:bg-gray-800 text-gray-900 dark:text-white",
+            "w-full flex items-center p-2 h-10 rounded border bg-white dark:bg-secondary text-gray-900 dark:text-white",
             "cursor-pointer select-none",
             "border-gray-300 dark:border-gray-600 hover:border-orange-400 dark:hover:border-orange-400 focus:outline-none",
             isOpen && "ring-2 ring-orange-200 dark:ring-orange-600",
@@ -486,7 +486,7 @@ const Select: React.FC<SelectProps> = ({
             <div
               ref={dropdownRef}
               className={twMerge(
-                "fixed z-[99999] bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 shadow-lg rounded overflow-auto dark:text-white",
+                "fixed z-[99999] bg-white dark:bg-secondary border border-gray-300 dark:border-gray-600 shadow-lg rounded overflow-auto dark:text-white",
                 dropdownSizeStyles[dropdownSize],
                 dropdownWidthStyles[dropdownWidth] || dropdownWidth,
                 getAnimationClasses()

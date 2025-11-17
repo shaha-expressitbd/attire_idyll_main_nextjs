@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 export default function CareersPage() {
 
     return (
-        <div className="min-h-screen bg-white dark:bg-gray-800">
+        <div className="min-h-screen bg-white dark:bg-secondary">
             {/* Hero Section */}
             <div className="relative overflow-hidden bg-gradient-to-r from-red-600 via-red-700 to-red-800 md:mt-0 -mt-4">
                 <div className="absolute inset-0 bg-black/10" />
@@ -76,7 +76,7 @@ export default function CareersPage() {
                         ].map(({ title, text, iconPath }) => (
                             <div
                                 key={title}
-                                className="bg-white dark:bg-gray-900 rounded-2xl shadow-xl border border-red-100 dark:border-red-600 p-8 hover:shadow-2xl transition-all duration-300"
+                                className="bg-white dark:bg-secondary rounded-2xl shadow-xl border border-red-100 dark:border-red-600 p-8 hover:shadow-2xl transition-all duration-300"
                             >
                                 <div className="bg-red-600 rounded-full w-16 h-16 flex items-center justify-center mb-6 mx-auto">
                                     <svg
@@ -112,7 +112,7 @@ export default function CareersPage() {
 
                     {/* Example position */}
                     <div className="space-y-6">
-                        <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-xl border border-red-100 dark:border-red-600 overflow-hidden hover:shadow-2xl transition-all duration-300">
+                        <div className="bg-white dark:bg-secondary rounded-2xl shadow-xl border border-red-100 dark:border-red-600 overflow-hidden hover:shadow-2xl transition-all duration-300">
                             <div className="p-8">
                                 <div className="flex flex-col md:flex-row md:items-center justify-between mb-4 gap-4">
                                     <div>
@@ -148,7 +148,7 @@ export default function CareersPage() {
                 </section>
 
                 {/* Application Process */}
-                <section className="bg-white dark:bg-gray-900 rounded-2xl shadow-xl border border-red-100 dark:border-red-600 overflow-hidden mb-16">
+                <section className="bg-white dark:bg-secondary rounded-2xl shadow-xl border border-red-100 dark:border-red-600 overflow-hidden mb-16">
                     <div className="bg-gradient-to-r from-red-600 to-red-700 px-8 py-6">
                         <h2 className="text-lg sm:text-2xl font-bold text-white">
                             Application Process

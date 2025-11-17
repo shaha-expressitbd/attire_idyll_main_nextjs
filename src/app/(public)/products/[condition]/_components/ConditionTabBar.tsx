@@ -85,7 +85,7 @@ const ConditionTabBar: React.FC<ConditionTabBarProps> = ({
         {/* Left Arrow */}
         <button
           onClick={() => scroll("left")}
-          className={`absolute left-0 top-1/2 -translate-y-1/2 z-30 p-2.5 bg-white dark:bg-gray-800 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-110 ${showLeftArrow
+          className={`absolute left-0 top-1/2 -translate-y-1/2 z-30 p-2.5 bg-white dark:bg-secondary rounded-full shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-110 ${showLeftArrow
             ? "opacity-100 pointer-events-auto"
             : "opacity-0 pointer-events-none"
             }`}
@@ -117,7 +117,7 @@ const ConditionTabBar: React.FC<ConditionTabBarProps> = ({
                   scroll-snap-align-center
                   ${selected === opt.value
                     ? "bg-primary text-white shadow-lg ring-2 ring-primary/30"
-                    : "bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600"
+                    : "bg-gray-200 dark:bg-secondary text-gray-700 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600"
                   }
                 `}
               >
@@ -129,7 +129,7 @@ const ConditionTabBar: React.FC<ConditionTabBarProps> = ({
         {/* Right Arrow */}
         <button
           onClick={() => scroll("right")}
-          className={`absolute right-0 top-1/2 -translate-y-1/2 z-30 p-2.5 bg-white dark:bg-gray-800 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-110 ${showRightArrow
+          className={`absolute right-0 top-1/2 -translate-y-1/2 z-30 p-2.5 bg-white dark:bg-secondary rounded-full shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-110 ${showRightArrow
             ? "opacity-100 pointer-events-auto"
             : "opacity-0 pointer-events-none"
             }`}

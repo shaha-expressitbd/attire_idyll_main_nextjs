@@ -169,7 +169,7 @@ export default function CategoryTree({
                 <input
                   ref={checkboxRef}
                   type="checkbox"
-                  className="accent-pink-600 w-3 h-3 rounded"
+                  className="accent-green-600 w-3 h-3 rounded"
                   checked={selectionState === "all"}
                   onChange={() => toggleCategoryWithChildren(cat)}
                   aria-label={`Filter by ${cat.name}`}
@@ -211,7 +211,7 @@ export default function CategoryTree({
   );
 
   return (
-    <div className="space-y-2 max-h-48 overflow-auto pr-1 no-scrollbar">
+    <div className="space-y-2 max-h-96 overflow-auto pr-1 no-scrollbar">
       {renderCategoryTree(categories)}
     </div>
   );

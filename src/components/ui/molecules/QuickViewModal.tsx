@@ -172,11 +172,11 @@ export default function QuickViewModal({
             aria-labelledby="quick-view-modal-title"
         >
             {/* Main content container */}
-            <div className="relative z-[100001] w-full max-w-6xl mx-auto bg-white dark:bg-gray-900 rounded-2xl shadow-2xl overflow-y-auto max-h-[95vh]" style={{ WebkitOverflowScrolling: 'touch' }}>
+            <div className="relative z-[100001] w-full max-w-6xl mx-auto bg-white dark:bg-secondary rounded-2xl shadow-2xl overflow-y-auto max-h-[95vh]" style={{ WebkitOverflowScrolling: 'touch' }}>
                 {/* Close button - inside modal */}
                 <button
                     onClick={onClose}
-                    className="absolute top-4 right-4 z-10 w-10 h-10 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 rounded-full flex items-center justify-center text-gray-600 dark:text-gray-300 transition-colors"
+                    className="absolute top-4 right-4 z-10 w-10 h-10 bg-gray-100 hover:bg-gray-200 dark:bg-secondary dark:hover:bg-gray-700 rounded-full flex items-center justify-center text-gray-600 dark:text-gray-300 transition-colors"
                     aria-label="Close modal"
                 >
                     <FiX className="w-6 h-6" />
@@ -204,7 +204,7 @@ export default function QuickViewModal({
                     </div>
 
                     {/* Mobile image section */}
-                    <div className="relative aspect-square bg-gray-100 dark:bg-gray-800">
+                    <div className="relative aspect-square bg-gray-100 dark:bg-secondary">
                         <div
                             ref={imageRef}
                             className="relative w-full h-full cursor-zoom-in overflow-hidden"
@@ -231,13 +231,13 @@ export default function QuickViewModal({
                             <>
                                 <button
                                     onClick={(e) => { e.stopPropagation(); prevImage(); }}
-                                    className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/90 dark:bg-gray-800/90 rounded-full flex items-center justify-center shadow-lg"
+                                    className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/90 dark:bg-secondary/90 rounded-full flex items-center justify-center shadow-lg"
                                 >
                                     <FiChevronLeft className="w-5 h-5" />
                                 </button>
                                 <button
                                     onClick={(e) => { e.stopPropagation(); nextImage(); }}
-                                    className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/90 dark:bg-gray-800/90 rounded-full flex items-center justify-center shadow-lg"
+                                    className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/90 dark:bg-secondary/90 rounded-full flex items-center justify-center shadow-lg"
                                 >
                                     <FiChevronRight className="w-5 h-5" />
                                 </button>
@@ -290,7 +290,7 @@ export default function QuickViewModal({
                 {/* Desktop layout - side by side */}
                 <div className="hidden md:flex h-full max-h-[90vh]">
                     {/* Desktop image section */}
-                    <div className="relative w-1/2 bg-gray-100 dark:bg-gray-800">
+                    <div className="relative w-1/2 bg-gray-100 dark:bg-secondary">
                         <div
                             ref={imageRef}
                             className="relative w-full h-full cursor-zoom-in overflow-hidden"
@@ -315,13 +315,13 @@ export default function QuickViewModal({
                             <>
                                 <button
                                     onClick={(e) => { e.stopPropagation(); prevImage(); }}
-                                    className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/90 hover:bg-white dark:bg-gray-800/90 dark:hover:bg-gray-800 rounded-full flex items-center justify-center shadow-lg transition-colors"
+                                    className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/90 hover:bg-white dark:bg-secondary/90 dark:hover:bg-gray-800 rounded-full flex items-center justify-center shadow-lg transition-colors"
                                 >
                                     <FiChevronLeft className="w-6 h-6 text-black dark:text-white" />
                                 </button>
                                 <button
                                     onClick={(e) => { e.stopPropagation(); nextImage(); }}
-                                    className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/90 hover:bg-white dark:bg-gray-800/90 dark:hover:bg-gray-800 rounded-full flex items-center justify-center shadow-lg transition-colors"
+                                    className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/90 hover:bg-white dark:bg-secondary/90 dark:hover:bg-gray-800 rounded-full flex items-center justify-center shadow-lg transition-colors"
                                 >
                                     <FiChevronRight className="w-6 h-6  text-black dark:text-white" />
                                 </button>
@@ -361,7 +361,7 @@ export default function QuickViewModal({
                     </div>
 
                     {/* Desktop content section */}
-                    <div className="flex-1 p-8 flex flex-col bg-white dark:bg-gray-900">
+                    <div className="flex-1 p-8 flex flex-col bg-white dark:bg-secondary">
                         {/* Product header */}
                         <div>
                             <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2 leading-tight">

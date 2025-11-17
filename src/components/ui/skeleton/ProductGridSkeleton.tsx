@@ -5,9 +5,9 @@ const ProductGridSkeleton: React.FC<{ count?: number }> = ({ count = 8 }) => {
     return (
         <div className="grid grid-cols-1 sm:grid-cols-2 max-[345px]:grid-cols-1 max-[1030px]:grid-cols-2 xl:grid-cols-4 gap-4">
             {Array.from({ length: count }).map((_, index) => (
-                <div key={index} className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
+                <div key={index} className="bg-white dark:bg-secondary rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
                     {/* Product Image Skeleton */}
-                    <div className="aspect-square bg-gray-200 dark:bg-gray-700 relative">
+                    <div className="aspect-square bg-gray-200 dark:bg-secondary relative">
                         <SkeletonComponent
                             type="image"
                             width="w-full"

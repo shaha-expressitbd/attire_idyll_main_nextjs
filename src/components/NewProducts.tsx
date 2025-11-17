@@ -106,11 +106,11 @@ export default function NewProductsSlide({
             <p className="hidden md:block text-sm text-gray-700 dark:text-gray-300 mt-2 max-w-2xl">
               Discover our latest collection of premium products
             </p>
-            <div className="mt-3 h-1 bg-gradient-to-r from-pink-500 to-transparent w-32 sm:w-48 md:w-64 lg:w-80 rounded-full" />
+            <div className="mt-3 h-1 bg-gradient-to-r from-green-500 to-transparent w-32 sm:w-48 md:w-64 lg:w-80 rounded-full" />
           </div>
           <Link
             href="/products/new"
-            className="px-4 py-2 md:px-6 md:py-3 border-2 md:mt-0 mt-6 border-pink-500 text-primary dark:text-pink-400 font-medium rounded-full hover:bg-pink-50 dark:hover:bg-pink-900/30 transition"
+            className="px-4 py-2 md:px-6 md:py-3 border-2 md:mt-0 mt-6 border-green-500 text-primary dark:text-green-400 font-medium rounded-full hover:bg-green-50 dark:hover:bg-green-900/30 transition"
           >
             See More
           </Link>
@@ -177,7 +177,7 @@ export default function NewProductsSlide({
                     <div className="h-full transition-transform duration-300 hover:-translate-y-2 hover:scale-[1.02]">
                       <div className="relative">
                         {/* Glow on hover */}
-                        <div className="absolute inset-0 bg-gradient-to-r from-pink-400/20 to-green-400/20 rounded-xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10" />
+                        <div className="absolute inset-0 bg-gradient-to-r from-green-400/20 to-green-400/20 rounded-xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10" />
                         <ProductCard product={product} isAboveFold={index < 6} />
                       </div>
                     </div>
@@ -188,7 +188,7 @@ export default function NewProductsSlide({
               {/* Custom Nav Buttons */}
               <button
                 ref={prevRef}
-                className="absolute left-0 sm:-left-2 md:-left-4 top-1/2 -translate-y-1/2 z-30 w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 rounded-full bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/50 shadow-xl flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 hover:scale-110"
+                className="absolute left-0 sm:-left-2 md:-left-4 top-1/2 -translate-y-1/2 z-30 w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 rounded-full bg-white/90 dark:bg-secondary/90 backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/50 shadow-xl flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 hover:scale-110"
                 aria-label="Previous"
               >
                 <ChevronLeft />
@@ -196,7 +196,7 @@ export default function NewProductsSlide({
 
               <button
                 ref={nextRef}
-                className="absolute right-0 sm:-right-2 md:-right-4 top-1/2 -translate-y-1/2 z-30 w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 rounded-full bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/50 shadow-xl flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 hover:scale-110"
+                className="absolute right-0 sm:-right-2 md:-right-4 top-1/2 -translate-y-1/2 z-30 w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 rounded-full bg-white/90 dark:bg-secondary/90 backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/50 shadow-xl flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 hover:scale-110"
                 aria-label="Next"
               >
                 <ChevronRight />

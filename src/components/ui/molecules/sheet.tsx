@@ -148,6 +148,7 @@ const Sheet: React.FC<SheetProps> = ({
             transition={{ duration: 0.2 }}
             className={twMerge("fixed inset-0 z-40 bg-black/50 backdrop-blur-sm", overlayClassName)}
             onClick={disableClickOutside ? undefined : onClose}
+            suppressHydrationWarning={true}
           />
 
           {/* Sheet */}
@@ -159,12 +160,13 @@ const Sheet: React.FC<SheetProps> = ({
             aria-modal='true'
             aria-labelledby={title ? "sheet-title" : undefined}
             className={twMerge(
-              "fixed z-[10000] bg-white dark:bg-gray-800 w-fit",
+              "fixed z-[10000] bg-white dark:bg-secondary w-fit",
               position === "left" || position === "right" ? "h-svh" : "w-full",
               positionClasses[position],
               className
             )}
             onClick={(e) => e.stopPropagation()}
+            suppressHydrationWarning={true}
           >
             <div className='w-full'>
               {showHeader && (
@@ -225,7 +227,7 @@ const SheetHeader = ({ children, className = "", showCloseButton = true, onClose
   return (
     <header
       className={twMerge(
-        "z-50 w-full flex items-center justify-between border-b dark:border-gray-700 bg-white dark:bg-gray-800",
+        "z-50 w-full flex items-center justify-between border-b dark:border-gray-700 bg-white dark:bg-secondary",
         className
       )}
     >
@@ -257,7 +259,7 @@ const SheetFooter = ({ children, className = "" }: SheetFooterProps) => {
   return (
     <footer
       className={twMerge(
-        "absolute bottom-0 w-full border-t p-0 dark:border-gray-700 bg-gray-50 dark:bg-gray-700/50",
+        "absolute bottom-0 w-full border-t p-0 dark:border-gray-700 bg-gray-50 dark:bg-secondary",
         className
       )}
     >

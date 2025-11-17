@@ -19,7 +19,7 @@ const CartSheet = dynamic(() => import('../organisms/cart-sheet'), {
 const WishlistSheet = dynamic(() => import('./WishlistSheet'), { ssr: false })
 const SearchDropdown = dynamic(() => import('./SearchDropdown'), { ssr: false })
 
-export default function NavbarClient ({
+export default function NavbarClient({
   businessData
 }: {
   businessData: Business
@@ -58,9 +58,8 @@ export default function NavbarClient ({
 
   return (
     <div
-      className={`flex items-center gap-4 transition-colors duration-300 ${
-        isScrolled ? 'text-gray-800' : 'text-black dark:text-white'
-      }`}
+      className={`flex items-center gap-4 transition-colors duration-300 ${isScrolled ? 'text-gray-800' : 'text-black dark:text-white'
+        }`}
     >
       <div className='flex items-center gap-2 cursor-pointer' onClick={toggle}>
         <SidebarToggler />
@@ -74,7 +73,7 @@ export default function NavbarClient ({
             if (!hasFetched) fetchProducts()
             setShowSearch(v => !v)
           }}
-          className='flex items-center gap-1 hover:text-pink-500'
+          className='flex items-center gap-1 hover:text-green-500'
         >
           <AiOutlineSearch className='text-lg' />
           <span>Search</span>
@@ -95,7 +94,7 @@ export default function NavbarClient ({
   )
 }
 
-NavbarClient.RightActions = function RightActions () {
+NavbarClient.RightActions = function RightActions() {
   const router = useRouter()
   return (
     <div className='flex items-center gap-4'>
@@ -109,7 +108,7 @@ NavbarClient.RightActions = function RightActions () {
   )
 }
 
-NavbarClient.Mobile = function Mobile ({
+NavbarClient.Mobile = function Mobile({
   businessData
 }: {
   businessData: Business

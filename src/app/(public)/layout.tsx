@@ -59,7 +59,7 @@ export default async function PublicLayout({
   const business = await getBusinessServer()
 
   return (
-    <div className='relative min-h-dvh bg-white dark:bg-gray-800 flex flex-col'>
+    <div className='relative min-h-dvh bg-white dark:bg-secondary flex flex-col'>
       {/* Header - will show on desktop (lg and up) for all pages, conditionally on mobile */}
       <ProgressBar />
       <header

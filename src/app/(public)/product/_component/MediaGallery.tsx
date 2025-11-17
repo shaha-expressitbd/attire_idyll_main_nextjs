@@ -284,13 +284,13 @@ export default function MediaGallery({
                         ))}
                     </div>
 
-                    <div className="absolute top-4 left-4 z-50">
+                    <div className="absolute top-4 left-4 z-30">
                         <span className={`inline-flex items-center px-3 py-1 text-sm font-bold rounded-full ${stock > 10 ? "bg-green-600" : stock > 0 ? "bg-amber-500" : "bg-red-600"} text-white`}>
                             {stock > 10 ? `${stock} Available` : stock > 0 ? `Only ${stock} Left!` : "Out of Stock"}
                         </span>
                     </div>
 
-                    <div className="absolute top-4 right-4 z-50 md:hidden block">
+                    <div className="absolute top-4 right-4 z-30 md:hidden block">
                         <LiveViews initialCount={10} />
                     </div>
                 </div>

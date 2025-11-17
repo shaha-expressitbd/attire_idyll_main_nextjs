@@ -225,13 +225,13 @@ export default function RecentlyViewedProducts({ currentProductId }: RecentlyVie
                 </Swiper>
 
                 {/* Custom Navigation Buttons */}
-                <button className="custom-prev absolute left-2 top-1/3 -translate-y-1/2 z-10 w-10 h-10 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 hover:bg-white dark:hover:bg-gray-700 group/btn opacity-0 group-hover:opacity-100">
+                <button className="custom-prev absolute left-2 top-1/3 -translate-y-1/2 z-10 w-10 h-10 bg-white/90 dark:bg-secondary/90 backdrop-blur-sm rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 hover:bg-white dark:hover:bg-gray-700 group/btn opacity-0 group-hover:opacity-100">
                     <svg className="w-5 h-5 text-gray-700 dark:text-gray-300 mx-auto transition-transform group-hover/btn:-translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                     </svg>
                 </button>
 
-                <button className="custom-next absolute right-2 top-1/3 -translate-y-1/2 z-10 w-10 h-10 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 hover:bg-white dark:hover:bg-gray-700 group/btn opacity-0 group-hover:opacity-100">
+                <button className="custom-next absolute right-2 top-1/3 -translate-y-1/2 z-10 w-10 h-10 bg-white/90 dark:bg-secondary/90 backdrop-blur-sm rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 hover:bg-white dark:hover:bg-gray-700 group/btn opacity-0 group-hover:opacity-100">
                     <svg className="w-5 h-5 text-gray-700 dark:text-gray-300 mx-auto transition-transform group-hover/btn:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>

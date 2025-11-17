@@ -109,20 +109,20 @@ export default function DynamicCategorySections({ initialProducts }: { initialPr
 
                             <div className="relative space-y-8 lg:container mx-auto px-1 md:px-0">
                                 <div className="relative">
-                                    <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 via-pink-500/10 to-transparent rounded-3xl blur-3xl scale-110"></div>
-                                    <div className="relative flex flex-col md:flex-row items-center justify-between gap-6 md:p-8 p-4 bg-white/60 dark:bg-gray-800/40 backdrop-blur-xl rounded-3xl border border-primary/20 shadow-xl dark:shadow-2xl transition-all duration-500 hover:shadow-2xl">
+                                    <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 via-green-500/10 to-transparent rounded-3xl blur-3xl scale-110"></div>
+                                    <div className="relative flex flex-col md:flex-row items-center justify-between gap-6 md:p-8 p-4 bg-white/60 dark:bg-secondary/40 backdrop-blur-xl rounded-3xl border border-primary/20 shadow-xl dark:shadow-2xl transition-all duration-500 hover:shadow-2xl">
                                         <div className="flex-1 space-y-3">
                                             <div className="flex items-center gap-4">
-                                                <div className="w-1.5 h-10 bg-gradient-to-t from-primary to-pink-500 rounded-full shadow-lg shadow-primary/40"></div>
+                                                <div className="w-1.5 h-10 bg-gradient-to-t from-primary to-green-500 rounded-full shadow-lg shadow-primary/40"></div>
                                                 <div>
-                                                    <h2 className="text-xl md:text-2xl lg:text-3xl font-extrabold bg-gradient-to-r from-gray-800 dark:from-white via-primary dark:via-white to-pink-500 dark:to-white bg-clip-text text-transparent capitalize leading-tight tracking-wide drop-shadow-sm">
+                                                    <h2 className="text-xl md:text-2xl lg:text-3xl font-extrabold bg-gradient-to-r from-gray-800 dark:from-white via-primary dark:via-white to-green-500 dark:to-white bg-clip-text text-transparent capitalize leading-tight tracking-wide drop-shadow-sm">
                                                         {category}
                                                     </h2>
-                                                    <div className="mt-2 h-1 w-20 bg-gradient-to-r from-primary to-pink-500 rounded-full shadow-inner"></div>
+                                                    <div className="mt-2 h-1 w-20 bg-gradient-to-r from-primary to-green-500 rounded-full shadow-inner"></div>
                                                 </div>
                                             </div>
                                             <div className="flex flex-wrap items-center gap-3 mt-4">
-                                                <div className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary/15 to-pink-500/15 rounded-full border border-primary/30 shadow-sm">
+                                                <div className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary/15 to-green-500/15 rounded-full border border-primary/30 shadow-sm">
                                                     <span className="w-2 h-2 bg-primary rounded-full animate-pulse shadow-md"></span>
                                                     <span className="text-sm font-semibold text-gray-700 dark:text-gray-200">
                                                         {totalCount} টি প্রোডাক্ট
@@ -143,9 +143,9 @@ export default function DynamicCategorySections({ initialProducts }: { initialPr
                                         <div className="hidden md:block">
                                             <Link
                                                 href={`/category/${encodeURIComponent(category)}`}
-                                                className="group relative inline-flex items-center gap-3 px-7 py-4 bg-gradient-to-r from-primary to-pink-600 text-white font-bold text-sm rounded-2xl shadow-lg hover:shadow-2xl hover:scale-105 transform transition-all duration-300 ease-out overflow-hidden"
+                                                className="group relative inline-flex items-center gap-3 px-7 py-4 bg-gradient-to-r from-primary to-green-600 text-white font-bold text-sm rounded-2xl shadow-lg hover:shadow-2xl hover:scale-105 transform transition-all duration-300 ease-out overflow-hidden"
                                             >
-                                                <div className="absolute inset-0 bg-gradient-to-r from-primary to-pink-600 scale-105 opacity-0 group-hover:opacity-100 blur-xl transition duration-300"></div>
+                                                <div className="absolute inset-0 bg-gradient-to-r from-primary to-green-600 scale-105 opacity-0 group-hover:opacity-100 blur-xl transition duration-300"></div>
                                                 <span className="relative z-10 whitespace-nowrap">সব প্রোডাক্ট দেখুন</span>
                                                 <div className="relative z-10 p-1.5 bg-white/20 rounded-full transition-transform duration-300 group-hover:translate-x-1 group-hover:scale-110">
                                                     <svg
@@ -167,7 +167,7 @@ export default function DynamicCategorySections({ initialProducts }: { initialPr
                                         <div className="md:hidden w-full">
                                             <Link
                                                 href={`/category/${encodeURIComponent(category)}`}
-                                                className="w-full text-center group inline-flex items-center justify-center gap-2 px-5 py-3 bg-gradient-to-r from-primary to-pink-600 text-white font-medium text-sm rounded-2xl shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300"
+                                                className="w-full text-center group inline-flex items-center justify-center gap-2 px-5 py-3 bg-gradient-to-r from-primary to-green-600 text-white font-medium text-sm rounded-2xl shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300"
                                             >
                                                 <span>সব দেখুন</span>
                                                 <svg

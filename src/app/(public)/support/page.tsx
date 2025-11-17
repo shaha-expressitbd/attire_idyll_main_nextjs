@@ -161,7 +161,7 @@ const SupportPage = () => {
         operational: 'text-green-600 bg-green-100 dark:text-green-400 dark:bg-green-900',
         degraded: 'text-yellow-600 bg-yellow-100 dark:text-yellow-400 dark:bg-yellow-900',
         outage: 'text-red-600 bg-red-100 dark:text-red-400 dark:bg-red-900',
-    }[status] || 'text-gray-600 bg-gray-100 dark:text-gray-400 dark:bg-gray-800');
+    }[status] || 'text-gray-600 bg-gray-100 dark:text-gray-400 dark:bg-secondary');
 
     const getStatusIcon = (status: string) =>
     ({
@@ -207,7 +207,7 @@ const SupportPage = () => {
 
 
     return (
-        <div className="min-h-screen  bg-white dark:bg-gray-800">
+        <div className="min-h-screen  bg-white dark:bg-secondary">
             {/* Hero */}
             <header className="bg-primary text-white md:mt-8 -mt-4">
                 <div className="max-w-7xl mx-auto px-2 md:px-4 py-8 md:py-16 text-center">
@@ -239,7 +239,7 @@ const SupportPage = () => {
                         <button
                             key={o.id}
                             onClick={() => setActiveTab(o.id as typeof activeTab)}
-                            className={`bg-white dark:bg-gray-900 rounded-2xl shadow-lg hover:shadow-xl transition-all p-6 text-left group ${activeTab === o.id ? 'ring-2 ring-red-500' : ''
+                            className={`bg-white dark:bg-secondary rounded-2xl shadow-lg hover:shadow-xl transition-all p-6 text-left group ${activeTab === o.id ? 'ring-2 ring-red-500' : ''
                                 }`}
                         >
                             <div
@@ -261,7 +261,7 @@ const SupportPage = () => {
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                         {/* ticket form */}
                         <section className="lg:col-span-2">
-                            <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-lg md:p-8 p-2">
+                            <div className="bg-white dark:bg-secondary rounded-2xl shadow-lg md:p-8 p-2">
                                 <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6">
                                     Submit a Support Ticket
                                 </h2>
@@ -283,7 +283,7 @@ const SupportPage = () => {
                                                     value={(formData as any)[name]}
                                                     onChange={handleInputChange}
                                                     required={required}
-                                                    className="w-full md:px-4 px-2 py-3 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                                                    className="w-full md:px-4 px-2 py-3 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-secondary text-gray-800 dark:text-gray-100 focus:ring-2 focus:ring-red-500 focus:border-transparent"
                                                 />
                                             </div>
                                         ))}
@@ -298,7 +298,7 @@ const SupportPage = () => {
                                             name="subject"
                                             value={formData.subject}
                                             onChange={handleInputChange}
-                                            className="w-full text-black dark:text-white px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                                            className="w-full text-black dark:text-white px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-secondary focus:ring-2 focus:ring-red-500 focus:border-transparent"
                                         >
                                             <option value="">Select a topic…</option>
                                             {supportTopics.map((t) => (
@@ -319,7 +319,7 @@ const SupportPage = () => {
                                                 name="priority"
                                                 value={formData.priority}
                                                 onChange={handleInputChange}
-                                                className="w-full text-black dark:text-white px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                                                className="w-full text-black dark:text-white px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-secondary focus:ring-2 focus:ring-red-500 focus:border-transparent"
                                             >
                                                 {['low', 'medium', 'high', 'urgent'].map((p) => (
                                                     <option key={p} value={p}>
@@ -338,7 +338,7 @@ const SupportPage = () => {
                                                 value={formData.orderNumber}
                                                 onChange={handleInputChange}
                                                 placeholder="EMD-123456"
-                                                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                                                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-secondary focus:ring-2 focus:ring-red-500 focus:border-transparent"
                                             />
                                         </div>
                                     </div>
@@ -355,7 +355,7 @@ const SupportPage = () => {
                                             placeholder="Please describe your issue in detail…"
                                             value={formData.message}
                                             onChange={handleInputChange}
-                                            className="w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg resize-none bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                                            className="w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg resize-none bg-white dark:bg-secondary text-gray-800 dark:text-gray-100 focus:ring-2 focus:ring-red-500 focus:border-transparent"
                                         />
                                     </div>
 
@@ -382,7 +382,7 @@ const SupportPage = () => {
 
                         {/* sidebar */}
                         <aside className="space-y-6">
-                            <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-lg p-6">
+                            <div className="bg-white dark:bg-secondary rounded-2xl shadow-lg p-6">
                                 <h3 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">
                                     Other Ways to Reach Us
                                 </h3>
@@ -407,7 +407,7 @@ const SupportPage = () => {
                                 </ul>
                             </div>
 
-                            <div className=" bg-white dark:bg-gray-900 rounded-2xl p-6">
+                            <div className=" bg-white dark:bg-secondary rounded-2xl p-6">
                                 <div className="flex items-center gap-3 mb-4">
                                     <FiZap className="w-6 h-6 text-primary" />
                                     <h3 className="text-lg font-bold text-gray-800 dark:text-gray-100">Premium Support</h3>
@@ -425,7 +425,7 @@ const SupportPage = () => {
 
                 {/*LIVE CHAT*/}
                 {activeTab === 'live-chat' && (
-                    <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-lg overflow-hidden">
+                    <div className="bg-white dark:bg-secondary rounded-2xl shadow-lg overflow-hidden">
                         {/* header */}
                         <div className="bg-primary text-white p-6 flex items-center justify-between">
                             <div>
@@ -445,7 +445,7 @@ const SupportPage = () => {
                                     <div
                                         className={`max-w-xs lg:max-w-md px-4 py-2 rounded-lg ${m.type === 'user'
                                             ? 'bg-primary text-white'
-                                            : 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-100'
+                                            : 'bg-gray-100 text-gray-800 dark:bg-secondary dark:text-gray-100'
                                             }`}
                                     >
                                         <p>{m.message}</p>
@@ -461,7 +461,7 @@ const SupportPage = () => {
 
                             {isTyping && (
                                 <div className="flex justify-start">
-                                    <div className="bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-100 px-4 py-2 rounded-lg">
+                                    <div className="bg-gray-100 dark:bg-secondary text-gray-800 dark:text-gray-100 px-4 py-2 rounded-lg">
                                         <div className="flex items-center gap-1">
                                             <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" />
                                             <div
@@ -486,7 +486,7 @@ const SupportPage = () => {
                                     onChange={(e) => setNewMessage(e.target.value)}
                                     onKeyDown={(e) => e.key === 'Enter' && sendMessage()}
                                     placeholder="Type your message…"
-                                    className="flex-1 px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                                    className="flex-1 px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-secondary text-gray-800 dark:text-gray-100 focus:ring-2 focus:ring-red-500 focus:border-transparent"
                                 />
                                 <button
                                     onClick={sendMessage}
@@ -516,7 +516,7 @@ const SupportPage = () => {
                                 <input
                                     type="text"
                                     placeholder="Search help articles…"
-                                    className="w-full pl-12 pr-4 py-3 border text-black dark:text-white border-gray-300 dark:border-gray-700 rounded-xl bg-white dark:bg-gray-800 focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                                    className="w-full pl-12 pr-4 py-3 border text-black dark:text-white border-gray-300 dark:border-gray-700 rounded-xl bg-white dark:bg-secondary focus:ring-2 focus:ring-red-500 focus:border-transparent"
                                 />
                             </div>
                         </div>
@@ -524,7 +524,7 @@ const SupportPage = () => {
                         {/* cards */}
                         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                             {helpResources.map((section) => (
-                                <article key={section.category} className="bg-white dark:bg-gray-900 rounded-2xl shadow-lg p-6">
+                                <article key={section.category} className="bg-white dark:bg-secondary rounded-2xl shadow-lg p-6">
                                     <h3 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">
                                         {section.category}
                                     </h3>
@@ -564,7 +564,7 @@ const SupportPage = () => {
                             </p>
                         </header>
 
-                        <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-lg p-8">
+                        <div className="bg-white dark:bg-secondary rounded-2xl shadow-lg p-8">
                             <div className="flex items-center justify-between mb-6">
                                 <h3 className="text-xl font-bold text-gray-800 dark:text-gray-100">Service Status</h3>
                                 <div className="flex items-center gap-2">

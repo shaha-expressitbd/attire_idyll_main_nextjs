@@ -104,7 +104,7 @@ export const Table = ({
     >
       <div className='flex flex-col gap-2'>
         {label && <TableLabel>{label}</TableLabel>}
-        <div className='relative rounded bg-white dark:bg-gray-800' style={{ height }}>
+        <div className='relative rounded bg-white dark:bg-secondary' style={{ height }}>
           <div className='relative h-full w-full overflow-auto'>
             <div className='min-w-full'>
               <table className={baseClasses} style={{ minWidth }} {...props}>
@@ -158,7 +158,7 @@ export const TableHeader = ({ className, children }: React.HTMLAttributes<HTMLTa
   return (
     <thead
       className={twMerge(
-        "sticky top-0 bg-gray-50 text-left  font-semibold text-gray-800 dark:bg-gray-700 dark:text-white",
+        "sticky top-0 bg-gray-50 text-left  font-semibold text-gray-800 dark:bg-secondary dark:text-white",
         variant === "bordered" && "border-b border-gray-200 dark:border-gray-600",
         className
       )}
@@ -307,7 +307,7 @@ export const TableFooter = ({ className, children }: React.HTMLAttributes<HTMLTa
   return (
     <tfoot
       className={twMerge(
-        "sticky bottom-0 bg-gray-50 border-t border-gray-200 dark:border-gray-600 dark:bg-gray-700",
+        "sticky bottom-0 bg-gray-50 border-t border-gray-200 dark:border-gray-600 dark:bg-secondary",
         variant === "bordered" && "border-t border-gray-200 dark:border-gray-600",
         className
       )}

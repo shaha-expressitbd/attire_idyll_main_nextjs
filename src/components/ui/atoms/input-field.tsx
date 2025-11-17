@@ -57,8 +57,8 @@ export const InputField = ({
               error
                 ? "text-red-500"
                 : typeof value === "string" && value.length
-                ? "text-green-500"
-                : "text-gray-400 dark:text-gray-500"
+                  ? "text-green-500"
+                  : "text-gray-400 dark:text-gray-500"
             )}
           >
             {React.createElement(icon, { className: "w-4 h-4" })}
@@ -71,7 +71,7 @@ export const InputField = ({
           className={twMerge(
             "w-full h-10 px-3 py-2 rounded border text-sm",
             "focus:outline-none focus:ring-2 focus:border-transparent",
-            "bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100",
+            "bg-white dark:bg-secondary text-gray-800 dark:text-gray-100",
             "placeholder-gray-400 dark:placeholder-gray-400",
             "disabled:bg-gray-50 dark:disabled:bg-gray-800/50 disabled:opacity-75 disabled:cursor-not-allowed",
 
@@ -79,8 +79,8 @@ export const InputField = ({
             error
               ? "border-red-500 focus:ring-red-200 dark:focus:ring-red-500/30"
               : warning
-              ? "border-yellow-500 focus:ring-yellow-200 dark:focus:ring-yellow-500/30"
-              : "border-gray-300 dark:border-gray-600 hover:border-orange-400 dark:hover:border-orange-400 focus:ring-orange-200 dark:focus:ring-orange-400",
+                ? "border-yellow-500 focus:ring-yellow-200 dark:focus:ring-yellow-500/30"
+                : "border-gray-300 dark:border-gray-600 hover:border-orange-400 dark:hover:border-orange-400 focus:ring-orange-200 dark:focus:ring-orange-400",
             icon ? "pl-10" : "pl-3",
             rightElement ? "pr-10" : "pr-3",
             inputClassName

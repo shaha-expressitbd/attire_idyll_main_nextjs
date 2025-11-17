@@ -15,7 +15,7 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
       default: '',
       elevated: 'shadow-md',
       outline: 'border border-gray-200 dark:border-gray-700',
-      filled: 'bg-gray-50 dark:bg-gray-800',
+      filled: 'bg-gray-50 dark:bg-secondary',
     };
 
     const sizeClasses = {

@@ -168,17 +168,17 @@ export default function ProductTabs({
 {/* Tab Content */ }
 
 
-{/* <div className="p-4 md:p-6 bg-white dark:bg-gray-900">
+{/* <div className="p-4 md:p-6 bg-white dark:bg-secondary">
           
                 {activeTab === 'Short-Description' && shortDescription && (
-                    <div className="prose prose-sm dark:prose-invert max-w-none text-gray-700 dark:text-gray-300">
+                    <div className="pgreen pgreen-sm dark:pgreen-invert max-w-none text-gray-700 dark:text-gray-300">
                         <div dangerouslySetInnerHTML={{ __html: shortDescription }} />
                     </div>
                 )}
 
                 
                 {activeTab === 'Long-Description' && longDescription && (
-                    <div className="prose prose-sm dark:prose-invert max-w-none text-gray-700 dark:text-gray-300">
+                    <div className="pgreen pgreen-sm dark:pgreen-invert max-w-none text-gray-700 dark:text-gray-300">
                         <div dangerouslySetInnerHTML={{ __html: longDescription }} />
                     </div>
                 )}

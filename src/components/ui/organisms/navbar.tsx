@@ -227,7 +227,7 @@ export const Navbar = ({ className, business }: NavbarProps) => {
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
-                  className="absolute top-full left-0 mt-1 w-screen sm:w-48 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-md shadow-lg py-1 z-50"
+                  className="absolute top-full left-0 mt-1 w-screen sm:w-48 bg-white dark:bg-secondary border border-gray-200 dark:border-gray-700 rounded-md shadow-lg py-1 z-50"
                   style={{ maxWidth: "100vw" }}
                 >
                   <nav className="max-h-60 overflow-y-auto">
@@ -239,8 +239,8 @@ export const Navbar = ({ className, business }: NavbarProps) => {
                           href={`/maincategory/${slug}`}
                           onClick={() => setIsCategoryOpen(false)}
                           className="block px-4 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-300
-                            hover:bg-pink-50 dark:hover:bg-gray-800
-                            hover:text-primary dark:hover:text-pink-400
+                            hover:bg-green-50 dark:hover:bg-gray-800
+                            hover:text-primary dark:hover:text-green-400
                             transition text-left"
                         >
                           {cat.name}

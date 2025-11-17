@@ -55,9 +55,9 @@ export const MobileCarouselView = ({
         onMouseLeave={handleMouseLeave}
     >
         {/* Progress Bar */}
-        <div className="mb-4 bg-gray-200 dark:bg-gray-700 h-1 rounded-full overflow-hidden">
+        <div className="mb-4 bg-gray-200 dark:bg-secondary h-1 rounded-full overflow-hidden">
             <motion.div
-                className="h-full bg-gradient-to-r from-red-500 to-pink-500"
+                className="h-full bg-gradient-to-r from-red-500 to-green-500"
                 initial={{ width: 0 }}
                 animate={{ width: `${((activeIndex + 1) / deals.length) * 100}%` }}
                 transition={{ duration: 0.3 }}
@@ -205,7 +205,7 @@ export const MobileCarouselView = ({
                     exit={{ opacity: 0, x: -20 }}
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
-                    className="absolute left-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm shadow-xl hover:shadow-2xl flex items-center justify-center cursor-pointer select-none border border-gray-200 dark:border-gray-700"
+                    className="absolute left-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/95 dark:bg-secondary/95 backdrop-blur-sm shadow-xl hover:shadow-2xl flex items-center justify-center cursor-pointer select-none border border-gray-200 dark:border-gray-700"
                 >
                     <svg
                         className="w-4 h-4 sm:w-5 sm:h-5 text-gray-700 dark:text-gray-300"
@@ -226,7 +226,7 @@ export const MobileCarouselView = ({
                     exit={{ opacity: 0, x: 20 }}
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm shadow-xl hover:shadow-2xl flex items-center justify-center cursor-pointer select-none border border-gray-200 dark:border-gray-700"
+                    className="absolute right-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/95 dark:bg-secondary/95 backdrop-blur-sm shadow-xl hover:shadow-2xl flex items-center justify-center cursor-pointer select-none border border-gray-200 dark:border-gray-700"
                 >
                     <svg
                         className="w-4 h-4 sm:w-5 sm:h-5 text-gray-700 dark:text-gray-300"
@@ -288,9 +288,9 @@ export const DesktopCarouselView = ({
         onMouseLeave={handleMouseLeave}
     >
         {/* Progress Bar */}
-        <div className="mb-4 bg-gray-200 dark:bg-gray-700 h-1 rounded-full overflow-hidden">
+        <div className="mb-4 bg-gray-200 dark:bg-secondary h-1 rounded-full overflow-hidden">
             <motion.div
-                className="h-full bg-gradient-to-r from-red-500 to-pink-500"
+                className="h-full bg-gradient-to-r from-red-500 to-green-500"
                 initial={{ width: 0 }}
                 animate={{ width: `${((activeIndex + 1) / deals.length) * 100}%` }}
                 transition={{ duration: 0.3 }}
@@ -441,7 +441,7 @@ export const DesktopCarouselView = ({
                     exit={{ opacity: 0, x: -20 }}
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
-                    className="absolute left-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm shadow-xl hover:shadow-2xl flex items-center justify-center cursor-pointer select-none border border-gray-200 dark:border-gray-700"
+                    className="absolute left-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/95 dark:bg-secondary/95 backdrop-blur-sm shadow-xl hover:shadow-2xl flex items-center justify-center cursor-pointer select-none border border-gray-200 dark:border-gray-700"
                 >
                     <svg
                         className="w-4 h-4 sm:w-5 sm:h-5 text-gray-700 dark:text-gray-300"
@@ -462,7 +462,7 @@ export const DesktopCarouselView = ({
                     exit={{ opacity: 0, x: 20 }}
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm shadow-xl hover:shadow-2xl flex items-center justify-center cursor-pointer select-none border border-gray-200 dark:border-gray-700"
+                    className="absolute right-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/95 dark:bg-secondary/95 backdrop-blur-sm shadow-xl hover:shadow-2xl flex items-center justify-center cursor-pointer select-none border border-gray-200 dark:border-gray-700"
                 >
                     <svg
                         className="w-4 h-4 sm:w-5 sm:h-5 text-gray-700 dark:text-gray-300"

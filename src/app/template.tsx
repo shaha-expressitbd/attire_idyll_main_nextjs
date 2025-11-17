@@ -70,7 +70,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
       </head>
       <body className={`${jura.className} w-full max-w-screen h-screen`}>
         <AppProviders>
-          <main className="bg-white dark:bg-gray-800 cursor-default">
+          <main className="bg-white dark:bg-secondary cursor-default">
             <Toaster richColors position="top-center" closeButton />
             {children}
           </main>

@@ -34,7 +34,7 @@ export default function CategoryProductsPage({ initialProducts = [], category = 
     };
 
     return (
-        <div className="min-h-screen bg-[#FFEBF0] dark:bg-gray-800 md:mt-20">
+        <div className="min-h-screen bg-[#FFEBF0] dark:bg-secondary md:mt-20">
             <div className="relative overflow-hidden bg-gradient-to-r from-primary to-secondary -top-2">
                 <div className="absolute inset-0 bg-gradient-to-r from-primary via-red-800 to-primary" />
                 <div className="absolute inset-0 pointer-events-none overflow-hidden">

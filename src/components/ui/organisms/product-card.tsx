@@ -287,9 +287,9 @@ export default function ProductCard({
           )}
 
           {/* Product Image */}
-          <div className="relative w-full aspect-[3/5] sm:aspect-[3/4] bg-pink-50 dark:bg-black overflow-hidden rounded-xl">
+          <div className="relative w-full aspect-[3/5] sm:aspect-[3/4] bg-green-50 dark:bg-black overflow-hidden rounded-xl">
             {isImageError ? (
-              <div className="absolute inset-0 flex items-center justify-center bg-gray-100 dark:bg-gray-800">
+              <div className="absolute inset-0 flex items-center justify-center bg-gray-100 dark:bg-secondary">
                 <span className="text-gray-500 dark:text-gray-400 text-sm">Image not available</span>
               </div>
             ) : (
@@ -313,7 +313,7 @@ export default function ProductCard({
               aria-label={isWishlisted ? "Remove from wishlist" : "Add to wishlist"}
               className={`absolute top-2 right-2 p-2 rounded-full border ${isWishlisted
                 ? "border-red-500 bg-red-50 dark:bg-red-900/30 text-red-500"
-                : "border-pink-200 bg-white dark:bg-gray-700 text-primary"
+                : "border-green-200 bg-white dark:bg-secondary text-primary"
                 } hover:shadow-md z-10 transition-colors ${isPreOrder ? "cursor-not-allowed opacity-50" : ""}`}
               title={isWishlisted ? "Remove from wishlist" : "Add to wishlist"}
               disabled={isPreOrder}
@@ -323,7 +323,7 @@ export default function ProductCard({
           </div>
 
           {/* Product Info - Hide prices for preorder items */}
-          {/* <div className="p-3 sm:p-4 bg-pink-50/40 dark:bg-black">
+          {/* <div className="p-3 sm:p-4 bg-green-50/40 dark:bg-black">
             <h3 className="text-[15px] font-semibold text-gray-900 dark:text-white line-clamp-1">
               {product.name}
             </h3>
@@ -340,7 +340,7 @@ export default function ProductCard({
               </div>
             )}
           </div> */}
-          <div className="p-3 sm:p-4 bg-pink-50/40 dark:bg-black">
+          <div className="p-3 sm:p-4 bg-green-50/40 dark:bg-black">
             <h3 className="text-[15px] font-semibold text-gray-900 dark:text-white line-clamp-1">
               {product.name}
             </h3>

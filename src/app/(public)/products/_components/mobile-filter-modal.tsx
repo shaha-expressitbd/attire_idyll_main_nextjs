@@ -130,7 +130,7 @@ export default function MobileFilterModal({
     return createPortal(
         <div className="fixed inset-0 z-[999] bg-black/50" onClick={() => setIsOpen(false)}>
             <div
-                className="absolute right-0 top-0 h-full w-full max-w-md bg-white dark:bg-slate-900 shadow-2xl flex flex-col"
+                className="absolute right-0 top-0 h-full w-full max-w-md bg-white dark:bg-secondary shadow-2xl flex flex-col"
                 onClick={(e) => e.stopPropagation()}
             >
                 {/* Header */}
@@ -183,7 +183,7 @@ export default function MobileFilterModal({
                     {/* Price */}
                     <section>
                         <h3 className="font-semibold mb-2">Price Range</h3>
-                        <div className="p-3 bg-gray-50 dark:bg-gray-800 rounded">
+                        <div className="p-3 bg-gray-50 dark:bg-secondary rounded">
                             <RangePriceFilter
                                 minPrice={minPrice}
                                 maxPrice={maxPrice}
@@ -271,7 +271,7 @@ export default function MobileFilterModal({
                                                         }}
                                                         className={`px-3 py-1 text-xs rounded-full transition-colors ${selectedVariants[variant.name]?.includes(value)
                                                             ? "bg-primary text-white"
-                                                            : "bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600"
+                                                            : "bg-gray-100 dark:bg-secondary hover:bg-gray-200 dark:hover:bg-gray-600"
                                                             }`}
                                                     >
                                                         {value}
@@ -298,8 +298,8 @@ export default function MobileFilterModal({
                                             toggle(selectedTags, setSelectedTags, t);
                                         }}
                                         className={`px-3 py-1 text-xs rounded-full transition-colors ${selectedTags.includes(t)
-                                            ? "bg-rose-600 text-white"
-                                            : "bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600"
+                                            ? "bg-green-600 text-white"
+                                            : "bg-gray-100 dark:bg-secondary hover:bg-gray-200 dark:hover:bg-gray-600"
                                             }`}
                                     >
                                         #{t}
@@ -317,7 +317,7 @@ export default function MobileFilterModal({
                             clearAllFilters();
                             setIsOpen(false);
                         }}
-                        className="flex-1 py-2.5 text-sm font-medium bg-gray-100 dark:bg-gray-800 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+                        className="flex-1 py-2.5 text-sm font-medium bg-gray-100 dark:bg-secondary rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
                     >
                         Clear All
                     </button>

@@ -13,7 +13,7 @@ interface Notification {
   message: string;
 }
 
-// const dotColors = ["bg-primary", "bg-green-500", "bg-purple-500", "bg-yellow-500", "bg-pink-500"];
+// const dotColors = ["bg-primary", "bg-green-500", "bg-purple-500", "bg-yellow-500", "bg-green-500"];
 
 interface NotificationsDropdownProps {
   notifications?: Notification[];
@@ -31,7 +31,7 @@ const NotificationsDropdown = ({ notifications = [] }: NotificationsDropdownProp
   return (
     <Dropdown align='right' className='relative'>
       <DropdownTrigger>
-        <div className='p-2 rounded-full bg-gray-100 dark:bg-gray-900 hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors duration-200'>
+        <div className='p-2 rounded-full bg-gray-100 dark:bg-secondary hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors duration-200'>
           <Icon icon={FaBell} size={20} />
           {notifications.length > 0 && (
             <span className='absolute -top-1 -right-1 bg-red-500  text-white text-xs rounded-full min-h-5 min-w-5 flex items-center justify-center'>
@@ -40,7 +40,7 @@ const NotificationsDropdown = ({ notifications = [] }: NotificationsDropdownProp
           )}
         </div>
       </DropdownTrigger>
-      <DropdownContent className='w-fit sm:w-72 rounded-lg shadow-lg bg-white dark:bg-gray-700 fixed sm:absolute left-2 sm:left-auto right-2 sm:right-0 mt-2'>
+      <DropdownContent className='w-fit sm:w-72 rounded-lg shadow-lg bg-white dark:bg-secondary fixed sm:absolute left-2 sm:left-auto right-2 sm:right-0 mt-2'>
         {/* <div className='flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700'>
           <h3 className='text-lg font-semibold text-gray-900 dark:text-gray-100'>
             Notifications
@@ -109,10 +109,10 @@ const NotificationsDropdown = ({ notifications = [] }: NotificationsDropdownProp
           transition={{ duration: 0.2, ease: "easeOut" }}
         >
           <div
-            className='absolute right-0 z-20 w-80 mt-2 bg-white divide-y divide-gray-100 rounded-lg shadow-sm dark:bg-gray-800 dark:divide-gray-700'
+            className='absolute right-0 z-20 w-80 mt-2 bg-white divide-y divide-gray-100 rounded-lg shadow-sm dark:bg-secondary dark:divide-gray-700'
             aria-labelledby='dropdownNotificationButton'
           >
-            <div className='block px-4 py-2 font-medium text-center text-gray-700 rounded-t-lg bg-gray-50 dark:bg-gray-800 dark:text-white'>
+            <div className='block px-4 py-2 font-medium text-center text-gray-700 rounded-t-lg bg-gray-50 dark:bg-secondary dark:text-white'>
               Notifications
             </div>
 
@@ -154,7 +154,7 @@ const NotificationsDropdown = ({ notifications = [] }: NotificationsDropdownProp
 
             <a
               href='#'
-              className='block py-2 text-sm font-medium text-center text-gray-900 rounded-b-lg bg-gray-50 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-white'
+              className='block py-2 text-sm font-medium text-center text-gray-900 rounded-b-lg bg-gray-50 hover:bg-gray-100 dark:bg-secondary dark:hover:bg-gray-700 dark:text-white'
             >
               <div className='inline-flex items-center '>
                 <svg

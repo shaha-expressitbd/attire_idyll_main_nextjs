@@ -64,7 +64,7 @@ export const BkashCashbackModal: React.FC<bkashCashbackModalProps> = ({
 
     return (
         <div className="fixed inset-0 z-[1000] flex items-center justify-center bg-black/50 backdrop-blur-sm">
-            <div className="relative bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-6 m-4 max-w-md w-full border border-gray-200 dark:border-gray-700 animate-fade-in">
+            <div className="relative bg-white dark:bg-secondary rounded-2xl shadow-2xl p-6 m-4 max-w-md w-full border border-gray-200 dark:border-gray-700 animate-fade-in">
                 <button
                     onClick={() => setIsOpen(false)}
                     className="absolute top-4 right-4 text-gray-500 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors"

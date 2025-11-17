@@ -1,7 +1,7 @@
 // components/DeliveryInfoForm.tsx
 "use client";
 import React, { useState, useEffect } from "react";
-import Image from "next/image";
+
 import { FaBackward } from "react-icons/fa";
 
 interface PaymentMethod {
@@ -65,12 +65,12 @@ const DeliveryInfoForm: React.FC<Props> = ({
     const noteVisibility = isNoteVisible || !isMobile;
 
     return (
-        <form onSubmit={handleSubmit} className="w-full bg-white dark:bg-gray-900">
+        <form onSubmit={handleSubmit} className="w-full bg-white dark:bg-secondary">
 
             <button
                 type="button"
                 onClick={onBack}
-                className="fixed top-1 left-2 z-50 md:hidden flex items-center justify-center w-8 h-10 bg-white dark:bg-gray-800 rounded-full shadow-sm border border-gray-200 dark:border-gray-600 text-gray-600 dark:text-white hover:text-primary transition-colors"
+                className="fixed top-1 left-2 z-50 md:hidden flex items-center justify-center w-8 h-10 bg-white dark:bg-secondary rounded-full shadow-sm border border-gray-200 dark:border-gray-600 text-gray-600 dark:text-white hover:text-primary transition-colors"
             >
                 <FaBackward className="text-sm text-primary" />
             </button>
@@ -99,7 +99,7 @@ const DeliveryInfoForm: React.FC<Props> = ({
                         value={formData.name}
                         onChange={handleChange}
                         placeholder="Enter Full Name"
-                        className={`w-full mb-1 px-4 py-2 rounded-xl border transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-red-300 bg-white dark:bg-gray-700 text-gray-800 dark:text-white ${formErrors.name
+                        className={`w-full mb-1 px-4 py-2 rounded-xl border transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-red-300 bg-white dark:bg-secondary text-gray-800 dark:text-white ${formErrors.name
                             ? "border-red-300 bg-red-50 focus:border-red-300"
                             : "border-red-100 focus:border-red-300 hover:border-gray-300"
                             }`}
@@ -127,7 +127,7 @@ const DeliveryInfoForm: React.FC<Props> = ({
                         value={formData.phone}
                         onChange={handleChange}
                         placeholder="Enter Contact Number"
-                        className={`w-full px-4 py-2 rounded-xl border transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-red-300 bg-white dark:bg-gray-700 text-gray-800 dark:text-white ${formErrors.phone
+                        className={`w-full px-4 py-2 rounded-xl border transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-red-300 bg-white dark:bg-secondary text-gray-800 dark:text-white ${formErrors.phone
                             ? "border-red-300 bg-red-50 focus:border-red-300"
                             : "border-red-100 focus:border-red-300 hover:border-gray-300"
                             }`}
@@ -153,7 +153,7 @@ const DeliveryInfoForm: React.FC<Props> = ({
                         onChange={handleChange}
                         placeholder="Enter Delivery Address"
                         rows={2}
-                        className={`w-full px-4 py-2 rounded-xl border transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-red-300 resize-none bg-white dark:bg-gray-700 text-gray-800 dark:text-white ${formErrors.address
+                        className={`w-full px-4 py-2 rounded-xl border transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-red-300 resize-none bg-white dark:bg-secondary text-gray-800 dark:text-white ${formErrors.address
                             ? "border-red-300 bg-red-50 focus:border-red-300"
                             : "border-red-100 focus:border-red-300 hover:border-gray-300"
                             }`}
@@ -177,7 +177,7 @@ const DeliveryInfoForm: React.FC<Props> = ({
                         name="delivery_area"
                         value={formData.delivery_area}
                         onChange={handleChange}
-                        className={`w-full py-2 lg:px-4 lg:py-4 rounded-xl border transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-red-300 bg-white text-sm text-gray-800 dark:text-white dark:bg-gray-700 ${formErrors.delivery_area
+                        className={`w-full py-2 lg:px-4 lg:py-4 rounded-xl border transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-red-300 bg-white text-sm text-gray-800 dark:text-white dark:bg-secondary ${formErrors.delivery_area
                             ? "border-red-300 focus:border-red-300"
                             : "border-red-100 focus:border-red-300 hover:border-gray-300"
                             }`}
@@ -222,7 +222,7 @@ const DeliveryInfoForm: React.FC<Props> = ({
                             onChange={handleChange}
                             placeholder="Enter Your Note"
                             rows={2}
-                            className={`w-full px-4 py-2 rounded-xl border transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-red-300 resize-none bg-white dark:bg-gray-700 text-gray-800 dark:text-white ${formErrors.note
+                            className={`w-full px-4 py-2 rounded-xl border transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-red-300 resize-none bg-white dark:bg-secondary text-gray-800 dark:text-white ${formErrors.note
                                 ? "border-red-300 bg-red-50 focus:border-red-300"
                                 : "border-red-100 focus:border-red-300 hover:border-gray-300"
                                 }`}
@@ -260,7 +260,7 @@ const DeliveryInfoForm: React.FC<Props> = ({
                                 className="mr-3 accent-indigo-600"
                                 disabled={isLoading}
                             />
-                            <Image src="/assets/cod.png" alt="Cash on Delivery" width={50} height={32} />
+                            <img src="/assets/cod.png" alt="Cash on Delivery" width={50} height={32} />
                             <span className="text-gray-700 dark:text-gray-200">COD</span>
                         </label>
 
@@ -284,7 +284,7 @@ const DeliveryInfoForm: React.FC<Props> = ({
                                 />
                                 <div className="flex items-center">
                                     {method.logo && (
-                                        <Image
+                                        <img
                                             src={method.logo}
                                             alt={`${method.name} logo`}
                                             width={32}
@@ -303,12 +303,12 @@ const DeliveryInfoForm: React.FC<Props> = ({
                 </div>
             </div>
 
-            <div className="mt-6 bg-white dark:bg-gray-700 p-4 rounded-xl border border-blue-200 dark:border-gray-600 shadow-sm hover:shadow-md transition-shadow duration-200">
+            <div className="mt-6 bg-white dark:bg-secondary p-4 rounded-xl border border-blue-200 dark:border-gray-600 shadow-sm hover:shadow-md transition-shadow duration-200">
                 <label className="flex items-start gap-3 cursor-pointer">
                     <input
                         type="checkbox"
                         defaultChecked
-                        className="w-3 h-3 rounded-md border-2 border-gray-200 text-red-300 focus:ring-2 focus:ring-red-300 bg-white dark:bg-gray-700 mt-1"
+                        className="w-3 h-3 rounded-md border-2 border-gray-200 text-red-300 focus:ring-2 focus:ring-red-300 bg-white dark:bg-secondary mt-1"
                     />
                     <span className="text-sm font-medium text-gray-700 dark:text-white">
                         I agree to our{" "}

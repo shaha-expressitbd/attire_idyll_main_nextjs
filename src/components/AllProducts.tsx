@@ -137,7 +137,7 @@ export default function AllProducts({ initialProducts, isFirstVisit = false }: A
                         ট্রেন্ডিং পণ্যগুলোর সাথে থাকুন সবসময় এক ধাপ এগিয়ে! আপনার ফ্যাশন, আপনার পরিচয়{" "}
                     </span>
                     <br />
-                    <span className="text-pink-400">AttireIdyll</span>
+                    <span className="text-green-400">AttireIdyll</span>
                     <span className="text-black dark:text-white"> এর সাথে।❤️</span>
                 </p>
             </div>
