@@ -303,6 +303,7 @@ export default function ProductCard({
                 className={`transition-transform duration-500 ${isHovered ? "scale-[1.3] rotate-1" : "scale-100"}`}
                 onError={() => setIsImageError(true)}
                 objectFit="cover"
+                variant="large"
               />
             )}
 

@@ -4,7 +4,7 @@ import React, { useMemo } from "react";
 import { createPortal } from "react-dom";
 import { FiX } from "react-icons/fi";
 import CategoryTree from "./category-tree";
-import RangePriceFilter from "./rangeSlider";
+import RangePriceFilter from "../../../app/(public)/maincategory/[slug]/components/rangeSlider";
 import { BiFilterAlt } from "react-icons/bi";
 
 interface FilterCategory {

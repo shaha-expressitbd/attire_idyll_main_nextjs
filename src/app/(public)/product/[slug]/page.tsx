@@ -131,7 +131,7 @@ export default async function ProductPage({
   }
 
   return (
-    <div className="bg-secondary dark:bg-secondary">
+    <div className="bg-white dark:bg-secondary">
       <Suspense fallback={<ProductPageSkeleton />}>
         <ProductDetail
           product={product}

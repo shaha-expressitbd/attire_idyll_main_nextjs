@@ -12,7 +12,6 @@ import Image from "../atoms/image";
 import { CartSheet } from "../organisms/cart-sheet";
 import { WishlistSheet } from "./WishlistSheet";
 import ThemeToggler from "../molecules/themeToggler";
-import { PiShoppingBagThin } from "react-icons/pi";
 
 const SearchDropdown = lazy(() => import("./SearchDropdown"));
 
@@ -382,12 +381,7 @@ export const Navbar = ({ className, business }: NavbarProps) => {
 
           {/* Right: Icons */}
           <div className="flex items-center gap-2 sm:gap-3">
-            <button
-              onClick={() => router.push("/products")}
-              className="text-gray-700 dark:text-gray-300 hover:text-primary"
-            >
-              <PiShoppingBagThin className="w-6 h-6 " />
-            </button>
+
             <CartSheet />
             <WishlistSheet />
             <ThemeToggler />

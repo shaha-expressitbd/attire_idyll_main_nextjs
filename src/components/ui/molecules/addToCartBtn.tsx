@@ -70,7 +70,8 @@ export default function AddToCartBtn({
       size="md"
       onClick={handleAdd}
       disabled={disabled}
-      className=" bg-primary dark:bg-primary w-full h-12 text-lg"
+      className="  w-full h-12 text-lg"
+      variant="edge"
     >
       {buttonText}
     </Button>

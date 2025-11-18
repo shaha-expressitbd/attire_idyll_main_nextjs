@@ -5,6 +5,7 @@ import { publicApi } from '@/lib/api/publicApi'
 import { makeStore } from '@/lib/store'
 import { Product } from '@/types/product'
 import MainCategoryPage from './components/MainCategoryPage'
+import { div } from 'framer-motion/client'
 
 const createSlug = (name: string): string =>
     name
@@ -54,14 +55,14 @@ export default async function MainCategoryPageServer({
             : []
 
         return (
-            <MainCategoryPage
+            <div className='mt-10'>  <MainCategoryPage
                 business={business}
                 initialProducts={products}
                 mainCategory={mainCategory}
                 mainCategoryId={mainCategoryId}
                 page={page}
                 limit={limit}
-            />
+            /></div>
         )
     } catch (err) {
         console.error(err)

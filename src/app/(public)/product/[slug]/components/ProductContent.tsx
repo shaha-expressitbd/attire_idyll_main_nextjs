@@ -48,7 +48,7 @@ export function ProductContent({
     setActiveTab,
 }: ProductContentProps) {
     return (
-        <div className={`w-full lg:max-w-[700px] lg:w-full px-2 md:px-4 lg:col-span-5 ${allMedia.length === 2 ? "" : "md:sticky md:top-24 md:self-start md:h-fit"}`}>
+        <div className={`w-full  px-2 md:px-4 lg:col-span-6 ${allMedia.length === 1 ? "" : "md:sticky md:top-24 md:self-start md:h-fit"}`}>
 
             <ProductHeader name={product.name} />
 
@@ -63,6 +63,16 @@ export function ProductContent({
                 isPreorder={isPreOrder}
             />
 
+
+
+            <ProductTabs
+                activeTab={activeTab}
+                setActiveTab={setActiveTab}
+                shortDescription={product.short_description}
+                longDescription={product.long_description}
+                stock={stock}
+                variantsCount={product.variantsId.length}
+            />
             <div className="md:pb-2">
                 <QuantityControls
                     quantity={quantity}
@@ -80,15 +90,6 @@ export function ProductContent({
                     buttonTitle={isPreOrder ? "Pre-order product" : "Add to Cart"}
                 />
             </div>
-
-            <ProductTabs
-                activeTab={activeTab}
-                setActiveTab={setActiveTab}
-                shortDescription={product.short_description}
-                longDescription={product.long_description}
-                stock={stock}
-                variantsCount={product.variantsId.length}
-            />
         </div>
     );
 }

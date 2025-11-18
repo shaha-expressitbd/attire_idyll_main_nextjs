@@ -29,24 +29,7 @@ export default function ProductPricing({
 
     return (
         <div className="space-y-3 md:space-y-4 mt-2 sm:mb-2">
-            <div className="flex flex-row items-center gap-1 md:gap-2 flex-wrap">
-                <div className="bg-primary dark:bg-black py-1 rounded-full items-center md:gap-4 text-xs text-gray-600 hidden md:block font-semibold">
-                    <LiveViews initialCount={10} />
-                </div>
 
-                {/* Badges */}
-                {stock > 0 && stock <= 10 && (
-                    <span className="bg-gradient-to-r from-orange-500 to-red-500 text-white text-xs font-bold px-2 py-1 md:px-3 md:py-1.5 rounded-full flex items-center animate-pulse">
-                        <HiLightningBolt />
-                        Almost Gone!
-                    </span>
-                )}
-                <span className="bg-primary dark:bg-primary text-white text-xs font-bold px-2 py-1 md:px-3 md:py-1.5 rounded-full flex items-center">
-                    <HiSparkles />
-                    Premium Quality
-                </span>
-
-            </div>
 
             {/* Pricing Section - Hide for preorder items */}
             {!isPreorder && (

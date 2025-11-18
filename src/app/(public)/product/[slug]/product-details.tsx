@@ -179,7 +179,7 @@ export default function ProductDetail({ product,
       />
 
       {subCategoryId && (
-        <div className="py-6 md:py-8 md:container md:max-w-7xl mx-auto">
+        <div className="py-6 md:py-8 md:container mx-auto">
           <RelatedProducts
             currentProductId={product._id}
             subCategoryId={subCategoryId}

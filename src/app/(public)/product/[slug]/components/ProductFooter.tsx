@@ -38,12 +38,8 @@ export function ProductFooter({
                 </Link>
             </div>
 
-            {(!isPreOrder && wishItems.length > 0) && (
-                <div className="fixed bottom-16 right-2 z-50 md:hidden flex flex-col gap-2 items-end max-w-[50px] bg-secondary p-2 rounded-full">
-                    <WishlistSheet />
-                </div>
-            )}
 
+            {/* 
             <div className="flex items-center gap-1">
                 <div className="fixed bottom-0 left-0 right-0  backdrop-blur-lg border-t shadow-xl lg:hidden z-50">
                     <div className="flex items-center justify-between p-1 gap-2 bg-white dark:bg-black">
@@ -74,7 +70,7 @@ export function ProductFooter({
                         )}
                     </div>
                 </div>
-            </div>
+            </div> */}
         </>
     );
 }

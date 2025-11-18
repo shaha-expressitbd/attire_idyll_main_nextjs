@@ -156,9 +156,7 @@ export default function RecentlyViewedProducts({ currentProductId }: RecentlyVie
                     </h2>
                     <div className="w-8 h-0.5 bg-gradient-to-l from-transparent via-red-400 to-red-600 transition-all duration-700 group-hover:w-16 group-hover:via-red-500"></div>
                 </div>
-                <p className="text-gray-600 dark:text-gray-400 text-sm mt-2 opacity-0 animate-fade-in-up animation-delay-300">
-                    Discover items you've recently explored
-                </p>
+
             </div>
 
             {/* Enhanced Swiper Container */}

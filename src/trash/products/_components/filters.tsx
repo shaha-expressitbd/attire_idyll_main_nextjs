@@ -7,7 +7,7 @@ import { Product } from "@/types/product";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 import { BiFilterAlt } from "react-icons/bi";
 import CategoryTree from "./category-tree";
-import RangePriceFilter from "./rangeSlider";
+import RangePriceFilter from "../../../app/(public)/maincategory/[slug]/components/rangeSlider";
 
 interface FilterCategory {
   _id: string;
