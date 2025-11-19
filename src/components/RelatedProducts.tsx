@@ -105,8 +105,8 @@ export default function RelatedProducts({
     <section ref={sectionRef}>
       <div className="py-2 text-3xl text-center mb-4">
         <div className="inline-flex gap-2 items-center">
-          <p className="text-gray-500 dark:text-white">
-            RELATED<span className="text-gray-700 dark:text-white font-medium">PRODUCTS</span>
+          <p className="text-gray-500 dark:text-white uppercase">
+            You May <span className="text-gray-700 dark:text-white font-medium">Also like</span>
           </p>
           <p className="w-8 sm:w-12 h-0.5 bg-gray-700 dark:bg-white"></p>
         </div>

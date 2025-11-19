@@ -4,7 +4,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { useSelector } from 'react-redux';
-import { RootState } from '@reduxjs/toolkit/query';
+import { RootState } from '@/lib/store';
+
 
 interface SrcSetItem {
   src: string;

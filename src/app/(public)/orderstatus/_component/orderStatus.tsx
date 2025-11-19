@@ -23,6 +23,7 @@ interface OrderItem {
     name: string;
     price: number;
     quantity: number;
+    isPreOrder?: boolean;
 }
 
 export function OrderStatus() {
@@ -32,6 +33,7 @@ export function OrderStatus() {
     const transaction_id = searchParams.get("transaction_id");
     const error = searchParams.get("error");
     const hasOrderData = !!searchParams.get("customerName");
+
     const [isVisible, setIsVisible] = useState(false);
     const [currentStep, setCurrentStep] = useState(0);
     const [orderItems, setOrderItems] = useState<OrderItem[]>([]);
@@ -39,6 +41,7 @@ export function OrderStatus() {
     const [deliveryCharge, setDeliveryCharge] = useState(0);
     const [subtotal, setSubtotal] = useState(0);
     const [additionalDiscount, setAdditionalDiscount] = useState(0);
+    const [hasPreorder, setHasPreorder] = useState(false);
 
     const rawPaymentMethod = decodeURIComponent(searchParams.get("paymentMethod") || "cashOnDelivery");
     const paymentMethod = rawPaymentMethod === "cashOnDelivery" ? "Cash on Delivery" : rawPaymentMethod;
@@ -51,55 +54,84 @@ export function OrderStatus() {
     useEffect(() => {
         setIsVisible(true);
 
-        // Reconstruct order items
-        const itemCount = parseInt(searchParams.get("itemCount") || "0", 10);
-        const totalQuantity = parseInt(searchParams.get("totalQuantity") || "0", 10);
-        const items: OrderItem[] = [];
-        let totalAmount = 0;
+        // Parse delivery & discount
+        const delivery = parseFloat(searchParams.get("deliveryCharge") || "0");
+        const discount = parseFloat(searchParams.get("additionalDiscount") || "0");
 
-        // Check for products parameter (multiple products separated by ,,)
-        const productsParam = searchParams.get("products");
-        if (productsParam) {
-            const productNames = decodeURIComponent(productsParam).split(",,");
-            const subtotalFromTotal = parseFloat(searchParams.get("total_amount") || "0") - parseFloat(searchParams.get("deliveryCharge") || "0");
-            const pricePerProduct = subtotalFromTotal / productNames.length;
+        // Reconstruct items from URL
+        const itemCount = parseInt(searchParams.get("itemCount") || "0", 10);
+        const itemsFromUrl: OrderItem[] = [];
+
+        if (searchParams.get("products")) {
+            const productNames = decodeURIComponent(searchParams.get("products")!).split(",,");
+            const subtotalFromTotal = parseFloat(searchParams.get("total_amount") || "0") - delivery;
+            const pricePerProduct = productNames.length > 0 ? subtotalFromTotal / productNames.length : 0;
             productNames.forEach((name) => {
-                items.push({ name: name.trim(), price: pricePerProduct, quantity: 1 });
-                totalAmount += pricePerProduct;
+                itemsFromUrl.push({ name: name.trim(), price: pricePerProduct, quantity: 1 });
             });
         } else {
-            // Use individual item parameters
             for (let i = 0; i < itemCount; i++) {
                 const name = decodeURIComponent(searchParams.get(`itemName${i}`) || `Product ${i + 1}`);
                 const price = parseFloat(searchParams.get(`itemPrice${i}`) || "0");
                 const quantity = parseInt(searchParams.get(`itemQty${i}`) || "1", 10);
-                const itemTotal = price * quantity;
-                items.push({ name, price, quantity });
-                totalAmount += itemTotal;
-            }
-
-            // If no items but totalQuantity exists, create dummy item
-            if (items.length === 0 && totalQuantity > 0) {
-                const subtotalFromTotal = parseFloat(searchParams.get("total_amount") || "0") - parseFloat(searchParams.get("deliveryCharge") || "0");
-                const price = subtotalFromTotal / totalQuantity;
-                items.push({ name: "Product", price, quantity: totalQuantity });
-                totalAmount = subtotalFromTotal;
+                const isPreOrder = searchParams.get(`itemPreOrder${i}`) === "true";
+                itemsFromUrl.push({ name, price, quantity, isPreOrder });
             }
         }
 
-        const Items = sessionStorage.getItem(`orderId-${orderId}`) || "[]";
-        setOrderItems(JSON.parse(Items));
-        const delivery = parseFloat(searchParams.get("deliveryCharge") || "0");
-        const discount = parseFloat(searchParams.get("additionalDiscount") || "0");
-        const totalAmountParam = parseFloat(searchParams.get("total_amount") || "0");
-        const finalTotal = totalAmountParam || totalAmount + delivery - discount;
+        // Priority: sessionStorage → URL params
+        let finalItems: OrderItem[] = [];
+        let hasPreorderFlag = false;
 
-        setSubtotal(totalAmountParam ? totalAmountParam - delivery : totalAmount);
-        setDeliveryCharge(delivery);
-        setAdditionalDiscount(discount);
-        setTotal(finalTotal);
+        if (orderId) {
+            const stored = sessionStorage.getItem(`orderId-${orderId}`);
+            if (stored) {
+                try {
+                    const sessionItems = JSON.parse(stored);
+                    finalItems = sessionItems;
+                    hasPreorderFlag = sessionItems.some((item: OrderItem) => item.isPreOrder);
+                } catch {
+                    finalItems = itemsFromUrl;
+                    hasPreorderFlag = itemsFromUrl.some(item => item.isPreOrder);
+                }
+            } else {
+                finalItems = itemsFromUrl;
+                hasPreorderFlag = itemsFromUrl.some(item => item.isPreOrder);
+            }
+        } else {
+            finalItems = itemsFromUrl;
+            hasPreorderFlag = itemsFromUrl.some(item => item.isPreOrder);
+        }
 
-        // Animate progress bar
+        setOrderItems(finalItems);
+        setHasPreorder(hasPreorderFlag);
+
+        // Calculate totals ONLY if NO pre-order items
+        if (hasPreorderFlag) {
+            setSubtotal(0);
+            setTotal(0);
+            setDeliveryCharge(delivery);
+            setAdditionalDiscount(discount);
+        } else {
+            // Only regular products → calculate normally
+            let calculatedSubtotal = 0;
+            finalItems.forEach(item => {
+                calculatedSubtotal += item.price * item.quantity;
+            });
+
+            const totalFromUrl = parseFloat(searchParams.get("total_amount") || "0");
+            const useUrlTotal = totalFromUrl > 0;
+
+            const finalSubtotal = useUrlTotal ? totalFromUrl - delivery + discount : calculatedSubtotal;
+            const finalTotal = useUrlTotal ? totalFromUrl : calculatedSubtotal + delivery - discount;
+
+            setSubtotal(finalSubtotal);
+            setTotal(Math.max(0, finalTotal));
+            setDeliveryCharge(delivery);
+            setAdditionalDiscount(discount);
+        }
+
+        // Progress animation for success/incomplete
         if (isSuccess || isIncomplete) {
             if (isSuccess) {
                 dispatch(clearCart());
@@ -131,31 +163,13 @@ export function OrderStatus() {
             </div>
 
             <div className="container mx-auto px-4 py-8 md:py-16 relative z-10">
-                <div
-                    className={`w-full md:max-w-6xl mx-auto transition-all duration-1000 ease-out transform ${isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-                        }`}
-                >
-                    <div className="bg-white/80 dark:bg-secondary/80 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/20 dark:border-slate-700/50 overflow-hidden mb-8">
+                <div className={`w-full md:max-w-6xl mx-auto transition-all duration-1000 ease-out transform ${isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"}`}>
+                    <div className="bg-white/80 dark:bg-secondary backdrop-blur-xl rounded-3xl shadow-2xl border border-white/20 dark:border-slate-700/50 overflow-hidden mb-8">
+
                         {/* Status Header */}
-                        <div
-                            className={`relative px-6 sm:px-8 lg:px-12 py-8 sm:py-12 text-center ${isSuccess
-                                ? "bg-green-50 dark:bg-emerald-900/20"
-                                : isIncomplete
-                                    ? "bg-yellow-50 dark:bg-amber-900/20"
-                                    : "bg-red-50 dark:bg-green-900/20"
-                                }`}
-                        >
-                            <div
-                                className={`inline-flex p-4 sm:p-6 rounded-full mb-6 sm:mb-8 ${isSuccess ? "bg-green-500 text-white" : isIncomplete ? "bg-yellow-500 text-white" : "bg-red-500 text-white"
-                                    }`}
-                            >
-                                {isSuccess ? (
-                                    <FiCheckCircle className="w-8 h-8 sm:w-12 sm:h-12" />
-                                ) : isIncomplete ? (
-                                    <FiAlertTriangle className="w-8 h-8 sm:w-12 sm:h-12" />
-                                ) : (
-                                    <FiXCircle className="w-8 h-8 sm:w-12 sm:h-12" />
-                                )}
+                        <div className={`relative px-6 sm:px-8 lg:px-12 py-8 sm:py-12 text-center ${isSuccess ? "bg-green-50 dark:bg-emerald-900/20" : isIncomplete ? "bg-yellow-50 dark:bg-amber-900/20" : "bg-red-50 dark:bg-red-900/20"}`}>
+                            <div className={`inline-flex p-4 sm:p-6 rounded-full mb-6 sm:mb-8 ${isSuccess ? "bg-green-500 text-white" : isIncomplete ? "bg-yellow-500 text-white" : "bg-red-500 text-white"}`}>
+                                {isSuccess ? <FiCheckCircle className="w-8 h-8 sm:w-12 sm:h-12" /> : isIncomplete ? <FiAlertTriangle className="w-8 h-8 sm:w-12 sm:h-12" /> : <FiXCircle className="w-8 h-8 sm:w-12 sm:h-12" />}
                             </div>
                             <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4 sm:mb-6 text-black dark:text-white">
                                 {isSuccess ? "Order Successful!" : isIncomplete ? "Order Incomplete" : "Order Failed"}
@@ -195,32 +209,21 @@ export function OrderStatus() {
                             </div>
                         </div>
 
-                        {/* Progress Bar (Success Only) */}
-                        {(isSuccess || isIncomplete) && (
+                        {/* Progress Bar */}
+                        {(isSuccess || isIncomplete) && !hasPreorder && (
                             <div className="px-6 sm:px-8 lg:px-12 py-8 border-t border-slate-200 dark:border-slate-700">
                                 <h2 className="text-xl font-semibold mb-6 text-black dark:text-white text-center">Order Progress</h2>
                                 <div className="flex justify-between items-center relative">
                                     <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-slate-200 dark:bg-secondary -translate-y-1/2"></div>
-                                    <div
-                                        className="absolute top-1/2 left-0 h-0.5 bg-green-500 -translate-y-1/2 transition-all duration-1000 ease-out"
-                                        style={{ width: `${(currentStep / 3) * 100}%` }}
-                                    ></div>
+                                    <div className="absolute top-1/2 left-0 h-0.5 bg-green-500 -translate-y-1/2 transition-all duration-1000 ease-out" style={{ width: `${(currentStep / 3) * 100}%` }}></div>
                                     {orderSteps.map((step, index) => {
                                         const Icon = step.icon;
                                         return (
                                             <div key={index} className="flex flex-col items-center relative z-10">
-                                                <div
-                                                    className={`w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center ${step.active
-                                                        ? "bg-green-500 text-white"
-                                                        : "bg-white dark:bg-secondary text-slate-400 border-2 border-slate-200 dark:border-slate-700"
-                                                        }`}
-                                                >
+                                                <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center ${step.active ? "bg-green-500 text-white" : "bg-white dark:bg-secondary text-slate-400 border-2 border-slate-200 dark:border-slate-700"}`}>
                                                     <Icon className="w-5 h-5 sm:w-6 sm:h-6" />
                                                 </div>
-                                                <span
-                                                    className={`mt-2 text-xs font-medium ${step.active ? "text-black dark:text-white" : "text-slate-400"
-                                                        }`}
-                                                >
+                                                <span className={`mt-2 text-xs font-medium ${step.active ? "text-black dark:text-white" : "text-slate-400"}`}>
                                                     {step.label}
                                                 </span>
                                             </div>
@@ -229,8 +232,7 @@ export function OrderStatus() {
                                 </div>
                                 <div className="mt-8 text-center">
                                     <p className="text-slate-600 dark:text-slate-300">
-                                        Estimated delivery:{" "}
-                                        <span className="font-semibold text-black dark:text-white">
+                                        Estimated delivery: <span className="font-semibold text-black dark:text-white">
                                             {deliveryDate.toLocaleDateString("en-US", { weekday: "long", month: "short", day: "numeric" })}
                                         </span>
                                     </p>
@@ -243,49 +245,35 @@ export function OrderStatus() {
                             <div className="px-4 sm:px-6 md:px-8 lg:px-12 py-6 md:py-8 border-t border-slate-200 dark:border-slate-700">
                                 <h2 className="text-lg sm:text-xl font-semibold mb-4 sm:mb-6 text-black dark:text-white">Order Details</h2>
                                 <div className="space-y-6 sm:space-y-8">
+
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                                         {/* Customer Info */}
-                                        <div className="bg-slate-50 dark:bg-secondary/50 rounded-xl p-4 sm:p-6">
+                                        <div className="bg-slate-50 dark:bg-secondary rounded-xl p-4 sm:p-6">
                                             <h3 className="flex items-center text-base sm:text-lg font-semibold mb-3 sm:mb-4 text-black dark:text-white">
                                                 <FiUser className="mr-2 w-5 h-5" /> Customer Information
                                             </h3>
                                             <div className="space-y-2 sm:space-y-3 text-sm">
-                                                <div className="flex flex-col sm:flex-row">
-                                                    <span className="w-full sm:w-32 text-slate-500 dark:text-slate-400">Name:</span>
-                                                    <span className="font-medium mt-1 sm:mt-0 text-black dark:text-white">
-                                                        {decodeURIComponent(searchParams.get("customerName") || "N/A")}
-                                                    </span>
-                                                </div>
-                                                <div className="flex flex-col sm:flex-row">
-                                                    <span className="w-full sm:w-32 text-slate-500 dark:text-slate-400">Phone:</span>
-                                                    <span className="font-medium mt-1 sm:mt-0 text-black dark:text-white">
-                                                        {decodeURIComponent(searchParams.get("customerPhone") || "N/A")}
-                                                    </span>
-                                                </div>
-                                                <div className="flex flex-col sm:flex-row">
-                                                    <span className="w-full sm:w-32 text-slate-500 dark:text-slate-400">Address:</span>
-                                                    <span className="font-medium mt-1 sm:mt-0 text-black dark:text-white">
-                                                        {decodeURIComponent(searchParams.get("customerAddress") || "N/A")}
-                                                    </span>
-                                                </div>
+                                                <div className="flex flex-col sm:flex-row"><span className="w-full sm:w-32 text-slate-500 dark:text-slate-400">Name:</span><span className="font-medium mt-1 sm:mt-0 text-black dark:text-white">{decodeURIComponent(searchParams.get("customerName") || "N/A")}</span></div>
+                                                <div className="flex flex-col sm:flex-row"><span className="w-full sm:w-32 text-slate-500 dark:text-slate-400">Phone:</span><span className="font-medium mt-1 sm:mt-0 text-black dark:text-white">{decodeURIComponent(searchParams.get("customerPhone") || "N/A")}</span></div>
+                                                <div className="flex flex-col sm:flex-row"><span className="w-full sm:w-32 text-slate-500 dark:text-slate-400">Address:</span><span className="font-medium mt-1 sm:mt-0 text-black dark:text-white">{decodeURIComponent(searchParams.get("customerAddress") || "N/A")}</span></div>
                                             </div>
                                         </div>
 
                                         {/* Payment Info */}
-                                        <div className="bg-slate-50 dark:bg-secondary/50 rounded-xl p-4 sm:p-6">
+                                        <div className="bg-slate-50 dark:bg-secondary rounded-xl p-4 sm:p-6">
                                             <h3 className="flex items-center text-base sm:text-lg font-semibold mb-3 sm:mb-4 text-black dark:text-white">
                                                 <FiCreditCard className="mr-2 w-5 h-5" /> Payment Information
                                             </h3>
                                             <div className="space-y-2 sm:space-y-3 text-sm">
                                                 <div className="flex flex-col sm:flex-row">
                                                     <span className="w-full sm:w-32 text-slate-500 dark:text-slate-400">Total Amount:</span>
-                                                    <span className="font-medium mt-1 sm:mt-0 text-black dark:text-white">৳{total.toFixed(2)}</span>
+                                                    <span className="font-medium mt-1 sm:mt-0 text-black dark:text-white">
+                                                        {hasPreorder ? "Pre-order" : `BDT ${total.toFixed(2)}`}
+                                                    </span>
                                                 </div>
                                                 <div className="flex flex-col sm:flex-row">
                                                     <span className="w-full sm:w-32 text-slate-500 dark:text-slate-400">Delivery:</span>
-                                                    <span className="font-medium mt-1 sm:mt-0 text-black dark:text-white">
-                                                        ৳{deliveryCharge.toFixed(2)}
-                                                    </span>
+                                                    <span className="font-medium mt-1 sm:mt-0 text-black dark:text-white">BDT {deliveryCharge.toFixed(2)}</span>
                                                 </div>
                                                 <div className="flex flex-col sm:flex-row">
                                                     <span className="w-full sm:w-32 text-slate-500 dark:text-slate-400">Method:</span>
@@ -301,8 +289,8 @@ export function OrderStatus() {
                                         </div>
                                     </div>
 
-                                    {/* Order Summary */}
-                                    <div className="bg-slate-50 dark:bg-secondary/50 rounded-xl p-4 sm:p-6 overflow-x-auto">
+                                    {/* Order Summary Table */}
+                                    <div className="bg-slate-50 dark:bg-secondary rounded-xl p-4 sm:p-6 overflow-x-auto">
                                         <h3 className="flex items-center text-base sm:text-lg font-semibold mb-3 sm:mb-4 text-black dark:text-white">
                                             <FiShoppingBag className="mr-2 w-5 h-5" /> Order Summary
                                         </h3>
@@ -319,54 +307,41 @@ export function OrderStatus() {
                                             <tbody>
                                                 {orderItems.map((item, i) => (
                                                     <tr key={i} className="border-b border-slate-100 dark:border-slate-700/50">
-                                                        <td className="py-2 sm:py-3 font-medium">
-                                                            <img
-                                                                src={item.image}
-                                                                alt={item.name}
-                                                                className="w-10 h-10 sm:w-12 sm:h-12 object-cover rounded"
-                                                            />
+                                                        <td className="py-2 sm:py-3">
+                                                            {item.image ? <img src={item.image} alt={item.name} className="w-10 h-10 sm:w-12 sm:h-12 object-cover rounded" /> : <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gray-200 dark:bg-gray-700 rounded"></div>}
                                                         </td>
                                                         <td className="py-2 sm:py-3 font-medium text-sm text-black dark:text-white">{item.name}</td>
                                                         <td className="py-2 sm:py-3 text-center text-sm text-black dark:text-white">{item.quantity}</td>
-                                                        <td className="py-2 sm:py-3 text-right text-sm text-black dark:text-white">৳{item.price.toFixed(2)}</td>
                                                         <td className="py-2 sm:py-3 text-right text-sm text-black dark:text-white">
-                                                            ৳{(item.price * item.quantity).toFixed(2)}
+                                                            {item.isPreOrder || hasPreorder ? "Pre-order" : `BDT ${item.price.toFixed(2)}`}
+                                                        </td>
+                                                        <td className="py-2 sm:py-3 text-right text-sm text-black dark:text-white">
+                                                            {item.isPreOrder || hasPreorder ? "Pre-order" : `BDT ${(item.price * item.quantity).toFixed(2)}`}
                                                         </td>
                                                     </tr>
                                                 ))}
                                             </tbody>
                                             <tfoot>
                                                 <tr>
-                                                    <td colSpan={3} className="pt-3 sm:pt-4 text-right font-semibold text-sm text-black dark:text-white">
-                                                        Subtotal:
-                                                    </td>
+                                                    <td colSpan={3} className="pt-3 sm:pt-4 text-right font-semibold text-sm text-black dark:text-white">Subtotal:</td>
                                                     <td className="pt-3 sm:pt-4 text-right font-semibold text-sm text-black dark:text-white">
-                                                        ৳{subtotal.toFixed(2)}
+                                                        {hasPreorder ? "Pre-order" : `BDT ${subtotal.toFixed(2)}`}
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td colSpan={3} className="pt-1 text-right text-slate-500 dark:text-slate-400 text-sm">Delivery:</td>
-                                                    <td className="pt-1 text-right text-slate-500 dark:text-slate-400 text-sm">৳{deliveryCharge.toFixed(2)}</td>
+                                                    <td className="pt-1 text-right text-slate-500 dark:text-slate-400 text-sm">BDT {deliveryCharge.toFixed(2)}</td>
                                                 </tr>
                                                 {additionalDiscount > 0 && (
                                                     <tr>
-                                                        <td
-                                                            colSpan={3}
-                                                            className="pt-1 text-right text-green-600 dark:text-green-400 font-medium text-sm"
-                                                        >
-                                                            Discount:
-                                                        </td>
-                                                        <td className="pt-1 text-right text-green-600 dark:text-green-400 font-medium text-sm">
-                                                            [&minus;] ৳{additionalDiscount.toFixed(2)}
-                                                        </td>
+                                                        <td colSpan={3} className="pt-1 text-right text-green-600 dark:text-green-400 font-medium text-sm">Discount:</td>
+                                                        <td className="pt-1 text-right text-green-600 dark:text-green-400 font-medium text-sm">[-] BDT {additionalDiscount.toFixed(2)}</td>
                                                     </tr>
                                                 )}
                                                 <tr>
-                                                    <td colSpan={3} className="pt-1 text-right font-semibold sm:text-lg text-black dark:text-white">
-                                                        Total:
-                                                    </td>
-                                                    <td className="pt-1 text-right font-semibold sm:text-lg text-black dark:text-white">
-                                                        ৳{total.toFixed(2)}
+                                                    <td colSpan={3} className="pt-4 text-right font-bold text-lg text-black dark:text-white">Total:</td>
+                                                    <td className="pt-4 text-right font-bold text-lg text-black dark:text-white">
+                                                        {hasPreorder ? "Pre-order" : `BDT ${total.toFixed(2)}`}
                                                     </td>
                                                 </tr>
                                             </tfoot>
@@ -381,13 +356,12 @@ export function OrderStatus() {
                             <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
                                 <Button title="continue" variant="gradient">
                                     <Link href="/products" className="flex items-center justify-center gap-2 w-full">
-                                        Continue Shopping
-                                        <FiArrowRight className="w-4 h-4" />
+                                        Continue Shopping <FiArrowRight className="w-4 h-4" />
                                     </Link>
                                 </Button>
                                 {(isFailure || isIncomplete) && (
-                                    <Button title="try-again" variant="outline" className="px-2">
-                                        <Link href="/checkout" className="flex items-center justify-center gap-2 w-full text-nowrap">
+                                    <Button title="try-again" variant="outline">
+                                        <Link href="/checkout" className="flex items-center justify-center gap-2 w-full">
                                             Try Again
                                         </Link>
                                     </Button>

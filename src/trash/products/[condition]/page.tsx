@@ -33,7 +33,7 @@ export default async function Page({ params }: { params: Promise<PageParams> }) 
 
   if (!condition) {
     return (
-      <div className="max-w-6xl mx-auto p-4 text-center text-red-500">
+      <div className="max-w-6xl mx-auto p-4 text-center text-green-500">
         No condition specified.
       </div>
     );

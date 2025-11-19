@@ -86,7 +86,7 @@ export function ProductContent({
                     onAddToCart={onAddToCart}
                     onVariantMissing={onVariantMissing}
                     onWishlistVariantMissing={onWishlistVariantMissing}
-                    buttonText={isPreOrder ? "PRE-ORDER NOW" : "ORDER NOW"}
+                    buttonText={isPreOrder ? "PRE-ORDER NOW" : "ORDER TO BOOK NOW"}
                     buttonTitle={isPreOrder ? "Pre-order product" : "Add to Cart"}
                 />
             </div>

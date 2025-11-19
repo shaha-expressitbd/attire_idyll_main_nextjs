@@ -31,7 +31,7 @@ export const Badge = ({
       'bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300',
     green:
       'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300',
-    red: 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300',
+    red: 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300',
     yellow:
       'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300',
     gray: 'bg-gray-100 text-gray-800 dark:bg-secondary dark:text-gray-200',

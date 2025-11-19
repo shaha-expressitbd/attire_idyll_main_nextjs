@@ -41,7 +41,7 @@ export const CalendarTrigger = React.forwardRef<HTMLDivElement, CalendarTriggerP
           "cursor-pointer select-none text-xs md:text-sm",
           "border-gray-300 dark:border-gray-600 hover:border-orange-400 dark:hover:border-orange-400 focus:outline-none",
           isCalendarOpen && "ring-2 ring-orange-300 dark:ring-primary",
-          error && "border-red-500",
+          error && "border-green-500",
           disabled && "opacity-50 cursor-not-allowed",
           className
         )}
@@ -51,7 +51,7 @@ export const CalendarTrigger = React.forwardRef<HTMLDivElement, CalendarTriggerP
         </div>
 
         {selectedDates.length > 0 && !disabled && (
-          <FiX className='ml-2 w-4 h-4 text-gray-400 dark:text-white hover:text-red-500 cursor-pointer' onClick={onClearAll} />
+          <FiX className='ml-2 w-4 h-4 text-gray-400 dark:text-white hover:text-green-500 cursor-pointer' onClick={onClearAll} />
         )}
         <FiCalendar className='ml-2 w-4 h-4 text-gray-400 dark:text-white' />
       </div>

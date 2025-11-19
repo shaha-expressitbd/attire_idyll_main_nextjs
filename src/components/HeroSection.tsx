@@ -13,27 +13,32 @@ import Link from 'next/link';
 export default function HeroSection() {
   const { businessData } = useBusiness();
   const router = useRouter();
-  const CATEGORIES = businessData?.categories.slice(0, 5) ?? [];
-  const progressCircle = useRef<SVGSVGElement | null>(null);
-  const progressContent = useRef<HTMLSpanElement | null>(null);
 
-  const DEFAULT_IMAGE = '/assets/placeholder.webp';
+  const progressCircle = useRef<SVGSVGElement>(null);
+  const progressContent = useRef<HTMLSpanElement>(null);
 
-  // Function to get a fallback image from subcategories if the main category lacks an image
-  const getCategoryImage = (category: any) => {
-    if (category.image?.optimizeUrl) {
-      return category.image.optimizeUrl;
-    }
-    const subCategoryWithImage = category.children?.find((child: any) => child.image?.optimizeUrl);
-    return subCategoryWithImage?.image?.optimizeUrl || DEFAULT_IMAGE;
-  };
+  // Active & valid slides from businessTheme
+  const heroSlides = businessData?.businessTheme
+    ?.filter((theme: any) => theme.isActive === true)
+    .map((theme: any) => ({
+      redirectUrl: theme.redirect_URL || '#',
+      // Device-specific images (priority: mobile → tab → desktop → alterImage)
+      mobile: theme.slider_Mobile?.alterImage?.optimizeUrl || theme.slider_Mobile?.alterImage?.secure_url,
+      tab: theme.slider_Tab?.alterImage?.optimizeUrl || theme.slider_Tab?.alterImage?.secure_url,
+      desktop: theme.slider_Desktop?.alterImage?.optimizeUrl || theme.slider_Desktop?.alterImage?.secure_url,
+      fallback: theme.slider?.alterImage?.optimizeUrl || theme.slider?.alterImage?.secure_url || '/assets/placeholder.webp',
+    }))
+    .filter(slide => slide.fallback || slide.desktop || slide.mobile || slide.tab); // at least one image
 
-  const onAutoplayTimeLeft = (_: import('swiper').Swiper, time: number, progress: number) => {
+  const onAutoplayTimeLeft = (_: any, time: number, progress: number) => {
     if (progressCircle.current && progressContent.current) {
       progressCircle.current.style.setProperty('--progress', String(1 - progress));
       progressContent.current.textContent = `${Math.ceil(time / 1000)}s`;
     }
   };
+
+  // Category buttons remain same
+  const CATEGORIES = businessData?.categories?.slice(0, 5) ?? [];
 
   const handleCategoryClick = (categoryName: string) => {
     const slug = categoryName
@@ -46,51 +51,72 @@ export default function HeroSection() {
     router.push(`/maincategory/${slug}`);
   };
 
+  if (!heroSlides || heroSlides.length === 0) {
+    return null; // or fallback UI
+  }
+
   return (
     <div className="pb-12 md:pb-0 lg:container md:container mx-auto lg:mt-12 md:mt-12 mt-8">
-      <div className="relative w-full overflow-hidden h-[260px] md:h-[800px] lg:h-[800px] md:pb-10">
-        <section className="w-full h-full">
-          <Swiper
-            spaceBetween={0}
-            centeredSlides={true}
-            autoplay={{ delay: 2500, disableOnInteraction: false }}
-            pagination={{ clickable: true }}
-            navigation={true}
-            modules={[Autoplay, Pagination, Navigation]}
-            onAutoplayTimeLeft={onAutoplayTimeLeft}
-            className="mySwiper w-full h-full"
-          >
-            {[
-              { src: '/upload/images/bride-14-160707.webp', alt: 'Hero Necklace' },
-              { src: '/upload/images/bride-13-795681.webp', alt: 'Bracelet' },
-              { src: '/upload/images/bride-12-313748.webp', alt: 'Earrings' },
-              { src: '/upload/images/Bride-1-994403.webp', alt: 'Earrings' },
-            ].map((slide, index) => (
-              <SwiperSlide key={index}>
-                <div className="relative w-full h-full flex flex-col md:flex-row items-center">
-                  <div className="w-full h-full">
-                    <Image
-                      src={slide.src}
-                      alt={slide.alt}
-                      fill
-                      sizes="100vw"
-                      className="object-cover"
-                      variant='original'
-                      // Priority for the first slide only
-
-                      loading={index === 0 ? 'eager' : 'lazy'} // Lazy load non-critical slides
+      <div className="relative w-full overflow-hidden h-[260px] md:h-[800px] lg:h-[800px]">
+        <Swiper
+          spaceBetween={0}
+          centeredSlides={true}
+          autoplay={{ delay: 4000, disableOnInteraction: false }}
+          pagination={{ clickable: true }}
+          navigation={true}
+          modules={[Autoplay, Pagination, Navigation]}
+          onAutoplayTimeLeft={onAutoplayTimeLeft}
+          className="mySwiper w-full h-full"
+        >
+          {heroSlides.map((slide, index) => (
+            <SwiperSlide key={index}>
+              <a
+                href={slide.redirectUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block w-full h-full cursor-pointer"
+              >
+                <picture className="block w-full h-full">
+                  {/* Mobile */}
+                  {slide.mobile && (
+                    <source
+                      media="(max-width: 767px)"
+                      srcSet={slide.mobile}
                     />
-                  </div>
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </section>
-
-
+                  )}
+                  {/* Tablet */}
+                  {slide.tab && (
+                    <source
+                      media="(min-width: 768px) and (max-width: 1023px)"
+                      srcSet={slide.tab}
+                    />
+                  )}
+                  {/* Desktop */}
+                  {slide.desktop && (
+                    <source
+                      media="(min-width: 1024px)"
+                      srcSet={slide.desktop}
+                    />
+                  )}
+                  {/* Fallback Image */}
+                  <Image
+                    src={slide.fallback}
+                    alt={`Hero slide ${index + 1}`}
+                    fill
+                    sizes="100vw"
+                    objectFit="contain"
+                    variant="original"
+                    loading={index === 0 ? 'eager' : 'lazy'}
+                  />
+                </picture>
+              </a>
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </div>
 
-      <div className="w-full mx-auto space-y-4">
+      {/* Category Buttons - unchanged */}
+      <div className="w-full mx-auto space-y-4 mt-10">
         {CATEGORIES.length > 0 && (
           <>
             <div className="grid grid-cols-3 gap-3">

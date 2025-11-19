@@ -70,7 +70,7 @@ export const CountdownTimer = ({ endDate }: { endDate: string }) => {
                 </div>
                 <div className="text-gray-300">:</div>
                 <div className="text-center">
-                    <div className="text-xl font-bold text-red-500">{timeLeft.seconds.toString().padStart(2, '0')}</div>
+                    <div className="text-xl font-bold text-green-500">{timeLeft.seconds.toString().padStart(2, '0')}</div>
                     <div className="text-xs text-gray-500 dark:text-gray-700">Seconds</div>
                 </div>
             </div>

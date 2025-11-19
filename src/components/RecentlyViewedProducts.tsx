@@ -146,15 +146,15 @@ export default function RecentlyViewedProducts({ currentProductId }: RecentlyVie
             {/* Beautiful Enhanced Header */}
             <div className="text-center mb-10">
                 <div className="inline-flex items-center gap-4 group">
-                    <div className="w-8 h-0.5 bg-gradient-to-r from-transparent via-red-400 to-red-600 transition-all duration-700 group-hover:w-16 group-hover:via-red-500"></div>
+                    <div className="w-8 h-0.5 bg-gradient-to-r from-transparent via-green-400 to-green-600 transition-all duration-700 group-hover:w-16 group-hover:via-green-500"></div>
                     <h2 className="text-2xl md:text-3xl lg:text-4xl font-light tracking-wider relative">
                         <span className="text-gray-500 dark:text-gray-300 transition-colors duration-300">RECENTLY</span>
                         <span className="text-gray-800 dark:text-white font-medium ml-2 relative">
                             VIEWED
-                            <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-red-500 to-red-600 transition-all duration-700 group-hover:w-full"></div>
+                            <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-green-500 to-green-600 transition-all duration-700 group-hover:w-full"></div>
                         </span>
                     </h2>
-                    <div className="w-8 h-0.5 bg-gradient-to-l from-transparent via-red-400 to-red-600 transition-all duration-700 group-hover:w-16 group-hover:via-red-500"></div>
+                    <div className="w-8 h-0.5 bg-gradient-to-l from-transparent via-green-400 to-green-600 transition-all duration-700 group-hover:w-16 group-hover:via-green-500"></div>
                 </div>
 
             </div>
@@ -162,7 +162,7 @@ export default function RecentlyViewedProducts({ currentProductId }: RecentlyVie
             {/* Enhanced Swiper Container */}
             <div className="relative group">
                 {/* Background Glow Effect */}
-                <div className="absolute inset-0 bg-gradient-to-r from-red-500/5 via-transparent to-red-500/5 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-green-500/5 via-transparent to-green-500/5 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
                 {/* Enhanced Swiper Slider */}
                 <Swiper
@@ -202,7 +202,7 @@ export default function RecentlyViewedProducts({ currentProductId }: RecentlyVie
                         clickable: true,
                         dynamicBullets: true,
                         renderBullet: (index, className) => {
-                            return `<span class="${className} w-2 h-2 bg-red-400 rounded-full transition-all duration-300 hover:bg-red-600"></span>`;
+                            return `<span class="${className} w-2 h-2 bg-green-400 rounded-full transition-all duration-300 hover:bg-green-600"></span>`;
                         },
                     }}
                     className="!pb-12 animate-fade-in-up animation-delay-500"

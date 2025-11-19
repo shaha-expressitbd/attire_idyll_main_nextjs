@@ -24,7 +24,7 @@ const OurStoryPage = () => {
     return (
         <div className="min-h-screen bg-white dark:bg-secondary md:mt-0 -mt-4">
             {/* Hero Section */}
-            <section className="relative bg-gradient-to-r from-red-600 to-red-800 text-white md:py-16 py-8 ">
+            <section className="relative bg-gradient-to-r from-green-600 to-green-800 text-white md:py-16 py-8 ">
                 <div className="absolute inset-0 bg-black/10"></div>
                 <div className="relative max-w-6xl mx-auto px-4 text-center">
                     <h1 className="text-2xl md:text-6xl font-bold mb-6 animate-fade-in">
@@ -34,7 +34,7 @@ const OurStoryPage = () => {
                         Discover how AttireIdyll became your trusted partner in online
                         shopping
                     </p>
-                    <div className="w-24 h-1 bg-red-300 mx-auto rounded-full" />
+                    <div className="w-24 h-1 bg-green-300 mx-auto rounded-full" />
                 </div>
             </section>
 
@@ -42,7 +42,7 @@ const OurStoryPage = () => {
             <section className="py-12 sm:py-16 max-w-6xl mx-auto px-4">
                 <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
                     <div>
-                        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-red-800 dark:text-red-400 mb-6">
+                        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-green-800 dark:text-green-400 mb-6">
                             From Vision to Reality
                         </h2>
                         <p className="text-gray-700 dark:text-gray-300 text-base sm:text-lg mb-6 leading-relaxed">
@@ -59,8 +59,8 @@ const OurStoryPage = () => {
                         </p>
                     </div>
 
-                    <div className="bg-gradient-to-br from-red-500 to-red-700 p-8 rounded-2xl text-white shadow-xl">
-                        <FaShoppingCart className="w-16 h-16 mb-6 text-red-200" />
+                    <div className="bg-gradient-to-br from-green-500 to-green-700 p-8 rounded-2xl text-white shadow-xl">
+                        <FaShoppingCart className="w-16 h-16 mb-6 text-green-200" />
                         <h3 className="text-2xl font-bold mb-4">Our Mission</h3>
                         <p className="text-lg opacity-90">
                             To democratize online shopping by providing exceptional products
@@ -72,7 +72,7 @@ const OurStoryPage = () => {
 
                 {/* Timeline */}
                 <div className="mb-16">
-                    <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-red-800 dark:text-red-400 mb-12 text-center">
+                    <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-green-800 dark:text-green-400 mb-12 text-center">
                         Our Journey
                     </h2>
 
@@ -115,13 +115,13 @@ const OurStoryPage = () => {
                             },
                         ].map((m, i) => (
                             <div key={i} className="flex items-center gap-6">
-                                <div className="flex items-center justify-center w-16 h-16 bg-red-500 text-white rounded-full shadow-lg shrink-0">
+                                <div className="flex items-center justify-center w-16 h-16 bg-green-500 text-white rounded-full shadow-lg shrink-0">
                                     {m.icon}
                                 </div>
                                 <div className="flex-1">
-                                    <div className="bg-white dark:bg-secondary p-6 rounded-xl shadow-lg border-l-4 border-red-500 dark:border-red-600 hover:shadow-xl transition-shadow duration-300">
+                                    <div className="bg-white dark:bg-secondary p-6 rounded-xl shadow-lg border-l-4 border-green-500 dark:border-green-600 hover:shadow-xl transition-shadow duration-300">
                                         <div className="flex flex-wrap items-center gap-4 mb-3">
-                                            <span className="text-red-600 dark:text-red-400 font-bold text-lg sm:text-xl">
+                                            <span className="text-green-600 dark:text-green-400 font-bold text-lg sm:text-xl">
                                                 {m.year}
                                             </span>
                                             <h3 className="text-lg sm:text-xl font-bold text-gray-800 dark:text-gray-200">
@@ -140,7 +140,7 @@ const OurStoryPage = () => {
 
                 {/* Values Section */}
                 <div className="mb-16">
-                    <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-red-800 dark:text-red-400 mb-12 text-center">
+                    <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-green-800 dark:text-green-400 mb-12 text-center">
                         Our Core Values
                     </h2>
 
@@ -185,9 +185,9 @@ const OurStoryPage = () => {
                         ].map((v, i) => (
                             <div
                                 key={i}
-                                className="bg-white dark:bg-secondary p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 border-t-4 border-red-500 dark:border-red-600"
+                                className="bg-white dark:bg-secondary p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 border-t-4 border-green-500 dark:border-green-600"
                             >
-                                <div className="text-red-600 dark:text-red-400 mb-4">
+                                <div className="text-green-600 dark:text-green-400 mb-4">
                                     {v.icon}
                                 </div>
                                 <h3 className="text-lg sm:text-xl font-bold text-gray-800 dark:text-gray-200 mb-3">
@@ -202,7 +202,7 @@ const OurStoryPage = () => {
                 </div>
 
                 {/* Stats Section */}
-                <div className="bg-gradient-to-r from-red-600 to-red-800 rounded-2xl p-8 text-white mb-16">
+                <div className="bg-gradient-to-r from-green-600 to-green-800 rounded-2xl p-8 text-white mb-16">
                     <div className="grid md:grid-cols-4 gap-8 text-center">
                         {[
                             { stat: '100K+', label: 'Happy Customers' },
@@ -214,7 +214,7 @@ const OurStoryPage = () => {
                                 <div className="text-3xl sm:text-4xl font-bold mb-1">
                                     {stat}
                                 </div>
-                                <div className="text-sm sm:text-base text-red-200">{label}</div>
+                                <div className="text-sm sm:text-base text-green-200">{label}</div>
                             </div>
                         ))}
                     </div>
@@ -222,7 +222,7 @@ const OurStoryPage = () => {
 
                 {/* Future Vision */}
                 <div className="text-center">
-                    <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-red-800 dark:text-red-400 mb-6">
+                    <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-green-800 dark:text-green-400 mb-6">
                         Looking Forward
                     </h2>
                     <p className="text-base sm:text-lg text-gray-700 dark:text-gray-300 max-w-4xl mx-auto mb-8 leading-relaxed">
@@ -231,8 +231,8 @@ const OurStoryPage = () => {
                         constantly innovating, expanding our product range, and improving
                         our services to serve you better.
                     </p>
-                    <div className="bg-red-50 dark:bg-secondary p-8 rounded-xl border-l-4 border-red-500 dark:border-red-600">
-                        <p className="text-lg sm:text-xl font-semibold text-red-800 dark:text-red-400">
+                    <div className="bg-green-50 dark:bg-secondary p-8 rounded-xl border-l-4 border-green-500 dark:border-green-600">
+                        <p className="text-lg sm:text-xl font-semibold text-green-800 dark:text-green-400">
                             &quot;At AttireIdyll, we don&apos;t just sell products—we create
                             experiences, build relationships, and make online shopping a
                             joy.&quot;
@@ -242,7 +242,7 @@ const OurStoryPage = () => {
             </section>
 
             {/* CTA Section */}
-            <section className="bg-gradient-to-r from-red-600 to-red-800 text-white py-12 sm:py-16">
+            <section className="bg-gradient-to-r from-green-600 to-green-800 text-white py-12 sm:py-16">
                 <div className="max-w-4xl mx-auto text-center px-4">
                     <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6">
                         Be Part of Our Story
@@ -251,7 +251,7 @@ const OurStoryPage = () => {
                         Join thousands of satisfied customers who trust AttireIdyll for their
                         online shopping needs.
                     </p>
-                    <button onClick={handleShopNow} className="bg-white text-red-600 px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg hover:bg-red-50 dark:hover:bg-red-700 transition-colors duration-300 shadow-lg">
+                    <button onClick={handleShopNow} className="bg-white text-green-600 px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg hover:bg-green-50 dark:hover:bg-green-700 transition-colors duration-300 shadow-lg">
                         Start Shopping Today
                     </button>
                 </div>

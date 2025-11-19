@@ -82,7 +82,7 @@ const DeliveryInfoForm: React.FC<Props> = ({
             </div>
 
             <p className="text-xs text-gray-500 dark:text-white -mt-2 lg:mt-4">
-                অর্ডার কনফার্ম করতে আপনার নাম, ঠিকানা, মোবাইল নাম্বার লিখে অর্ডার কনফার্ম করুন।
+                To confirm order, please provide your name, address, and mobile number to confirm the order.
             </p>
 
             <div className="md:space-y-6 space-y-2">
@@ -91,7 +91,7 @@ const DeliveryInfoForm: React.FC<Props> = ({
                         htmlFor="name"
                         className="block mt-1 lg:mt-4 md:mb-2 text-sm font-semibold text-black dark:text-white"
                     >
-                        আপনার নাম*
+                        Your Name*
                     </label>
                     <input
                         id="name"
@@ -99,13 +99,13 @@ const DeliveryInfoForm: React.FC<Props> = ({
                         value={formData.name}
                         onChange={handleChange}
                         placeholder="Enter Full Name"
-                        className={`w-full mb-1 px-4 py-2 rounded-xl border transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-red-300 bg-white dark:bg-secondary text-gray-800 dark:text-white ${formErrors.name
-                            ? "border-red-300 bg-red-50 focus:border-red-300"
-                            : "border-red-100 focus:border-red-300 hover:border-gray-300"
+                        className={`w-full mb-1 px-4 py-2 rounded-xl border transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-green-300 bg-white dark:bg-secondary text-gray-800 dark:text-white ${formErrors.name
+                            ? "border-green-300 bg-green-50 focus:border-green-300"
+                            : "border-green-100 focus:border-green-300 hover:border-gray-300"
                             }`}
                     />
                     {formErrors.name && (
-                        <p className="mt-2 text-red-600 dark:text-primary text-sm flex items-center">
+                        <p className="mt-2 text-red-600 dark:text-red-600 text-sm flex items-center">
                             {formErrors.name}
                         </p>
                     )}
@@ -116,7 +116,7 @@ const DeliveryInfoForm: React.FC<Props> = ({
                         htmlFor="phone"
                         className="block md:mb-2 text-sm font-semibold text-black dark:text-white mt-[-8px] sm:mt-0"
                     >
-                        ফোন নাম্বার*
+                        Phone Number*
                     </label>
                     <input
                         id="phone"
@@ -127,13 +127,13 @@ const DeliveryInfoForm: React.FC<Props> = ({
                         value={formData.phone}
                         onChange={handleChange}
                         placeholder="Enter Contact Number"
-                        className={`w-full px-4 py-2 rounded-xl border transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-red-300 bg-white dark:bg-secondary text-gray-800 dark:text-white ${formErrors.phone
-                            ? "border-red-300 bg-red-50 focus:border-red-300"
-                            : "border-red-100 focus:border-red-300 hover:border-gray-300"
+                        className={`w-full px-4 py-2 rounded-xl border transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-green-300 bg-white dark:bg-secondary text-gray-800 dark:text-white ${formErrors.phone
+                            ? "border-green-300 bg-green-50 focus:border-green-300"
+                            : "border-green-100 focus:border-green-300 hover:border-gray-300"
                             }`}
                     />
                     {formErrors.phone && (
-                        <p className="mt-2 text-red-600 dark:text-primary text-sm flex items-center">
+                        <p className="mt-2 text-red-600 dark:text-red-600 text-sm flex items-center">
                             {formErrors.phone}
                         </p>
                     )}
@@ -144,7 +144,7 @@ const DeliveryInfoForm: React.FC<Props> = ({
                         htmlFor="address"
                         className="block md:mb-2 text-sm font-semibold text-black dark:text-white mt-[-6px] sm:mt-0"
                     >
-                        ডেলিভারি ঠিকানা*
+                        Delivery Address*
                     </label>
                     <textarea
                         id="address"
@@ -153,13 +153,13 @@ const DeliveryInfoForm: React.FC<Props> = ({
                         onChange={handleChange}
                         placeholder="Enter Delivery Address"
                         rows={2}
-                        className={`w-full px-4 py-2 rounded-xl border transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-red-300 resize-none bg-white dark:bg-secondary text-gray-800 dark:text-white ${formErrors.address
-                            ? "border-red-300 bg-red-50 focus:border-red-300"
-                            : "border-red-100 focus:border-red-300 hover:border-gray-300"
+                        className={`w-full px-4 py-2 rounded-xl border transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-green-300 resize-none bg-white dark:bg-secondary text-gray-800 dark:text-white ${formErrors.address
+                            ? "border-green-300 bg-green-50 focus:border-green-300"
+                            : "border-green-100 focus:border-green-300 hover:border-gray-300"
                             }`}
                     />
                     {formErrors.address && (
-                        <p className="mt-2 text-red-600 dark:text-primary text-sm flex items-center">
+                        <p className="mt-2 text-red-600 dark:text-red-600 text-sm flex items-center">
                             {formErrors.address}
                         </p>
                     )}
@@ -170,27 +170,27 @@ const DeliveryInfoForm: React.FC<Props> = ({
                         htmlFor="delivery_area"
                         className="block md:mb-2 text-sm font-semibold text-black dark:text-white mt-[-8px] sm:mt-0"
                     >
-                        ডেলিভারি এলাকা*
+                        Delivery Area*
                     </label>
                     <select
                         id="delivery_area"
                         name="delivery_area"
                         value={formData.delivery_area}
                         onChange={handleChange}
-                        className={`w-full py-2 lg:px-4 lg:py-4 rounded-xl border transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-red-300 bg-white text-sm text-gray-800 dark:text-white dark:bg-secondary ${formErrors.delivery_area
-                            ? "border-red-300 focus:border-red-300"
-                            : "border-red-100 focus:border-red-300 hover:border-gray-300"
+                        className={`w-full py-2 lg:px-4 lg:py-4 rounded-xl border transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-green-300 bg-white text-sm text-gray-800 dark:text-white dark:bg-secondary ${formErrors.delivery_area
+                            ? "border-green-300 focus:border-green-300"
+                            : "border-green-100 focus:border-green-300 hover:border-gray-300"
                             }`}
                     >
                         <option value="" disabled hidden>
                             Select Delivery Area
                         </option>
-                        <option value="inside_dhaka"> ঢাকার ভিতরে - ৳{insideFee}</option>
-                        <option value="sub_dhaka"> সাব-ঢাকা - ৳{subDhakaFee}</option>
-                        <option value="outside_dhaka"> ঢাকার বাইরে - ৳{outsideFee}</option>
+                        <option value="inside_dhaka"> Inside Dhaka - ${insideFee}</option>
+                        <option value="sub_dhaka"> Sub-Dhaka - ${subDhakaFee}</option>
+                        <option value="outside_dhaka"> Outside Dhaka - ${outsideFee}</option>
                     </select>
                     {formErrors.delivery_area && (
-                        <p className="mt-2 text-red-600 dark:text-primary text-sm flex items-center">
+                        <p className="mt-2 text-red-600 dark:text-red-600 text-sm flex items-center">
                             {formErrors.delivery_area}
                         </p>
                     )}
@@ -202,14 +202,14 @@ const DeliveryInfoForm: React.FC<Props> = ({
                             htmlFor="note"
                             className="block text-sm font-bold text-black dark:text-white"
                         >
-                            গ্রাহক নোট (optional)
+                            Customer Note (optional)
                         </label>
                         <button
                             type="button"
                             onClick={() => setIsNoteVisible(!isNoteVisible)}
                             className="md:hidden ml-2 p-1 rounded-lg bg-gray-100 dark:bg-gray-600"
                         >
-                            {isNoteVisible ? 'আড়াল করুন' : 'নোট যোগ করুন'}
+                            {isNoteVisible ? 'Hide' : 'Add Note'}
 
                         </button>
                     </div>
@@ -222,9 +222,9 @@ const DeliveryInfoForm: React.FC<Props> = ({
                             onChange={handleChange}
                             placeholder="Enter Your Note"
                             rows={2}
-                            className={`w-full px-4 py-2 rounded-xl border transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-red-300 resize-none bg-white dark:bg-secondary text-gray-800 dark:text-white ${formErrors.note
-                                ? "border-red-300 bg-red-50 focus:border-red-300"
-                                : "border-red-100 focus:border-red-300 hover:border-gray-300"
+                            className={`w-full px-4 py-2 rounded-xl border transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-green-300 resize-none bg-white dark:bg-secondary text-gray-800 dark:text-white ${formErrors.note
+                                ? "border-green-300 bg-green-50 focus:border-green-300"
+                                : "border-green-100 focus:border-green-300 hover:border-gray-300"
                                 }`}
                         />)}
                     {formErrors.note && (
@@ -236,11 +236,11 @@ const DeliveryInfoForm: React.FC<Props> = ({
             </div>
 
             {/* Payment Methods */}
-            <div className="bg-green-50 p-2 md:p-6 rounded-xl border border-green-200">
+            <div className="bg-white dark:bg-secondary p-2 md:p-6 rounded-xl border border-green-200">
                 <div className={`flex justify-between ${availablePaymentMethods.length === 0 ? 'flex-row' : 'flex-col'}`}>
                     <div className={`flex flex-row items-center gap-3 justify-between mb-2 md:mb-6 ${availablePaymentMethods.length === 0 ? 'flex-col' : 'flex-row'}`}>
-                        <h3 className="font-semibold text-gray-800 mb-1">পেমেন্ট পদ্ধতি</h3>
-                        <p className="text-sm text-gray-600">নিরাপদ ও সুবিধাজনক</p>
+                        <h3 className="font-semibold text-gray-800 dark:text-white mb-1">Payment Method</h3>
+                        <p className="text-sm text-gray-600 dark:text-white">Safe and Convenient</p>
                     </div>
 
                     <div className={`grid gap-4 ${availablePaymentMethods.length === 0 ? 'grid-cols-1' : 'grid-cols-2 md:grid-cols-2 w-full'}`}>
@@ -308,13 +308,13 @@ const DeliveryInfoForm: React.FC<Props> = ({
                     <input
                         type="checkbox"
                         defaultChecked
-                        className="w-3 h-3 rounded-md border-2 border-gray-200 text-red-300 focus:ring-2 focus:ring-red-300 bg-white dark:bg-secondary mt-1"
+                        className="w-3 h-3 rounded-md border-2 border-gray-200 text-green-300 focus:ring-2 focus:ring-green-300 bg-white dark:bg-secondary mt-1"
                     />
                     <span className="text-sm font-medium text-gray-700 dark:text-white">
                         I agree to our{" "}
-                        <a href="/terms-of-service" className="text-primary hover:underline">Terms & Conditions</a>,{" "}
-                        <a href="/privacy-policy" className="text-primary hover:underline">Privacy Policy</a>, and{" "}
-                        <a href="/refund-policy" className="text-primary hover:underline">Return & Refund Policy</a>
+                        <a href="/terms-of-service" className="text-primary dark:text-red-600 hover:underline">Terms & Conditions</a>,{" "}
+                        <a href="/privacy-policy" className="text-primary dark:text-red-600 hover:underline">Privacy Policy</a>, and{" "}
+                        <a href="/refund-policy" className="text-primary dark:text-red-600 hover:underline">Return & Refund Policy</a>
                     </span>
                 </label>
             </div>

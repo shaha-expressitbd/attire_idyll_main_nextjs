@@ -21,7 +21,7 @@
 // const indentCls = ["pl-4", "pl-8", "pl-12", "pl-16", "pl-20"];
 // /** চোখে পড়ার মতো হাইলাইট */
 // const highlightCls =
-//   "bg-red-600 text-white font-semibold border-l-[5px] border-red-400 shadow-md shadow-red-500/40";
+//   "bg-green-600 text-white font-semibold border-l-[5px] border-green-400 shadow-md shadow-green-500/40";
 // /** নরমাল হোভার স্টেট */
 // const hoverCls =
 //   "hover:bg-gray-700 hover:text-gray-100 transition-colors duration-150";

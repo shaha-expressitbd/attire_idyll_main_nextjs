@@ -53,7 +53,7 @@ const SupportPage = () => {
             title: 'Contact Support',
             icon: FiMessageCircle,
             description: 'Get personalized help from our support team',
-            color: 'from-red-500 to-red-600',
+            color: 'from-green-500 to-green-600',
         },
         {
             id: 'live-chat',
@@ -98,7 +98,7 @@ const SupportPage = () => {
             title: 'Live Chat',
             description: 'Instant messaging',
             availability: 'Online now',
-            color: 'text-red-600 bg-red-50 dark:text-red-400 dark:bg-red-900',
+            color: 'text-green-600 bg-green-50 dark:text-green-400 dark:bg-green-900',
         },
     ];
 
@@ -160,7 +160,7 @@ const SupportPage = () => {
     ({
         operational: 'text-green-600 bg-green-100 dark:text-green-400 dark:bg-green-900',
         degraded: 'text-yellow-600 bg-yellow-100 dark:text-yellow-400 dark:bg-yellow-900',
-        outage: 'text-red-600 bg-red-100 dark:text-red-400 dark:bg-red-900',
+        outage: 'text-green-600 bg-green-100 dark:text-green-400 dark:bg-green-900',
     }[status] || 'text-gray-600 bg-gray-100 dark:text-gray-400 dark:bg-secondary');
 
     const getStatusIcon = (status: string) =>
@@ -212,7 +212,7 @@ const SupportPage = () => {
             <header className="bg-primary text-white md:mt-8 -mt-4">
                 <div className="max-w-7xl mx-auto px-2 md:px-4 py-8 md:py-16 text-center">
                     <h1 className="text-2xl md:text-5xl font-bold mb-4">Support Center</h1>
-                    <p className="text-sm md:text-xl text-red-100 max-w-3xl mx-auto">
+                    <p className="text-sm md:text-xl text-green-100 max-w-3xl mx-auto">
                         We’re here to help you every step of the way. Get instant support, find answers, or
                         connect with our expert team.
                     </p>
@@ -225,7 +225,7 @@ const SupportPage = () => {
                                     <Icon className="w-6 h-6 text-white" />
                                 </div>
                                 <div className="text-2xl font-bold">{value}</div>
-                                <div className="text-red-100 text-sm">{label}</div>
+                                <div className="text-green-100 text-sm">{label}</div>
                             </div>
                         ))}
                     </div>
@@ -239,7 +239,7 @@ const SupportPage = () => {
                         <button
                             key={o.id}
                             onClick={() => setActiveTab(o.id as typeof activeTab)}
-                            className={`bg-white dark:bg-secondary rounded-2xl shadow-lg hover:shadow-xl transition-all p-6 text-left group ${activeTab === o.id ? 'ring-2 ring-red-500' : ''
+                            className={`bg-white dark:bg-secondary rounded-2xl shadow-lg hover:shadow-xl transition-all p-6 text-left group ${activeTab === o.id ? 'ring-2 ring-green-500' : ''
                                 }`}
                         >
                             <div
@@ -283,7 +283,7 @@ const SupportPage = () => {
                                                     value={(formData as any)[name]}
                                                     onChange={handleInputChange}
                                                     required={required}
-                                                    className="w-full md:px-4 px-2 py-3 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-secondary text-gray-800 dark:text-gray-100 focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                                                    className="w-full md:px-4 px-2 py-3 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-secondary text-gray-800 dark:text-gray-100 focus:ring-2 focus:ring-green-500 focus:border-transparent"
                                                 />
                                             </div>
                                         ))}
@@ -298,7 +298,7 @@ const SupportPage = () => {
                                             name="subject"
                                             value={formData.subject}
                                             onChange={handleInputChange}
-                                            className="w-full text-black dark:text-white px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-secondary focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                                            className="w-full text-black dark:text-white px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-secondary focus:ring-2 focus:ring-green-500 focus:border-transparent"
                                         >
                                             <option value="">Select a topic…</option>
                                             {supportTopics.map((t) => (
@@ -319,7 +319,7 @@ const SupportPage = () => {
                                                 name="priority"
                                                 value={formData.priority}
                                                 onChange={handleInputChange}
-                                                className="w-full text-black dark:text-white px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-secondary focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                                                className="w-full text-black dark:text-white px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-secondary focus:ring-2 focus:ring-green-500 focus:border-transparent"
                                             >
                                                 {['low', 'medium', 'high', 'urgent'].map((p) => (
                                                     <option key={p} value={p}>
@@ -338,7 +338,7 @@ const SupportPage = () => {
                                                 value={formData.orderNumber}
                                                 onChange={handleInputChange}
                                                 placeholder="EMD-123456"
-                                                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-secondary focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                                                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-secondary focus:ring-2 focus:ring-green-500 focus:border-transparent"
                                             />
                                         </div>
                                     </div>
@@ -355,7 +355,7 @@ const SupportPage = () => {
                                             placeholder="Please describe your issue in detail…"
                                             value={formData.message}
                                             onChange={handleInputChange}
-                                            className="w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg resize-none bg-white dark:bg-secondary text-gray-800 dark:text-gray-100 focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                                            className="w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg resize-none bg-white dark:bg-secondary text-gray-800 dark:text-gray-100 focus:ring-2 focus:ring-green-500 focus:border-transparent"
                                         />
                                     </div>
 
@@ -430,7 +430,7 @@ const SupportPage = () => {
                         <div className="bg-primary text-white p-6 flex items-center justify-between">
                             <div>
                                 <h2 className="text-2xl font-bold">Live Chat Support</h2>
-                                <p className="text-red-100">Connected with Agent Sarah</p>
+                                <p className="text-green-100">Connected with Agent Sarah</p>
                             </div>
                             <div className="flex items-center gap-2">
                                 <div className="w-3 h-3 bg-green-400 rounded-full" />
@@ -450,7 +450,7 @@ const SupportPage = () => {
                                     >
                                         <p>{m.message}</p>
                                         <p
-                                            className={`text-xs mt-1 ${m.type === 'user' ? 'text-red-100' : 'text-gray-500 dark:text-gray-400'
+                                            className={`text-xs mt-1 ${m.type === 'user' ? 'text-green-100' : 'text-gray-500 dark:text-gray-400'
                                                 }`}
                                         >
                                             {m.time}
@@ -486,7 +486,7 @@ const SupportPage = () => {
                                     onChange={(e) => setNewMessage(e.target.value)}
                                     onKeyDown={(e) => e.key === 'Enter' && sendMessage()}
                                     placeholder="Type your message…"
-                                    className="flex-1 px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-secondary text-gray-800 dark:text-gray-100 focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                                    className="flex-1 px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-secondary text-gray-800 dark:text-gray-100 focus:ring-2 focus:ring-green-500 focus:border-transparent"
                                 />
                                 <button
                                     onClick={sendMessage}
@@ -516,7 +516,7 @@ const SupportPage = () => {
                                 <input
                                     type="text"
                                     placeholder="Search help articles…"
-                                    className="w-full pl-12 pr-4 py-3 border text-black dark:text-white border-gray-300 dark:border-gray-700 rounded-xl bg-white dark:bg-secondary focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                                    className="w-full pl-12 pr-4 py-3 border text-black dark:text-white border-gray-300 dark:border-gray-700 rounded-xl bg-white dark:bg-secondary focus:ring-2 focus:ring-green-500 focus:border-transparent"
                                 />
                             </div>
                         </div>
@@ -531,7 +531,7 @@ const SupportPage = () => {
                                     <ul className="space-y-4">
                                         {section.articles.map((a) => (
                                             <li key={a.title} className="border-b border-gray-100 dark:border-gray-800 pb-4 last:border-b-0">
-                                                <h4 className="font-semibold text-gray-800 dark:text-gray-100 hover:text-red-600 cursor-pointer mb-2">
+                                                <h4 className="font-semibold text-gray-800 dark:text-gray-100 hover:text-green-600 cursor-pointer mb-2">
                                                     {a.title}
                                                 </h4>
                                                 <div className="flex items-center justify-between text-xs text-gray-600 dark:text-gray-400">
@@ -544,7 +544,7 @@ const SupportPage = () => {
                                             </li>
                                         ))}
                                     </ul>
-                                    <button className="w-full mt-4 text-primary font-semibold hover:text-secondary dark:hover:text-red-300 flex items-center justify-center gap-2">
+                                    <button className="w-full mt-4 text-primary font-semibold hover:text-secondary dark:hover:text-green-300 flex items-center justify-center gap-2">
                                         View All Articles
                                         <BsArrowRight className="w-4 h-4" />
                                     </button>

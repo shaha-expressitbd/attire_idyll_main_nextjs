@@ -48,7 +48,7 @@ export function ProductFooter({
                                 <button
                                     onClick={onWishlistToggle}
                                     aria-label={isWishlisted ? "Remove from wishlist" : "Add to wishlist"}
-                                    className={`p-1 rounded-md border ${isWishlisted ? "text-red-500 border-red-400 bg-red-50" : "text-gray-500 border-gray-300 bg-white"}`}
+                                    className={`p-1 rounded-md border ${isWishlisted ? "text-green-500 border-green-400 bg-green-50" : "text-gray-500 border-gray-300 bg-white"}`}
                                 >
                                     <FiHeart size={20} fill={isWishlisted ? "#ef4444" : "none"} />
                                 </button>

@@ -41,7 +41,7 @@ export const CalendarMonthView: React.FC<CalendarMonthViewProps> = ({
               "p-1 rounded text-center text-xs md:text-sm transition-colors",
               isCurrentMonth
                 ? error
-                  ? "bg-red-600 text-white"
+                  ? "bg-green-600 text-white"
                   : "bg-primary text-white"
                 : "hover:bg-gray-100 dark:hover:bg-gray-700",
               disabled && "opacity-50 cursor-not-allowed"

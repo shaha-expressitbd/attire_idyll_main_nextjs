@@ -250,7 +250,7 @@ export default function MainCategoryPage({
         <div className="space-y-6">
             {/* Sub-categories with Image */}
             <div className="bg-white dark:bg-secondary rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
-                <div className="p-4 bg-gray-50 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+                <div className="p-4 bg-gray-50 dark:bg-secondary border-b border-gray-200 dark:border-gray-700">
                     <div className="flex items-center justify-between">
                         <h3 className="font-semibold text-gray-900 dark:text-white">Sub-categories</h3>
                         {selectedSubs && (
@@ -307,8 +307,8 @@ export default function MainCategoryPage({
 
             {/* Price Range */}
             <div className="bg-white dark:bg-secondary rounded-xl shadow-sm border border-gray-200 dark:border-gray-700">
-                <div className="p-4 bg-gray-50 dark:bg-gray-800 border-b">
-                    <h3 className="font-semibold">Price Range</h3>
+                <div className="p-4 bg-gray-50 dark:bg-secondary border-b">
+                    <h3 className="font-semibold text-black dark:text-white">Price Range</h3>
                 </div>
                 <div className="p-5">
                     <RangePriceFilter
@@ -323,7 +323,7 @@ export default function MainCategoryPage({
             {hasActiveFilters && (
                 <button
                     onClick={clearFilters}
-                    className="w-full py-3 bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 rounded-xl font-medium hover:bg-red-200 dark:hover:bg-red-900/50 transition"
+                    className="w-full py-3 bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 rounded-xl font-medium hover:bg-green-200 dark:hover:bg-green-900/50 transition"
                 >
                     Clear All Filters
                 </button>
@@ -333,7 +333,7 @@ export default function MainCategoryPage({
     FilterSidebar.displayName = 'FilterSidebar';
 
     return (
-        <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+        <div className="min-h-screen bg-gray-50 dark:bg-secondary">
             {/* Full Width Banner */}
             {mainCategory.cover?.secure_url ? (
                 <div className="relative h-64 md:h-96 w-full overflow-hidden">

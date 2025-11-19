@@ -26,9 +26,9 @@ export default function PromotionBanner() {
             </div>
             <div className="space-y-4 pt-5 md:pt-2 lg:ml-16 dark:text-white  ">
               <h1 className="text-3xl lg:text-6xl font-bold leading-tight lg:leading-normal font-serif ml-16 lg:ml-72">
-                <span>নতুন</span> <br />
+                <span>New</span> <br />
                 <span className="text-primary  -ml-8 lg:-ml-20 ">
-                  কালেকশন
+                  Collection
                 </span>
               </h1>
               <div className="text-sm md:text-lg md:leading-relaxed ">
@@ -39,7 +39,7 @@ export default function PromotionBanner() {
                   </span>
 
                   <span className="lg:ml-0 inline-block font-serif  ">
-                    - এর সাথে ফ্যাশনে পা রাখুন নতুন দিগন্তে! ❤️
+                    - Step into fashion with AttireIdyll in a new horizon! ❤️
                   </span>
                 </p>
 
@@ -48,31 +48,31 @@ export default function PromotionBanner() {
                 <div className="text-sm md:text-lg md:leading-relaxed md:hidden ipad-mini:hidden">
                   {" "}
                   <div className=" block">
-                    ✨<span className="text-primary">AttireIdyll</span>-এর সাথে
-                    ফ্যাশনে পা
+                    ✨<span className="text-primary">AttireIdyll</span> - Step into fashion
+                    in a new
                   </div>
                   <span className="block break-words pl-8">
                     {" "}
-                    রাখুন নতুন দিগন্তে! ❤️
+                    horizon! ❤️
                   </span>{" "}
                 </div>
 
                 {/* iPad Mini */}
                 <div className="hidden ipad-mini:block text-center">
-                  ✨<span className="text-primary">AttireIdyll</span>-এর সাথে
-                  ফ্যাশনে পারাখুন নতুন দিগন্তে!
+                  ✨<span className="text-primary">AttireIdyll</span> - Step into fashion
+                  in a new horizon!
                   <br />
                   ❤️
                 </div>
 
                 <span className="hidden md:block font-serif">
                   <span className="lg:ml-44 ">
-                    আমাদের এক্সক্লুসিভ নতুন কালেকশন এখন উপলব্ধ!
+                    Our exclusive new collection is now available!
                   </span>{" "}
                   <br />
                   <span className="lg:ml-24 ">
-                    আপনার প্রিয় ফ্যাশন স্টাইল খুঁজে নিন আর নিজেকে সাজান
-                    অনন্যভাবে। ❤️
+                    Find your favorite fashion style and dress yourself
+                    uniquely. ❤️
                   </span>
                 </span>
               </div>
@@ -83,7 +83,7 @@ export default function PromotionBanner() {
                 className="inline-block bg-primary px-3.5 py-2 xl:px-10 md:py-3.5 rounded-xl  xl:ml-32 xl:mt-8 mt-1 font-bold text-sm md:text-[16px] text-white dark:text-white  transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-lg"
                 href="/products"
               >
-                অর্ডার করুন
+                Order Now
               </a>
             </div>
           </div>

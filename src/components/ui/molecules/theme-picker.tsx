@@ -10,7 +10,7 @@ const ThemeColorPicker: React.FC = () => {
   const { color, changeColor } = useTheme();
 
   const colors: { name: ThemeColor; icon: React.ReactNode }[] = [
-    { name: "red", icon: <Icon icon={FaFire} className='text-red-500' /> },
+    { name: "red", icon: <Icon icon={FaFire} className='text-green-500' /> },
     { name: "green", icon: <Icon icon={FaLeaf} className='text-green-500' /> },
     { name: "blue", icon: <Icon icon={FaTint} className='text-blue-500' /> },
     {

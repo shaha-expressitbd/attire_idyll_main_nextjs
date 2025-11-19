@@ -117,7 +117,7 @@ function WishlistItemRow({
                     onMouseDown={stop}
                     onTouchStart={stop}
                     onClick={onRemove}
-                    className="p-2 rounded-full bg-white dark:bg-secondary border border-gray-200 dark:border-gray-700 text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
+                    className="p-2 rounded-full bg-white dark:bg-secondary border border-gray-200 dark:border-gray-700 text-green-500 hover:bg-green-50 dark:hover:bg-green-900/20 transition-colors"
                     aria-label="Remove"
                 >
                     <FiTrash2 className="w-4 h-4" />
@@ -233,7 +233,7 @@ export function WishlistSheet() {
                                 </motion.span>
                             </AnimatePresence>
 
-                            <div className="absolute -top-3 -right-3 md:top-2 w-5 h-5 rounded-full bg-red-500 animate-ping opacity-60" />
+                            <div className="absolute -top-3 -right-3 md:top-2 w-5 h-5 rounded-full bg-green-500 animate-ping opacity-60" />
                         </>
                     )}
                 </div>
@@ -248,10 +248,10 @@ export function WishlistSheet() {
                 <SheetContent className="flex flex-col h-screen w-full sm:max-w-sm md:max-w-md lg:max-w-lg bg-white dark:bg-secondary overflow-hidden">
                     <div ref={contentRef} className="flex flex-col flex-1 min-h-0">
                         {/* header */}
-                        <div className="relative px-5 py-5 bg-gradient-to-r from-red-50 to-green-50 dark:from-red-900/20 dark:to-green-900/20 border-b border-gray-200/50 dark:border-gray-700/50">
+                        <div className="relative px-5 py-5 bg-gradient-to-r from-green-50 to-green-50 dark:from-green-900/20 dark:to-green-900/20 border-b border-gray-200/50 dark:border-gray-700/50">
                             <div className="flex items-center justify-between">
                                 <div className="flex items-center gap-3">
-                                    <div className="p-2 rounded-xl bg-gradient-to-br from-green-100 to-red-100 dark:from-green-900/30 dark:to-red-900/30">
+                                    <div className="p-2 rounded-xl bg-gradient-to-br from-green-100 to-green-100 dark:from-green-900/30 dark:to-green-900/30">
                                         <FiHeart className="w-5 h-5 text-primary dark:text-green-400" />
                                     </div>
                                     <div>
@@ -283,7 +283,7 @@ export function WishlistSheet() {
                                     animate={{ opacity: 1, y: 0 }}
                                     className="flex flex-col items-center justify-center h-full gap-6 p-6 sm:p-8"
                                 >
-                                    <div className="p-6 rounded-3xl bg-gradient-to-br from-red-50 to-green-50 dark:from-red-900/30 dark:to-green-900/30">
+                                    <div className="p-6 rounded-3xl bg-gradient-to-br from-green-50 to-green-50 dark:from-green-900/30 dark:to-green-900/30">
                                         <FiHeart className="w-16 h-16 text-green-400" />
                                     </div>
 

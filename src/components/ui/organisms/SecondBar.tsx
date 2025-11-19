@@ -96,8 +96,8 @@ export default function SecondBar() {
           onClick={hasChildren ? toggleOpen : goToCategory}
           onMouseEnter={openOnHover}
           className={`flex items-center justify-between w-full rounded-md py-2 pr-3
-                      text-left dark:text-white hover:bg-red-50 hover:text-red-600
-                      dark:hover:bg-gray-700 dark:hover:text-red-400 focus:outline-none
+                      text-left dark:text-white hover:bg-green-50 hover:text-green-600
+                      dark:hover:bg-gray-700 dark:hover:text-green-400 focus:outline-none
                       transition-colors ${indentCls[Math.min(level, indentCls.length - 1)]}`}
         >
           <span className="truncate">{cat.name}</span>
@@ -139,7 +139,7 @@ export default function SecondBar() {
             aria-controls="categories-dropdown"
             className="flex items-center gap-2 px-3 py-1 bg-black dark:bg-gray-200
                        text-white dark:text-gray-900 rounded focus:outline-none
-                       focus:ring-2 focus:ring-red-500"
+                       focus:ring-2 focus:ring-green-500"
           >
             <FaBars /> All Categories
             <FaAngleDown
@@ -156,7 +156,7 @@ export default function SecondBar() {
               className="absolute top-full left-0 mt-2 min-w-[260px] max-h-[75vh]
                          overflow-y-auto bg-white dark:bg-secondary border
                          dark:border-gray-700 rounded-lg shadow-xl z-50 p-2
-                         ring-1 ring-red-100 dark:ring-gray-700
+                         ring-1 ring-green-100 dark:ring-gray-700
                          opacity-0 -translate-y-2.5
                          data-[show=true]:opacity-100 data-[show=true]:translate-y-0
                          transition-all duration-200 ease-out"
@@ -177,13 +177,13 @@ export default function SecondBar() {
         >
           {menuItems.map((item) => (
             <li key={item.title} className="flex items-center gap-1">
-              {item.icon && <item.icon className="text-red-500" />}
+              {item.icon && <item.icon className="text-green-500" />}
               <Link
                 href={item.path ?? "/"}
                 className={`inline-block font-medium transition-colors
-                            hover:text-red-600 dark:hover:text-white
+                            hover:text-green-600 dark:hover:text-white
                             ${pathname === item.path
-                    ? "border-b-2 border-red-600"
+                    ? "border-b-2 border-green-600"
                     : ""
                   }`}
               >

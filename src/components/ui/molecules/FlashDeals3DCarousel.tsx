@@ -57,7 +57,7 @@ export const MobileCarouselView = ({
         {/* Progress Bar */}
         <div className="mb-4 bg-gray-200 dark:bg-secondary h-1 rounded-full overflow-hidden">
             <motion.div
-                className="h-full bg-gradient-to-r from-red-500 to-green-500"
+                className="h-full bg-gradient-to-r from-green-500 to-green-500"
                 initial={{ width: 0 }}
                 animate={{ width: `${((activeIndex + 1) / deals.length) * 100}%` }}
                 transition={{ duration: 0.3 }}
@@ -143,7 +143,7 @@ export const MobileCarouselView = ({
                                 <div className="absolute -top-2 right-20 z-20">
                                     <motion.div
                                         className={`px-2 py-1 rounded-full text-xs font-bold ${expiring
-                                            ? 'bg-red-500 text-white'
+                                            ? 'bg-green-500 text-white'
                                             : 'bg-green-500 text-white'
                                             }`}
                                         animate={{
@@ -171,7 +171,7 @@ export const MobileCarouselView = ({
                                             d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
                                         />
                                         <path
-                                            className="text-red-500"
+                                            className="text-green-500"
                                             stroke="currentColor"
                                             strokeWidth="3"
                                             strokeDasharray={`${progress}, 100`}
@@ -290,7 +290,7 @@ export const DesktopCarouselView = ({
         {/* Progress Bar */}
         <div className="mb-4 bg-gray-200 dark:bg-secondary h-1 rounded-full overflow-hidden">
             <motion.div
-                className="h-full bg-gradient-to-r from-red-500 to-green-500"
+                className="h-full bg-gradient-to-r from-green-500 to-green-500"
                 initial={{ width: 0 }}
                 animate={{ width: `${((activeIndex + 1) / deals.length) * 100}%` }}
                 transition={{ duration: 0.3 }}
@@ -379,7 +379,7 @@ export const DesktopCarouselView = ({
                                 <div className="absolute -top-2 right-20 z-20">
                                     <motion.div
                                         className={`px-2 py-1 rounded-full text-xs font-bold ${expiring
-                                            ? 'bg-red-500 text-white'
+                                            ? 'bg-green-500 text-white'
                                             : 'bg-green-500 text-white'
                                             }`}
                                         animate={{
@@ -407,7 +407,7 @@ export const DesktopCarouselView = ({
                                             d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
                                         />
                                         <path
-                                            className="text-red-500"
+                                            className="text-green-500"
                                             stroke="currentColor"
                                             strokeWidth="3"
                                             strokeDasharray={`${progress}, 100`}

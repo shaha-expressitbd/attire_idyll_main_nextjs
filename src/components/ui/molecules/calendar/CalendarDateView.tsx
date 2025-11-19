@@ -98,13 +98,13 @@ export const CalendarDateView: React.FC<CalendarDateViewProps> = ({
         isPastDate && 'line-through text-gray-400 dark:text-gray-300',
         isSelected && !isRangeStart && !isRangeEnd
           ? error
-            ? 'bg-red-600 text-white'
+            ? 'bg-green-600 text-white'
             : 'bg-primary text-white'
           : isInRange
-          ? error
-            ? 'bg-red-100 text-red-800 dark:bg-red-900/50 dark:text-red-200'
-            : 'bg-orange-100 text-orange-800 dark:bg-orange-900/50 dark:text-orange-200'
-          : 'hover:bg-gray-100 dark:hover:bg-gray-700',
+            ? error
+              ? 'bg-green-100 text-green-800 dark:bg-green-900/50 dark:text-green-200'
+              : 'bg-orange-100 text-orange-800 dark:bg-orange-900/50 dark:text-orange-200'
+            : 'hover:bg-gray-100 dark:hover:bg-gray-700',
         isRangeStart && 'bg-primary text-white',
         isRangeEnd && 'bg-primary text-white',
         isRangeStart && isRangeEnd && 'rounded',

@@ -38,7 +38,7 @@ export const CalendarHeader: React.FC<CalendarHeaderProps> = ({
     <div
       className={twMerge(
         'flex justify-between items-center p-2 sticky top-0 z-10',
-        error ? 'bg-red-600 text-white' : 'bg-primary text-white'
+        error ? 'bg-green-600 text-white' : 'bg-primary text-white'
       )}
     >
       <div className="flex items-center">
@@ -108,21 +108,18 @@ export const CalendarHeader: React.FC<CalendarHeaderProps> = ({
           )}
           {viewMode === 'year' && (
             <div className="font-medium">
-              {`${Math.floor(currentDate.getFullYear() / 10) * 10 - 1} - ${
-                Math.floor(currentDate.getFullYear() / 10) * 10 + 10
-              }`}
+              {`${Math.floor(currentDate.getFullYear() / 10) * 10 - 1} - ${Math.floor(currentDate.getFullYear() / 10) * 10 + 10
+                }`}
             </div>
           )}
         </div>
       ) : (
         <div className="font-medium">
           {dualMonth
-            ? `${getMonthYearLabel().split(' ')[1]} ${
-                getMonthYearLabel().split(' ')[0]
-              }-${getMonthYearLabel(1).split(' ')[0]}`
-            : `${getMonthYearLabel().split(' ')[1]} ${
-                getMonthYearLabel().split(' ')[0]
-              }`}
+            ? `${getMonthYearLabel().split(' ')[1]} ${getMonthYearLabel().split(' ')[0]
+            }-${getMonthYearLabel(1).split(' ')[0]}`
+            : `${getMonthYearLabel().split(' ')[1]} ${getMonthYearLabel().split(' ')[0]
+            }`}
         </div>
       )}
 

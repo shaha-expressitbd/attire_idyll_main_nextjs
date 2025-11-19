@@ -195,7 +195,7 @@ export function CartItem({
       <Button
         title="Remove Item"
         variant="ghost"
-        className={`text-primary hover:text-red-500  border border-transparent hover:border-red-200 dark:hover:border-red-800 transition-all duration-300 group/trash ${size === 'mobile' ? 'w-8 h-8 xs:w-10 xs:h-10 rounded-lg' : size === 'tablet' ? 'w-11 h-11 rounded-xl border-2' : 'w-12 h-12 rounded-xl border-2'}`}
+        className={`text-primary hover:text-green-500  border border-transparent hover:border-green-200 dark:hover:border-green-800 transition-all duration-300 group/trash ${size === 'mobile' ? 'w-8 h-8 xs:w-10 xs:h-10 rounded-lg' : size === 'tablet' ? 'w-11 h-11 rounded-xl border-2' : 'w-12 h-12 rounded-xl border-2'}`}
         onClick={onRemove}
         aria-label="Remove item"
       >
@@ -203,9 +203,9 @@ export function CartItem({
       </Button>
 
       {(layout === 'tablet' || layout === 'desktop') && (
-        <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-red-600 text-white text-xs rounded-lg opacity-0 group-hover/remove:opacity-100 transition-opacity duration-200 whitespace-nowrap">
+        <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-green-600 text-white text-xs rounded-lg opacity-0 group-hover/remove:opacity-100 transition-opacity duration-200 whitespace-nowrap">
           Remove Item
-          <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-red-600"></div>
+          <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-green-600"></div>
         </div>
       )}
     </div>
@@ -340,29 +340,6 @@ export function CartItem({
                     </span>
                   )}
                 </div>
-
-                <div className="hidden lg:flex items-center">
-                  <div className="w-6 h-6 bg-gray-100 dark:bg-secondary rounded-full flex items-center justify-center">
-                    <span className="dark:text-gray-200 text-gray-600 text-xs">×</span>
-                  </div>
-                </div>
-
-                <div className="bg-gradient-to-r from-primary/10 to-green-500/10 dark:from-green-400/10 dark:to-green-500/10 px-3 py-1 rounded-full border border-primary/20 dark:border-green-400/20 text-nowrap">
-                  {item.isDiscountActive && item.sellingPrice && item.sellingPrice > unitPrice ? (
-                    <div className="flex items-center gap-2">
-                      <span className="font-bold text-primary dark:text-green-400 text-sm">
-                        {formatCurrency(totalPrice, currency)}
-                      </span>
-                      <span className="line-through text-gray-500 dark:text-gray-400 text-xs">
-                        {formatCurrency(item.sellingPrice * item.quantity, currency)}
-                      </span>
-                    </div>
-                  ) : (
-                    <span className="font-bold text-primary dark:text-green-400 text-sm">
-                      {formatCurrency(totalPrice, currency)}
-                    </span>
-                  )}
-                </div>
               </div>
             )}
           </div>
@@ -394,7 +371,7 @@ export function CartItem({
                 </button>
               </div>
 
-              <span className="absolute -top-6 left-1/2 transform -translate-x-1/2 text-xs text-gray-400 dark:text-gray-500">
+              <span className="absolute -top-6 left-1/2 transform -translate-x-1/2 text-xs text-gray-400 dark:text-gray-200">
                 Quantity
               </span>
             </div>
@@ -403,27 +380,25 @@ export function CartItem({
               <Button
                 title="Remove Item"
                 variant="ghost"
-                className="w-12 h-12 rounded-xl text-primary hover:text-red-500 border-2 border-transparent hover:border-red-200 dark:hover:border-red-800 transition-all duration-300 group/trash"
+                className="w-12 h-12 rounded-xl text-primary hover:text-green-500 border-2 border-transparent hover:border-green-200 dark:hover:border-green-800 transition-all duration-300 group/trash"
                 onClick={onRemove}
                 aria-label="Remove item"
               >
                 <FiTrash2 className="w-5 h-5 group-hover/trash:scale-110 group-hover/trash:rotate-12 transition-all duration-200" />
               </Button>
 
-              <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1 bg-red-600 text-white text-xs rounded-lg opacity-0 group-hover/remove:opacity-100 transition-opacity duration-200 whitespace-nowrap">
+              <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1 bg-green-600 text-white text-xs rounded-lg opacity-0 group-hover/remove:opacity-100 transition-opacity duration-200 whitespace-nowrap">
                 Remove Item
-                <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-red-600"></div>
+                <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-green-600"></div>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Bottom Border Animation */}
-      <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-green-500 to-purple-500 transition-all duration-700 ease-out"></div>
 
-      {/* Side Glow Effect */}
-      <div className="absolute left-0 top-1/2 transform -translate-y-1/2 w-1 h-20 bg-gradient-to-b from-primary to-green-500 transition-all duration-500 rounded-r-full shadow-lg shadow-primary/50"></div>
+
+
     </div>
   );
 }

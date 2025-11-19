@@ -154,7 +154,7 @@ export default function PrivacyPolicyPage() {
                 opacity: isVisible ? 1 : 0
               }}
             >
-              <div className="bg-white/80 dark:bg-secondary/80 backdrop-blur-sm rounded-2xl shadow-xl border border-white/20 dark:border-slate-700/20 overflow-hidden hover:shadow-2xl transition-all duration-300">
+              <div className="bg-white dark:bg-secondary backdrop-blur-sm rounded-2xl shadow-xl border border-white/20 dark:border-slate-700/20 overflow-hidden hover:shadow-2xl transition-all duration-300">
                 <div
                   className="flex items-center justify-between p-6 cursor-pointer hover:bg-gradient-to-r hover:from-primary/5 hover:to-secondary/5 dark:hover:from-primary/10 dark:hover:to-secondary/10 transition-all duration-300"
                   onClick={() => setActiveSection(activeSection === section.id ? null : section.id)}

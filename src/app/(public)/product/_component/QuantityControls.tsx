@@ -136,7 +136,7 @@ export default function QuantityControls({
       </div>
 
       {/* Separate Row: Add to Cart */}
-      <div className="pt-1 md:pt-0 flex flex-row gap-2 items-center justify-between">
+      <div className="pt-1 md:pt-0 flex flex-col  gap-2 items-center justify-between text-black dark:text-white">
         <AddToCartBtn
           item={product as Product}
           variant={
@@ -173,10 +173,10 @@ export default function QuantityControls({
             }
           }}
           variant="edge"
-          className="flex items-center gap-2"
+          className="flex items-center gap-2 w-full justify-center mt-1"
         >
           <FaWhatsapp className="w-5 h-5" />
-          WhatsApp
+          CHAT WITH CLIENT ADVISOR
         </Button>
       </div>
 

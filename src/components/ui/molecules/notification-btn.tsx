@@ -34,7 +34,7 @@ const NotificationsDropdown = ({ notifications = [] }: NotificationsDropdownProp
         <div className='p-2 rounded-full bg-gray-100 dark:bg-secondary hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors duration-200'>
           <Icon icon={FaBell} size={20} />
           {notifications.length > 0 && (
-            <span className='absolute -top-1 -right-1 bg-red-500  text-white text-xs rounded-full min-h-5 min-w-5 flex items-center justify-center'>
+            <span className='absolute -top-1 -right-1 bg-green-500  text-white text-xs rounded-full min-h-5 min-w-5 flex items-center justify-center'>
               {notifications.length > 9 ? "9+" : notifications.length}
             </span>
           )}

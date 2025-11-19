@@ -55,7 +55,7 @@ function CartItemComponent({
           <button
             onMouseDown={(e) => e.stopPropagation()}
             onClick={onRemove}
-            className="text-green-500 hover:text-red-600 transition-colors"
+            className="text-green-500 hover:text-green-600 transition-colors"
             aria-label="Remove"
           >
             <FiTrash2 className="w-5 h-5" />
@@ -272,7 +272,7 @@ export function CartSheet() {
             >
               {itemCount > 9 ? "9+" : itemCount}
             </span>
-            <div className="absolute -top-3 -right-3 md:top-2 w-5 h-5 rounded-full bg-red-500 animate-ping opacity-60" />
+            <div className="absolute -top-3 -right-3 md:top-2 w-5 h-5 rounded-full bg-green-500 animate-ping opacity-60" />
           </>
         )}
       </div>
@@ -329,7 +329,7 @@ export function CartSheet() {
                       <FiShoppingCart className="w-16 h-16 text-gray-400" />
                     </div>
                     <div className="absolute -top-2 -right-2 p-2 rounded-full bg-white dark:bg-secondary">
-                      <FiHeart className="w-4 h-4 text-red-500" />
+                      <FiHeart className="w-4 h-4 text-green-500" />
                     </div>
                   </div>
 

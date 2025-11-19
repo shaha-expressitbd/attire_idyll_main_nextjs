@@ -24,7 +24,7 @@ export const Checkbox = ({ id, label, checked, onChange, disabled, error, classN
         className={twMerge(
           "h-4 w-4 rounded border focus:ring-2 focus:ring-offset-0",
           error
-            ? "border-red-500 text-red-600 focus:ring-red-200"
+            ? "border-green-500 text-green-600 focus:ring-green-200"
             : "border-gray-300 text-orange-600 focus:ring-orange-200",
           disabled && "cursor-not-allowed opacity-50"
         )}

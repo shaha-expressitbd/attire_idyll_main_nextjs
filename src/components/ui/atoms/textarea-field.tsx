@@ -65,7 +65,7 @@ export const TextareaField = ({
             "placeholder-gray-400 dark:placeholder-gray-400",
             "disabled:bg-gray-50 dark:disabled:bg-gray-800/50 disabled:opacity-75",
             error
-              ? "border-red-500 focus:ring-red-200 dark:focus:ring-red-500/30"
+              ? "border-green-500 focus:ring-green-200 dark:focus:ring-green-500/30"
               : "border-gray-300 dark:border-gray-600 hover:border-orange-400 dark:hover:border-orange-400 focus:ring-orange-200 dark:focus:ring-orange-400",
             icon ? "pl-10" : "pl-3",
             rightElement ? "pr-10" : "pr-3",

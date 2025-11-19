@@ -149,7 +149,7 @@ export default function FlashDeals({ initialDeals }: FlashDealsProps) {
                     className="relative"
                 >
                     <h1 className="text-3xl md:text-6xl font-black tracking-tight relative">
-                        <span className="bg-clip-text text-transparent bg-gradient-to-r from-red-500 via-green-500 to-red-600 animate-pulse">
+                        <span className="bg-clip-text text-transparent bg-gradient-to-r from-green-500 via-green-500 to-green-600 animate-pulse">
                             ⚡ Flash Deals
                         </span>
 
@@ -165,8 +165,8 @@ export default function FlashDeals({ initialDeals }: FlashDealsProps) {
                         </div>
                         {dealStats.expiring > 0 && (
                             <div className="flex items-center gap-2">
-                                <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
-                                <span className="text-red-600 dark:text-red-400">
+                                <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                                <span className="text-green-600 dark:text-green-400">
                                     {dealStats.expiring} Expiring Soon!
                                 </span>
                             </div>
@@ -181,7 +181,7 @@ export default function FlashDeals({ initialDeals }: FlashDealsProps) {
                     <select
                         value={sortBy}
                         onChange={(e) => setSortBy(e.target.value as any)}
-                        className="md:px-3 md:py-2 px-2  text-black dark:text-white bg-white dark:bg-secondary border border-gray-200 dark:border-gray-700 rounded-lg text-sm focus:ring-2 focus:ring-red-500"
+                        className="md:px-3 md:py-2 px-2  text-black dark:text-white bg-white dark:bg-secondary border border-gray-200 dark:border-gray-700 rounded-lg text-sm focus:ring-2 focus:ring-green-500"
                     >
                         <option value="discount">🔥 Best Discount</option>
                         <option value="time">⏰ Ending Soon</option>
@@ -193,7 +193,7 @@ export default function FlashDeals({ initialDeals }: FlashDealsProps) {
                         <select
                             value={filterCategory}
                             onChange={(e) => setFilterCategory(e.target.value)}
-                            className="md:px-3 md:py-2 px-2  text-black dark:text-white bg-white dark:bg-secondary border border-gray-200 dark:border-gray-700 rounded-lg text-sm focus:ring-2 focus:ring-red-500"
+                            className="md:px-3 md:py-2 px-2  text-black dark:text-white bg-white dark:bg-secondary border border-gray-200 dark:border-gray-700 rounded-lg text-sm focus:ring-2 focus:ring-green-500"
                         >
                             <option value="all">📂 All Categories</option>
                             {categories.map((cat, i) => (
@@ -210,7 +210,7 @@ export default function FlashDeals({ initialDeals }: FlashDealsProps) {
                             type="checkbox"
                             checked={showExpired}
                             onChange={(e) => setShowExpired(e.target.checked)}
-                            className="rounded focus:ring-red-500"
+                            className="rounded focus:ring-green-500"
                         />
                         <span className="text-gray-600 dark:text-gray-400">
                             Show Expired
@@ -218,7 +218,7 @@ export default function FlashDeals({ initialDeals }: FlashDealsProps) {
                     </label>
                 </div>
 
-                <div className="h-1.5 bg-gradient-to-r from-transparent via-red-500 to-transparent mt-6 w-full max-w-md mx-auto rounded-full opacity-60" />
+                <div className="h-1.5 bg-gradient-to-r from-transparent via-green-500 to-transparent mt-6 w-full max-w-md mx-auto rounded-full opacity-60" />
             </div>
 
             {/* ───────── Content ───────── */}
@@ -257,7 +257,7 @@ export default function FlashDeals({ initialDeals }: FlashDealsProps) {
                         {filterCategory !== 'all' && (
                             <button
                                 onClick={() => setFilterCategory('all')}
-                                className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors"
+                                className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors"
                             >
                                 View All Categories
                             </button>
@@ -310,7 +310,7 @@ const DesktopGridView = ({ deals }: { deals: Product[] }) => {
                             className={`relative ${expiring ? 'animate-pulse' : ''}`}
                         >
                             {expiring && (
-                                <div className="absolute -top-2 -right-2 z-20 bg-red-500 text-white px-2 py-1 rounded-full text-xs font-bold animate-bounce">
+                                <div className="absolute -top-2 -right-2 z-20 bg-green-500 text-white px-2 py-1 rounded-full text-xs font-bold animate-bounce">
                                     🔥 ENDING SOON!
                                 </div>
                             )}

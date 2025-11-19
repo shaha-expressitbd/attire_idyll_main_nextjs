@@ -281,7 +281,7 @@ export default function ProductCard({
         <div className="relative rounded-2xl overflow-hidden bg-white dark:bg-black shadow-lg transition-transform duration-200 hover:-translate-y-0.5">
           {/* Discount Badge */}
           {discountPercent > 0 && (
-            <span className="absolute top-3 left-3 z-20 bg-red-600 text-white text-xs font-bold px-3 py-1.5 rounded-full">
+            <span className="absolute top-3 left-3 z-20 bg-green-600 text-white text-xs font-bold px-3 py-1.5 rounded-full">
               -{discountPercent}%
             </span>
           )}
@@ -313,7 +313,7 @@ export default function ProductCard({
               onClick={handleWishlistClick}
               aria-label={isWishlisted ? "Remove from wishlist" : "Add to wishlist"}
               className={`absolute top-2 right-2 p-2 rounded-full border ${isWishlisted
-                ? "border-red-500 bg-red-50 dark:bg-red-900/30 text-red-500"
+                ? "border-green-500 bg-green-50 dark:bg-green-900/30 text-green-500"
                 : "border-green-200 bg-white dark:bg-secondary text-primary"
                 } hover:shadow-md z-10 transition-colors ${isPreOrder ? "cursor-not-allowed opacity-50" : ""}`}
               title={isWishlisted ? "Remove from wishlist" : "Add to wishlist"}
@@ -324,28 +324,24 @@ export default function ProductCard({
           </div>
 
           {/* Product Info - Hide prices for preorder items */}
-          {/* <div className="p-3 sm:p-4 bg-green-50/40 dark:bg-black">
-            <h3 className="text-[15px] font-semibold text-gray-900 dark:text-white line-clamp-1">
+          <div className="p-3 sm:p-4 bg-green-50/40 dark:bg-black text-center">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white line-clamp-1">
               {product.name}
             </h3>
             {!isPreOrder && (
-              <div className="flex justify-between items-baseline">
-                <span className="md:text-xl text-[14px] font-semibold text-primary">
-                  ৳{displayPrice}
+              <div className="flex flex-col justify-center items-center">
+                <span className=" text-lg font-semibold text-black dark:text-white ">
+                  BDT-{displayPrice}
                 </span>
                 {discountPercent > 0 && (
                   <span className="line-through text-gray-400 md:text-xl">
-                    ৳{pricingData.sellingPrice}
+                    BDT-{pricingData.sellingPrice}
                   </span>
                 )}
               </div>
             )}
-          </div> */}
-          <div className="p-3 sm:p-4 bg-green-50/40 dark:bg-black">
-            <h3 className="text-[15px] font-semibold text-gray-900 dark:text-white line-clamp-1">
-              {product.name}
-            </h3>
           </div>
+
 
           {/* Action Buttons */}
 

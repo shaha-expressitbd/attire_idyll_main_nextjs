@@ -197,7 +197,7 @@ export default function PreOrderBtn({ item, variant, quantity, className = "" }:
                 onClick={handlePreOrder}
                 aria-label="Pre-order product"
             >
-                <span>প্রি-অর্ডার করুন</span>
+                <span>PRE-ORDER NOW</span>
             </Button>
 
             <Modal

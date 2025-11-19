@@ -90,11 +90,11 @@ export const ToggleSwitch: React.FC<ToggleSwitchProps> = ({
             className={twMerge(
               "relative inline-flex items-center rounded-full transition-colors duration-200",
               sizeClasses[size].container,
-              checked ? (error ? "bg-red-600" : "bg-primary") : "bg-gray-200 dark:bg-gray-600",
+              checked ? (error ? "bg-green-600" : "bg-primary") : "bg-gray-200 dark:bg-gray-600",
               disabled || loading
                 ? "cursor-not-allowed opacity-70"
                 : "cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2",
-              error ? "focus:ring-red-200 dark:focus:ring-red-800" : "focus:ring-orange-200 dark:focus:ring-orange-800",
+              error ? "focus:ring-green-200 dark:focus:ring-green-800" : "focus:ring-orange-200 dark:focus:ring-orange-800",
               loading && "opacity-80"
             )}
           >
@@ -120,7 +120,7 @@ export const ToggleSwitch: React.FC<ToggleSwitchProps> = ({
                 "text-xs font-medium",
                 checked
                   ? error
-                    ? "text-red-600 dark:text-red-400"
+                    ? "text-green-600 dark:text-green-400"
                     : "text-primary dark:text-orange-400"
                   : "text-gray-500 dark:text-gray-400",
                 disabled && "opacity-50"
@@ -137,7 +137,7 @@ export const ToggleSwitch: React.FC<ToggleSwitchProps> = ({
             htmlFor={id}
             className={twMerge(
               "block text-sm font-medium select-none",
-              error ? "text-red-600 dark:text-red-500" : "text-gray-700 dark:text-gray-300",
+              error ? "text-green-600 dark:text-green-500" : "text-gray-700 dark:text-gray-300",
               (disabled || loading) && "opacity-70 cursor-not-allowed",
               labelClassName
             )}

@@ -25,7 +25,7 @@ const colorClasses: Record<Color, string> = {
   accent: "border-accent",
   white: "border-white",
   blue: "border-blue-500",
-  red: "border-red-500",
+  red: "border-green-500",
   green: "border-green-500",
   gray: "border-gray-500",
 };

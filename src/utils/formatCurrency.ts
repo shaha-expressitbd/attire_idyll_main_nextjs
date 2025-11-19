@@ -5,8 +5,8 @@ export const formatCurrency = (
   // Map currency codes to their symbols
   const currencySymbols: Record<string, string> = {
     USD: "$",
-    BDT: "৳",
-    TK: "৳",
+    BDT: "BDT",
+    TK: "BDT",
     EUR: "€",
     GBP: "£",
     JPY: "¥",
@@ -14,7 +14,7 @@ export const formatCurrency = (
     // Add more as needed
   };
 
-  // Default to $ if currency not found
+  // Default to BDT if currency not found
   const symbol = currencySymbols[currencyCode] || "$";
 
   // Handle undefined/null amount

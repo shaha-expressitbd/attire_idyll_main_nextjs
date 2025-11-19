@@ -224,7 +224,7 @@ export default function ProductVideosSlider() {
       <div className='fixed inset-0 pointer-events-none overflow-hidden -z-10'>
         <div className={`absolute top-1/4 left-1/4 w-48 sm:w-64 md:w-96 h-48 sm:h-64 md:h-96 bg-blue-500/10 rounded-full blur-xl sm:blur-2xl md:blur-3xl animate-pulse ${isMobile ? '' : 'transform-gpu'}`}></div>
         <div className={`absolute bottom-1/4 right-1/4 w-48 sm:w-64 md:w-96 h-48 sm:h-64 md:h-96 bg-purple-500/10 rounded-full blur-xl sm:blur-2xl md:blur-3xl animate-pulse ${isMobile ? '' : 'transform-gpu'}`} style={{ animationDelay: '2s' }}></div>
-        <div className={`absolute top-1/2 right-1/3 w-32 sm:w-48 md:w-72 h-32 sm:h-48 md:h-72 bg-red-500/10 rounded-full blur-xl sm:blur-2xl md:blur-3xl animate-pulse ${isMobile ? '' : 'transform-gpu'}`} style={{ animationDelay: '4s' }}></div>
+        <div className={`absolute top-1/2 right-1/3 w-32 sm:w-48 md:w-72 h-32 sm:h-48 md:h-72 bg-green-500/10 rounded-full blur-xl sm:blur-2xl md:blur-3xl animate-pulse ${isMobile ? '' : 'transform-gpu'}`} style={{ animationDelay: '4s' }}></div>
       </div>
 
       <div className={`relative px-2 py-4 sm:py-8 w-full ${isMobile ? '' : 'perspective-1000'}`}>
@@ -234,7 +234,7 @@ export default function ProductVideosSlider() {
             {/* Previous Button */}
             <button
               onClick={() => handleSlideChange((currentSlide - 1 + videos.length) % videos.length)}
-              className={`group relative p-2 sm:p-3 md:p-4 bg-white/80 dark:bg-secondary/80 backdrop-blur-xl hover:bg-white dark:hover:bg-gray-600 rounded-2xl shadow-2xl border border-gray-200/50 dark:border-gray-600/50 transition-all duration-500 hover:scale-110 hover:-translate-y-2 hover:shadow-3xl z-20 ${isMobile ? '' : 'transform-gpu'}`}
+              className={`group relative p-2 sm:p-3 md:p-4 bg-white dark:bg-secondary backdrop-blur-xl hover:bg-white dark:hover:bg-gray-600 rounded-2xl shadow-2xl border border-gray-200/50 dark:border-gray-600/50 transition-all duration-500 hover:scale-110 hover:-translate-y-2 hover:shadow-3xl z-20 ${isMobile ? '' : 'transform-gpu'}`}
               style={isMobile ? {} : { transform: isTransitioning ? 'rotateY(-15deg) scale(0.95)' : 'rotateY(-5deg)', transformStyle: 'preserve-3d' }}
               aria-label='Previous video'
             >
@@ -361,7 +361,7 @@ export default function ProductVideosSlider() {
                     <div className='absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20 opacity-0 group-hover:opacity-100 transition-all duration-500 transform-gpu'>
                       <div className='absolute top-3 sm:top-4 left-3 sm:left-4 right-3 sm:right-4 flex justify-between items-start'>
                         {isPlaying && (
-                          <div className='flex items-center space-x-1 bg-red-500/90 backdrop-blur-sm px-2 py-1 sm:px-3 sm:py-2 rounded-full animate-pulse'>
+                          <div className='flex items-center space-x-1 bg-green-500/90 backdrop-blur-sm px-2 py-1 sm:px-3 sm:py-2 rounded-full animate-pulse'>
                             <div className='w-1.5 h-1.5 sm:w-2 sm:h-2 bg-white rounded-full animate-pulse'></div>
                             <span className='text-white text-xs sm:text-sm font-medium'>LIVE</span>
                           </div>
@@ -376,7 +376,7 @@ export default function ProductVideosSlider() {
                       <div className='absolute bottom-3 sm:bottom-4 left-3 sm:left-4 right-3 sm:right-4'>
                         <div className='w-full bg-white/20 backdrop-blur-sm rounded-full h-1.5 sm:h-2 mb-3 sm:mb-4 shadow-inner'>
                           <div
-                            className='bg-gradient-to-r from-blue-500 via-purple-500 to-red-500 h-full rounded-full transition-all duration-300 relative overflow-hidden shadow-lg'
+                            className='bg-gradient-to-r from-blue-500 via-purple-500 to-green-500 h-full rounded-full transition-all duration-300 relative overflow-hidden shadow-lg'
                             style={{ width: `${videoProgress}%` }}
                           >
                             <div className='absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-pulse transform-gpu'></div>
@@ -457,11 +457,11 @@ export default function ProductVideosSlider() {
             {/* Next Button */}
             <button
               onClick={() => handleSlideChange((currentSlide + 1) % videos.length)}
-              className={`group relative p-2 sm:p-3 md:p-4 bg-white/80 dark:bg-secondary/80 backdrop-blur-xl hover:bg-white dark:hover:bg-gray-600 rounded-2xl shadow-2xl border border-gray-200/50 dark:border-gray-600/50 transition-all duration-500 z-20 ${isMobile ? '' : 'transform-gpu'}`}
+              className={`group relative p-2 sm:p-3 md:p-4 bg-white dark:bg-secondary backdrop-blur-xl hover:bg-white dark:hover:bg-gray-600 rounded-2xl shadow-2xl border border-gray-200/50 dark:border-gray-600/50 transition-all duration-500 z-20 ${isMobile ? '' : 'transform-gpu'}`}
               style={isMobile ? {} : { transform: isTransitioning ? 'rotateY(15deg) scale(0.95)' : 'rotateY(5deg)', transformStyle: 'preserve-3d' }}
               aria-label='Next video'
             >
-              <div className={`absolute inset-0 bg-gradient-to-r from-purple-500/20 to-red-500/20 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 ${isMobile ? '' : 'transform-gpu'}`}></div>
+              <div className={`absolute inset-0 bg-gradient-to-r from-purple-500/20 to-green-500/20 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 ${isMobile ? '' : 'transform-gpu'}`}></div>
               <BiChevronRight className='w-6 h-6 sm:w-5 sm:h-5 md:w-6 md:h-6 text-gray-700 dark:text-white duration-300' />
             </button>
           </div>
@@ -481,8 +481,8 @@ export default function ProductVideosSlider() {
               >
                 {index === currentSlide && !isMobile && (
                   <>
-                    <div className='absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-red-500 rounded-full animate-pulse opacity-75 transform-gpu'></div>
-                    <div className='absolute inset-0 bg-gradient-to-r from-blue-400/50 via-purple-400/50 to-red-400/50 rounded-full animate-ping transform-gpu'></div>
+                    <div className='absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-green-500 rounded-full animate-pulse opacity-75 transform-gpu'></div>
+                    <div className='absolute inset-0 bg-gradient-to-r from-blue-400/50 via-purple-400/50 to-green-400/50 rounded-full animate-ping transform-gpu'></div>
                   </>
                 )}
               </button>

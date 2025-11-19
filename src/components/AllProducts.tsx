@@ -224,7 +224,7 @@ export default function AllProducts({ initialProducts, isFirstVisit = false }: A
                                 </div>
                                 <motion.button
                                     onClick={() => handleTabClick("all")}
-                                    className="px-4 md:px-6 py-2 md:py-2.5 text-sm font-medium text-white bg-gradient-to-r from-red-600 to-red-700 rounded-full hover:from-red-700 hover:to-red-800 transition-all duration-200 shadow-lg hover:shadow-xl"
+                                    className="px-4 md:px-6 py-2 md:py-2.5 text-sm font-medium text-white bg-gradient-to-r from-green-600 to-green-700 rounded-full hover:from-green-700 hover:to-green-800 transition-all duration-200 shadow-lg hover:shadow-xl"
                                     whileHover={{ scale: 1.05 }}
                                     whileTap={{ scale: 0.95 }}
                                 >

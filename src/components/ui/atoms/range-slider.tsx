@@ -40,7 +40,7 @@ export const RangeSlider = ({
         disabled={disabled}
         className={twMerge(
           "w-full h-2 rounded-lg appearance-none cursor-pointer",
-          error ? "bg-red-200 accent-red-600" : "bg-gray-200 accent-orange-600",
+          error ? "bg-green-200 accent-green-600" : "bg-gray-200 accent-orange-600",
           disabled && "cursor-not-allowed opacity-50"
         )}
       />

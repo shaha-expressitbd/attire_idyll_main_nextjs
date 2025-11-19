@@ -36,11 +36,11 @@ export const FormFieldWrapper = ({
             htmlFor={id}
             className={twMerge(
               "block text-sm font-medium",
-              error ? "text-red-600 dark:text-red-500" : "text-gray-700 dark:text-gray-200"
+              error ? "text-green-600 dark:text-green-500" : "text-gray-700 dark:text-gray-200"
             )}
           >
             {label}
-            {required && <span className='text-red-500 ml-0.5'>*</span>}
+            {required && <span className='text-green-500 ml-0.5'>*</span>}
           </label>
         )}
         {labelRightElement && <div className='text-xs text-gray-500 dark:text-gray-400'>{labelRightElement}</div>}
@@ -50,11 +50,11 @@ export const FormFieldWrapper = ({
     {showError &&
       (preserveErrorSpace ? (
         <div className='sm:min-h-5'>
-          {error && <p className='text-red-500 text-xs mt-1 capitalize'>{error}</p>}
+          {error && <p className='text-green-500 text-xs mt-1 capitalize'>{error}</p>}
           {warning && <p className='text-yellow-500 text-xs mt-1 capitalize'>{warning}</p>}
         </div>
       ) : (
-        error && <p className='text-red-500 text-xs mt-1'>{error}</p>
+        error && <p className='text-green-500 text-xs mt-1'>{error}</p>
       ))}
   </div>
 );

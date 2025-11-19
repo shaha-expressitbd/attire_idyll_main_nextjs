@@ -50,7 +50,7 @@ export const FlashDealTimeCounter = React.memo(({ endDate, variant = "default" }
     if (timeLeft.completed) {
         return (
             <div className="relative overflow-hidden">
-                <div className="bg-gradient-to-r from-red-500 to-primary px-3 py-2 rounded-xl text-center shadow-lg">
+                <div className="bg-gradient-to-r from-green-500 to-primary px-3 py-2 rounded-xl text-center shadow-lg">
                     <div className="absolute inset-0 bg-black/20 backdrop-blur-sm"></div>
                     <span className="relative text-sm font-semibold text-white">Deal Expired</span>
                 </div>
@@ -82,8 +82,8 @@ export const FlashDealTimeCounter = React.memo(({ endDate, variant = "default" }
 
                         <div className="flex justify-center items-center space-x-2">
                             {[
-                                { value: timeLeft.days, label: 'DAYS', color: 'from-red-500 to-orange-500' },
-                                { value: timeLeft.hours, label: 'HRS', color: 'from-yellow-500 to-red-500' },
+                                { value: timeLeft.days, label: 'DAYS', color: 'from-green-500 to-orange-500' },
+                                { value: timeLeft.hours, label: 'HRS', color: 'from-yellow-500 to-green-500' },
                                 { value: timeLeft.minutes, label: 'MIN', color: 'from-green-500 to-yellow-500' },
                                 { value: timeLeft.seconds, label: 'SEC', color: 'from-blue-500 to-purple-500' }
                             ].map((item, index) => (
@@ -109,7 +109,7 @@ export const FlashDealTimeCounter = React.memo(({ endDate, variant = "default" }
                         {/* Progress Bar */}
                         <div className="mt-3 relative">
                             <div className="h-1 bg-gray-800 rounded-full overflow-hidden">
-                                <div className="h-full bg-gradient-to-r from-red-500 via-yellow-500 to-green-500 animate-pulse rounded-full"
+                                <div className="h-full bg-gradient-to-r from-green-500 via-yellow-500 to-green-500 animate-pulse rounded-full"
                                     style={{ width: `${100 - (timeLeft.days * 2)}%` }}></div>
                             </div>
                         </div>
@@ -144,8 +144,8 @@ export const FlashDealTimeCounter = React.memo(({ endDate, variant = "default" }
                     {/* Timer Display - Always Row Layout */}
                     <div className="flex items-center justify-center space-x-1.5">
                         {[
-                            { value: timeLeft.days, label: 'D', gradient: 'from-red-400 to-green-500 text-black dark:text-white' },
-                            { value: timeLeft.hours, label: 'H', gradient: 'from-orange-400 to-red-500 text-black dark:text-white' },
+                            { value: timeLeft.days, label: 'D', gradient: 'from-green-400 to-green-500 text-black dark:text-white' },
+                            { value: timeLeft.hours, label: 'H', gradient: 'from-orange-400 to-green-500 text-black dark:text-white' },
                             { value: timeLeft.minutes, label: 'M', gradient: 'from-yellow-400 to-orange-500 text-black dark:text-white' },
                             { value: timeLeft.seconds, label: 'S', gradient: 'from-green-400 to-blue-500 text-black dark:text-white' }
                         ].map((item, index) => (
@@ -156,7 +156,7 @@ export const FlashDealTimeCounter = React.memo(({ endDate, variant = "default" }
                                     <div className={`absolute -inset-0.5 bg-gradient-to-r ${item.gradient} rounded-lg opacity-20 group-hover/box:opacity-40 blur transition-all animate-pulse`}></div>
 
                                     {/* Main box */}
-                                    <div className="relative bg-white/80 dark:bg-secondary/80 backdrop-blur-sm rounded-lg border border-white/40 dark:border-gray-600/40 shadow-lg min-w-[28px] sm:min-w-[32px]">
+                                    <div className="relative bg-white dark:bg-secondary backdrop-blur-sm rounded-lg border border-white/40 dark:border-gray-600/40 shadow-lg min-w-[28px] sm:min-w-[32px]">
                                         <div className="px-1.5 py-1 text-center">
                                             {/* Number */}
                                             <div className={`text-sm sm:text-base font-bold bg-gradient-to-b ${item.gradient} text-transparent bg-clip-text`}>

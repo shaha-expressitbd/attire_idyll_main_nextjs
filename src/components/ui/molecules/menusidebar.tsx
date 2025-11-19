@@ -85,7 +85,7 @@ export const MenuSidebar = () => {
       <li className="flex flex-col">
         <button
           onClick={() => (hasChildren ? toggleCategory(category._id) : goToCategory())}
-          className={`flex items-center justify-between w-full py-2 pr-3 text-left hover:text-red-600 ${level === 0 ? "font-medium border-b border-gray-200" : ""
+          className={`flex items-center justify-between w-full py-2 pr-3 text-left hover:text-green-600 ${level === 0 ? "font-medium border-b border-gray-200" : ""
             } ${level > 0 ? `pl-${level * 4}` : ""}`}
         >
           <span>{category.name}</span>

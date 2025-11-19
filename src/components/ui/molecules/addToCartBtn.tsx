@@ -22,7 +22,7 @@ export default function AddToCartBtn({
   quantity = 1,
   className,
   onAddToCart,
-  buttonText = "অর্ডার করুন",
+  buttonText = "ORDER TO BOOK NOW",
   buttonTitle = "Add to Cart",
 }: AddToCartBtnProps) {
   const [isAdding, setIsAdding] = useState(false);   // duplicate‑click lock

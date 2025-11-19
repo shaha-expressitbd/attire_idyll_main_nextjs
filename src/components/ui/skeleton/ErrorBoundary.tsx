@@ -36,17 +36,17 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
             }
 
             return (
-                <div className="min-h-[200px] flex flex-col items-center justify-center p-6 bg-red-50 dark:bg-red-900/10 rounded-lg border border-red-200 dark:border-red-800">
+                <div className="min-h-[200px] flex flex-col items-center justify-center p-6 bg-green-50 dark:bg-green-900/10 rounded-lg border border-green-200 dark:border-green-800">
                     <div className="text-center">
-                        <h3 className="text-lg font-semibold text-red-800 dark:text-red-200 mb-2">
+                        <h3 className="text-lg font-semibold text-green-800 dark:text-green-200 mb-2">
                             Something went wrong
                         </h3>
-                        <p className="text-red-600 dark:text-red-300 mb-4">
+                        <p className="text-green-600 dark:text-green-300 mb-4">
                             {this.state.error.message || "An unexpected error occurred"}
                         </p>
                         <button
                             onClick={this.retry}
-                            className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors"
+                            className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors"
                         >
                             Try Again
                         </button>

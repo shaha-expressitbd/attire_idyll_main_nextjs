@@ -99,7 +99,7 @@ function FlashDeals({ initialProducts }: FlashDealsProps) {
       <div className="max-w-7xl mx-auto px-2 md:px-6 py-2 md:mt-24 text-center">
         <div className="py-16">
           <div className="text-6xl mb-4">😞</div>
-          <h3 className="text-xl font-semibold text-red-600 dark:text-red-400 mb-2">
+          <h3 className="text-xl font-semibold text-green-600 dark:text-green-400 mb-2">
             Failed to load flash deals
           </h3>
         </div>

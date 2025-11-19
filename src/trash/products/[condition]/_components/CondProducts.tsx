@@ -159,7 +159,7 @@ export default function ConditionProducts() {
 
       {/* Error */}
       {(initialError || moreError) && (
-        <div className="text-center text-red-500 py-4">
+        <div className="text-center text-green-500 py-4">
           Failed to load products. Please try again.
         </div>
       )}

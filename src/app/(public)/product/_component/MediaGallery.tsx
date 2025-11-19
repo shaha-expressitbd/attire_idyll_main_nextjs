@@ -115,7 +115,7 @@ export default function MediaGallery({
     return (
         <div className="w-full">
             {/* MAIN GALLERY – FULLSCREEN MOBILE + PERFECT DESKTOP */}
-            <div className="relative w-full h-[85vh] md:h-[600px] lg:h-[700px]  bg-white rounded-xl overflow-hidden shadow-2xl">
+            <div className="relative w-full md:ml-32 md:w-[50vh] h-[85vh] md:h-[600px] lg:h-[700px] bg-white rounded-xl overflow-hidden">
 
                 {/* Badges */}
                 {isPreOrder && (
@@ -126,7 +126,7 @@ export default function MediaGallery({
                     </div>
                 )}
                 <div className={`absolute top-${isPreOrder ? "14" : "4"} left-4 z-30`}>
-                    <span className={`px-4 py-2 text-xs font-bold rounded-full text-white shadow-lg ${stock > 10 ? "bg-green-600" : stock > 0 ? "bg-amber-500" : "bg-red-600"
+                    <span className={`px-4 py-2 text-xs font-bold rounded-full text-white shadow-lg ${stock > 10 ? "bg-green-600" : stock > 0 ? "bg-amber-500" : "bg-green-600"
                         }`}>
                         {stock > 10 ? `${stock} Available` : stock > 0 ? `Only ${stock} Left!` : "Out of Stock"}
                     </span>
@@ -161,7 +161,7 @@ export default function MediaGallery({
                         {isZoomed && !isMobile && mainMedia.type === "image" && (
                             <div className="absolute inset-0 overflow-hidden pointer-events-none z-50">
                                 <div
-                                    className="absolute w-72 h-72 rounded-full border-8 border-white shadow-2xl backdrop-blur-sm"
+                                    className="absolute w-72 h-72 rounded-full border-8 border-white shadow-2xl"
                                     style={{
                                         left: `calc(${zoomPos.x}% - 144px)`,
                                         top: `calc(${zoomPos.y}% - 144px)`,
@@ -187,11 +187,7 @@ export default function MediaGallery({
                                     }}
                                 />
 
-                                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                                    <div className="w-20 h-20 border-2 border-white/70 rounded-full" />
-                                    <div className="absolute w-px h-40 bg-white/70" />
-                                    <div className="absolute h-px w-40 bg-white/70" />
-                                </div>
+
                             </div>
                         )}
 
@@ -229,10 +225,10 @@ export default function MediaGallery({
                 {/* Mobile Navigation */}
                 {isMobile && media.length > 1 && (
                     <>
-                        <button onClick={(e) => { e.stopPropagation(); goPrev(); }} className="absolute left-4 top-1/2 -translate-y-1/2 w-14 h-14 bg-white/90 backdrop-blur rounded-full flex items-center justify-center shadow-2xl z-40">
+                        <button onClick={(e) => { e.stopPropagation(); goPrev(); }} className="absolute left-4 top-1/2 -translate-y-1/2 w-8 h-8 bg-white/90 backdrop-blur rounded-full flex items-center justify-center shadow-2xl z-40">
                             <BiChevronLeft className="w-9 h-9" />
                         </button>
-                        <button onClick={(e) => { e.stopPropagation(); goNext(); }} className="absolute right-4 top-1/2 -translate-y-1/2 w-14 h-14 bg-white/90 backdrop-blur rounded-full flex items-center justify-center shadow-2xl z-40">
+                        <button onClick={(e) => { e.stopPropagation(); goNext(); }} className="absolute right-4 top-1/2 -translate-y-1/2 w-8 h-8 bg-white/90 backdrop-blur rounded-full flex items-center justify-center shadow-2xl z-40">
                             <BiChevronRight className="w-9 h-9" />
                         </button>
                         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2 z-40">

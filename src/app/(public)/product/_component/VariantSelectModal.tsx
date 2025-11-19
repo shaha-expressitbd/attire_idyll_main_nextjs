@@ -156,7 +156,7 @@ export default function VariantSelectModal({
                 className={`flex items-start p-3 border rounded-lg transition-all ${isDisabled
                   ? "opacity-50 cursor-not-allowed"
                   : isSelected
-                    ? "border-red-500 bg-red-50 dark:bg-red-950"
+                    ? "border-green-500 bg-green-50 dark:bg-green-950"
                     : "border-gray-200 dark:border-gray-700 hover:border-primary"
                   }`}
               >
@@ -174,7 +174,7 @@ export default function VariantSelectModal({
                     <div className="flex-1 min-w-0">
                       {variantDetails}
                       {isDisabled ? (
-                        <span className="text-sm text-red-500 block mt-1">Out of stock</span>
+                        <span className="text-sm text-green-500 block mt-1">Out of stock</span>
                       ) : (
                         <span className="text-sm text-gray-500 block mt-1">
                           Stock: {v.variants_stock} units
@@ -200,7 +200,7 @@ export default function VariantSelectModal({
                   <div className="flex flex-col items-end gap-2">
                     {!isPreOrder && (
                       <div>
-                        <span className="text-lg font-bold text-red-600 dark:text-red-400">
+                        <span className="text-lg font-bold text-green-600 dark:text-green-400">
                           {"৳"}{displayPrice}
                         </span>
                         {discountPercent > 0 && (

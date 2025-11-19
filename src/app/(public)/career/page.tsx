@@ -11,14 +11,14 @@ export default function CareersPage() {
     return (
         <div className="min-h-screen bg-white dark:bg-secondary">
             {/* Hero Section */}
-            <div className="relative overflow-hidden bg-gradient-to-r from-red-600 via-red-700 to-red-800 md:mt-0 -mt-4">
+            <div className="relative overflow-hidden bg-gradient-to-r from-green-600 via-green-700 to-green-800 md:mt-0 -mt-4">
                 <div className="absolute inset-0 bg-black/10" />
                 <div className="relative max-w-7xl mx-auto px-2 md:px-4 py-4 md:py-20">
                     <div className="text-center">
                         <h1 className="text-3xl  md:text-5xl font-bold text-white mb-6 tracking-tight">
                             Join Our Team
                         </h1>
-                        <p className="text-base text-sm md:text-xl text-red-100 max-w-3xl mx-auto leading-relaxed mb-8">
+                        <p className="text-base text-sm md:text-xl text-green-100 max-w-3xl mx-auto leading-relaxed mb-8">
                             Be part of Bangladesh&apos;s fastest-growing e-commerce platform.
                             We&apos;re looking for passionate individuals to help us shape the
                             future of online shopping.
@@ -49,7 +49,7 @@ export default function CareersPage() {
             <div className="max-w-7xl mx-auto px-2 md:px-4 py-8 md:py-16">
                 {/* Why Work With Us */}
                 <section className="mb-16">
-                    <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-center mb-6 md:mb-12 text-gray-800 dark:text-red-400">
+                    <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-center mb-6 md:mb-12 text-gray-800 dark:text-green-400">
                         Why Work With Us?
                     </h2>
 
@@ -76,9 +76,9 @@ export default function CareersPage() {
                         ].map(({ title, text, iconPath }) => (
                             <div
                                 key={title}
-                                className="bg-white dark:bg-secondary rounded-2xl shadow-xl border border-red-100 dark:border-red-600 p-8 hover:shadow-2xl transition-all duration-300"
+                                className="bg-white dark:bg-secondary rounded-2xl shadow-xl border border-green-100 dark:border-green-600 p-8 hover:shadow-2xl transition-all duration-300"
                             >
-                                <div className="bg-red-600 rounded-full w-16 h-16 flex items-center justify-center mb-6 mx-auto">
+                                <div className="bg-green-600 rounded-full w-16 h-16 flex items-center justify-center mb-6 mx-auto">
                                     <svg
                                         className="w-8 h-8 text-white"
                                         fill="none"
@@ -106,13 +106,13 @@ export default function CareersPage() {
 
                 {/* Open Positions */}
                 <section className="mb-16">
-                    <h2 className="text-2xl sm:text-3xl font-bold text-center mb-8 md:mb-12 text-gray-800 dark:text-red-400">
+                    <h2 className="text-2xl sm:text-3xl font-bold text-center mb-8 md:mb-12 text-gray-800 dark:text-green-400">
                         Open Positions
                     </h2>
 
                     {/* Example position */}
                     <div className="space-y-6">
-                        <div className="bg-white dark:bg-secondary rounded-2xl shadow-xl border border-red-100 dark:border-red-600 overflow-hidden hover:shadow-2xl transition-all duration-300">
+                        <div className="bg-white dark:bg-secondary rounded-2xl shadow-xl border border-green-100 dark:border-green-600 overflow-hidden hover:shadow-2xl transition-all duration-300">
                             <div className="p-8">
                                 <div className="flex flex-col md:flex-row md:items-center justify-between mb-4 gap-4">
                                     <div>
@@ -120,7 +120,7 @@ export default function CareersPage() {
                                             CRM
                                         </h3>
                                         <div className="flex flex-wrap gap-2 mb-2">
-                                            <span className="bg-red-100 dark:bg-red-800 dark:text-red-100 text-red-700 px-3 py-1 rounded-full text-xs sm:text-sm">
+                                            <span className="bg-green-100 dark:bg-green-800 dark:text-green-100 text-green-700 px-3 py-1 rounded-full text-xs sm:text-sm">
                                                 Customer Care
                                             </span>
                                         </div>
@@ -134,7 +134,7 @@ export default function CareersPage() {
                                                 💼 Full-time
                                             </p>
                                         </div>
-                                        <button className="bg-red-600 hover:bg-red-700 text-white px-4 sm:px-6 py-2 rounded-lg transition-colors duration-300 text-sm ">
+                                        <button className="bg-green-600 hover:bg-green-700 text-white px-4 sm:px-6 py-2 rounded-lg transition-colors duration-300 text-sm ">
                                             Apply Now
                                         </button>
                                     </div>
@@ -148,8 +148,8 @@ export default function CareersPage() {
                 </section>
 
                 {/* Application Process */}
-                <section className="bg-white dark:bg-secondary rounded-2xl shadow-xl border border-red-100 dark:border-red-600 overflow-hidden mb-16">
-                    <div className="bg-gradient-to-r from-red-600 to-red-700 px-8 py-6">
+                <section className="bg-white dark:bg-secondary rounded-2xl shadow-xl border border-green-100 dark:border-green-600 overflow-hidden mb-16">
+                    <div className="bg-gradient-to-r from-green-600 to-green-700 px-8 py-6">
                         <h2 className="text-lg sm:text-2xl font-bold text-white">
                             Application Process
                         </h2>
@@ -164,8 +164,8 @@ export default function CareersPage() {
                                 'Final Decision',
                             ].map((step, i) => (
                                 <div key={step} className="text-center">
-                                    <div className="bg-red-100 dark:bg-red-800 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                                        <span className="text-red-600 dark:text-red-100 font-bold text-lg">
+                                    <div className="bg-green-100 dark:bg-green-800 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                                        <span className="text-green-600 dark:text-green-100 font-bold text-lg">
                                             {i + 1}
                                         </span>
                                     </div>
@@ -188,12 +188,12 @@ export default function CareersPage() {
                 </section>
 
                 {/* Contact Section */}
-                <section className="bg-gradient-to-r from-red-600 to-red-700 rounded-2xl shadow-xl p-8 text-white">
+                <section className="bg-gradient-to-r from-green-600 to-green-700 rounded-2xl shadow-xl p-8 text-white">
                     <div className="text-center">
                         <h2 className="text-lg sm:text-2xl font-bold mb-4">
                             Ready to Join Us?
                         </h2>
-                        <p className="text-red-100 mb-6 text-sm ">
+                        <p className="text-green-100 mb-6 text-sm ">
                             Don&apos;t see a position that fits? Send us your resume anyway!
                             We&apos;re always looking for talented individuals.
                         </p>
@@ -201,7 +201,7 @@ export default function CareersPage() {
                         <div className="flex flex-wrap justify-center gap-4">
                             <a
                                 href="mailto:careers@AttireIdyll.com"
-                                className="bg-white text-red-600 hover:bg-red-50 dark:hover:bg-red-700 px-6 py-3 rounded-lg font-semibold transition-colors duration-300 flex items-center gap-2 text-sm "
+                                className="bg-white text-green-600 hover:bg-green-50 dark:hover:bg-green-700 px-6 py-3 rounded-lg font-semibold transition-colors duration-300 flex items-center gap-2 text-sm "
                             >
                                 <svg
                                     className="w-5 h-5"

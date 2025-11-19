@@ -47,7 +47,7 @@ export const RadioButton = React.forwardRef<HTMLInputElement, RadioButtonProps>(
           className={twMerge(
             "h-4 w-4 rounded-full border-2 transition-colors focus:ring-2 focus:ring-offset-0 focus:outline-none",
             error
-              ? "border-red-500 text-red-600 focus:ring-red-200"
+              ? "border-green-500 text-green-600 focus:ring-green-200"
               : "border-gray-300 text-orange-600 focus:ring-orange-200",
             disabled && "cursor-not-allowed opacity-50",
             inputClassName
@@ -59,7 +59,7 @@ export const RadioButton = React.forwardRef<HTMLInputElement, RadioButtonProps>(
           className={twMerge(
             "text-sm font-medium",
             disabled ? "text-gray-400" : "text-gray-700",
-            error && !disabled && "text-red-600",
+            error && !disabled && "text-green-600",
             labelClassName
           )}
         >

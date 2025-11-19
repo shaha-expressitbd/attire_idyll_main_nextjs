@@ -55,7 +55,7 @@ export const InputField = ({
             className={twMerge(
               "absolute left-3 top-1/2 transform -translate-y-1/2",
               error
-                ? "text-red-500"
+                ? "text-green-500"
                 : typeof value === "string" && value.length
                   ? "text-green-500"
                   : "text-gray-400 dark:text-gray-500"
@@ -77,7 +77,7 @@ export const InputField = ({
 
             // ❌ don't duplicate fallback styles
             error
-              ? "border-red-500 focus:ring-red-200 dark:focus:ring-red-500/30"
+              ? "border-green-500 focus:ring-green-200 dark:focus:ring-green-500/30"
               : warning
                 ? "border-yellow-500 focus:ring-yellow-200 dark:focus:ring-yellow-500/30"
                 : "border-gray-300 dark:border-gray-600 hover:border-orange-400 dark:hover:border-orange-400 focus:ring-orange-200 dark:focus:ring-orange-400",

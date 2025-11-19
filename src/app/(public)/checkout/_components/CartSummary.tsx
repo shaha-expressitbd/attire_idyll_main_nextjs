@@ -53,10 +53,10 @@ export const CartSummary: React.FC<CartSummaryProps> = ({
                 {/* Header */}
                 <div className="flex items-center justify-between mb-6">
                     <h2 className="text-xl font-bold text-gray-800 dark:text-white">
-                        🛍️ আপনার কার্ট
+                        Your Cart
                     </h2>
                     <span className="bg-indigo-100 text-indigo-600 px-3 py-1 rounded-full text-sm font-medium whitespace-nowrap">
-                        {itemCount} আইটেম
+                        {itemCount} Items
                     </span>
                 </div>
 
@@ -65,7 +65,7 @@ export const CartSummary: React.FC<CartSummaryProps> = ({
                     {items.map((item) => (
                         <div
                             key={`${item._id}-${item.variantId ?? "default"}`}
-                            className="bg-gray-50 dark:bg-secondary p-1 rounded-xl border border-gray-100 hover:shadow-md transition-shadow"
+                            className="bg-white dark:bg-secondary p-1 rounded-xl border border-gray-100 hover:shadow-md transition-shadow"
                         >
                             <CartItem
                                 item={item}
@@ -80,7 +80,7 @@ export const CartSummary: React.FC<CartSummaryProps> = ({
                     ))}
                     {items.length === 0 && (
                         <div className="py-8 text-center text-gray-500 dark:text-gray-400 text-sm">
-                            আপনার কার্ট খালি
+                            Your cart is empty
                         </div>
                     )}
                 </div>
@@ -88,30 +88,30 @@ export const CartSummary: React.FC<CartSummaryProps> = ({
                 {/* Totals (Desktop) */}
                 <div className="mt-6 pt-6 border-t border-gray-200 hidden lg:block">
                     {!isPreOrder && (
-                        <div className="flex justify-between text-gray-600 dark:text-white">
-                            <span>সাবটোটাল</span>
+                        <div className="flex justify-between text-gray-600 dark:text-white uppercase">
+                            <span>Subtotal</span>
                             <span className="font-medium">
                                 {formatCurrency(subtotal, currency)}
                             </span>
                         </div>
                     )}
-                    <div className="flex justify-between text-gray-600 dark:text-white">
-                        <span>ডেলিভারি চার্জ</span>
+                    <div className="flex justify-between text-gray-600 dark:text-white uppercase">
+                        <span>Delivery Charge</span>
                         <span className="font-medium">
                             {formatCurrency(deliveryCharge, currency)}
                         </span>
                     </div>
                     {additional_discount_amount > 0 && (
-                        <div className="flex justify-between text-green-600 dark:text-green-400">
-                            <span>ডিসকাউন্ট</span>
+                        <div className="flex justify-between text-green-600 dark:text-green-400 uppercase">
+                            <span>Discount</span>
                             <span className="font-medium">
                                 [&minus;] {formatCurrency(additional_discount_amount, currency)}
                             </span>
                         </div>
                     )}
                     <div className="border-t pt-4">
-                        <div className="flex justify-between text-xl font-bold text-gray-800 dark:text-white">
-                            <span>মোট</span>
+                        <div className="flex justify-between text-xl font-bold text-gray-800 dark:text-white uppercase">
+                            <span>Total</span>
                             <span className="text-primary">
                                 {formatCurrency(isPreOrder ? deliveryCharge : total, currency)}
                             </span>
@@ -121,7 +121,7 @@ export const CartSummary: React.FC<CartSummaryProps> = ({
                     <Button
                         type="button"
                         title="order"
-                        variant="default"
+                        variant="edge"
                         size="lg"
                         className="w-full mt-6"
                         disabled={isLoading}
@@ -130,11 +130,11 @@ export const CartSummary: React.FC<CartSummaryProps> = ({
                         {isLoading ? (
                             <>
                                 <span className="animate-spin rounded-full h-5 w-5 border-2 border-white border-t-transparent mr-2" />
-                                প্রসেস হচ্ছে...
+                                Loading...
                             </>
                         ) : (
                             <>
-                                <span className="mr-2">🛒</span> অর্ডারটি নিশ্চিত করুন
+                                <span className="mr-2">🛒</span> ORDER CONFIRME
                             </>
                         )}
                     </Button>

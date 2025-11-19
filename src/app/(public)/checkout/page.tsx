@@ -151,39 +151,39 @@ export default function CheckoutPage() {
     let firstErrorField: string | null = null;
 
     if (!formData.name.trim()) {
-      errors.name = "সর্বনিম্ন ৩ অক্ষরের নাম দিন";
+      errors.name = "Enter a name with at least 3 characters";
       hasError = true;
       if (!firstErrorField) firstErrorField = "name";
     } else if (formData.name.trim().length < 3) {
-      errors.name = "সর্বনিম্ন ৩ অক্ষরের নাম দিন";
+      errors.name = "Enter a name with at least 3 characters";
       hasError = true;
       if (!firstErrorField) firstErrorField = "name";
     }
     if (!formData.phone.trim()) {
-      errors.phone = "আপনার ফোন নাম্বার দিন";
+      errors.phone = "Enter your phone number";
       hasError = true;
       if (!firstErrorField) firstErrorField = "phone";
     } else if (!/^01\d{9}$/.test(formData.phone)) {
-      errors.phone = "সঠিক ফোন নাম্বার দিন (01xxxxxxxxx)";
+      errors.phone = "Enter a valid phone number (01xxxxxxxxx)";
       hasError = true;
       if (!firstErrorField) firstErrorField = "phone";
     }
     if (!formData.address) {
-      errors.address = "আপনার ঠিকানা দিন";
+      errors.address = "Enter your address";
       hasError = true;
       if (!firstErrorField) firstErrorField = "address";
     } else if (formData.address.trim().length < 10) {
-      errors.address = "ডেলিভারি ঠিকানা কমপক্ষে ১০ অক্ষরের হতে হবে";
+      errors.address = "Enter a delivery address with at least 10 characters";
       hasError = true;
       if (!firstErrorField) firstErrorField = "address";
     }
     if (!formData.delivery_area) {
-      errors.delivery_area = "ডেলিভারি এলাকা নির্বাচন করুন";
+      errors.delivery_area = "Select a delivery area";
       hasError = true;
       if (!firstErrorField) firstErrorField = "delivery_area";
     }
     if (formData.note && formData.note.length < 5) {
-      errors.note = "নোট কমপক্ষে ৫ অক্ষরের হতে হবে";
+      errors.note = "Enter a note with at least 5 characters";
       hasError = true;
       if (!firstErrorField) firstErrorField = "note";
     }
@@ -214,14 +214,14 @@ export default function CheckoutPage() {
   const handlePreorderRemoveItem = (id: string, variantId?: string) => {
     if (isPreorderCheckout) {
       clearPreorderCart();
-      toast.success("প্রি-অর্ডার আইটেম মুছে ফেলা হয়েছে");
+      toast.success("Preorder item removed");
     }
   };
 
   const handlePreorderUpdateQuantity = (id: string, variantId: string | undefined, quantity: number) => {
     if (isPreorderCheckout && preorderItem) {
       updatePreorderQuantity(quantity);
-      toast.success(`প্রি-অর্ডার কোয়ান্টিটি ${quantity}-এ আপডেট হয়েছে`);
+      toast.success(`Preorder quantity updated to ${quantity}`);
     }
   };
 
@@ -302,7 +302,7 @@ export default function CheckoutPage() {
     const backendPaymentMethod = getBackendPaymentMethod(formData.paymentMethod);
 
     if (!backendPaymentMethod) {
-      toast.error("অবৈধ পেমেন্ট পদ্ধতি");
+      toast.error("Invalid payment method");
       return;
     }
 
@@ -374,28 +374,28 @@ export default function CheckoutPage() {
           });
 
           window.location.href = successUrl.toString();
-          toast.success("অর্ডার সফলভাবে স্থাপন করা হয়েছে!");
+          toast.success("Order placed successfully!");
         } else {
           const gatewayUrl =
             response?.data?.selectedGatewayUrl || response?.data?.allGatewayUrl;
           if (gatewayUrl) {
             window.location.href = gatewayUrl;
           } else {
-            toast.error("পেমেন্ট গেটওয়ে অনুপলব্ধ");
+            toast.error("Payment gateway unavailable");
           }
         }
       } else {
-        toast.error(response.message || "অর্ডার তৈরি ব্যর্থ হয়েছে");
+        toast.error(response.message || "Order creation failed");
       }
     } catch (error: any) {
-      toast.error(error?.data?.message || "একটি ত্রুটি ঘটেছে");
+      toast.error(error?.data?.message || "An error occurred");
     }
   };
 
   const overlayActive = isOrderLoading;
 
   return (
-    <div className="min-h-screen min-w-screen bg-green-50 dark:bg-secondary relative">
+    <div className="min-h-screen min-w-screen bg-white dark:bg-secondary relative">
       {overlayActive && (
         <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center">
           <div className="animate-spin h-14 w-14 border-4 border-white border-t-transparent rounded-full" />
@@ -405,7 +405,7 @@ export default function CheckoutPage() {
       {/* <div className="md:mt-20">
         <PromotionBikashText />
       </div> */}
-      <div className="px-1 pb-24 md:mt-20 lg:pb-16 bg-green-50 dark:bg-secondary ">
+      <div className="px-1 pb-24 md:mt-20 lg:pb-16 bg-white dark:bg-secondary md:container md:mx-auto md:px-4 mt-12">
         <div className=" grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-6 ">
           <section className="lg:col-span-6 space-y-4 flex flex-col order-1 lg:order-2">
             <div className="rounded-xl overflow-hidden shadow-sm border bg-white dark:bg-secondary border-green-100 dark:border-gray-800 flex-1">
@@ -429,8 +429,8 @@ export default function CheckoutPage() {
           </section>
           <section className="lg:col-span-6 flex flex-col order-2">
             <div className="rounded-xl overflow-hidden shadow-sm border border-green-100 dark:border-gray-700 bg-white dark:bg-secondary flex-1">
-              <div className="bg-primary px-4 py-3">
-                <h2 className="text-[15px] font-semibold text-white">Shopping Items</h2>
+              <div className="bg-white dark:bg-secondary px-4 py-3">
+                <h2 className="text-sm font-semibold text-black dark:text-white">Shopping Items</h2>
               </div>
               <div className="lg:p-4 p-1">
                 <CartSummary
@@ -461,27 +461,27 @@ export default function CheckoutPage() {
               <div className="flex flex-col gap-1 sm:gap-2 sm:mt-2 text-sm">
                 {!isPreorderCheckout && (
                   <>
-                    <div className="flex justify-between text-black dark:text-white">
-                      <p>সাব-টোটাল</p>
+                    <div className="flex justify-between text-black dark:text-white uppercase">
+                      <p>subtotal</p>
                       <p>{formatCurrency(currentSubtotal, currency)}</p>
                     </div>
                     <hr />
                   </>
                 )}
-                <div className="flex justify-between text-black dark:text-white">
-                  <p>ডেলিভারি চার্জ</p>
+                <div className="flex justify-between text-black dark:text-white uppercase">
+                  <p>Delivery Charge</p>
                   <p>{formatCurrency(deliveryCharge, currency)}</p>
                 </div>
                 <hr />
                 {additional_discount_amount > 0 && !isPreorderCheckout && (
                   <div className="flex justify-between text-black dark:text-white">
-                    <p>বিকাশ ডিসকাউন্ট</p>
+                    <p>Bikas Discount</p>
                     <p>[&minus;] {formatCurrency(additional_discount_amount, currency)}</p>
                   </div>
                 )}
                 {additional_discount_amount > 0 && !isPreorderCheckout && <hr />}
-                <div className="flex justify-between text-black dark:text-white">
-                  <p><strong>টোটাল বিল</strong></p>
+                <div className="flex justify-between text-black dark:text-white uppercase">
+                  <p><strong>Total</strong></p>
                   <p className="font-bold">{formatCurrency(total, currency)}</p>
                 </div>
               </div>
@@ -491,16 +491,17 @@ export default function CheckoutPage() {
             title="order"
             type="submit"
             disabled={isOrderLoading}
-            variant="custom"
+            variant="edge"
+            className="w-full flex items-center justify-center"
           >
             {isOrderLoading ? (
-              <div className="flex items-center justify-center">
+              <div className="flex items-center justify-center ">
                 <div className="animate-spin rounded-full h-5 w-5 border-2 border-white border-t-transparent mr-2" />
-                প্রসেস হচ্ছে...
+                Loading...
               </div>
             ) : (
               <>
-                <span className="mr-2">🛒</span> অর্ডারটি নিশ্চিত করুন
+                <span className="mr-2">🛒</span> ORDER CONFIRME
               </>
             )}
           </Button>

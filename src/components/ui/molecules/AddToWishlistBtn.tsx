@@ -113,7 +113,7 @@ export default function AddToWishlistBtn({
             aria-label={isWishlisted ? labelOn : labelOff}
             className={`inline-flex items-center justify-center border rounded-md ${size === "icon" ? "p-1" : "px-3 py-1"
                 } ${isWishlisted
-                    ? "text-red-500 border-red-400 bg-red-50"
+                    ? "text-green-500 border-green-400 bg-green-50"
                     : "text-gray-600 border-gray-300 bg-white"
                 } ${className ?? ""}`}
         >

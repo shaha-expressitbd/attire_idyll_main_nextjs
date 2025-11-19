@@ -29,7 +29,7 @@ export const CalendarYearView: React.FC<CalendarYearViewProps> = ({
               "p-1 rounded text-center text-xs md:text-sm transition-colors",
               isCurrentYear
                 ? error
-                  ? "bg-red-600 text-white"
+                  ? "bg-green-600 text-white"
                   : "bg-orange-600 text-white"
                 : "hover:bg-gray-100 dark:hover:bg-gray-700",
               disabled && "opacity-50 cursor-not-allowed"

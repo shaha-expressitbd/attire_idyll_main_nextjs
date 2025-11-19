@@ -35,12 +35,12 @@ export default function ProductPricing({
             {!isPreorder && (
                 <div className="flex items-center justify-between mb-2 md:mb-4">
                     <div className="flex items-center gap-2 md:gap-4">
-                        <span className="text-2xl md:text-4xl font-bold text-primary dark:text-white">
-                            ৳{displayPrice.toFixed(2)}
+                        <span className="text-lg md:text-xl font-bold text-black dark:text-white">
+                            BDT {displayPrice.toFixed(2)}
                         </span>
                         {isDiscountActive && discountPercent > 0 && (
-                            <span className="line-through text-gray-400 text-base md:text-xl">
-                                ৳{sellingPrice.toFixed(2)}
+                            <span className="line-through  text-black dark:text-white ">
+                                BDT {sellingPrice.toFixed(2)}
                             </span>
                         )}
                     </div>

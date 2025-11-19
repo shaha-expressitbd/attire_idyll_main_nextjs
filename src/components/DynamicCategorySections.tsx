@@ -24,10 +24,10 @@ export default function DynamicCategorySections({ initialProducts }: { initialPr
                     </div>
                     <div className="space-y-2">
                         <h3 className="text-xl font-bold bg-gradient-to-r from-primary via-purple-600 to-primary bg-clip-text text-transparent">
-                            কোনো প্রোডাক্ট পাওয়া যায়নি
+                            No products found
                         </h3>
                         <p className="text-gray-500 dark:text-gray-400 text-sm">
-                            দয়া করে পরে আবার চেষ্টা করুন
+                            Please try again later
                         </p>
                     </div>
                 </div>
@@ -81,10 +81,10 @@ export default function DynamicCategorySections({ initialProducts }: { initialPr
                     </div>
                     <div className="space-y-2">
                         <h3 className="text-xl font-bold bg-gradient-to-r from-primary via-purple-600 to-primary bg-clip-text text-transparent">
-                            কোনো প্রোডাক্ট পাওয়া যায়নি
+                            No products found
                         </h3>
                         <p className="text-gray-500 dark:text-gray-400 text-sm">
-                            দয়া করে পরে আবার চেষ্টা করুন
+                            Please try again later
                         </p>
                     </div>
                 </div>
@@ -125,12 +125,12 @@ export default function DynamicCategorySections({ initialProducts }: { initialPr
                                                 <div className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary/15 to-green-500/15 rounded-full border border-primary/30 shadow-sm">
                                                     <span className="w-2 h-2 bg-primary rounded-full animate-pulse shadow-md"></span>
                                                     <span className="text-sm font-semibold text-gray-700 dark:text-gray-200">
-                                                        {totalCount} টি প্রোডাক্ট
+                                                        {totalCount} Products
                                                     </span>
                                                 </div>
                                                 {totalCount > maxProducts && (
                                                     <span className="px-3 py-1 bg-gradient-to-r from-amber-100 to-orange-100 dark:from-amber-900/30 dark:to-orange-900/30 text-amber-800 dark:text-amber-200 text-xs font-medium rounded-full border border-amber-200 dark:border-amber-700 shadow-sm">
-                                                        +{totalCount - maxProducts} আরও
+                                                        +{totalCount - maxProducts} more
                                                     </span>
                                                 )}
                                             </div>
@@ -146,7 +146,7 @@ export default function DynamicCategorySections({ initialProducts }: { initialPr
                                                 className="group relative inline-flex items-center gap-3 px-7 py-4 bg-gradient-to-r from-primary to-green-600 text-white font-bold text-sm rounded-2xl shadow-lg hover:shadow-2xl hover:scale-105 transform transition-all duration-300 ease-out overflow-hidden"
                                             >
                                                 <div className="absolute inset-0 bg-gradient-to-r from-primary to-green-600 scale-105 opacity-0 group-hover:opacity-100 blur-xl transition duration-300"></div>
-                                                <span className="relative z-10 whitespace-nowrap">সব প্রোডাক্ট দেখুন</span>
+                                                <span className="relative z-10 whitespace-nowrap">View all products</span>
                                                 <div className="relative z-10 p-1.5 bg-white/20 rounded-full transition-transform duration-300 group-hover:translate-x-1 group-hover:scale-110">
                                                     <svg
                                                         className="w-4 h-4"
@@ -169,7 +169,7 @@ export default function DynamicCategorySections({ initialProducts }: { initialPr
                                                 href={`/category/${encodeURIComponent(category)}`}
                                                 className="w-full text-center group inline-flex items-center justify-center gap-2 px-5 py-3 bg-gradient-to-r from-primary to-green-600 text-white font-medium text-sm rounded-2xl shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300"
                                             >
-                                                <span>সব দেখুন</span>
+                                                <span>View all</span>
                                                 <svg
                                                     className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300"
                                                     fill="none"

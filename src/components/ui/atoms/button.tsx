@@ -17,7 +17,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     const variantStyles: Record<string, string> = {
       default: "rounded bg-primary text-white",
       flat: "rounded-none bg-primary text-text",
-      edge: "rounded-none border border-primary py-3 px-4",
+      edge: "rounded-none border border-primary py-3 px-4 text-black dark:text-white",
       outline: "border border-primary rounded",
       "outline-flat": "border border-primary rounded-none",
       "outline-edge": "border border-primary rounded-full",

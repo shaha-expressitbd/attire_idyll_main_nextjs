@@ -36,7 +36,7 @@ export default function CategoryProductsPage({ initialProducts = [], category = 
     return (
         <div className="min-h-screen bg-[#FFEBF0] dark:bg-secondary md:mt-20">
             <div className="relative overflow-hidden bg-gradient-to-r from-primary to-secondary -top-2">
-                <div className="absolute inset-0 bg-gradient-to-r from-primary via-red-800 to-primary" />
+                <div className="absolute inset-0 bg-gradient-to-r from-primary via-green-800 to-primary" />
                 <div className="absolute inset-0 pointer-events-none overflow-hidden">
                     {Array.from({ length: 100 }).map((_, i) => {
                         const size = Math.random() * 14 + 12;
@@ -93,7 +93,7 @@ export default function CategoryProductsPage({ initialProducts = [], category = 
                         <h3 className="text-2xl font-semibold text-gray-900 mb-2">
                             Error Loading Products
                         </h3>
-                        <p className="text-red-500 text-sm mt-2" role="alert">
+                        <p className="text-green-500 text-sm mt-2" role="alert">
                             {serverError}
                         </p>
                     </div>

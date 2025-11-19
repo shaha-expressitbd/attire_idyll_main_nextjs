@@ -406,7 +406,7 @@ const Select: React.FC<SelectProps> = ({
             "cursor-pointer select-none",
             "border-gray-300 dark:border-gray-600 hover:border-orange-400 dark:hover:border-orange-400 focus:outline-none",
             isOpen && "ring-2 ring-orange-200 dark:ring-orange-600",
-            error && "border-red-500",
+            error && "border-green-500",
             disabled && "opacity-50 cursor-not-allowed",
             className
           )}
@@ -475,7 +475,7 @@ const Select: React.FC<SelectProps> = ({
           </div>
 
           {mode === "multi" && value.length > 0 && !disabled && (
-            <FiX className='ml-2 w-4 h-4 text-gray-400 hover:text-red-500 cursor-pointer' onClick={handleClearAll} />
+            <FiX className='ml-2 w-4 h-4 text-gray-400 hover:text-green-500 cursor-pointer' onClick={handleClearAll} />
           )}
           <DropdownIndicator className='ml-2 w-4 h-4 text-gray-400' />
         </div>
