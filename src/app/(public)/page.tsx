@@ -1,6 +1,5 @@
 // app/page.js
-import React, { Suspense } from 'react'
-import { getProductsServer } from '@/lib/api/serverApi'
+import React from 'react'
 import BrandText from '@/components/BrandText'
 import HeroSection from '@/components/HeroSection'
 
@@ -21,7 +20,7 @@ export async function generateMetadata() {
 }
 
 export default async function LandingPage() {
-  const initialProducts = await getProductsServer()
+
 
   return (
     <div>

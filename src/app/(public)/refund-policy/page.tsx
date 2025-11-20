@@ -28,7 +28,7 @@ export default function RefundPolicyPage() {
           icon: <BiPackage className="w-5 h-5 text-primary" />
         },
         {
-          text: "Return request must be initiated within 7 calendar days of delivery",
+          text: "Return request must be initiated within 30 calendar days of delivery",
           icon: <BiCalendar className="w-5 h-5 text-primary" />
         },
         {

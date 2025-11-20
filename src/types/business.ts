@@ -35,6 +35,12 @@ export interface SSLCommerzConfig {
   payment_methods: SSLPaymentMethod[];
 }
 
+export interface Social {
+  facebook?: string;
+  whatsapp?: string;
+  instagram?: string;
+}
+
 export interface Business {
   _id: string;
   owner: Owner;
@@ -44,6 +50,7 @@ export interface Business {
   categories: Category[];
   website: string;
   socialMedia: string;
+  social?: Social;
   logo: Image;
   alterImage: Image;
   insideDhaka: number;
@@ -53,4 +60,5 @@ export interface Business {
   location: string;
   defaultCourier: string;
   ssl_commerz?: SSLCommerzConfig;
+  businessTheme: any[];
 }

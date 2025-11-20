@@ -10,6 +10,20 @@ interface FooterProps {
 }
 
 const Footer = function Footer({ business }: FooterProps) {
+  // Add safety check for business object
+  if (!business || typeof business !== 'object') {
+    return (
+      <footer className="w-full bg-white dark:bg-black font-hebrew">
+        <div className="px-4 sm:px-6 py-10">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div className="col-span-full text-center text-gray-500">
+              Loading footer content...
+            </div>
+          </div>
+        </div>
+      </footer>
+    );
+  }
 
   return (
     <footer className="w-full bg-white dark:bg-black font-hebrew">
@@ -117,38 +131,7 @@ const Footer = function Footer({ business }: FooterProps) {
               </button>
             </form>
 
-            {/* Social Icons */}
-            <div className="flex gap-4 text-gray-800 dark:text-gray-200">
-              <Link
-                href={business?.social?.facebook || "https://facebook.com"}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-primary transition-colors"
-                prefetch={false}
-              >
-                <FaFacebookF size={20} />
-              </Link>
 
-              <Link
-                href={business?.social?.whatsapp ? `https://wa.me/${business.social.whatsapp}` : "https://wa.me/8801907349009"}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-primary transition-colors"
-                prefetch={false}
-              >
-                <FaWhatsapp size={20} />
-              </Link>
-
-              <Link
-                href={business?.social?.instagram || "https://instagram.com"}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-primary transition-colors"
-                prefetch={false}
-              >
-                <FaInstagram size={20} />
-              </Link>
-            </div>
           </div>
         </div>
 
@@ -177,10 +160,7 @@ const Footer = function Footer({ business }: FooterProps) {
                 />
               </a>
             </div>
-            <div className='flex gap-2 text-sm text-gray-800 dark:text-gray-200'>
-              <span className='font-semibold'>Trade License Number:</span>
-              <span></span>
-            </div>
+
           </div>
 
           <div className='w-full mt-7 border-t border-gray-800 pt-6 md:mb-0 mb-20'>

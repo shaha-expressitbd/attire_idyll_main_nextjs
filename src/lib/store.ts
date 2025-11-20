@@ -70,6 +70,7 @@ if (isBrowser) {
     ],
   };
 
+  console.log("Applying persistReducer in browser");
   finalReducer = persistReducer(persistConfig, rootReducer);
   persistStoreFn = persistStore;
 }

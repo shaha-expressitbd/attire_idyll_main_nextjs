@@ -311,7 +311,7 @@ const FAQPage = () => {
                         </button>
                         <button className="bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white px-6 md:px-8 py-3 rounded-xl font-semibold transition-colors flex items-center gap-2 text-sm">
                             <BiPhone className="w-5 h-5" />
-                            <a href="tel:01855375963">Call Support</a>
+                            <a href="tel:01709503503">Call Support</a>
                         </button>
                     </div>
                 </div>

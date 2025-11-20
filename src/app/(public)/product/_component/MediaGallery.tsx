@@ -115,7 +115,7 @@ export default function MediaGallery({
     return (
         <div className="w-full">
             {/* MAIN GALLERY – FULLSCREEN MOBILE + PERFECT DESKTOP */}
-            <div className="relative w-full md:ml-32 md:w-[50vh] h-[85vh] md:h-[600px] lg:h-[700px] bg-white rounded-xl overflow-hidden">
+            <div className="relative w-full md:ml-32 lg:ml-32 md:w-[50vh] h-[85vh] md:h-[60vh] lg:h-[75vh] bg-white rounded-xl overflow-hidden">
 
                 {/* Badges */}
                 {isPreOrder && (
@@ -125,12 +125,7 @@ export default function MediaGallery({
                         </span>
                     </div>
                 )}
-                <div className={`absolute top-${isPreOrder ? "14" : "4"} left-4 z-30`}>
-                    <span className={`px-4 py-2 text-xs font-bold rounded-full text-white shadow-lg ${stock > 10 ? "bg-green-600" : stock > 0 ? "bg-amber-500" : "bg-green-600"
-                        }`}>
-                        {stock > 10 ? `${stock} Available` : stock > 0 ? `Only ${stock} Left!` : "Out of Stock"}
-                    </span>
-                </div>
+
 
                 {/* FULL VIEWPORT CENTERED IMAGE */}
                 <div className="absolute inset-0 flex items-center justify-center">

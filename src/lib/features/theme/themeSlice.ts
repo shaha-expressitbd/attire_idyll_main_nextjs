@@ -18,13 +18,28 @@ const themeSlice = createSlice({
   initialState,
   reducers: {
     setThemeMode: (state, action: PayloadAction<ThemeMode>) => {
+      console.log(
+        "themeSlice setThemeMode:",
+        action.payload,
+        "isServer:",
+        typeof window === "undefined"
+      );
       state.mode = action.payload;
     },
     setThemeColor: (state, action: PayloadAction<ThemeColor>) => {
       state.color = action.payload;
     },
     toggleThemeMode: (state) => {
-      state.mode = state.mode === "light" ? "dark" : "light";
+      const newMode = state.mode === "light" ? "dark" : "light";
+      console.log(
+        "themeSlice toggleThemeMode from:",
+        state.mode,
+        "to:",
+        newMode,
+        "isServer:",
+        typeof window === "undefined"
+      );
+      state.mode = newMode;
     },
   },
 });

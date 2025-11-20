@@ -11,7 +11,12 @@ import { Business } from "@/types/business";
 import Image from "../atoms/image";
 import { CartSheet } from "../organisms/cart-sheet";
 import { WishlistSheet } from "./WishlistSheet";
-import ThemeToggler from "../molecules/themeToggler";
+import dynamic from "next/dynamic";
+
+const ThemeToggler = dynamic(() => import("../molecules/themeToggler"), {
+  ssr: false,
+  loading: () => null,
+});
 
 const SearchDropdown = lazy(() => import("./SearchDropdown"));
 

@@ -13,19 +13,19 @@ const StickySocialButton = memo(() => {
 
   const socialLinks = [
     {
-      href: 'https://facebook.com/yourpage',
+      href: 'https://www.facebook.com/attireidyllbd',
       icon: <FaFacebookF className="w-5 h-5 md:w-6 md:h-6 text-white" />,
       gradient: 'from-blue-600 to-blue-800',
       label: 'Facebook',
     },
     {
-      href: 'https://instagram.com/yourprofile',
+      href: 'https://www.instagram.com/attire_idyll/',
       icon: <FaInstagram className="w-5 h-5 md:w-6 md:h-6 text-white" />,
       gradient: 'from-pink-500 to-purple-600',
       label: 'Instagram',
     },
     {
-      href: 'https://wa.me/88017XXXXXXXX', // আপনার নাম্বার
+      href: 'https://wa.me/8801709503503',
       icon: <FaWhatsapp className="w-5 h-5 md:w-6 md:h-6 text-white" />,
       gradient: 'from-green-500 to-green-700',
       label: 'WhatsApp',
