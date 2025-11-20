@@ -115,7 +115,7 @@ export default function MediaGallery({
     return (
         <div className="w-full">
             {/* MAIN GALLERY – FULLSCREEN MOBILE + PERFECT DESKTOP */}
-            <div className="relative w-full md:ml-32 lg:ml-32 md:w-[50vh] h-[85vh] md:h-[60vh] lg:h-[75vh] bg-white rounded-xl overflow-hidden">
+            <div className="relative w-full md:ml-32 lg:ml-32 md:w-[45vh] h-[75vh] md:h-[50vh] lg:h-[60vh] bg-white rounded-xl overflow-hidden md:mt-16 lg:mt-12">
 
                 {/* Badges */}
                 {isPreOrder && (
