@@ -153,7 +153,7 @@ export default function MediaGallery({
                         )}
 
                         {/* SUPER PREMIUM CIRCULAR ZOOM */}
-                        {isZoomed && !isMobile && mainMedia.type === "image" && (
+                        {/* {isZoomed && !isMobile && mainMedia.type === "image" && (
                             <div className="absolute inset-0 overflow-hidden pointer-events-none z-50">
                                 <div
                                     className="absolute w-72 h-72 rounded-full border-8 border-white shadow-2xl"
@@ -184,19 +184,19 @@ export default function MediaGallery({
 
 
                             </div>
-                        )}
+                        )} */}
 
                         {imageLoading && mainMedia.type === "image" && (
                             <div className="absolute inset-0 bg-gray-100 animate-pulse" />
                         )}
 
                         {/* Zoom Hint */}
-                        {isZoomed && !isMobile && (
+                        {/* {isZoomed && !isMobile && (
                             <div className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-black/80 text-white px-6 py-3 rounded-full text-base font-semibold flex items-center gap-3 z-50 backdrop-blur-md border border-white/20 shadow-2xl">
                                 <BiZoomIn className="w-6 h-6 animate-pulse" />
                                 <span>Move to Zoom</span>
                             </div>
-                        )}
+                        )} */}
 
                         {/* VIDEO */}
                         {mainMedia.type === "video" && (
